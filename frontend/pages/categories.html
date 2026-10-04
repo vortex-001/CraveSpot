@@ -1,0 +1,817 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Categories | StreetBites</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/categories.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+
+        <a
+            href="../index.html"
+            class="logo"
+        >
+
+            <span class="logo-icon">
+                🍴
+            </span>
+
+            <span>
+                Street<span>Bites</span>
+            </span>
+
+        </a>
+
+
+
+        <div class="location">
+
+            <span class="location-icon">
+                📍
+            </span>
+
+            <div>
+
+                <small>
+                    Location
+                </small>
+
+                <strong>
+                    Chandigarh
+                </strong>
+
+            </div>
+
+            <span>
+                ⌄
+            </span>
+
+        </div>
+
+
+
+        <div class="nav-search">
+
+            <span>
+                🔍
+            </span>
+
+            <input
+                type="text"
+                id="categorySearch"
+                placeholder="Search categories..."
+            >
+
+        </div>
+
+
+
+        <nav>
+
+            <a href="restaurants.html">
+                Restaurants
+            </a>
+
+            <a href="dishes.html">
+                Dishes
+            </a>
+
+            <a
+                href="categories.html"
+                class="active-nav"
+            >
+                Categories
+            </a>
+
+        </nav>
+
+
+
+        <button
+            class="login-btn"
+            onclick="openLogin()"
+        >
+            Login
+        </button>
+
+
+    </div>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="categories-page">
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="category-hero">
+
+        <div class="category-hero-content">
+
+            <p>
+                EXPLORE FOOD
+            </p>
+
+            <h1>
+                Find something<br>
+                <span>you'll love.</span>
+            </h1>
+
+            <div class="category-search">
+
+                <span>
+                    🔍
+                </span>
+
+                <input
+                    type="text"
+                    id="heroCategorySearch"
+                    placeholder="Search for a food category..."
+                >
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= MAIN CATEGORIES ================= -->
+
+    <section class="container category-main">
+
+
+        <div class="category-heading">
+
+            <div>
+
+                <p>
+                    BROWSE BY FOOD
+                </p>
+
+                <h2>
+                    What are you in the mood for?
+                </h2>
+
+            </div>
+
+            <span id="categoryCount">
+                12 categories
+            </span>
+
+        </div>
+
+
+
+        <div
+            class="category-grid"
+            id="categoryGrid"
+        >
+
+
+            <!-- BIRYANI -->
+
+            <a
+                href="dishes.html?category=Biryani"
+                class="big-category-card"
+                data-name="Biryani"
+            >
+
+                <div class="big-category-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=900&q=85"
+                        alt="Biryani"
+                    >
+
+                </div>
+
+                <div class="big-category-info">
+
+                    <h3>
+                        Biryani
+                    </h3>
+
+                    <p>
+                        Aromatic rice & rich flavours
+                    </p>
+
+                    <span>
+                        Explore dishes →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- PIZZA -->
+
+            <a
+                href="dishes.html?category=Pizza"
+                class="big-category-card"
+                data-name="Pizza"
+            >
+
+                <div class="big-category-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85"
+                        alt="Pizza"
+                    >
+
+                </div>
+
+                <div class="big-category-info">
+
+                    <h3>
+                        Pizza
+                    </h3>
+
+                    <p>
+                        Cheesy, crispy & delicious
+                    </p>
+
+                    <span>
+                        Explore dishes →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- BURGERS -->
+
+            <a
+                href="dishes.html?category=Burger"
+                class="big-category-card"
+                data-name="Burgers"
+            >
+
+                <div class="big-category-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=85"
+                        alt="Burger"
+                    >
+
+                </div>
+
+                <div class="big-category-info">
+
+                    <h3>
+                        Burgers
+                    </h3>
+
+                    <p>
+                        Loaded, crispy & juicy
+                    </p>
+
+                    <span>
+                        Explore dishes →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- CHINESE -->
+
+            <a
+                href="dishes.html?category=Chinese"
+                class="big-category-card"
+                data-name="Chinese"
+            >
+
+                <div class="big-category-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=900&q=85"
+                        alt="Chinese food"
+                    >
+
+                </div>
+
+                <div class="big-category-info">
+
+                    <h3>
+                        Chinese
+                    </h3>
+
+                    <p>
+                        Noodles, momos & wok favourites
+                    </p>
+
+                    <span>
+                        Explore dishes →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- NORTH INDIAN -->
+
+            <a
+                href="dishes.html?category=North%20Indian"
+                class="big-category-card"
+                data-name="North Indian"
+            >
+
+                <div class="big-category-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85"
+                        alt="North Indian food"
+                    >
+
+                </div>
+
+                <div class="big-category-info">
+
+                    <h3>
+                        North Indian
+                    </h3>
+
+                    <p>
+                        Curries, naan & comfort food
+                    </p>
+
+                    <span>
+                        Explore dishes →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- DESSERTS -->
+
+            <a
+                href="dishes.html?category=Dessert"
+                class="big-category-card"
+                data-name="Desserts"
+            >
+
+                <div class="big-category-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=85"
+                        alt="Dessert"
+                    >
+
+                </div>
+
+                <div class="big-category-info">
+
+                    <h3>
+                        Desserts
+                    </h3>
+
+                    <p>
+                        Sweet treats for every mood
+                    </p>
+
+                    <span>
+                        Explore dishes →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- STREET FOOD -->
+
+            <a
+                href="dishes.html?category=Street Food"
+                class="big-category-card"
+                data-name="Street Food"
+            >
+
+                <div class="big-category-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=900&q=85"
+                        alt="Street food"
+                    >
+
+                </div>
+
+                <div class="big-category-info">
+
+                    <h3>
+                        Street Food
+                    </h3>
+
+                    <p>
+                        Local favourites & quick bites
+                    </p>
+
+                    <span>
+                        Explore dishes →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- SOUTH INDIAN -->
+
+            <a
+                href="dishes.html?category=South Indian"
+                class="big-category-card"
+                data-name="South Indian"
+            >
+
+                <div class="big-category-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1630383249896-424e482df921?auto=format&fit=crop&w=900&q=85"
+                        alt="South Indian food"
+                    >
+
+                </div>
+
+                <div class="big-category-info">
+
+                    <h3>
+                        South Indian
+                    </h3>
+
+                    <p>
+                        Dosa, idli & classic flavours
+                    </p>
+
+                    <span>
+                        Explore dishes →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- PASTA -->
+
+            <a
+                href="dishes.html?category=Pasta"
+                class="big-category-card"
+                data-name="Pasta"
+            >
+
+                <div class="big-category-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=900&q=85"
+                        alt="Pasta"
+                    >
+
+                </div>
+
+                <div class="big-category-info">
+
+                    <h3>
+                        Pasta
+                    </h3>
+
+                    <p>
+                        Creamy & comforting Italian food
+                    </p>
+
+                    <span>
+                        Explore dishes →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- ROLLS -->
+
+            <a
+                href="dishes.html?category=Rolls"
+                class="big-category-card"
+                data-name="Rolls"
+            >
+
+                <div class="big-category-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=900&q=85"
+                        alt="Food roll"
+                    >
+
+                </div>
+
+                <div class="big-category-info">
+
+                    <h3>
+                        Rolls & Wraps
+                    </h3>
+
+                    <p>
+                        Quick, filling & full of flavour
+                    </p>
+
+                    <span>
+                        Explore dishes →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- BEVERAGES -->
+
+            <a
+                href="dishes.html?category=Beverages"
+                class="big-category-card"
+                data-name="Beverages"
+            >
+
+                <div class="big-category-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=900&q=85"
+                        alt="Beverages"
+                    >
+
+                </div>
+
+                <div class="big-category-info">
+
+                    <h3>
+                        Beverages
+                    </h3>
+
+                    <p>
+                        Coolers, shakes & refreshing drinks
+                    </p>
+
+                    <span>
+                        Explore dishes →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- CAKES -->
+
+            <a
+                href="dishes.html?category=Cakes"
+                class="big-category-card"
+                data-name="Cakes"
+            >
+
+                <div class="big-category-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85"
+                        alt="Cake"
+                    >
+
+                </div>
+
+                <div class="big-category-info">
+
+                    <h3>
+                        Cakes
+                    </h3>
+
+                    <p>
+                        Celebration cakes & desserts
+                    </p>
+
+                    <span>
+                        Explore dishes →
+                    </span>
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- NO RESULTS -->
+
+        <div
+            class="category-no-results"
+            id="categoryNoResults"
+        >
+
+            <div>
+                🔎
+            </div>
+
+            <h3>
+                No category found
+            </h3>
+
+            <p>
+                Try searching for another food category.
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= QUICK LINKS ================= -->
+
+    <section class="container category-links-section">
+
+
+        <div class="category-links">
+
+            <div>
+
+                <span>
+                    🍴
+                </span>
+
+                <h3>
+                    Looking for restaurants?
+                </h3>
+
+                <p>
+                    Discover popular places serving
+                    your favourite food.
+                </p>
+
+                <a href="restaurants.html">
+                    Explore restaurants →
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    🔥
+                </span>
+
+                <h3>
+                    Know what you want?
+                </h3>
+
+                <p>
+                    Search directly through our
+                    popular dishes.
+                </p>
+
+                <a href="dishes.html">
+                    Browse dishes →
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-container">
+
+
+        <div>
+
+            <div class="footer-logo">
+                🍴 StreetBites
+            </div>
+
+            <p>
+                Discover delicious local food
+                and hidden gems around you.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Explore
+            </h3>
+
+            <a href="restaurants.html">
+                Restaurants
+            </a>
+
+            <a href="dishes.html">
+                Dishes
+            </a>
+
+            <a href="categories.html">
+                Categories
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Community
+            </h3>
+
+            <a href="reviews.html">
+                Reviews
+            </a>
+
+            <a href="#">
+                About StreetBites
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 StreetBites — DBMS Project
+
+    </div>
+
+</footer>
+
+
+
+<script src="../js/app.js"></script>
+
+<script src="../js/categories.js"></script>
+
+
+</body>
+
+</html>
