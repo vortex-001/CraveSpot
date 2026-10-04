@@ -1,0 +1,374 @@
+
+/* =========================================
+   RESTAURANTS PAGE
+========================================= */
+
+.restaurants-page {
+    background: #fafafa;
+    min-height: 100vh;
+}
+
+
+/* =========================================
+   PAGE HEADING
+========================================= */
+
+.restaurant-heading {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 55px 24px 30px;
+}
+
+.page-label {
+    color: #e23744;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+}
+
+.restaurant-heading h1 {
+    font-size: 38px;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.page-description {
+    color: #777;
+    font-size: 16px;
+}
+
+
+/* =========================================
+   DELIVERY / DINING TABS
+========================================= */
+
+.food-mode {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.mode-btn {
+    background: transparent;
+    border: none;
+    padding: 14px 22px;
+    font-size: 16px;
+    color: #777;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+}
+
+.mode-btn.active {
+    color: #e23744;
+    border-bottom-color: #e23744;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   FILTERS
+========================================= */
+
+.filter-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 35px;
+}
+
+.filter-btn,
+.sort-select {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 16px;
+    color: #555;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.filter-btn:hover {
+    border-color: #e23744;
+    color: #e23744;
+}
+
+.filter-btn.active {
+    background: #fff0f1;
+    border-color: #e23744;
+    color: #e23744;
+}
+
+.sort-select {
+    margin-left: auto;
+}
+
+
+/* =========================================
+   RESULTS HEADER
+========================================= */
+
+.result-header {
+    margin-bottom: 22px;
+}
+
+.result-header h2 {
+    font-size: 26px;
+    color: #222;
+    margin-bottom: 5px;
+}
+
+.result-header p {
+    color: #888;
+    font-size: 14px;
+}
+
+
+/* =========================================
+   RESTAURANT GRID
+========================================= */
+
+.restaurants-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding-bottom: 60px;
+}
+
+
+/* =========================================
+   FOOD CARD
+========================================= */
+
+.food-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #eeeeee;
+    transition: 0.25s ease;
+    cursor: pointer;
+}
+
+.food-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================
+   CARD IMAGE
+========================================= */
+
+.food-card-image {
+    height: 210px;
+    position: relative;
+    overflow: hidden;
+}
+
+.food-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.food-card:hover .food-card-image img {
+    transform: scale(1.05);
+}
+
+
+/* =========================================
+   OFFER
+========================================= */
+
+.discount-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background: #2563eb;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   FAVORITE
+========================================= */
+
+.favorite-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================
+   CARD BODY
+========================================= */
+
+.food-card-body {
+    padding: 17px;
+}
+
+.food-card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.food-card-title h3 {
+    font-size: 19px;
+    color: #222;
+}
+
+.rating-badge {
+    background: #267a3c;
+    color: white;
+    padding: 5px 7px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.food-cuisine {
+    color: #777;
+    font-size: 14px;
+    margin: 9px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.food-info {
+    display: flex;
+    gap: 7px;
+    color: #444;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.food-location {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+
+/* =========================================
+   CARD BOTTOM
+========================================= */
+
+.card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eeeeee;
+    padding-top: 12px;
+}
+
+.delivery-tag {
+    color: #267a3c;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.card-arrow {
+    color: #e23744;
+    font-size: 20px;
+}
+
+
+/* =========================================
+   NO RESULTS
+========================================= */
+
+.no-results {
+    display: none;
+    text-align: center;
+    padding: 70px 20px;
+    color: #777;
+}
+
+.no-results div {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.no-results h3 {
+    color: #333;
+    margin-bottom: 8px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .restaurants-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .restaurant-heading {
+        padding-top: 35px;
+    }
+
+    .restaurant-heading h1 {
+        font-size: 30px;
+    }
+
+    .restaurants-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sort-select {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .food-card-image {
+        height: 230px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .food-mode {
+        overflow-x: auto;
+    }
+
+    .mode-btn {
+        white-space: nowrap;
+    }
+
+    .filter-row {
+        gap: 8px;
+    }
+
+    .filter-btn {
+        padding: 9px 12px;
+    }
+
+}
