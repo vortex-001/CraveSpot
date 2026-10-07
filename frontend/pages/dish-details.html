@@ -11,7 +11,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Dish Details | StreetBites</title>
+    <title>Dish Details | CraveSpot</title>
 
     <!-- Main CSS -->
     <link
@@ -35,44 +35,57 @@
          NAVBAR
     =========================================== -->
 
-    <header class="navbar">
+    <!-- ================= NAVBAR ================= -->
 
-        <div class="logo">
-            StreetBites
-        </div>
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="../index.html" class="logo">
+
+            <span class="logo-icon">🍴</span>
+
+            <span>
+                Crave<span>Spot</span>
+            </span>
+
+        </a>
 
 
         <div class="location">
-            📍 Chandigarh
+
+            <span class="location-icon">📍</span>
+
+            <div>
+                <small>Location</small>
+                <strong>Chandigarh</strong>
+            </div>
+
+            <span>⌄</span>
+
         </div>
 
 
-        <div class="search-box">
+        <div class="nav-search">
+
+            <span>🔍</span>
 
             <input
                 type="text"
                 id="dishSearch"
-                placeholder="Search for dishes..."
+                placeholder="Search dishes, cuisines..."
             >
-
-            <button onclick="searchDish()">
-                🔍
-            </button>
 
         </div>
 
 
         <nav>
 
-            <a href="../index.html">
-                Home
-            </a>
-
             <a href="restaurants.html">
                 Restaurants
             </a>
 
-            <a href="dishes.html">
+            <a href="dishes.html" class="active-nav">
                 Dishes
             </a>
 
@@ -80,14 +93,16 @@
                 Categories
             </a>
 
-            <a href="#">
-                Login
-            </a>
-
         </nav>
 
-    </header>
 
+       <a href="login.html" class="login-btn">
+    Login
+</a>
+
+    </div>
+
+</header>
 
 
     <!-- ==========================================
@@ -332,7 +347,7 @@
                 <div>
 
                     <h3>
-                        StreetBites
+                        CraveSpot
                     </h3>
 
                     <p>
@@ -367,7 +382,7 @@
                 <div>
 
                     <h4>
-                        StreetBites
+                        CraveSpot
                     </h4>
 
                     <p>
@@ -381,7 +396,7 @@
 
             <div class="footer-bottom">
 
-                © 2026 StreetBites. All rights reserved.
+                © 2026 CraveSpot. All rights reserved.
 
             </div>
 

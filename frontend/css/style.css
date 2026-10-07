@@ -746,3 +746,32 @@ footer {
     }
 
 }
+/* ================================
+   LOGIN USER / LOGOUT
+================================ */
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.logout-btn {
+    border: none;
+    background: #ef6c2f;
+    color: white;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: #d9571d;
+}
