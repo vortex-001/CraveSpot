@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Account | CraveSpot</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/login.css"
+    >
+
+    <style>
+
+        /* =====================================
+           REGISTER PAGE
+        ===================================== */
+
+        .register-form {
+            margin-top: 20px;
+        }
+
+        .register-form .form-group {
+            margin-bottom: 16px;
+        }
+
+        .register-form label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 7px;
+        }
+
+        /* Required star */
+
+        .required-star {
+            color: #e23744;
+            font-weight: 700;
+            margin-left: 2px;
+        }
+
+        .register-form input {
+            width: 100%;
+            height: 46px;
+            padding: 0 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            font-size: 14px;
+            color: #333;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .register-form input:focus {
+            border-color: #f36c21;
+            box-shadow: 0 0 0 2px rgba(243, 108, 33, 0.08);
+        }
+
+        /* Invalid input */
+
+        .register-form input:invalid:not(:placeholder-shown) {
+            border-color: #ddd;
+        }
+
+        .register-form input:focus:invalid {
+            border-color: #e23744;
+        }
+
+        .register-submit {
+            width: 100%;
+            height: 48px;
+            border: none;
+            border-radius: 8px;
+            background: #f36c21;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        .register-submit:hover {
+            background: #e85f16;
+        }
+
+        .register-message {
+            min-height: 20px;
+            margin: 12px 0;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .register-login {
+            margin-top: 22px;
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .register-login a {
+            color: #f36c21;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .register-login a:hover {
+            text-decoration: underline;
+        }
+
+        .register-back {
+            display: block;
+            margin-top: 22px;
+            text-align: center;
+            color: #555;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .register-back:hover {
+            color: #f36c21;
+        }
+
+
+        /* =====================================
+           MOBILE
+        ===================================== */
+
+        @media (max-width: 700px) {
+
+            .login-left {
+                display: none;
+            }
+
+            .login-right {
+                width: 100%;
+            }
+
+            .login-card {
+                width: 90%;
+                max-width: 450px;
+                margin: auto;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <main class="login-page">
+
+
+        <!-- =================================
+             LEFT SIDE
+        ================================= -->
+
+        <section class="login-left">
+
+            <a
+                href="../index.html"
+                class="brand"
+            >
+                🍴 Crave<span>Spot</span>
+            </a>
+
+
+            <div class="welcome-content">
+
+                <p class="small-heading">
+                    JOIN US
+                </p>
+
+                <h1>
+                    Good food
+                    <br>
+                    starts here.
+                </h1>
+
+                <p class="welcome-text">
+                    Create your CraveSpot account
+                    and discover restaurants, delicious
+                    dishes and more.
+                </p>
+
+            </div>
+
+
+            <p class="copyright">
+                © 2026 CraveSpot
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================
+             RIGHT SIDE
+        ================================= -->
+
+        <section class="login-right">
+
+            <div class="login-card">
+
+
+                <!-- HEADING -->
+
+                <div class="login-heading">
+
+                    <h2>
+                        Create account
+                    </h2>
+
+                    <p>
+                        Sign up to continue to CraveSpot
+                    </p>
+
+                </div>
+
+
+
+                <!-- REGISTER FORM -->
+
+                <form
+                    id="registerForm"
+                    class="register-form"
+                >
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full name
+                            <span class="required-star">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your name"
+                            required
+                            autocomplete="name"
+                        >
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email address
+                            <span class="required-star">*</span>
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                            autocomplete="email"
+                        >
+
+                    </div>
+
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label for="phone">
+                            Phone number
+                            <span class="required-star">*</span>
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            placeholder="Enter your phone number"
+                            maxlength="15"
+                            minlength="10"
+                            pattern="[0-9]{10,15}"
+                            required
+                            autocomplete="tel"
+                        >
+
+                    </div>
+
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                            <span class="required-star">*</span>
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Create a password"
+                            minlength="6"
+                            required
+                            autocomplete="new-password"
+                        >
+
+                    </div>
+
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+                            Confirm password
+                            <span class="required-star">*</span>
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm your password"
+                            minlength="6"
+                            required
+                            autocomplete="new-password"
+                        >
+
+                    </div>
+
+
+
+                    <!-- MESSAGE -->
+
+                    <p
+                        id="registerMessage"
+                        class="register-message"
+                    ></p>
+
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="register-submit"
+                    >
+                        Create account
+                    </button>
+
+                </form>
+
+
+
+                <!-- LOGIN -->
+
+                <div class="register-login">
+
+                    Already have an account?
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
+                </div>
+
+
+
+                <!-- BACK -->
+
+                <a
+                    href="../index.html"
+                    class="register-back"
+                >
+                    ← Back to CraveSpot
+                </a>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="../js/register.js"></script>
+
+</body>
+
+</html>
