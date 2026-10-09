@@ -1,0 +1,340 @@
+
+/* ==========================================
+   DISH DETAILS PAGE
+========================================== */
+
+.dish-details-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+}
+
+
+/* ==========================================
+   BREADCRUMB
+========================================== */
+
+.breadcrumb {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 25px;
+    color: #777;
+    font-size: 14px;
+}
+
+.breadcrumb a {
+    color: #e23744;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.breadcrumb span {
+    color: #777;
+}
+
+
+/* ==========================================
+   DISH HERO
+========================================== */
+
+.dish-hero {
+    display: grid;
+    grid-template-columns: 48% 52%;
+    gap: 45px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    padding: 25px;
+    box-sizing: border-box;
+}
+
+
+/* Dish Image */
+
+.dish-image-container {
+    width: 100%;
+    height: 430px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #f5f5f5;
+}
+
+.dish-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* Dish Information */
+
+.dish-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+}
+
+.dish-category {
+    color: #e23744;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.dish-info h1 {
+    font-size: 38px;
+    margin: 0 0 15px;
+    color: #222;
+}
+
+
+/* Rating */
+
+.dish-rating {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    color: #777;
+}
+
+.rating-badge {
+    background: #267a3c;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+/* Price */
+
+.dish-price {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+
+/* Description */
+
+.dish-description {
+    color: #666;
+    line-height: 1.7;
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+
+/* ==========================================
+   FAVORITE BUTTON
+========================================== */
+
+.dish-favorite-btn {
+    width: fit-content;
+    padding: 12px 20px;
+    background: white;
+    border: 1px solid #e23744;
+    color: #e23744;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+.dish-favorite-btn:hover {
+    background: #e23744;
+    color: white;
+}
+
+
+/* ==========================================
+   RESTAURANT INFO
+========================================== */
+
+.restaurant-info {
+    border-top: 1px solid #eee;
+    margin-top: 25px;
+    padding-top: 20px;
+}
+
+.restaurant-info h3 {
+    margin: 0 0 8px;
+    font-size: 15px;
+    color: #777;
+}
+
+.restaurant-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 5px;
+}
+
+.restaurant-info p {
+    color: #777;
+    margin: 0 0 15px;
+}
+
+
+/* View Restaurant Button */
+
+.view-restaurant-btn {
+    background: #e23744;
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.view-restaurant-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* ==========================================
+   EXTRA INFORMATION
+========================================== */
+
+.dish-extra-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.info-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.info-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff1f2;
+    border-radius: 10px;
+    font-size: 22px;
+}
+
+.info-card h3 {
+    margin: 0 0 5px;
+    font-size: 14px;
+    color: #777;
+}
+
+.info-card p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   DESCRIPTION SECTION
+========================================== */
+
+.dish-description-section {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 25px;
+}
+
+.dish-description-section h2 {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.dish-description-section p {
+    color: #666;
+    line-height: 1.7;
+    margin: 0;
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.footer {
+    margin-top: 50px;
+}
+
+
+/* ==========================================
+   RESPONSIVE DESIGN
+========================================== */
+
+@media (max-width: 850px) {
+
+    .dish-hero {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .dish-image-container {
+        height: 350px;
+    }
+
+    .dish-info h1 {
+        font-size: 32px;
+    }
+
+    .dish-extra-info {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .dish-details-page {
+        padding: 20px 15px 40px;
+    }
+
+    .dish-hero {
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    .dish-image-container {
+        height: 280px;
+    }
+
+    .dish-info h1 {
+        font-size: 27px;
+    }
+
+    .dish-price {
+        font-size: 24px;
+    }
+
+    .dish-description {
+        font-size: 14px;
+    }
+
+    .dish-favorite-btn,
+    .view-restaurant-btn {
+        width: 100%;
+    }
+
+}
