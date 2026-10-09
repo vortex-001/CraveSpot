@@ -431,4 +431,3 @@ If you find the project useful, consider giving the repository a ⭐ on GitHub.
   <b>🍴 CraveSpot — The Ultimate Cheat-Meal & Street Food Finder</b><br>
   <i>Discover your craving. Find your food.</i>
 </p>
-change   
