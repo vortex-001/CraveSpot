@@ -7,6 +7,13 @@
 const API_BASE = "http://127.0.0.1:5000/api";
 
 let currentRestaurant = null;
+const sampleRestaurant = {
+    restaurant_id: 1,
+    name: "Spice Garden",
+    cuisine: "North Indian • Mughlai • Biryani",
+    address: "Chandigarh",
+    rating: 4.5
+};
 let selectedRating = 0;
 
 
@@ -18,98 +25,43 @@ const params = new URLSearchParams(window.location.search);
 
 const restaurantId = params.get("id");
 const vendor = params.get("vendor");
-
-
 /* ==========================================
    LOAD RESTAURANTS FROM MYSQL
 ========================================== */
 
 async function loadRestaurant() {
-
     try {
+        const restaurants = await apiRequest("/restaurants");
 
-        const response = await fetch(
-            `${API_BASE}/restaurants`
-        );
-
-        if (!response.ok) {
-            throw new Error("Restaurant API failed");
+        if (!Array.isArray(restaurants)) {
+            throw new Error("Invalid restaurant data");
         }
 
-        const restaurants = await response.json();
-
-        /*
-           First try restaurant ID.
-           Example:
-           restaurant-details.html?id=4
-        */
-
         if (restaurantId) {
-
             currentRestaurant = restaurants.find(
                 r => String(r.restaurant_id) === String(restaurantId)
             );
-
         }
-
-
-        /*
-           Also support vendor name.
-           Example:
-           restaurant-details.html?vendor=Swagath%20Restaurant%20And%20Bar
-        */
 
         if (!currentRestaurant && vendor) {
-
             currentRestaurant = restaurants.find(
-                r =>
-                    r.name.toLowerCase() ===
-                    vendor.toLowerCase()
+                r => (r.name || "").toLowerCase() === vendor.toLowerCase()
             );
-
         }
-
 
         if (!currentRestaurant) {
-
-            document.getElementById("restaurantName").textContent =
-                "Restaurant not found";
-
-            return;
-
+            currentRestaurant = sampleRestaurant;
         }
 
-
-        displayRestaurant();
-
-        await loadMenu();
-
-        loadReviews();
-
-        loadRatingSummary();
-
+    } catch (error) {
+        console.warn("Using sample restaurant data:", error);
+        currentRestaurant = sampleRestaurant;
     }
 
-    catch (error) {
-
-        console.error(error);
-
-        const name =
-            document.getElementById("restaurantName");
-
-        if (name) {
-
-            name.textContent =
-                "Unable to load restaurant";
-
-        }
-
-        console.error(
-            "Make sure Flask is running on port 5000."
-        );
-
-    }
-
+    displayRestaurant();
+    await loadMenu();
+    loadReviews();
+    loadRatingSummary();
 }
 
 
@@ -221,136 +173,124 @@ function displayRestaurant() {
 ========================================== */
 
 async function loadMenu() {
+    const menuGrid = document.getElementById("menuGrid");
+    const dishCount = document.getElementById("dishCount");
 
-    const menuGrid =
-        document.getElementById("menuGrid");
+    if (!menuGrid) return;
 
+    menuGrid.innerHTML = "<p>Loading menu...</p>";
 
-    if (!menuGrid) {
-        return;
-    }
-
-
-    menuGrid.innerHTML = `
-        <p>Loading menu...</p>
-    `;
-
-
-    try {
-
-        const response = await fetch(
-            `${API_BASE}/restaurants/${currentRestaurant.restaurant_id}/menu`
-        );
-
-
-        if (!response.ok) {
-
-            throw new Error("Menu API failed");
-
+    // Sample dishes for frontend testing
+    const sampleDishes = [
+        {
+            name: "Paneer Butter Masala",
+            category: "North Indian",
+            description: "Creamy tomato gravy with soft paneer.",
+            price: 249,
+            image_url: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7"
+        },
+        {
+            name: "Veg Biryani",
+            category: "Rice",
+            description: "Fragrant basmati rice with aromatic spices.",
+            price: 199,
+            image_url: "https://images.unsplash.com/photo-1589302168068-964664d93dc0"
+        },
+        {
+            name: "Margherita Pizza",
+            category: "Italian",
+            description: "Classic pizza with cheese and tomato.",
+            price: 229,
+            image_url: "https://images.unsplash.com/photo-1579751626657-72bc17010498"
+        },
+        {
+            name: "Crispy Veg Burger",
+            category: "Fast Food",
+            description: "A crispy vegetable patty with fresh toppings.",
+            price: 149,
+            image_url: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd"
+        },
+        {
+            name: "Chocolate Brownie",
+            category: "Desserts",
+            description: "A rich chocolate treat.",
+            price: 99,
+            image_url: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c"
+        },
+        {
+            name: "Masala Dosa",
+            category: "South Indian",
+            description: "Crispy dosa served with potato filling.",
+            price: 129,
+            image_url: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976"
         }
+    ];
 
+    let dishes = [];
 
-        const dishes = await response.json();
+   try {
+    dishes = await apiRequest(
+        `/restaurants/${currentRestaurant.restaurant_id}/menu`
+    );
 
-
-        menuGrid.innerHTML = "";
-
-
-        if (dishes.length === 0) {
-
-            menuGrid.innerHTML = `
-                <p>No menu items available.</p>
-            `;
-
-            return;
-
-        }
-
-
-        dishes.forEach(dish => {
-
-            const card =
-                document.createElement("div");
-
-            card.className = "menu-card";
-
-
-            const image =
-                dish.image_url ||
-                "https://images.unsplash.com/photo-1504674900247-0877df9cc836";
-
-
-            card.innerHTML = `
-
-                <img
-                    src="${image}"
-                    alt="${dish.name}"
-                    class="menu-image"
-                >
-
-                <div class="menu-info">
-
-                    <h3>
-                        ${dish.name}
-                    </h3>
-
-                    <p>
-                        ${dish.category || ""}
-                    </p>
-
-                    <p>
-                        ${dish.description || ""}
-                    </p>
-
-                    <p class="menu-price">
-                        ₹${Number(dish.price).toFixed(2)}
-                    </p>
-
-                </div>
-
-                <button
-                    class="dish-favorite"
-                    onclick="toggleDishFavorite(this)"
-                >
-                    ♡
-                </button>
-
-            `;
-
-
-            menuGrid.appendChild(card);
-
-        });
-
-
-        const dishCount =
-            document.getElementById("dishCount");
-
-
-        if (dishCount) {
-
-            dishCount.textContent =
-                dishes.length + " dishes";
-
-        }
-
+    // Use sample dishes if the backend returns an empty menu
+    if (!Array.isArray(dishes) || dishes.length === 0) {
+        dishes = sampleDishes;
     }
-
-    catch (error) {
-
-        console.error(error);
-
-        menuGrid.innerHTML = `
-            <p>
-                Unable to load menu.
-                Make sure Flask is running.
-            </p>
-        `;
-
-    }
-
+} catch (error) {
+    console.warn("Using sample menu data:", error);
+    dishes = sampleDishes;
 }
 
+    menuGrid.innerHTML = "";
+
+    dishes.forEach(dish => {
+        const card = document.createElement("div");
+        card.className = "menu-card";
+
+        const image = dish.image_url ||
+            "https://images.unsplash.com/photo-1504674900247-0877df9cc836";
+
+        const imageElement = document.createElement("img");
+        imageElement.src = image;
+        imageElement.alt = dish.name || "Food dish";
+        imageElement.className = "menu-image";
+
+        const info = document.createElement("div");
+        info.className = "menu-info";
+
+        const name = document.createElement("h3");
+        name.textContent = dish.name || "Food Item";
+
+        const category = document.createElement("p");
+        category.textContent = dish.category || "";
+
+        const description = document.createElement("p");
+        description.textContent = dish.description || "";
+
+        const price = document.createElement("p");
+        price.className = "menu-price";
+        price.textContent = `₹${Number(dish.price || 0).toFixed(2)}`;
+
+        info.append(name, category, description, price);
+
+        const favorite = document.createElement("button");
+        favorite.className = "dish-favorite";
+        favorite.type = "button";
+        favorite.textContent = "♡";
+        favorite.setAttribute("aria-label", "Add to favorites");
+        favorite.addEventListener("click", function () {
+            toggleDishFavorite(this);
+        });
+
+        card.append(imageElement, info, favorite);
+        menuGrid.appendChild(card);
+    });
+
+    if (dishCount) {
+        dishCount.textContent = `${dishes.length} dishes`;
+    }
+}
 
 /* ==========================================
    TABS
@@ -365,8 +305,7 @@ function showSection(section, button) {
         document.getElementById("overviewSection");
 
     const reviews =
-        document.getElementById("reviewsSection");
-
+    document.getElementById("reviews");
 
     if (menu) {
         menu.classList.add("hidden");
