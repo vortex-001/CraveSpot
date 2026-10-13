@@ -6,6 +6,44 @@
 const API_BASE = "http://127.0.0.1:5000/api";
 
 let restaurants = [];
+
+const sampleRestaurants = [
+    {
+        restaurant_id: 1,
+        name: "Spice Garden",
+        cuisine: "North Indian",
+        rating: 4.5,
+        address: "Sector 17, Chandigarh"
+    },
+    {
+        restaurant_id: 2,
+        name: "Pizza Corner",
+        cuisine: "Italian",
+        rating: 4.3,
+        address: "Sector 22, Chandigarh"
+    },
+    {
+        restaurant_id: 3,
+        name: "Wok Express",
+        cuisine: "Chinese",
+        rating: 4.2,
+        address: "Sector 35, Chandigarh"
+    },
+    {
+        restaurant_id: 4,
+        name: "Burger House",
+        cuisine: "Fast Food",
+        rating: 4.1,
+        address: "Sector 8, Chandigarh"
+    },
+    {
+        restaurant_id: 5,
+        name: "Sweet Cravings",
+        cuisine: "Desserts",
+        rating: 4.7,
+        address: "Sector 10, Chandigarh"
+    }
+];
 let menuItems = [];
 let activeFilter = "all";
 
@@ -52,12 +90,9 @@ async function loadRestaurants() {
 
         console.error(error);
 
-        restaurantGrid.innerHTML = `
-            <p style="padding:20px;">
-                Unable to load restaurants.
-                Please make sure Flask is running on port 5000.
-            </p>
-        `;
+        restaurants = sampleRestaurants;
+menuItems = [];
+renderRestaurants();
     }
 }
 
@@ -362,94 +397,72 @@ function attachCardEvents() {
 ========================================= */
 
 function filterRestaurants() {
-
-    const query =
-        searchInput
+    const query = searchInput
         ? searchInput.value.toLowerCase().trim()
         : "";
 
-
-    const cards =
-        document.querySelectorAll(".food-card");
-
-
+    const cards = document.querySelectorAll(".food-card");
     let visibleCount = 0;
 
-
     cards.forEach(card => {
-
-        const name =
-            card.dataset.name || "";
-
-
-        const cuisine =
-            card.dataset.cuisine || "";
-
-
-        const rating =
-            Number(card.dataset.rating || 0);
-
+        const name = card.dataset.name || "";
+        const cuisine = card.dataset.cuisine || "";
+        const rating = Number(card.dataset.rating || 0);
 
         const matchesSearch =
-            name.includes(query) ||
-            cuisine.includes(query);
-
+            name.includes(query) || cuisine.includes(query);
 
         let matchesFilter = true;
 
-
         if (activeFilter === "rating") {
-
-            matchesFilter =
-                rating >= 4.0;
+            matchesFilter = rating >= 4.0;
+        } else if (
+            activeFilter === "offers" ||
+            activeFilter === "veg" ||
+            activeFilter === "fast"
+        ) {
+            // Sample data doesn't include these details yet.
+            // Hide no restaurants for these unsupported filters.
+            matchesFilter = true;
         }
 
-
-        if (
-            matchesSearch &&
-            matchesFilter
-        ) {
-
-            card.style.display = "block";
-
+        if (matchesSearch && matchesFilter) {
+            card.style.display = "";
             visibleCount++;
-
         } else {
-
             card.style.display = "none";
         }
-
     });
 
-
     if (resultCount) {
-
         resultCount.textContent =
             `${visibleCount} restaurants found`;
     }
 
-
     if (noResults) {
-
         noResults.style.display =
-            visibleCount === 0
-            ? "block"
-            : "none";
+            visibleCount === 0 ? "block" : "none";
     }
 }
-
-
 /* =========================================
-   SEARCH INPUT
+   SEARCH INPUT + HOMEPAGE SEARCH
 ========================================= */
 
-if (searchInput) {
+// Read the search query passed from the homepage.
+const urlParams = new URLSearchParams(window.location.search);
+const initialSearch = urlParams.get("search");
 
-    searchInput.addEventListener(
-        "input",
-        filterRestaurants
-    );
+// Fill the restaurant search box with the query.
+if (searchInput && initialSearch) {
+    searchInput.value = initialSearch;
 }
+
+// Apply search whenever the user types.
+if (searchInput) {
+    searchInput.addEventListener("input", filterRestaurants);
+}
+
+
 
 
 /* =========================================
@@ -564,3 +577,42 @@ filterButtons.forEach(button => {
 ========================================= */
 
 loadRestaurants();
+// Open and close the filter panel
+const filterButton = document.querySelector(
+    '.filter-btn[data-filter="all"]'
+);
+const filterPanel = document.getElementById("filterPanel");
+
+if (filterButton && filterPanel) {
+    filterButton.addEventListener("click", function () {
+        const isHidden = filterPanel.style.display === "none";
+        filterPanel.style.display = isHidden ? "block" : "none";
+    });
+}
+
+// Apply selected filters
+document.getElementById("applyFilters")?.addEventListener("click", function () {
+    const ratingChecked = document.getElementById("ratingFilter").checked;
+    const vegChecked = document.getElementById("vegFilter").checked;
+    const offersChecked = document.getElementById("offersFilter").checked;
+
+    activeFilter = ratingChecked ? "rating" : "all";
+
+    filterRestaurants();
+
+    if (vegChecked || offersChecked) {
+        alert("Pure Veg and Offers need matching data from the backend. Those filters aren't available yet.");
+    }
+
+    filterPanel.style.display = "none";
+});
+
+// Clear selected filters
+document.getElementById("clearFilters")?.addEventListener("click", function () {
+    document.getElementById("ratingFilter").checked = false;
+    document.getElementById("vegFilter").checked = false;
+    document.getElementById("offersFilter").checked = false;
+
+    activeFilter = "all";
+    filterRestaurants();
+});

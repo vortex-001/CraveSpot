@@ -221,136 +221,130 @@ function displayRestaurant() {
 ========================================== */
 
 async function loadMenu() {
+    const menuGrid = document.getElementById("menuGrid");
+    const dishCount = document.getElementById("dishCount");
 
-    const menuGrid =
-        document.getElementById("menuGrid");
+    if (!menuGrid) return;
 
+    menuGrid.innerHTML = "<p>Loading menu...</p>";
 
-    if (!menuGrid) {
-        return;
-    }
+    // Sample dishes for frontend testing
+    const sampleDishes = [
+        {
+            name: "Paneer Butter Masala",
+            category: "North Indian",
+            description: "Creamy tomato gravy with soft paneer.",
+            price: 249,
+            image_url: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7"
+        },
+        {
+            name: "Veg Biryani",
+            category: "Rice",
+            description: "Fragrant basmati rice with aromatic spices.",
+            price: 199,
+            image_url: "https://images.unsplash.com/photo-1589302168068-964664d93dc0"
+        },
+        {
+            name: "Margherita Pizza",
+            category: "Italian",
+            description: "Classic pizza with cheese and tomato.",
+            price: 229,
+            image_url: "https://images.unsplash.com/photo-1579751626657-72bc17010498"
+        },
+        {
+            name: "Crispy Veg Burger",
+            category: "Fast Food",
+            description: "A crispy vegetable patty with fresh toppings.",
+            price: 149,
+            image_url: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd"
+        },
+        {
+            name: "Chocolate Brownie",
+            category: "Desserts",
+            description: "A rich chocolate treat.",
+            price: 99,
+            image_url: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c"
+        },
+        {
+            name: "Masala Dosa",
+            category: "South Indian",
+            description: "Crispy dosa served with potato filling.",
+            price: 129,
+            image_url: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976"
+        }
+    ];
 
-
-    menuGrid.innerHTML = `
-        <p>Loading menu...</p>
-    `;
-
+    let dishes = [];
 
     try {
-
         const response = await fetch(
             `${API_BASE}/restaurants/${currentRestaurant.restaurant_id}/menu`
         );
 
-
         if (!response.ok) {
-
             throw new Error("Menu API failed");
-
         }
 
+        dishes = await response.json();
 
-        const dishes = await response.json();
-
-
-        menuGrid.innerHTML = "";
-
-
-        if (dishes.length === 0) {
-
-            menuGrid.innerHTML = `
-                <p>No menu items available.</p>
-            `;
-
-            return;
-
+        // Use sample dishes if the backend returns an empty menu
+        if (!Array.isArray(dishes) || dishes.length === 0) {
+            dishes = sampleDishes;
         }
+    } catch (error) {
+        console.warn("Using sample menu data:", error);
+        dishes = sampleDishes;
+    }
 
+    menuGrid.innerHTML = "";
 
-        dishes.forEach(dish => {
+    dishes.forEach(dish => {
+        const card = document.createElement("div");
+        card.className = "menu-card";
 
-            const card =
-                document.createElement("div");
+        const image = dish.image_url ||
+            "https://images.unsplash.com/photo-1504674900247-0877df9cc836";
 
-            card.className = "menu-card";
+        const imageElement = document.createElement("img");
+        imageElement.src = image;
+        imageElement.alt = dish.name || "Food dish";
+        imageElement.className = "menu-image";
 
+        const info = document.createElement("div");
+        info.className = "menu-info";
 
-            const image =
-                dish.image_url ||
-                "https://images.unsplash.com/photo-1504674900247-0877df9cc836";
+        const name = document.createElement("h3");
+        name.textContent = dish.name || "Food Item";
 
+        const category = document.createElement("p");
+        category.textContent = dish.category || "";
 
-            card.innerHTML = `
+        const description = document.createElement("p");
+        description.textContent = dish.description || "";
 
-                <img
-                    src="${image}"
-                    alt="${dish.name}"
-                    class="menu-image"
-                >
+        const price = document.createElement("p");
+        price.className = "menu-price";
+        price.textContent = `₹${Number(dish.price || 0).toFixed(2)}`;
 
-                <div class="menu-info">
+        info.append(name, category, description, price);
 
-                    <h3>
-                        ${dish.name}
-                    </h3>
-
-                    <p>
-                        ${dish.category || ""}
-                    </p>
-
-                    <p>
-                        ${dish.description || ""}
-                    </p>
-
-                    <p class="menu-price">
-                        ₹${Number(dish.price).toFixed(2)}
-                    </p>
-
-                </div>
-
-                <button
-                    class="dish-favorite"
-                    onclick="toggleDishFavorite(this)"
-                >
-                    ♡
-                </button>
-
-            `;
-
-
-            menuGrid.appendChild(card);
-
+        const favorite = document.createElement("button");
+        favorite.className = "dish-favorite";
+        favorite.type = "button";
+        favorite.textContent = "♡";
+        favorite.setAttribute("aria-label", "Add to favorites");
+        favorite.addEventListener("click", function () {
+            toggleDishFavorite(this);
         });
 
+        card.append(imageElement, info, favorite);
+        menuGrid.appendChild(card);
+    });
 
-        const dishCount =
-            document.getElementById("dishCount");
-
-
-        if (dishCount) {
-
-            dishCount.textContent =
-                dishes.length + " dishes";
-
-        }
-
+    if (dishCount) {
+        dishCount.textContent = `${dishes.length} dishes`;
     }
-
-    catch (error) {
-
-        console.error(error);
-
-        menuGrid.innerHTML = `
-            <p>
-                Unable to load menu.
-                Make sure Flask is running.
-            </p>
-        `;
-
-    }
-
 }
-
 
 /* ==========================================
    TABS
@@ -365,8 +359,7 @@ function showSection(section, button) {
         document.getElementById("overviewSection");
 
     const reviews =
-        document.getElementById("reviewsSection");
-
+    document.getElementById("reviews");
 
     if (menu) {
         menu.classList.add("hidden");

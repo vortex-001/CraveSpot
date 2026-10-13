@@ -80,6 +80,10 @@
                 id="searchInput"
                 placeholder="Search restaurant or dish..."
             >
+            <div id="navSuggestions"
+     class="search-suggestions"
+     hidden>
+</div>
 
         </div>
 
@@ -107,12 +111,17 @@
 
 
         <!-- LOGIN -->
-        <a
-            href="pages/login.html"
-            class="login-btn"
-        >
-            Login
-        </a>
+
+<!-- LOGIN / SIGN UP -->
+<div class="auth-buttons">
+    <a href="pages/login.html" class="login-btn">
+        Login
+    </a>
+
+    <a href="pages/register.html" class="signup-btn">
+        Sign Up
+    </a>
+</div>
 
     </div>
 
@@ -160,9 +169,14 @@
                         placeholder="Search for dishes, restaurants or cuisines..."
                     >
 
-                    <button onclick="performSearch()">
-                        Search
-                    </button>
+
+<button type="button" id="heroSearchButton">
+    Search
+</button>
+  <div id="heroSuggestions"
+         class="search-suggestions"
+         hidden>
+    </div>
 
                 </div>
 
@@ -346,6 +360,163 @@
 
         </section>
 
+<!-- QUICK FOOD FILTERS -->
+<section class="container quick-food-section" id="quickFoodFilters">
+
+    <div class="section-title">
+        <div>
+            <p>QUICK FILTERS</p>
+            <h2>Find Your Kind of Food</h2>
+        </div>
+    </div>
+
+    <!-- Filter buttons -->
+    <div class="food-filter-buttons" role="group" aria-label="Filter dishes">
+
+        <button type="button"
+                class="food-filter active"
+                data-filter="all"
+                aria-pressed="true">
+            All Dishes
+        </button>
+
+        <button type="button"
+                class="food-filter"
+                data-filter="veg"
+                aria-pressed="false">
+            🥬 Veg
+        </button>
+
+        <button type="button"
+                class="food-filter"
+                data-filter="non-veg"
+                aria-pressed="false">
+            🍗 Non-Veg
+        </button>
+
+        <button type="button"
+                class="food-filter"
+                data-filter="vegan"
+                aria-pressed="false">
+            🌱 Vegan
+        </button>
+
+    </div>
+
+    <!-- Dish cards -->
+
+
+<!-- Dish cards -->
+<div class="quick-dish-grid">
+
+    <!-- VEGETARIAN DISHES -->
+    <article class="quick-dish-card" data-diet="veg">
+        <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=700&q=80"
+             alt="Paneer Butter Masala" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag veg-tag">VEG</span>
+            <h3>Paneer Butter Masala</h3>
+            <p>Creamy tomato gravy with soft paneer.</p>
+            <strong>₹220</strong>
+        </div>
+    </article>
+
+    <article class="quick-dish-card" data-diet="veg">
+        <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=700&q=80"
+             alt="Garden Veg Pizza" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag veg-tag">VEG</span>
+            <h3>Garden Veg Pizza</h3>
+            <p>Pizza topped with vegetables and cheese.</p>
+            <strong>₹250</strong>
+        </div>
+    </article>
+
+    <article class="quick-dish-card" data-diet="veg">
+        <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=700&q=80"
+             alt="Vegetable Biryani" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag veg-tag">VEG</span>
+            <h3>Vegetable Biryani</h3>
+            <p>Rice cooked with vegetables and aromatic spices.</p>
+            <strong>₹180</strong>
+        </div>
+    </article>
+
+    <!-- NON-VEGETARIAN DISHES -->
+    <article class="quick-dish-card" data-diet="non-veg">
+        <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=700&q=80"
+             alt="Chicken Curry" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag nonveg-tag">NON-VEG</span>
+            <h3>Chicken Curry</h3>
+            <p>Classic chicken curry with Indian spices.</p>
+            <strong>₹280</strong>
+        </div>
+    </article>
+
+    <article class="quick-dish-card" data-diet="non-veg">
+        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=700&q=80"
+             alt="Tandoori Chicken" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag nonveg-tag">NON-VEG</span>
+            <h3>Tandoori Chicken</h3>
+            <p>Chicken marinated with traditional spices.</p>
+            <strong>₹320</strong>
+        </div>
+    </article>
+
+    <article class="quick-dish-card" data-diet="non-veg">
+        <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb92?auto=format&fit=crop&w=700&q=80"
+             alt="Crispy Chicken" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag nonveg-tag">NON-VEG</span>
+            <h3>Crispy Chicken</h3>
+            <p>Crispy, seasoned chicken bites.</p>
+            <strong>₹240</strong>
+        </div>
+    </article>
+
+    <!-- VEGAN DISHES -->
+    <article class="quick-dish-card" data-diet="vegan">
+        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=700&q=80"
+             alt="Fresh Buddha Bowl" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag vegan-tag">VEGAN</span>
+            <h3>Fresh Buddha Bowl</h3>
+            <p>Fresh vegetables, greens and grains.</p>
+            <strong>₹190</strong>
+        </div>
+    </article>
+
+    <article class="quick-dish-card" data-diet="vegan">
+        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80"
+             alt="Fresh Vegetable Salad" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag vegan-tag">VEGAN</span>
+            <h3>Fresh Veggie Salad</h3>
+            <p>A fresh mix of vegetables and greens.</p>
+            <strong>₹160</strong>
+        </div>
+    </article>
+
+    <article class="quick-dish-card" data-diet="vegan">
+        <img src="https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?auto=format&fit=crop&w=700&q=80"
+             alt="Healthy Grain Bowl" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag vegan-tag">VEGAN</span>
+            <h3>Healthy Grain Bowl</h3>
+            <p>A plant-based bowl with grains and vegetables.</p>
+            <strong>₹200</strong>
+        </div>
+    </article>
+
+</div>
+    <p id="filterEmpty" class="filter-empty" hidden>
+        No dishes match this filter yet.
+    </p>
+
+</section>
 
 
         <!-- ================= RESTAURANTS ================= -->
