@@ -7,6 +7,13 @@
 const API_BASE = "http://127.0.0.1:5000/api";
 
 let currentRestaurant = null;
+const sampleRestaurant = {
+    restaurant_id: 1,
+    name: "Spice Garden",
+    cuisine: "North Indian • Mughlai • Biryani",
+    address: "Chandigarh",
+    rating: 4.5
+};
 let selectedRating = 0;
 
 
@@ -18,98 +25,43 @@ const params = new URLSearchParams(window.location.search);
 
 const restaurantId = params.get("id");
 const vendor = params.get("vendor");
-
-
 /* ==========================================
    LOAD RESTAURANTS FROM MYSQL
 ========================================== */
 
 async function loadRestaurant() {
-
     try {
+        const restaurants = await apiRequest("/restaurants");
 
-        const response = await fetch(
-            `${API_BASE}/restaurants`
-        );
-
-        if (!response.ok) {
-            throw new Error("Restaurant API failed");
+        if (!Array.isArray(restaurants)) {
+            throw new Error("Invalid restaurant data");
         }
 
-        const restaurants = await response.json();
-
-        /*
-           First try restaurant ID.
-           Example:
-           restaurant-details.html?id=4
-        */
-
         if (restaurantId) {
-
             currentRestaurant = restaurants.find(
                 r => String(r.restaurant_id) === String(restaurantId)
             );
-
         }
-
-
-        /*
-           Also support vendor name.
-           Example:
-           restaurant-details.html?vendor=Swagath%20Restaurant%20And%20Bar
-        */
 
         if (!currentRestaurant && vendor) {
-
             currentRestaurant = restaurants.find(
-                r =>
-                    r.name.toLowerCase() ===
-                    vendor.toLowerCase()
+                r => (r.name || "").toLowerCase() === vendor.toLowerCase()
             );
-
         }
-
 
         if (!currentRestaurant) {
-
-            document.getElementById("restaurantName").textContent =
-                "Restaurant not found";
-
-            return;
-
+            currentRestaurant = sampleRestaurant;
         }
 
-
-        displayRestaurant();
-
-        await loadMenu();
-
-        loadReviews();
-
-        loadRatingSummary();
-
+    } catch (error) {
+        console.warn("Using sample restaurant data:", error);
+        currentRestaurant = sampleRestaurant;
     }
 
-    catch (error) {
-
-        console.error(error);
-
-        const name =
-            document.getElementById("restaurantName");
-
-        if (name) {
-
-            name.textContent =
-                "Unable to load restaurant";
-
-        }
-
-        console.error(
-            "Make sure Flask is running on port 5000."
-        );
-
-    }
-
+    displayRestaurant();
+    await loadMenu();
+    loadReviews();
+    loadRatingSummary();
 }
 
 
@@ -276,25 +228,19 @@ async function loadMenu() {
 
     let dishes = [];
 
-    try {
-        const response = await fetch(
-            `${API_BASE}/restaurants/${currentRestaurant.restaurant_id}/menu`
-        );
+   try {
+    dishes = await apiRequest(
+        `/restaurants/${currentRestaurant.restaurant_id}/menu`
+    );
 
-        if (!response.ok) {
-            throw new Error("Menu API failed");
-        }
-
-        dishes = await response.json();
-
-        // Use sample dishes if the backend returns an empty menu
-        if (!Array.isArray(dishes) || dishes.length === 0) {
-            dishes = sampleDishes;
-        }
-    } catch (error) {
-        console.warn("Using sample menu data:", error);
+    // Use sample dishes if the backend returns an empty menu
+    if (!Array.isArray(dishes) || dishes.length === 0) {
         dishes = sampleDishes;
     }
+} catch (error) {
+    console.warn("Using sample menu data:", error);
+    dishes = sampleDishes;
+}
 
     menuGrid.innerHTML = "";
 

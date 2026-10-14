@@ -54,7 +54,6 @@ const resultTitle = document.getElementById("resultTitle");
 const noResults = document.getElementById("noResults");
 const sortSelect = document.getElementById("sortRestaurants");
 
-
 /* =========================================
    LOAD DATA FROM FLASK
 ========================================= */
@@ -63,36 +62,27 @@ async function loadRestaurants() {
     try {
         restaurantGrid.innerHTML = "<p>Loading restaurants...</p>";
 
-        const restaurantResponse =
-            await fetch(`${API_BASE}/restaurants`);
-
-        if (!restaurantResponse.ok) {
-            throw new Error("Restaurant API failed");
-        }
-
-        restaurants = await restaurantResponse.json();
+        // Load restaurants using the shared API helper
+        restaurants = await apiRequest("/restaurants");
 
         // Load menu items too
         try {
-            const menuResponse =
-                await fetch(`${API_BASE}/menu-items`);
-
-            if (menuResponse.ok) {
-                menuItems = await menuResponse.json();
-            }
+            menuItems = await apiRequest("/menu-items");
         } catch (error) {
             console.log("Menu data could not be loaded.");
+            menuItems = [];
         }
 
         renderRestaurants();
 
     } catch (error) {
+        console.error("Could not load restaurants from API:", error);
 
-        console.error(error);
-
+        // Keep the frontend usable when the backend is unavailable
         restaurants = sampleRestaurants;
-menuItems = [];
-renderRestaurants();
+        menuItems = [];
+
+        renderRestaurants();
     }
 }
 

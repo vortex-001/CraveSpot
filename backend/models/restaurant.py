@@ -1,36 +1,18 @@
 from datetime import datetime
 
-from sqlalchemy import (
-    String,
-    Text,
-    Float,
-    Integer,
-    Boolean,
-    DateTime,
-    ForeignKey
-)
+from sqlalchemy import String, Text, Float, Integer, Boolean, DateTime
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql import func
 
 from database import Base
 
 
-class Dish(Base):
-    __tablename__ = "dishes"
+class Restaurant(Base):
+    __tablename__ = "restaurants"
 
     id: Mapped[int] = mapped_column(
         primary_key=True,
         index=True
-    )
-
-    restaurant_id: Mapped[int] = mapped_column(
-        ForeignKey("restaurants.id"),
-        nullable=False
-    )
-
-    category_id: Mapped[int] = mapped_column(
-        ForeignKey("categories.id"),
-        nullable=False
     )
 
     name: Mapped[str] = mapped_column(
@@ -44,24 +26,34 @@ class Dish(Base):
         nullable=True
     )
 
-    long_description: Mapped[str | None] = mapped_column(
-        Text,
+    cuisine: Mapped[str | None] = mapped_column(
+        String(255),
         nullable=True
     )
 
-    price: Mapped[int] = mapped_column(
-        Integer,
-        nullable=False
+    location: Mapped[str | None] = mapped_column(
+        String(255),
+        nullable=True
     )
 
-    rating: Mapped[float] = mapped_column(
+    city: Mapped[str | None] = mapped_column(
+        String(100),
+        nullable=True
+    )
+
+    average_rating: Mapped[float] = mapped_column(
         Float,
         default=0
     )
 
-    review_count: Mapped[int] = mapped_column(
+    price_for_two: Mapped[int | None] = mapped_column(
         Integer,
-        default=0
+        nullable=True
+    )
+
+    delivery_time: Mapped[int | None] = mapped_column(
+        Integer,
+        nullable=True
     )
 
     is_veg: Mapped[bool] = mapped_column(
@@ -69,8 +61,8 @@ class Dish(Base):
         default=False
     )
 
-    cuisine: Mapped[str | None] = mapped_column(
-        String(100),
+    offer: Mapped[str | None] = mapped_column(
+        String(255),
         nullable=True
     )
 
@@ -84,12 +76,8 @@ class Dish(Base):
         server_default=func.now()
     )
 
-    restaurant = relationship(
-        "Restaurant",
-        back_populates="dishes"
-    )
-
-    category = relationship(
-        "Category",
-        back_populates="dishes"
+    dishes = relationship(
+        "Dish",
+        back_populates="restaurant",
+        cascade="all, delete-orphan"
     )
