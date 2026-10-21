@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -32,7 +32,23 @@
         <a href="index.html" class="logo">
 
             <span class="logo-icon">
-                🍴
+                <svg class="cutlery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <path d="M7 2v7"/>
+    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
+    <path d="M7 9v13"/>
+    <path d="M17 2c-2 2-3 5-3 8h6"/>
+    <path d="M17 10v12"/>
+</svg>
             </span>
 
             <span>
@@ -42,44 +58,86 @@
         </a>
 
 
-        <!-- LOCATION -->
-        <div class="location">
+<!-- LOCATION WRAPPER -->
+<div class="location-wrapper">
 
-            <span class="location-icon">
-                📍
-            </span>
+    <!-- LOCATION BUTTON -->
+    <div class="location"
+         id="locationSelector"
+         role="button"
+         tabindex="0"
+         aria-label="Choose your location">
 
-            <div>
+       <span class="location-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 10C20 15 12 22 12 22S4 15 4 10
+                 A8 8 0 1 1 20 10Z"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+        <circle cx="12" cy="10" r="2.5"
+                stroke="currentColor"
+                stroke-width="1.8"/>
+    </svg>
+</span>
 
-                <small>
-                    Location
-                </small>
-
-                <strong>
-                    Chandigarh
-                </strong>
-
-            </div>
-
-            <span>
-                ⌄
-            </span>
-
+        <div>
+            <small>Location</small>
+            <strong id="selectedLocation">Chandigarh</strong>
         </div>
 
+        <span>⌄</span>
+    </div>
 
+    <!-- LOCATION DROPDOWN -->
+    <div class="location-dropdown" id="locationDropdown" hidden>
+
+        <label for="locationCity">Choose your city</label>
+
+        <select id="locationCity">
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Mohali">Mohali</option>
+            <option value="Panchkula">Panchkula</option>
+            <option value="Ludhiana">Ludhiana</option>
+            <option value="Amritsar">Amritsar</option>
+            <option value="Jalandhar">Jalandhar</option>
+            <option value="Delhi">Delhi</option>
+        </select>
+
+        <button type="button" id="saveLocation">Save Location</button>
+
+    </div>
+
+</div>
+
+<!-- SEARCH BAR -->
         <!-- SEARCH BAR -->
         <div class="nav-search">
 
-            <span>
-                🔍
-            </span>
-
+           <span class="search-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10.8" cy="10.8" r="6.8"
+                stroke="currentColor"
+                stroke-width="2"/>
+        <path d="m16 16 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"/>
+    </svg>
+</span>
             <input
                 type="text"
                 id="searchInput"
                 placeholder="Search restaurant or dish..."
             >
+            <div id="navSuggestions"
+     class="search-suggestions"
+     hidden>
+</div>
 
         </div>
 
@@ -107,12 +165,14 @@
 
 
         <!-- LOGIN -->
-        <a
-            href="pages/login.html"
-            class="login-btn"
-        >
-            Login
-        </a>
+
+<!-- LOGIN / SIGN UP -->
+<div class="auth-buttons">
+   <div class="auth-buttons">
+    <a href="login.html" class="login-btn">Login</a>
+    <a href="register.html" class="signup-btn">Sign Up</a>
+</div>
+</div>
 
     </div>
 
@@ -152,7 +212,19 @@
 
                 <div class="hero-search">
 
-                    <span>🔍</span>
+                 <span class="search-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10.8" cy="10.8" r="6.8"
+                stroke="currentColor"
+                stroke-width="2"/>
+        <path d="m16 16 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"/>
+    </svg>
+</span>
 
                     <input
                         type="text"
@@ -160,9 +232,14 @@
                         placeholder="Search for dishes, restaurants or cuisines..."
                     >
 
-                    <button onclick="performSearch()">
-                        Search
-                    </button>
+
+<button type="button" id="heroSearchButton">
+    Search
+</button>
+  <div id="heroSuggestions"
+         class="search-suggestions"
+         hidden>
+    </div>
 
                 </div>
 
@@ -346,6 +423,163 @@
 
         </section>
 
+<!-- QUICK FOOD FILTERS -->
+<section class="container quick-food-section" id="quickFoodFilters">
+
+    <div class="section-title">
+        <div>
+            <p>QUICK FILTERS</p>
+            <h2>Find Your Kind of Food</h2>
+        </div>
+    </div>
+
+    <!-- Filter buttons -->
+    <div class="food-filter-buttons" role="group" aria-label="Filter dishes">
+
+        <button type="button"
+                class="food-filter active"
+                data-filter="all"
+                aria-pressed="true">
+            All Dishes
+        </button>
+
+        <button type="button"
+                class="food-filter"
+                data-filter="veg"
+                aria-pressed="false">
+            🥬 Veg
+        </button>
+
+        <button type="button"
+                class="food-filter"
+                data-filter="non-veg"
+                aria-pressed="false">
+            🍗 Non-Veg
+        </button>
+
+        <button type="button"
+                class="food-filter"
+                data-filter="vegan"
+                aria-pressed="false">
+            🌱 Vegan
+        </button>
+
+    </div>
+
+    <!-- Dish cards -->
+
+
+<!-- Dish cards -->
+<div class="quick-dish-grid">
+
+    <!-- VEGETARIAN DISHES -->
+    <article class="quick-dish-card" data-diet="veg">
+        <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=700&q=80"
+             alt="Paneer Butter Masala" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag veg-tag">VEG</span>
+            <h3>Paneer Butter Masala</h3>
+            <p>Creamy tomato gravy with soft paneer.</p>
+            <strong>₹220</strong>
+        </div>
+    </article>
+
+    <article class="quick-dish-card" data-diet="veg">
+        <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=700&q=80"
+             alt="Garden Veg Pizza" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag veg-tag">VEG</span>
+            <h3>Garden Veg Pizza</h3>
+            <p>Pizza topped with vegetables and cheese.</p>
+            <strong>₹250</strong>
+        </div>
+    </article>
+
+    <article class="quick-dish-card" data-diet="veg">
+        <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=700&q=80"
+             alt="Vegetable Biryani" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag veg-tag">VEG</span>
+            <h3>Vegetable Biryani</h3>
+            <p>Rice cooked with vegetables and aromatic spices.</p>
+            <strong>₹180</strong>
+        </div>
+    </article>
+
+    <!-- NON-VEGETARIAN DISHES -->
+    <article class="quick-dish-card" data-diet="non-veg">
+        <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=700&q=80"
+             alt="Chicken Curry" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag nonveg-tag">NON-VEG</span>
+            <h3>Chicken Curry</h3>
+            <p>Classic chicken curry with Indian spices.</p>
+            <strong>₹280</strong>
+        </div>
+    </article>
+
+    <article class="quick-dish-card" data-diet="non-veg">
+        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=700&q=80"
+             alt="Tandoori Chicken" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag nonveg-tag">NON-VEG</span>
+            <h3>Tandoori Chicken</h3>
+            <p>Chicken marinated with traditional spices.</p>
+            <strong>₹320</strong>
+        </div>
+    </article>
+
+    <article class="quick-dish-card" data-diet="non-veg">
+        <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb92?auto=format&fit=crop&w=700&q=80"
+             alt="Crispy Chicken" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag nonveg-tag">NON-VEG</span>
+            <h3>Crispy Chicken</h3>
+            <p>Crispy, seasoned chicken bites.</p>
+            <strong>₹240</strong>
+        </div>
+    </article>
+
+    <!-- VEGAN DISHES -->
+    <article class="quick-dish-card" data-diet="vegan">
+        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=700&q=80"
+             alt="Fresh Buddha Bowl" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag vegan-tag">VEGAN</span>
+            <h3>Fresh Buddha Bowl</h3>
+            <p>Fresh vegetables, greens and grains.</p>
+            <strong>₹190</strong>
+        </div>
+    </article>
+
+    <article class="quick-dish-card" data-diet="vegan">
+        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80"
+             alt="Fresh Vegetable Salad" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag vegan-tag">VEGAN</span>
+            <h3>Fresh Veggie Salad</h3>
+            <p>A fresh mix of vegetables and greens.</p>
+            <strong>₹160</strong>
+        </div>
+    </article>
+
+    <article class="quick-dish-card" data-diet="vegan">
+        <img src="https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?auto=format&fit=crop&w=700&q=80"
+             alt="Healthy Grain Bowl" loading="lazy">
+        <div class="quick-dish-info">
+            <span class="dish-tag vegan-tag">VEGAN</span>
+            <h3>Healthy Grain Bowl</h3>
+            <p>A plant-based bowl with grains and vegetables.</p>
+            <strong>₹200</strong>
+        </div>
+    </article>
+
+</div>
+    <p id="filterEmpty" class="filter-empty" hidden>
+        No dishes match this filter yet.
+    </p>
+
+</section>
 
 
         <!-- ================= RESTAURANTS ================= -->
@@ -425,7 +659,18 @@
                         </div>
 
                         <p class="restaurant-location">
-                            📍 Sector 17, Chandigarh
+                            <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Sector 17, Chandigarh
                         </p>
 
                     </div>
@@ -483,7 +728,18 @@
                         </div>
 
                         <p class="restaurant-location">
-                            📍 Phase 7, Mohali
+                            <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Phase 7, Mohali
                         </p>
 
                     </div>
@@ -541,7 +797,18 @@
                         </div>
 
                         <p class="restaurant-location">
-                            📍 Sector 35, Chandigarh
+                            <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Sector 35, Chandigarh
                         </p>
 
                     </div>
@@ -679,7 +946,23 @@
                 <div>
 
                     <div class="footer-logo">
-                        🍴 CraveSpot
+                       <svg class="cutlery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <path d="M7 2v7"/>
+    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
+    <path d="M7 9v13"/>
+    <path d="M17 2c-2 2-3 5-3 8h6"/>
+    <path d="M17 10v12"/>
+</svg> CraveSpot
                     </div>
 
                     <p>
@@ -756,5 +1039,3 @@
 </body>
 
 </html>
-
-changes

@@ -10,7 +10,7 @@ let currentRestaurant = null;
 const sampleRestaurant = {
     restaurant_id: 1,
     name: "Spice Garden",
-    cuisine: "North Indian • Mughlai • Biryani",
+    cuisine: "North Indian Ã¢â‚¬Â¢ Mughlai Ã¢â‚¬Â¢ Biryani",
     address: "Chandigarh",
     rating: 4.5
 };
@@ -83,7 +83,7 @@ function displayRestaurant() {
 
 
     document.getElementById("restaurantLocation").textContent =
-        "📍 " + (r.address || "Chandigarh");
+       (r.address || "Chandigarh");
 
 
     document.getElementById("restaurantRating").textContent =
@@ -100,7 +100,7 @@ function displayRestaurant() {
 
 
     document.getElementById("restaurantTime").textContent =
-        "—";
+        "Ã¢â‚¬â€";
 
 
     document.getElementById("restaurantOffer").textContent =
@@ -270,20 +270,44 @@ async function loadMenu() {
 
         const price = document.createElement("p");
         price.className = "menu-price";
-        price.textContent = `₹${Number(dish.price || 0).toFixed(2)}`;
+        price.textContent = "\u20B9" + Number(dish.price || 0).toFixed(2);
 
         info.append(name, category, description, price);
 
         const favorite = document.createElement("button");
         favorite.className = "dish-favorite";
         favorite.type = "button";
-        favorite.textContent = "♡";
-        favorite.setAttribute("aria-label", "Add to favorites");
+       favorite.innerHTML = `
+    <svg class="favorite-icon"
+         viewBox="0 0 24 24"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg"
+         aria-hidden="true">
+        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+    </svg>
+`;
+favorite.setAttribute("aria-label", "Add to favorites");
         favorite.addEventListener("click", function () {
             toggleDishFavorite(this);
         });
 
         card.append(imageElement, info, favorite);
+        card.style.cursor = "pointer";
+        card.addEventListener("click", function (event) {
+            if (event.target.closest("button")) return;
+            const dishSlug = (dish.name || "")
+                .toLowerCase().trim()
+                .replace(/&/g, "and")
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-+|-+$/g, "");
+            if (dishSlug) {
+                window.location.href = `dish-details.html?dish=${encodeURIComponent(dishSlug)}&name=${encodeURIComponent(dish.name || "")}&category=${encodeURIComponent(dish.category || "")}&description=${encodeURIComponent(dish.description || "")}&price=${encodeURIComponent(dish.price || 0)}&image=${encodeURIComponent(dish.image_url || "")}&restaurantId=${encodeURIComponent(currentRestaurant.restaurant_id || "")}`;
+            }
+        });
         menuGrid.appendChild(card);
     });
 
@@ -364,24 +388,20 @@ function showSection(section, button) {
 ========================================== */
 
 function toggleFavorite() {
-
-    const button =
-        document.getElementById("favoriteBtn");
-
+    const button = document.getElementById("favoriteBtn");
 
     if (!button) {
         return;
     }
 
-
     button.classList.toggle("saved");
 
-
-    button.textContent =
+    button.setAttribute(
+        "aria-label",
         button.classList.contains("saved")
-            ? "♥"
-            : "♡";
-
+            ? "Remove from favorites"
+            : "Add to favorites"
+    );
 }
 
 
@@ -390,17 +410,23 @@ function toggleFavorite() {
 ========================================== */
 
 function toggleDishFavorite(button) {
+    if (!button) {
+        button = document.getElementById("dishFavoriteBtn");
+    }
+
+    if (!button) {
+        return;
+    }
 
     button.classList.toggle("saved");
 
-
-    button.textContent =
+    button.setAttribute(
+        "aria-label",
         button.classList.contains("saved")
-            ? "♥"
-            : "♡";
-
+            ? "Remove from favorites"
+            : "Add to favorites"
+    );
 }
-
 
 /* ==========================================
    SEARCH
@@ -715,10 +741,10 @@ function loadReviews() {
     reviews.forEach(review => {
 
         const stars =
-            "★".repeat(
+            "Ã¢Ëœâ€¦".repeat(
                 Number(review.rating)
             ) +
-            "☆".repeat(
+            "Ã¢Ëœâ€ ".repeat(
                 5 - Number(review.rating)
             );
 

@@ -15,48 +15,78 @@
 
 <!-- ================= NAVBAR ================= -->
 
-<nav class="navbar">
+<header class="navbar">
+    <div class="nav-container">
 
-    <div class="logo">
-        Crave<span>Spot</span>
-    </div>
-
-    <div class="location">
-        📍 Chandigarh
-    </div>
-
-    <div class="nav-search">
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Search restaurant or dish..."
-        >
-        <button onclick="searchRestaurant()">🔍</button>
-    </div>
-
-    <div class="nav-links">
-
-        <a href="../index.html">Home</a>
-
-        <a href="restaurants.html">
-            Restaurants
+        <!-- Logo -->
+        <a href="../index.html" class="logo">
+            <span class="logo-icon"><svg class="cutlery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <path d="M7 2v7"/>
+    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
+    <path d="M7 9v13"/>
+    <path d="M17 2c-2 2-3 5-3 8h6"/>
+    <path d="M17 10v12"/>
+</svg></span>
+            <span>Crave<span>Spot</span></span>
         </a>
 
-        <a href="dishes.html">
-            Dishes
-        </a>
+        <!-- Location -->
+        <div class="location">
+            <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Chandigarh
+        </div>
 
-        <a href="categories.html">
-            Categories
-        </a>
+        <!-- Search -->
+        <div class="nav-search">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search restaurant or dish..."
+            >
+            <button onclick="searchRestaurant()" aria-label="Search">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="2"/>
+        <path d="m16 16 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+</button>
+        </div>
 
-       <a href="login.html" class="login-btn">
-    Login
-</a>
+        <!-- Navigation links -->
+        <nav class="nav-links">
+            <a href="../index.html">Home</a>
+            <a href="restaurants.html">Restaurants</a>
+            <a href="dishes.html">Dishes</a>
+            <a href="categories.html">Categories</a>
+        </nav>
+
+        <!-- Authentication buttons -->
+        <div class="auth-buttons">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="register.html" class="signup-btn">Sign Up</a>
+        </div>
 
     </div>
-
-</nav>
+</header>
 
 
 <!-- ================= RESTAURANT HERO ================= -->
@@ -75,13 +105,24 @@
                         Restaurant Name
                     </h1>
 
-                    <button
-                        class="details-favorite"
-                        id="favoriteBtn"
-                        onclick="toggleFavorite()"
-                    >
-                        ♡
-                    </button>
+                  <button
+    class="details-favorite"
+    id="favoriteBtn"
+    onclick="toggleFavorite()"
+    aria-label="Add to favorites"
+>
+    <svg class="favorite-icon"
+         viewBox="0 0 24 24"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg"
+         aria-hidden="true">
+        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+    </svg>
+</button>
 
                 </div>
 
@@ -90,7 +131,18 @@
                 </p>
 
                 <p id="restaurantLocation">
-                    📍 Chandigarh
+                    <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Chandigarh
                 </p>
 
                 <div class="restaurant-meta">
@@ -209,14 +261,41 @@
             <div class="overview-details">
 
                 <div>
-                    <strong>🍴 Cuisine</strong>
+                    <strong><svg class="cutlery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <path d="M7 2v7"/>
+    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
+    <path d="M7 9v13"/>
+    <path d="M17 2c-2 2-3 5-3 8h6"/>
+    <path d="M17 10v12"/>
+</svg> Cuisine</strong>
                     <span id="overviewCuisine">
                         -
                     </span>
                 </div>
 
                 <div>
-                    <strong>📍 Location</strong>
+                    <strong><svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Location</strong>
                     <span id="overviewLocation">
                         -
                     </span>
