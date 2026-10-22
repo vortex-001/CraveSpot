@@ -1,223 +1,337 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | CraveSpot</title>
+    <style>
+        * { box-sizing: border-box; }
 
-    <link
-        rel="stylesheet"
-        href="../css/login.css"
-    >
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #292524;
+            background: #fff7f2;
+        }
 
+        .auth-card {
+            width: 100%;
+            max-width: 430px;
+            padding: 32px;
+            background: #fff;
+            border: 1px solid #f0e5df;
+            border-radius: 16px;
+            box-shadow: 0 14px 40px rgba(60, 30, 15, .09);
+        }
+
+        .brand {
+            display: inline-block;
+            margin-bottom: 22px;
+            color: #c2183a;
+            font-size: 24px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        h1 { margin: 0 0 8px; font-size: 28px; }
+
+        .subtitle {
+            margin: 0 0 22px;
+            color: #78716c;
+            line-height: 1.5;
+        }
+
+        .field { margin-bottom: 17px; }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .field input {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d6d3d1;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        .field input:focus {
+            outline: 2px solid #f3b7c5;
+            border-color: #c2183a;
+        }
+
+        .password-field { position: relative; }
+
+        .password-field input { padding-right: 74px; }
+
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 9px;
+            transform: translateY(-50%);
+            border: 0;
+            padding: 5px;
+            color: #c2183a;
+            background: transparent;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .remember-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 2px 0 18px;
+            font-size: 14px;
+        }
+
+        .remember-row input { accent-color: #c2183a; }
+
+        .primary {
+            width: 100%;
+            padding: 13px;
+            border: 0;
+            border-radius: 9px;
+            background: #c2183a;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .primary:hover { background: #a3122e; }
+
+        .primary:disabled {
+            opacity: .65;
+            cursor: not-allowed;
+        }
+
+        #message {
+            min-height: 20px;
+            margin: 0 0 12px;
+            color: #b91c1c;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .bottom {
+            margin-top: 21px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .bottom a {
+            color: #c2183a;
+            font-weight: 700;
+        }
+
+        .demo-note {
+            margin-top: 18px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #fff0f3;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 480px) {
+            .auth-card { padding: 23px; }
+        }
+    </style>
 </head>
 
-
 <body>
+<main class="auth-card">
+    <a class="brand" href="../index.html"><svg class="cutlery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <path d="M7 2v7"/>
+    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
+    <path d="M7 9v13"/>
+    <path d="M17 2c-2 2-3 5-3 8h6"/>
+    <path d="M17 10v12"/>
+</svg> CraveSpot</a>
 
-    <!-- ================= LOGIN PAGE ================= -->
+    <h1>Welcome Back</h1>
+    <p class="subtitle">
+        Log in to continue discovering food you'll love.
+    </p>
 
-    <main class="login-page">
+    <p id="message" role="status" aria-live="polite"></p>
 
-        <!-- LEFT SIDE -->
-
-        <section class="login-left">
-
-            <a
-                href="../index.html"
-                class="brand"
+    <form id="loginForm" novalidate>
+        <div class="field">
+            <label for="email">Email address</label>
+            <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder="you@example.com"
+                required
             >
-                🍴 Crave<span>Spot</span>
-            </a>
+        </div>
 
+        <div class="field">
+            <label for="password">Password</label>
 
-            <div class="welcome-content">
-
-                <p class="small-heading">
-                    WELCOME BACK
-                </p>
-
-                <h1>
-                    Your favourite food
-                    <br>
-                    is waiting for you.
-                </h1>
-
-                <p class="welcome-text">
-                    Login to discover restaurants,
-                    explore delicious dishes and
-                    find your next favourite meal.
-                </p>
-
-            </div>
-
-
-            <p class="copyright">
-                © 2026 CraveSpot
-            </p>
-
-        </section>
-
-
-        <!-- RIGHT SIDE -->
-
-        <section class="login-right">
-
-            <div class="login-card">
-
-                <div class="login-heading">
-
-                    <h2>
-                        Welcome back!
-                    </h2>
-
-                    <p>
-                        Login to continue to CraveSpot
-                    </p>
-
-                </div>
-
-
-                <!-- LOGIN FORM -->
-
-                <form id="loginForm">
-
-                    <!-- EMAIL -->
-
-                    <div class="form-group">
-
-                        <label for="email">
-                            Email address
-                        </label>
-
-                        <input
-                            type="email"
-                            id="email"
-                            placeholder="Enter your email"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- PASSWORD -->
-
-                    <div class="form-group">
-
-                        <div class="password-label">
-
-                            <label for="password">
-                                Password
-                            </label>
-
-                            <a href="#">
-                                Forgot password?
-                            </a>
-
-                        </div>
-
-
-                        <div class="password-box">
-
-                            <input
-                                type="password"
-                                id="password"
-                                placeholder="Enter your password"
-                                required
-                            >
-
-                            <button
-                                type="button"
-                                id="togglePassword"
-                            >
-                                👁
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- REMEMBER ME -->
-
-                    <div class="remember-row">
-
-                        <label>
-
-                            <input
-                                type="checkbox"
-                                id="remember"
-                            >
-
-                            Remember me
-
-                        </label>
-
-                    </div>
-
-
-                    <!-- LOGIN BUTTON -->
-
-                    <button
-                        type="submit"
-                        class="login-submit"
-                    >
-                        Login
-                    </button>
-
-
-                    <!-- MESSAGE -->
-
-                    <p
-                        id="loginMessage"
-                        class="login-message"
-                    ></p>
-
-                </form>
-
-
-                <!-- SIGN UP -->
-
-                <div class="signup">
-
-                    <span>
-                        Don't have an account?
-                    </span>
-
-                    <!-- CHANGED THIS -->
-
-                    <a href="register.html">
-                        Create account
-                    </a>
-
-                </div>
-
-
-                <!-- BACK -->
-
-                <a
-                    href="../index.html"
-                    class="back-home"
+            <div class="password-field">
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    placeholder="Enter your password"
+                    required
                 >
-                    ← Back to CraveSpot
-                </a>
 
+                <button
+                    type="button"
+                    class="password-toggle"
+                    id="togglePassword"
+                    aria-label="Show password"
+                >Show</button>
             </div>
+        </div>
 
-        </section>
+        <label class="remember-row">
+            <input id="rememberMe" type="checkbox" checked>
+            Remember me
+        </label>
 
-    </main>
+        <button type="submit" class="primary" id="loginButton">
+            Login
+        </button>
+    </form>
 
+    <p class="bottom">
+        Don't have an account?
+        <a href="register.html">Create an account</a>
+    </p>
 
-    <script src="../js/login.js"></script>
+    <div class="demo-note">
+        <strong>Frontend demo only:</strong>
+        Accounts are stored in this browser's local storage.
+        Do not use real passwords or sensitive information.
+        This is not secure production authentication.
+    </div>
+</main>
 
+<script>
+"use strict";
+
+const form = document.getElementById("loginForm");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+const message = document.getElementById("message");
+const loginButton = document.getElementById("loginButton");
+const togglePassword = document.getElementById("togglePassword");
+
+togglePassword.addEventListener("click", function () {
+    const showing = passwordInput.type === "password";
+
+    passwordInput.type = showing ? "text" : "password";
+    togglePassword.textContent = showing ? "Hide" : "Show";
+
+    togglePassword.setAttribute(
+        "aria-label",
+        showing ? "Hide password" : "Show password"
+    );
+});
+
+form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    message.style.color = "#b91c1c";
+    message.textContent = "";
+
+    const email = emailInput.value.trim().toLowerCase();
+    const password = passwordInput.value;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+        message.textContent = "Please enter a valid email address.";
+        emailInput.focus();
+        return;
+    }
+
+    if (!password) {
+        message.textContent = "Please enter your password.";
+        passwordInput.focus();
+        return;
+    }
+
+    let accounts;
+
+    try {
+        accounts = JSON.parse(
+            localStorage.getItem("CraveSpotAccounts") || "[]"
+        );
+
+        if (!Array.isArray(accounts)) {
+            throw new Error("Invalid account list");
+        }
+    } catch (error) {
+        message.textContent =
+            "Could not read saved accounts. Please register again.";
+        return;
+    }
+
+    const account = accounts.find(function (item) {
+        return item &&
+            typeof item.email === "string" &&
+            typeof item.password === "string" &&
+            item.email.toLowerCase() === email &&
+            item.password === password;
+    });
+
+    if (!account) {
+        message.textContent = "Invalid email or password.";
+        passwordInput.focus();
+        return;
+    }
+
+    try {
+        // These keys are used by the existing app.js.
+        localStorage.setItem("CraveSpotLoggedIn", "true");
+        localStorage.setItem(
+            "CraveSpotUser",
+            account.name || account.email
+        );
+
+        sessionStorage.removeItem("CraveSpotLoggedIn");
+        sessionStorage.removeItem("CraveSpotUser");
+    } catch (error) {
+        message.textContent =
+            "Browser storage is unavailable. Please check your browser settings.";
+        return;
+    }
+
+    message.style.color = "#15803d";
+    message.textContent = "Login successful! Redirecting...";
+    loginButton.disabled = true;
+
+    window.setTimeout(function () {
+        window.location.href = "../index.html";
+    }, 600);
+});
+</script>
 </body>
-
 </html>

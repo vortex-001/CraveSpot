@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,37 +26,90 @@
 
     <div class="nav-container">
 
-        <a href="../index.html" class="logo">
+    <a href="../index.html" class="logo">
+    <span class="logo-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 2v8M4 2v5a3 3 0 0 0 6 0V2M7 10v12M17 2c-2 2-3 5-3 9h3v11M17 2v9"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+        </svg>
+    </span>
+    <span>Crave<span>Spot</span></span>
+</a>
 
-            <span class="logo-icon">🍴</span>
+<!-- LOCATION WRAPPER -->
+<div class="location-wrapper">
 
-            <span>
-                Crave<span>Spot</span>
-            </span>
+    <!-- LOCATION BUTTON -->
+    <div class="location"
+         id="locationSelector"
+         role="button"
+         tabindex="0"
+         aria-label="Choose your location">
 
-        </a>
+      <span class="location-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 10C20 15 12 22 12 22S4 15 4 10
+                 A8 8 0 1 1 20 10Z"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+        <circle cx="12" cy="10" r="2.5"
+                stroke="currentColor"
+                stroke-width="1.8"/>
+    </svg>
+</span>
 
-
-        <div class="location">
-
-            <span class="location-icon">📍</span>
-
-            <div>
-
-                <small>Location</small>
-
-                <strong>Chandigarh</strong>
-
-            </div>
-
-            <span>⌄</span>
-
+        <div>
+            <small>Location</small>
+            <strong id="selectedLocation">Chandigarh</strong>
         </div>
+
+        <span>⌄</span>
+
+    </div>
+
+    <!-- LOCATION DROPDOWN -->
+    <div class="location-dropdown" id="locationDropdown" hidden>
+
+        <label for="locationCity">Choose your city</label>
+
+        <select id="locationCity">
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Mohali">Mohali</option>
+            <option value="Panchkula">Panchkula</option>
+            <option value="Ludhiana">Ludhiana</option>
+            <option value="Amritsar">Amritsar</option>
+            <option value="Jalandhar">Jalandhar</option>
+            <option value="Delhi">Delhi</option>
+        </select>
+
+        <button type="button" id="saveLocation">Save Location</button>
+
+    </div>
+
+</div>
 
 
         <div class="nav-search">
 
-            <span>🔍</span>
+            <span class="search-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10.8" cy="10.8" r="6.8"
+                stroke="currentColor"
+                stroke-width="2"/>
+        <path d="m16 16 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"/>
+    </svg>
+</span>
 
             <input
                 type="text"
@@ -66,27 +119,26 @@
 
         </div>
 
+<nav>
+    <a href="../index.html">Home</a>
 
-        <nav>
+    <a href="restaurants.html">Restaurants</a>
 
-            <a href="restaurants.html">
-                Restaurants
-            </a>
+    <a href="dishes.html">Dishes</a>
 
-            <a href="dishes.html">
-                Dishes
-            </a>
-
-            <a href="categories.html">
-                Categories
-            </a>
-
-        </nav>
+    <a href="categories.html">Categories</a>
+</nav>
 
 
-       <a href="login.html" class="login-btn">
-    Login
-</a>
+       <div class="auth-buttons">
+    <a href="login.html" class="login-btn">
+        Login
+    </a>
+
+    <a href="register.html" class="signup-btn">
+        Sign Up
+    </a>
+</div>
 
     </div>
 
@@ -134,7 +186,52 @@
                 class="mode-btn active"
                 data-mode="delivery"
             >
-                🛵 Delivery
+                <svg class="delivery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     width="32"
+     height="32"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="2.5"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+
+    <!-- Wheels -->
+    <circle cx="15" cy="48" r="7"/>
+    <circle cx="49" cy="48" r="7"/>
+    <circle cx="15" cy="48" r="2"/>
+    <circle cx="49" cy="48" r="2"/>
+
+    <!-- Scooter body -->
+    <path d="M15 41 L22 34 L35 34 L43 43 L49 43"/>
+    <path d="M22 34 L19 25 L27 25"/>
+    <path d="M35 34 L39 25"/>
+
+    <!-- Seat -->
+    <path d="M25 29 L36 29"/>
+    <path d="M28 25 L38 25"/>
+
+    <!-- Handlebar -->
+    <path d="M19 25 L16 19 L11 19"/>
+    <path d="M16 19 L19 15"/>
+
+    <!-- Front mudguard -->
+    <path d="M8 44 Q15 37 22 44"/>
+
+    <!-- Delivery box -->
+    <path d="M36 8 H55 V25 H36 Z"/>
+    <path d="M36 13 H55"/>
+    <path d="M42 8 V5 H49 V8"/>
+
+    <!-- Connection to delivery box -->
+    <path d="M39 25 L35 32"/>
+
+    <!-- Headlight -->
+    <circle cx="20" cy="27" r="2"/>
+
+</svg> Delivery
             </button>
 
             <button
@@ -178,39 +275,63 @@
     <button type="button" id="clearFilters">Clear Filters</button>
 </div>
 
-            <button
-                class="filter-btn"
-                data-filter="rating"
-            >
-                ⭐ Rating 4.0+
-            </button>
+<button
+    class="filter-btn"
+    data-filter="rating"
+>
+    <svg class="star-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="20"
+     height="20"
+     fill="currentColor"
+     aria-hidden="true">
+    <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z"/>
+</svg> Rating 4.0+
+</button>
+
+<button
+    class="filter-btn"
+    data-filter="offers"
+>
+    🏷️ Offers
+</button>
+
+<button
+    class="filter-btn"
+    data-filter="veg"
+>
+    <svg class="salad-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.7"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <!-- Salad leaves -->
+    <path d="M12 11C7 11 5 7 7 4c3 0 5 2 5 5"/>
+    <path d="M12 11c0-5 3-7 6-6 1 3-1 6-6 6"/>
+    <path d="M12 10C9 6 11 3 14 2c2 3 1 6-2 8"/>
+    <!-- Bowl -->
+    <path d="M3 12h18l-2 6a3 3 0 0 1-3 2H8a3 3 0 0 1-3-2l-2-6z"/>
+    <path d="M8 23h8"/>
+</svg> Pure Veg
+</button>
+
+<button
+    class="filter-btn"
+    data-filter="fast"
+>
+    ⚡ Fast Delivery
+</button>
+
+<select
 
 
-            <button
-                class="filter-btn"
-                data-filter="offers"
-            >
-                🏷️ Offers
-            </button>
-
-
-            <button
-                class="filter-btn"
-                data-filter="veg"
-            >
-                🥗 Pure Veg
-            </button>
-
-
-            <button
-                class="filter-btn"
-                data-filter="fast"
-            >
-                ⚡ Fast Delivery
-            </button>
-
-
-            <select
                 id="sortRestaurants"
                 class="sort-select"
             >
@@ -292,9 +413,19 @@
                         20% OFF
                     </span>
 
-                    <button class="favorite-btn">
-                        ♡
-                    </button>
+                  <button class="favorite-btn" aria-label="Add to favorites">
+    <svg class="favorite-icon"
+         viewBox="0 0 24 24"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg"
+         aria-hidden="true">
+        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+    </svg>
+</button>
 
                 </div>
 
@@ -333,14 +464,70 @@
 
 
                     <p class="food-location">
-                        📍 Sector 17, Chandigarh
+                        <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Sector 17, Chandigarh
                     </p>
 
 
                     <div class="card-bottom">
 
                         <span class="delivery-tag">
-                            🛵 Free delivery
+                            <svg class="delivery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     width="32"
+     height="32"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="2.5"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+
+    <!-- Wheels -->
+    <circle cx="15" cy="48" r="7"/>
+    <circle cx="49" cy="48" r="7"/>
+    <circle cx="15" cy="48" r="2"/>
+    <circle cx="49" cy="48" r="2"/>
+
+    <!-- Scooter body -->
+    <path d="M15 41 L22 34 L35 34 L43 43 L49 43"/>
+    <path d="M22 34 L19 25 L27 25"/>
+    <path d="M35 34 L39 25"/>
+
+    <!-- Seat -->
+    <path d="M25 29 L36 29"/>
+    <path d="M28 25 L38 25"/>
+
+    <!-- Handlebar -->
+    <path d="M19 25 L16 19 L11 19"/>
+    <path d="M16 19 L19 15"/>
+
+    <!-- Front mudguard -->
+    <path d="M8 44 Q15 37 22 44"/>
+
+    <!-- Delivery box -->
+    <path d="M36 8 H55 V25 H36 Z"/>
+    <path d="M36 13 H55"/>
+    <path d="M42 8 V5 H49 V8"/>
+
+    <!-- Connection to delivery box -->
+    <path d="M39 25 L35 32"/>
+
+    <!-- Headlight -->
+    <circle cx="20" cy="27" r="2"/>
+
+</svg> Free delivery
                         </span>
 
                         <span class="card-arrow">
@@ -380,7 +567,17 @@
                     </span>
 
                     <button class="favorite-btn">
-                        ♡
+                        <svg class="favorite-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+</svg>
                     </button>
 
                 </div>
@@ -420,14 +617,70 @@
 
 
                     <p class="food-location">
-                        📍 Phase 7, Mohali
+                        <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Phase 7, Mohali
                     </p>
 
 
                     <div class="card-bottom">
 
                         <span class="delivery-tag">
-                            🛵 Free delivery
+                            <svg class="delivery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     width="32"
+     height="32"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="2.5"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+
+    <!-- Wheels -->
+    <circle cx="15" cy="48" r="7"/>
+    <circle cx="49" cy="48" r="7"/>
+    <circle cx="15" cy="48" r="2"/>
+    <circle cx="49" cy="48" r="2"/>
+
+    <!-- Scooter body -->
+    <path d="M15 41 L22 34 L35 34 L43 43 L49 43"/>
+    <path d="M22 34 L19 25 L27 25"/>
+    <path d="M35 34 L39 25"/>
+
+    <!-- Seat -->
+    <path d="M25 29 L36 29"/>
+    <path d="M28 25 L38 25"/>
+
+    <!-- Handlebar -->
+    <path d="M19 25 L16 19 L11 19"/>
+    <path d="M16 19 L19 15"/>
+
+    <!-- Front mudguard -->
+    <path d="M8 44 Q15 37 22 44"/>
+
+    <!-- Delivery box -->
+    <path d="M36 8 H55 V25 H36 Z"/>
+    <path d="M36 13 H55"/>
+    <path d="M42 8 V5 H49 V8"/>
+
+    <!-- Connection to delivery box -->
+    <path d="M39 25 L35 32"/>
+
+    <!-- Headlight -->
+    <circle cx="20" cy="27" r="2"/>
+
+</svg> Free delivery
                         </span>
 
                         <span class="card-arrow">
@@ -467,7 +720,17 @@
                     </span>
 
                     <button class="favorite-btn">
-                        ♡
+                        <svg class="favorite-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+</svg>
                     </button>
 
                 </div>
@@ -507,14 +770,43 @@
 
 
                     <p class="food-location">
-                        📍 Sector 35, Chandigarh
+                        <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Sector 35, Chandigarh
                     </p>
 
 
                     <div class="card-bottom">
 
                         <span class="delivery-tag">
-                            🥗 Veg options
+                            <svg class="salad-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.7"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <!-- Salad leaves -->
+    <path d="M12 11C7 11 5 7 7 4c3 0 5 2 5 5"/>
+    <path d="M12 11c0-5 3-7 6-6 1 3-1 6-6 6"/>
+    <path d="M12 10C9 6 11 3 14 2c2 3 1 6-2 8"/>
+    <!-- Bowl -->
+    <path d="M3 12h18l-2 6a3 3 0 0 1-3 2H8a3 3 0 0 1-3-2l-2-6z"/>
+    <path d="M8 23h8"/>
+</svg> Veg options
                         </span>
 
                         <span class="card-arrow">
@@ -550,7 +842,17 @@
                     >
 
                     <button class="favorite-btn">
-                        ♡
+                        <svg class="favorite-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+</svg>
                     </button>
 
                 </div>
@@ -590,7 +892,18 @@
 
 
                     <p class="food-location">
-                        📍 Sector 22, Chandigarh
+                        <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Sector 22, Chandigarh
                     </p>
 
 
@@ -637,7 +950,17 @@
                     </span>
 
                     <button class="favorite-btn">
-                        ♡
+                        <svg class="favorite-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+</svg>
                     </button>
 
                 </div>
@@ -677,7 +1000,18 @@
 
 
                     <p class="food-location">
-                        📍 Sector 34, Chandigarh
+                        <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Sector 34, Chandigarh
                     </p>
 
 
@@ -720,7 +1054,17 @@
                     >
 
                     <button class="favorite-btn">
-                        ♡
+                        <svg class="favorite-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+</svg>
                     </button>
 
                 </div>
@@ -760,7 +1104,18 @@
 
 
                     <p class="food-location">
-                        📍 Sector 15, Chandigarh
+                        <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Sector 15, Chandigarh
                     </p>
 
 
@@ -792,7 +1147,19 @@
         >
 
             <div>
-                🔎
+                <svg class="real-search-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <circle cx="10.8" cy="10.8" r="6.8"
+            stroke="currentColor"
+            stroke-width="2"/>
+    <path d="m16 16 5 5"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"/>
+</svg>
             </div>
 
             <h3>
@@ -822,7 +1189,23 @@
         <div>
 
             <div class="footer-logo">
-                🍴 CraveSpot
+               <svg class="cutlery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <path d="M7 2v7"/>
+    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
+    <path d="M7 9v13"/>
+    <path d="M17 2c-2 2-3 5-3 8h6"/>
+    <path d="M17 10v12"/>
+</svg> CraveSpot
             </div>
 
             <p>
@@ -881,10 +1264,9 @@
 
 </footer>
 
-
-
 <script src="../js/app.js"></script>
 <script src="../js/api.js"></script>
+
 
 <script src="../js/restaurants.js"></script>
 

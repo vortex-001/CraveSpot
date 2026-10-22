@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +28,23 @@
 
         <a href="../index.html" class="logo">
 
-            <span class="logo-icon">🍴</span>
+            <span class="logo-icon"><svg class="cutlery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <path d="M7 2v7"/>
+    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
+    <path d="M7 9v13"/>
+    <path d="M17 2c-2 2-3 5-3 8h6"/>
+    <path d="M17 10v12"/>
+</svg></span>
 
             <span>
                 Crave<span>Spot</span>
@@ -37,26 +53,75 @@
         </a>
 
 
-        <div class="location">
+        <div class="location-wrapper">
 
-            <span class="location-icon">📍</span>
+    <div class="location"
+         id="locationSelector"
+         role="button"
+         tabindex="0"
+         aria-label="Choose your location">
 
-            <div>
+        <span class="location-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 10C20 15 12 22 12 22S4 15 4 10
+                 A8 8 0 1 1 20 10Z"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+        <circle cx="12" cy="10" r="2.5"
+                stroke="currentColor"
+                stroke-width="1.8"/>
+    </svg>
+</span>
 
-                <small>Location</small>
-
-                <strong>Chandigarh</strong>
-
-            </div>
-
-            <span>⌄</span>
-
+        <div>
+            <small>Location</small>
+            <strong id="selectedLocation">Chandigarh</strong>
         </div>
+
+        <span>⌄</span>
+
+    </div>
+
+    <div class="location-dropdown" id="locationDropdown" hidden>
+
+        <label for="locationCity">Choose your city</label>
+
+        <select id="locationCity">
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Mohali">Mohali</option>
+            <option value="Panchkula">Panchkula</option>
+            <option value="Ludhiana">Ludhiana</option>
+            <option value="Amritsar">Amritsar</option>
+            <option value="Jalandhar">Jalandhar</option>
+            <option value="Delhi">Delhi</option>
+        </select>
+
+        <button type="button" id="saveLocation">
+            Save Location
+        </button>
+
+    </div>
+
+</div>
 
 
         <div class="nav-search">
 
-            <span>🔍</span>
+        <span class="search-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10.8" cy="10.8" r="6.8"
+                stroke="currentColor"
+                stroke-width="2"/>
+        <path d="m16 16 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"/>
+    </svg>
+</span>
 
             <input
                 type="text"
@@ -67,26 +132,27 @@
         </div>
 
 
-        <nav>
+      <nav>
+    <a href="../index.html">Home</a>
 
-            <a href="restaurants.html">
-                Restaurants
-            </a>
+    <a href="restaurants.html">Restaurants</a>
 
-            <a href="dishes.html" class="active-nav">
-                Dishes
-            </a>
+    <a href="dishes.html">Dishes</a>
 
-            <a href="categories.html">
-                Categories
-            </a>
-
-        </nav>
-
-
+    <a href="categories.html">Categories</a>
+</nav>
+        <div class="auth-buttons">
     <a href="login.html" class="login-btn">
-    Login
-</a>
+        Login
+    </a>
+
+    <a href="register.html" class="signup-btn">
+        Sign Up
+    </a>
+</div>
+
+
+   
 
     </div>
 
@@ -121,7 +187,18 @@
 
             <div class="dish-search-box">
 
-                <span>🔍</span>
+                <span class="search-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10.8" cy="10.8" r="6.8"
+                stroke="currentColor"
+                stroke-width="2"/>
+        <path d="m16 16 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"/>
+    </svg>
+</span>
 
                 <input
                     type="text"
@@ -174,7 +251,31 @@
                 class="dish-category"
                 data-category="biryani"
             >
-                <span>🍛</span>
+                <span><svg class="curry-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.7"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <!-- Steam -->
+    <path d="M8 3c-2 2 2 3 0 5"/>
+    <path d="M12 2c-2 2 2 3 0 5"/>
+    <path d="M16 3c-2 2 2 3 0 5"/>
+    <!-- Curry bowl -->
+    <path d="M3 10h18l-2 7a4 4 0 0 1-4 3H9a4 4 0 0 1-4-3l-2-7z"/>
+    <path d="M5 14h14"/>
+    <!-- Bowl base -->
+    <path d="M9 23h6"/>
+    <!-- Curry ingredients -->
+    <circle cx="8" cy="12" r="1" fill="currentColor" stroke="none"/>
+    <circle cx="13" cy="13" r="1" fill="currentColor" stroke="none"/>
+    <circle cx="17" cy="12" r="1" fill="currentColor" stroke="none"/>
+</svg></span>
                 Biryani
             </button>
 
@@ -183,7 +284,41 @@
                 class="dish-category"
                 data-category="pizza"
             >
-                <span>🍕</span>
+                <span><svg class="pizza-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 48 48"
+     width="32"
+     height="32"
+     aria-hidden="true">
+
+    <!-- Golden crust -->
+    <path d="M5 10 Q24 -1 43 10 L27 42 Q24 48 21 42 Z"
+          fill="#D99A45"/>
+
+    <!-- Cheese layer -->
+    <path d="M8 11 Q24 2 40 11 L26 40 Q24 44 22 40 Z"
+          fill="#FFD75E"/>
+
+    <!-- Melted cheese highlights -->
+    <path d="M12 12 Q24 6 35 12"
+          fill="none"
+          stroke="#FFF0A3"
+          stroke-width="2.5"
+          stroke-linecap="round"/>
+
+    <!-- Pepperoni -->
+    <circle cx="17" cy="15" r="4.2" fill="#D83B32"/>
+    <circle cx="30" cy="14" r="4.2" fill="#D83B32"/>
+    <circle cx="24" cy="25" r="4.2" fill="#D83B32"/>
+    <circle cx="25" cy="36" r="3" fill="#D83B32"/>
+
+    <!-- Pepperoni details -->
+    <g fill="#F58B68">
+        <circle cx="16" cy="14" r="1"/>
+        <circle cx="29" cy="13" r="1"/>
+        <circle cx="23" cy="24" r="1"/>
+    </g>
+</svg></span>
                 Pizza
             </button>
 
@@ -192,7 +327,82 @@
                 class="dish-category"
                 data-category="burger"
             >
-                <span>🍔</span>
+                <span><svg class="burger-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     width="36"
+     height="36"
+     aria-hidden="true">
+
+    <!-- Top bun -->
+    <path d="M7 27C7 14 18 6 32 6s25 8 25 21v3H7Z"
+          fill="#E8A044"
+          stroke="#B86D2B"
+          stroke-width="1.5"/>
+
+    <!-- Bun shading -->
+    <path d="M11 23C14 14 22 10 32 10"
+          fill="none"
+          stroke="#FFD38A"
+          stroke-width="3"
+          stroke-linecap="round"/>
+
+    <!-- Sesame seeds -->
+    <g fill="#FFF0C7" stroke="#D69A50" stroke-width=".5">
+        <ellipse cx="22" cy="14" rx="2.2" ry="1.1" transform="rotate(-30 22 14)"/>
+        <ellipse cx="32" cy="11" rx="2.2" ry="1.1" transform="rotate(15 32 11)"/>
+        <ellipse cx="42" cy="15" rx="2.2" ry="1.1" transform="rotate(-25 42 15)"/>
+        <ellipse cx="16" cy="21" rx="2.2" ry="1.1" transform="rotate(20 16 21)"/>
+        <ellipse cx="27" cy="20" rx="2.2" ry="1.1" transform="rotate(-15 27 20)"/>
+        <ellipse cx="39" cy="21" rx="2.2" ry="1.1" transform="rotate(25 39 21)"/>
+        <ellipse cx="49" cy="22" rx="2.2" ry="1.1" transform="rotate(-20 49 22)"/>
+    </g>
+
+    <!-- Lettuce -->
+    <path d="M6 29L12 26L18 30L24 26L31 30L38 26L45 30L52 26L58 29L55 35H9Z"
+          fill="#53A83D"
+          stroke="#357E2D"
+          stroke-width="1.2"/>
+
+    <!-- Tomato -->
+    <path d="M9 34Q32 31 55 34L53 39Q32 42 11 39Z"
+          fill="#E8493E"
+          stroke="#B72F2A"
+          stroke-width="1.2"/>
+
+    <!-- Cheese -->
+    <path d="M9 38H55L49 45L39 41L31 47L23 41L14 45Z"
+          fill="#FFD447"
+          stroke="#D79A20"
+          stroke-width="1.2"/>
+
+    <!-- Beef patty -->
+    <path d="M9 43Q32 40 55 43L53 50Q32 54 11 50Z"
+          fill="#75402B"
+          stroke="#4C281D"
+          stroke-width="1.5"/>
+
+    <!-- Patty texture -->
+    <g stroke="#B9784E" stroke-width="1.5" stroke-linecap="round">
+        <path d="M17 46l4-1"/>
+        <path d="M29 48l4-1"/>
+        <path d="M41 45l4-1"/>
+        <path d="M23 50l3-1"/>
+    </g>
+
+    <!-- Bottom bun -->
+    <path d="M11 50Q32 54 53 50L52 54Q50 59 43 59H21Q14 59 12 54Z"
+          fill="#E8A044"
+          stroke="#B86D2B"
+          stroke-width="1.5"/>
+
+    <!-- Bottom bun highlight -->
+    <path d="M19 56Q32 58 45 56"
+          fill="none"
+          stroke="#FFD38A"
+          stroke-width="1.8"
+          stroke-linecap="round"/>
+</svg></span>
                 Burgers
             </button>
 
@@ -201,7 +411,61 @@
                 class="dish-category"
                 data-category="chinese"
             >
-                <span>🥟</span>
+                <span><svg class="dumpling-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     width="36"
+     height="36"
+     aria-hidden="true">
+
+    <!-- Dumpling shadow -->
+    <ellipse cx="32" cy="49" rx="23" ry="7" fill="#D8B18A" opacity=".35"/>
+
+    <!-- Dumpling body -->
+    <path d="M8 38
+             Q7 29 17 25
+             Q19 15 28 17
+             Q32 10 38 17
+             Q48 15 49 25
+             Q59 29 56 38
+             Q53 49 32 50
+             Q11 49 8 38Z"
+          fill="#F3D7A2"
+          stroke="#C49A60"
+          stroke-width="1.5"/>
+
+    <!-- Golden lower edge -->
+    <path d="M10 39 Q18 47 32 47 Q46 47 54 39"
+          fill="none"
+          stroke="#D5AC70"
+          stroke-width="2.5"
+          stroke-linecap="round"/>
+
+    <!-- Pleated folds -->
+    <g fill="none"
+       stroke="#C49A60"
+       stroke-width="1.5"
+       stroke-linecap="round">
+        <path d="M17 25 Q23 29 21 35"/>
+        <path d="M24 19 Q29 26 27 33"/>
+        <path d="M32 17 Q35 24 32 31"/>
+        <path d="M39 19 Q36 26 38 33"/>
+        <path d="M47 25 Q41 29 43 35"/>
+    </g>
+
+    <!-- Soft highlights -->
+    <path d="M17 30 Q20 23 26 23"
+          fill="none"
+          stroke="#FFF0CF"
+          stroke-width="2.5"
+          stroke-linecap="round"/>
+
+    <path d="M14 36 Q14 40 19 42"
+          fill="none"
+          stroke="#FFF0CF"
+          stroke-width="2"
+          stroke-linecap="round"/>
+</svg></span>
                 Chinese
             </button>
 
@@ -210,7 +474,109 @@
                 class="dish-category"
                 data-category="north indian"
             >
-                <span>🥘</span>
+                <span><svg class="cooking-pot-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     width="36"
+     height="36"
+     aria-hidden="true">
+
+    <defs>
+        <linearGradient id="potBody" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#9E4526"/>
+            <stop offset="25%" stop-color="#E58A3A"/>
+            <stop offset="65%" stop-color="#C9672D"/>
+            <stop offset="100%" stop-color="#8D3C24"/>
+        </linearGradient>
+
+        <linearGradient id="currySurface" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F9CF62"/>
+            <stop offset="100%" stop-color="#D97927"/>
+        </linearGradient>
+
+        <linearGradient id="metalRim" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#F4F5F6"/>
+            <stop offset="50%" stop-color="#AAB1B8"/>
+            <stop offset="100%" stop-color="#E6E8EB"/>
+        </linearGradient>
+
+        <linearGradient id="steamFade" x1="0" y1="1" x2="0" y2="0">
+            <stop offset="0%" stop-color="#A6ADB5" stop-opacity=".8"/>
+            <stop offset="100%" stop-color="#A6ADB5" stop-opacity=".15"/>
+        </linearGradient>
+    </defs>
+
+    <!-- Steam -->
+    <g fill="none" stroke="url(#steamFade)"
+       stroke-width="2.5" stroke-linecap="round">
+        <path d="M22 16C16 11 25 8 22 3"/>
+        <path d="M32 14C27 9 36 6 32 1"/>
+        <path d="M42 16C37 11 46 8 42 3"/>
+    </g>
+
+    <!-- Side handles -->
+    <path d="M11 29H5Q2 29 3 34L5 39Q6 41 12 39"
+          fill="#B8BEC5" stroke="#737B84" stroke-width="1.5"/>
+    <path d="M53 29H59Q62 29 61 34L59 39Q58 41 52 39"
+          fill="#B8BEC5" stroke="#737B84" stroke-width="1.5"/>
+
+    <!-- Pot body -->
+    <path d="M10 29H54L49 49Q47 56 40 56H24Q17 56 15 49Z"
+          fill="url(#potBody)" stroke="#77351F" stroke-width="1.4"/>
+
+    <!-- Body reflections -->
+    <path d="M17 34L20 47Q21 50 24 51"
+          fill="none" stroke="#FFD09A" stroke-width="2.5"
+          stroke-linecap="round" opacity=".7"/>
+
+    <path d="M47 35L44 47"
+          fill="none" stroke="#803B24" stroke-width="2"
+          stroke-linecap="round" opacity=".6"/>
+
+    <!-- Metallic rim -->
+    <ellipse cx="32" cy="29" rx="23" ry="7"
+             fill="url(#metalRim)" stroke="#747D86" stroke-width="1.2"/>
+
+    <!-- Curry -->
+    <ellipse cx="32" cy="28" rx="20" ry="5.5"
+             fill="url(#currySurface)"/>
+
+    <!-- Curry oil highlights -->
+    <path d="M17 28Q21 24 26 27"
+          fill="none" stroke="#FFF0A4" stroke-width="1.5"
+          stroke-linecap="round"/>
+
+    <ellipse cx="39" cy="27" rx="3" ry="1.4"
+             fill="#FCE59A" opacity=".8"/>
+
+    <!-- Vegetable pieces -->
+    <g>
+        <path d="M19 28L22 25L25 28L22 30Z"
+              fill="#C94732" stroke="#9B3025" stroke-width=".6"/>
+
+        <path d="M30 26L33 24L36 27L33 29Z"
+              fill="#5E9D3F" stroke="#39742E" stroke-width=".6"/>
+
+        <circle cx="42" cy="28" r="2.1"
+                fill="#D94B35" stroke="#A32F23" stroke-width=".6"/>
+
+        <circle cx="28" cy="29" r="1.2" fill="#8C4B28"/>
+        <circle cx="37" cy="29" r="1" fill="#8C4B28"/>
+
+        <path d="M35 25Q38 22 40 25Q37 27 35 25Z"
+              fill="#4F913B"/>
+    </g>
+
+    <!-- Base band -->
+    <path d="M14 44Q32 49 50 44"
+          fill="none" stroke="#F5B76D" stroke-width="1.8"
+          opacity=".8"/>
+
+    <!-- Pot feet -->
+    <path d="M21 55V59H27V56M37 56V59H43V55"
+          fill="#8C4828" stroke="#71371F" stroke-width="1.2"
+          stroke-linejoin="round"/>
+</svg></span>
                 North Indian
             </button>
 
@@ -219,7 +585,118 @@
                 class="dish-category"
                 data-category="dessert"
             >
-                <span>🍰</span>
+                <span><svg class="cake-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 64 64"
+     width="36"
+     height="36"
+     aria-hidden="true">
+
+  <defs>
+    <linearGradient id="sponge" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0%" stop-color="#FFE0A0"/>
+      <stop offset="100%" stop-color="#D99A51"/>
+    </linearGradient>
+
+    <linearGradient id="cream" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFDF0"/>
+      <stop offset="100%" stop-color="#F0DDBD"/>
+    </linearGradient>
+
+    <linearGradient id="frosting" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#FFD5E0"/>
+      <stop offset="100%" stop-color="#E98AA8"/>
+    </linearGradient>
+
+    <linearGradient id="berry" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6475"/>
+      <stop offset="100%" stop-color="#C91F40"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Soft shadow -->
+  <ellipse cx="32" cy="55" rx="24" ry="4"
+           fill="#684338" opacity=".15"/>
+
+  <!-- Bottom sponge -->
+  <path d="M7 38 L39 23 L57 34 L25 51 Z"
+        fill="url(#sponge)" stroke="#BD8042" stroke-width="1"/>
+
+  <path d="M7 38 L25 51 L25 57 L7 44 Z"
+        fill="#E4B36C" stroke="#BD8042" stroke-width=".8"/>
+
+  <path d="M25 51 L57 34 L57 40 L25 57 Z"
+        fill="#C58A47" stroke="#A86C35" stroke-width=".8"/>
+
+  <!-- Bottom cream filling -->
+  <path d="M7 34 L39 19 L57 30 L25 47 Z"
+        fill="url(#cream)" stroke="#D8BE94" stroke-width=".8"/>
+
+  <!-- Middle sponge -->
+  <path d="M7 29 L39 14 L57 25 L25 42 Z"
+        fill="url(#sponge)" stroke="#BD8042" stroke-width=".9"/>
+
+  <!-- Middle sponge front -->
+  <path d="M7 29 L25 42 L25 47 L7 34 Z"
+        fill="#E9BC78" stroke="#BD8042" stroke-width=".7"/>
+
+  <!-- Top cream filling -->
+  <path d="M7 25 L39 10 L57 21 L25 38 Z"
+        fill="url(#cream)" stroke="#D8BE94" stroke-width=".8"/>
+
+  <!-- Top sponge -->
+  <path d="M7 21 L39 6 L57 17 L25 34 Z"
+        fill="url(#sponge)" stroke="#BD8042" stroke-width="1"/>
+
+  <!-- Frosting -->
+  <path d="M7 21 L39 6 L57 17 L25 34 Z"
+        fill="url(#frosting)" stroke="#D97899" stroke-width=".8"/>
+
+  <!-- Frosting drips -->
+  <path d="M7 21 L10 23 L10 28
+           Q10 31 12 30
+           L15 27 L18 29
+           Q20 31 22 27
+           L25 25 L28 27
+           Q30 29 32 25
+           L36 22 L39 23
+           Q41 24 43 20
+           L47 19 L50 21
+           L57 17"
+        fill="#F5B6CA" stroke="#D97899" stroke-width=".8"
+        stroke-linejoin="round"/>
+
+  <!-- Frosting shine -->
+  <path d="M16 19 L34 10"
+        fill="none" stroke="#FFF3F6" stroke-width="1.8"
+        stroke-linecap="round"/>
+
+  <!-- Strawberry leaves -->
+  <path d="M29 11 L27 7 L31 9 L34 6 L35 11 Z"
+        fill="#438B45"/>
+
+  <!-- Strawberry -->
+  <path d="M27 10
+           Q24 7 22 10
+           Q20 14 30 20
+           Q40 14 37 10
+           Q35 7 32 10
+           Q30 8 27 10 Z"
+        fill="url(#berry)" stroke="#B51F39" stroke-width=".8"/>
+
+  <!-- Strawberry seeds -->
+  <g fill="#FFE7A0">
+    <ellipse cx="25" cy="11" rx=".7" ry="1"/>
+    <ellipse cx="32" cy="12" rx=".7" ry="1"/>
+    <ellipse cx="29" cy="15" rx=".7" ry="1"/>
+    <ellipse cx="34" cy="15" rx=".7" ry="1"/>
+  </g>
+
+  <!-- Cream decoration -->
+  <circle cx="43" cy="20" r="1.5" fill="#FFF8ED"/>
+  <circle cx="46" cy="18" r="1" fill="#FFF8ED"/>
+
+</svg></span>
                 Desserts
             </button>
 
@@ -230,73 +707,94 @@
 
 
 
-    <!-- ================= FILTERS ================= -->
+    <!-- FILTERS SECTION -->
+<section class="container">
+    <div class="dish-filter-row">
 
-    <section class="container">
+        <button type="button" id="filterToggle" class="dish-filter">
+            ☰ Filters
+        </button>
 
-        <div class="dish-filter-row">
+        <button type="button" class="dish-filter" data-filter="veg">
+            <svg class="salad-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.7"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <!-- Salad leaves -->
+    <path d="M12 11C7 11 5 7 7 4c3 0 5 2 5 5"/>
+    <path d="M12 11c0-5 3-7 6-6 1 3-1 6-6 6"/>
+    <path d="M12 10C9 6 11 3 14 2c2 3 1 6-2 8"/>
+    <!-- Bowl -->
+    <path d="M3 12h18l-2 6a3 3 0 0 1-3 2H8a3 3 0 0 1-3-2l-2-6z"/>
+    <path d="M8 23h8"/>
+</svg> Veg
+        </button>
 
+        <button type="button" class="dish-filter" data-filter="under200">
+            ₹ Under 200
+        </button>
 
-            <button
-                class="dish-filter"
-                data-filter="all"
-            >
-                ☰ Filters
-            </button>
+        <button type="button" class="dish-filter" data-filter="rating">
+            <svg class="star-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="20"
+     height="20"
+     fill="currentColor"
+     aria-hidden="true">
+    <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z"/>
+</svg> 4.0+
+        </button>
 
+        <select id="dishSort" class="dish-sort">
+            <option value="recommended">Recommended</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="rating">Rating</option>
+        </select>
+    </div>
 
-            <button
-                class="dish-filter"
-                data-filter="veg"
-            >
-                🥗 Veg
-            </button>
+    <!-- ADVANCED FILTER PANEL -->
+    <div id="advancedFilterPanel" class="advanced-filter-panel" hidden>
+        <h3>Refine Your Search</h3>
 
+        <label>
+            <input type="checkbox" id="advancedVeg">
+            Vegetarian dishes only
+        </label>
 
-            <button
-                class="dish-filter"
-                data-filter="under200"
-            >
-                ₹ Under 200
-            </button>
+        <label for="maxDishPrice">
+            Maximum price (₹)
+        </label>
+        <input type="number" id="maxDishPrice" min="0" placeholder="e.g. 300">
 
+        <label for="minDishRating">
+            Minimum rating
+        </label>
+        <select id="minDishRating">
+            <option value="0">Any rating</option>
+            <option value="3">3.0+</option>
+            <option value="3.5">3.5+</option>
+            <option value="4">4.0+</option>
+            <option value="4.5">4.5+</option>
+        </select>
 
-            <button
-                class="dish-filter"
-                data-filter="rating"
-            >
-                ⭐ 4.0+
-            </button>
+        <button type="button" id="applyAdvancedFilters">
+            Apply Filters
+        </button>
 
-
-            <select
-                id="dishSort"
-                class="dish-sort"
-            >
-
-                <option value="recommended">
-                    Recommended
-                </option>
-
-                <option value="price-low">
-                    Price: Low to High
-                </option>
-
-                <option value="price-high">
-                    Price: High to Low
-                </option>
-
-                <option value="rating">
-                    Rating
-                </option>
-
-            </select>
-
-        </div>
-
-    </section>
-
-
+        <button type="button" id="resetAdvancedFilters">
+            Reset
+        </button>
+    </div>
+</section>
 
     <!-- ================= DISH RESULTS ================= -->
 
@@ -350,7 +848,17 @@
                     >
 
                     <button class="dish-heart">
-                        ♡
+                        <svg class="favorite-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+</svg>
                     </button>
 
                 </div>
@@ -393,7 +901,18 @@
                     <div class="dish-card-footer">
 
                         <span>
-                            📍 Sector 17
+                            <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg>Sector 17
                         </span>
 
                         <span class="dish-view">
@@ -427,7 +946,17 @@
                     >
 
                     <button class="dish-heart">
-                        ♡
+                        <svg class="favorite-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+</svg>
                     </button>
 
                 </div>
@@ -470,7 +999,18 @@
                     <div class="dish-card-footer">
 
                         <span>
-                            📍 Sector 34
+                            <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Sector 34
                         </span>
 
                         <span class="dish-view">
@@ -504,7 +1044,17 @@
                     >
 
                     <button class="dish-heart">
-                        ♡
+                        <svg class="favorite-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+</svg>
                     </button>
 
                 </div>
@@ -547,7 +1097,18 @@
                     <div class="dish-card-footer">
 
                         <span>
-                            📍 Phase 7
+                            <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Phase 7
                         </span>
 
                         <span class="dish-view">
@@ -581,7 +1142,17 @@
                     >
 
                     <button class="dish-heart">
-                        ♡
+                        <svg class="favorite-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+</svg>
                     </button>
 
                 </div>
@@ -624,7 +1195,18 @@
                     <div class="dish-card-footer">
 
                         <span>
-                            📍 Sector 35
+                            <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Sector 35
                         </span>
 
                         <span class="dish-view">
@@ -658,7 +1240,17 @@
                     >
 
                     <button class="dish-heart">
-                        ♡
+                        <svg class="favorite-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+</svg>
                     </button>
 
                 </div>
@@ -701,7 +1293,18 @@
                     <div class="dish-card-footer">
 
                         <span>
-                            📍 Sector 17
+                            <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Sector 17
                         </span>
 
                         <span class="dish-view">
@@ -735,7 +1338,17 @@
                     >
 
                     <button class="dish-heart">
-                        ♡
+                        <svg class="favorite-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+</svg>
                     </button>
 
                 </div>
@@ -778,7 +1391,18 @@
                     <div class="dish-card-footer">
 
                         <span>
-                            📍 Phase 7
+                            <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Phase 7
                         </span>
 
                         <span class="dish-view">
@@ -812,7 +1436,17 @@
                     >
 
                     <button class="dish-heart">
-                        ♡
+                        <svg class="favorite-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+</svg>
                     </button>
 
                 </div>
@@ -855,7 +1489,18 @@
                     <div class="dish-card-footer">
 
                         <span>
-                            📍 Sector 35
+                            <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Sector 35
                         </span>
 
                         <span class="dish-view">
@@ -889,7 +1534,17 @@
                     >
 
                     <button class="dish-heart">
-                        ♡
+                        <svg class="favorite-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+</svg>
                     </button>
 
                 </div>
@@ -932,7 +1587,18 @@
                     <div class="dish-card-footer">
 
                         <span>
-                            📍 Sector 22
+                            <svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg> Sector 22
                         </span>
 
                         <span class="dish-view">
@@ -956,9 +1622,21 @@
             id="dishNoResults"
         >
 
-            <div>
-                🔎
-            </div>
+           <div>
+    <svg class="real-search-icon"
+         viewBox="0 0 24 24"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg"
+         aria-hidden="true">
+        <circle cx="10.8" cy="10.8" r="6.8"
+                stroke="currentColor"
+                stroke-width="2"/>
+        <path d="m16 16 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"/>
+    </svg>
+</div>
 
             <h3>
                 No dishes found
@@ -987,7 +1665,23 @@
         <div>
 
             <div class="footer-logo">
-                🍴 CraveSpot
+                <svg class="cutlery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <path d="M7 2v7"/>
+    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
+    <path d="M7 9v13"/>
+    <path d="M17 2c-2 2-3 5-3 8h6"/>
+    <path d="M17 10v12"/>
+</svg> CraveSpot
             </div>
 
             <p>

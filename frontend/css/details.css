@@ -1,4 +1,4 @@
-
+﻿
 /* ==========================================
    RESTAURANT DETAILS PAGE
    ========================================== */
@@ -51,31 +51,52 @@
     font-size: 42px;
     margin: 0;
 }
-
 .details-favorite {
     width: 45px;
     height: 45px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    padding: 0;
     border: none;
     border-radius: 50%;
 
     background: white;
     color: #e23744;
 
-    font-size: 28px;
-
     cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-    transition: 0.2s;
+.details-favorite .favorite-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+    color: currentColor;
+}
+
+.details-favorite .favorite-icon path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    transition: fill 0.2s ease;
 }
 
 .details-favorite:hover {
-    transform: scale(1.08);
+    transform: scale(1.06);
+    box-shadow: 0 3px 10px rgba(226, 55, 68, 0.2);
 }
 
 .details-favorite.saved {
     background: #e23744;
     color: white;
+}
+
+.details-favorite.saved .favorite-icon path {
+    fill: currentColor;
 }
 
 
@@ -342,37 +363,55 @@
    DISH FAVORITE
    ========================================== */
 
+/* Dish favorite button â€” match Restaurants page */
 .dish-favorite {
     position: absolute;
-
     top: 12px;
     right: 12px;
 
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     border: none;
-
-    background: white;
-
     border-radius: 50%;
-
-    font-size: 20px;
-
+    background: #ffffff;
     color: #e23744;
 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
     cursor: pointer;
 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.dish-favorite.saved {
-    background: #e23744;
-
-    color: white;
+.dish-favorite .favorite-icon {
+    display: block;
+    width: 23px;
+    height: 23px;
+    color: currentColor;
 }
 
+.dish-favorite .favorite-icon path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: fill 0.2s ease;
+}
 
+.dish-favorite.saved .favorite-icon path {
+    fill: currentColor;
+}
+
+.dish-favorite:hover {
+    transform: scale(1.06);
+    box-shadow: 0 3px 10px rgba(226, 55, 68, 0.2);
+}
 /* ==========================================
    OVERVIEW
    ========================================== */
@@ -853,28 +892,59 @@ footer a:hover {
         width: 100%;
     }
 }
-/* ==========================================
-   FIX RESTAURANT DETAILS NAVBAR
-========================================== */
+/* FIX RESTAURANT DETAILS NAVBAR */
 
-.restaurant-hero-page .navbar,
-.navbar {
+header.navbar {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     min-height: 76px;
-    padding: 12px 30px;
-    background: #ffffff;
-    border-bottom: 1px solid #eeeeee;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    z-index: 99999;
+    box-sizing: border-box;
+}
 
+/* Navbar contents */
+header.navbar .nav-container {
+    width: 100%;
+    max-width: 1250px;
+    min-height: 76px;
+    height: auto;
+    margin: 0 auto;
+    padding: 12px 25px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-
-    position: relative;
-    z-index: 1000;
     box-sizing: border-box;
 }
 
+/* Reserve space for the fixed navbar */
+body {
+    padding-top: 100px !important;
+    box-sizing: border-box;
+}
+
+/* Mobile navbar */
+@media (max-width: 700px) {
+    header.navbar .nav-container {
+        min-height: 0;
+        height: auto;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 15px;
+    }
+
+    body {
+        padding-top: 130px !important;
+    }
+}
 
 /* NAVBAR CONTAINER */
 
@@ -1036,58 +1106,69 @@ footer a:hover {
 .navbar .nav-container nav a:hover {
     color: #e23744;
 }
+/* LOGIN AND SIGN UP BUTTONS */
 
-
-/* LOGIN */
-
-.navbar .login-btn {
-    border: none;
-
-    background: transparent;
-
-    font-size: 15px;
-
-    cursor: pointer;
-
-    color: #333;
-
+.navbar .auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     white-space: nowrap;
-
-    text-decoration: none;
 }
 
+.navbar .auth-buttons a {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.2s ease;
+    box-sizing: border-box;
+}
 
-/* ==========================================
-   DESKTOP - KEEP SEARCH IN CENTER
-========================================== */
+.navbar .auth-buttons .login-btn {
+    color: #e23744;
+    background: #ffffff;
+    border: 1px solid #e23744;
+}
+
+.navbar .auth-buttons .login-btn:hover {
+    background: #fff0f1;
+}
+
+.navbar .auth-buttons .signup-btn {
+    color: #ffffff;
+    background: #e23744;
+    border: 1px solid #e23744;
+}
+
+.navbar .auth-buttons .signup-btn:hover {
+    background: #c92532;
+}
+
+/* DESKTOP NAVBAR LAYOUT */
 
 @media (min-width: 1101px) {
-
     .navbar .nav-container {
-        display: grid;
-
-        grid-template-columns:
-            auto
-            auto
-            minmax(300px, 430px)
-            auto
-            auto;
-
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-
-        gap: 28px;
+        gap: 20px;
     }
 
     .navbar .nav-search {
-        justify-self: center;
-
-        width: 100%;
-
+        flex: 1;
+        min-width: 200px;
         max-width: 430px;
     }
 
+    .navbar .nav-container nav {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        white-space: nowrap;
+    }
 }
-
 
 /* ==========================================
    TABLET
@@ -1113,9 +1194,7 @@ footer a:hover {
 
 @media (max-width: 700px) {
 
-    .navbar {
-        height: auto;
-    }
+    
 
     .navbar .nav-container {
         height: auto;
@@ -1150,3 +1229,4 @@ footer a:hover {
     }
 
 }
+

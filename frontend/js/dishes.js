@@ -96,63 +96,49 @@ function filterDishes() {
         }
 
 
+        
+
+        const advancedPrice = maxDishPrice.value.trim();
+        const maxPrice = advancedPrice === "" ? Infinity : Number(advancedPrice);
+        const minRating = Number(minDishRating.value);
+
+        const matchesAdvanced =
+            (!advancedVeg.checked || veg) &&
+            price <= maxPrice &&
+            rating >= minRating;
+
         if (
             matchesSearch &&
             matchesCategory &&
-            matchesFilter
+            matchesFilter &&
+            matchesAdvanced
         ) {
-
             card.style.display = "block";
-
             visibleCount++;
-
         } else {
-
             card.style.display = "none";
-
         }
 
-    });
+    }); // Closes dishCards.forEach()
 
-
-    dishResultCount.textContent =
-        visibleCount +
-        " dishes found";
-
+    dishResultCount.textContent = visibleCount + " dishes found";
 
     if (visibleCount === 0) {
-
-        dishNoResults.style.display =
-            "block";
-
+        dishNoResults.style.display = "block";
     } else {
-
-        dishNoResults.style.display =
-            "none";
-
+        dishNoResults.style.display = "none";
     }
-
 
     if (selectedCategory === "all") {
-
-        dishResultTitle.textContent =
-            "Popular dishes";
-
+        dishResultTitle.textContent = "Popular dishes";
     } else {
-
         dishResultTitle.textContent =
-            selectedCategory
-                .charAt(0)
-                .toUpperCase() +
+            selectedCategory.charAt(0).toUpperCase() +
             selectedCategory.slice(1) +
             " dishes";
-
     }
 
-}
-
-
-
+} // Closes filterDishes()
 /* =========================================
    SEARCH
 ========================================= */
@@ -167,34 +153,57 @@ function updateDishSearch(value) {
 
 }
 
+function handleDishSearch(value) {
+    const query = value.toLowerCase().trim();
 
-dishSearch.addEventListener(
-    "input",
-    function() {
+    dishSearch.value = value;
+    heroDishSearch.value = value;
 
-        heroDishSearch.value =
-            this.value;
+    const categoryAliases = {
+        "all": "all",
+        "burger": "burger",
+        "burgers": "burger",
+        "chinese": "chinese",
+        "north indian": "north indian",
+        "dessert": "dessert",
+        "desserts": "dessert",
+        "biryani": "biryani",
+        "pizza": "pizza"
+    };
 
-        filterDishes();
+    if (query === "") {
+        selectedCategory = "all";
+    } else if (Object.prototype.hasOwnProperty.call(categoryAliases, query)) {
+        selectedCategory = categoryAliases[query];
+    } else {
+        const matchingDish = Array.from(dishCards).find(card =>
+            (card.dataset.name || "").toLowerCase().trim() === query
+        ) || Array.from(dishCards).find(card =>
+            (card.dataset.name || "").toLowerCase().trim().includes(query)
+        );
 
+        selectedCategory = matchingDish
+            ? matchingDish.dataset.category.toLowerCase().trim()
+            : "all";
     }
-);
 
+    categoryButtons.forEach(button => {
+        button.classList.toggle(
+            "active",
+            button.dataset.category.toLowerCase().trim() === selectedCategory
+        );
+    });
 
-heroDishSearch.addEventListener(
-    "input",
-    function() {
+    filterDishes();
+}
 
-        dishSearch.value =
-            this.value;
+dishSearch.addEventListener("input", function() {
+    handleDishSearch(this.value);
+});
 
-        filterDishes();
-
-    }
-);
-
-
-
+heroDishSearch.addEventListener("input", function() {
+    handleDishSearch(this.value);
+});
 /* =========================================
    CATEGORY BUTTONS
 ========================================= */
@@ -221,11 +230,7 @@ categoryButtons.forEach(button => {
 
 
             this.classList.add("active");
-
-
-            selectedCategory =
-                this.dataset.category;
-
+selectedCategory = this.dataset.category.toLowerCase().trim();
 
             filterDishes();
 
@@ -240,41 +245,22 @@ categoryButtons.forEach(button => {
    FILTER BUTTONS
 ========================================= */
 
-const filterButtons =
-    document.querySelectorAll(
-        ".dish-filter"
-    );
+const filterToggle = document.getElementById("filterToggle");
 
+const filterButtons = document.querySelectorAll(
+    '.dish-filter[data-filter]'
+);
 
 filterButtons.forEach(button => {
+    button.addEventListener("click", function () {
+        filterButtons.forEach(btn => btn.classList.remove("active"));
 
-    button.addEventListener(
-        "click",
-        function() {
+        this.classList.add("active");
+        selectedFilter = this.dataset.filter;
 
-            filterButtons.forEach(btn => {
-
-                btn.classList.remove(
-                    "active"
-                );
-
-            });
-
-
-            this.classList.add("active");
-
-
-            selectedFilter =
-                this.dataset.filter;
-
-
-            filterDishes();
-
-        }
-    );
-
+        filterDishes();
+    });
 });
-
 
 
 /* =========================================
@@ -361,99 +347,19 @@ const hearts =
         ".dish-heart"
     );
 
-
 hearts.forEach(heart => {
+    heart.addEventListener("click", function(event) {
+        event.stopPropagation();
 
-    heart.addEventListener(
-        "click",
-        function(event) {
+        const isFavorite = this.classList.contains("is-favorite");
 
-            event.stopPropagation();
-
-
-            if (
-                this.textContent === "♡"
-            ) {
-
-                this.textContent = "♥";
-
-                this.style.color =
-                    "#e23744";
-
-            } else {
-
-                this.textContent = "♡";
-
-                this.style.color =
-                    "#222";
-
-            }
-
-        }
-    );
-
-});
-
-
-
-/* =========================================
-   HOMEPAGE CATEGORY LINK
-========================================= */
-
-const params =
-    new URLSearchParams(
-        window.location.search
-    );
-
-
-const categoryFromURL =
-    params.get("category");
-
-
-if (categoryFromURL) {
-
-    const normalized =
-        categoryFromURL.toLowerCase();
-
-
-    const matchingButton =
-        Array.from(categoryButtons)
-        .find(button =>
-            button.dataset.category ===
-            normalized
-        );
-
-
-    if (matchingButton) {
-
-        categoryButtons.forEach(btn => {
-
-            btn.classList.remove("active");
-
-        });
-
-
-        matchingButton.classList.add(
-            "active"
-        );
-
-
-        selectedCategory =
-            normalized;
-
-    }
-
-
-    dishSearch.value =
-        categoryFromURL;
-
-    heroDishSearch.value =
-        categoryFromURL;
-
-
-    filterDishes();
-
+       if (isFavorite) {
+    this.classList.remove("is-favorite");
+} else {
+    this.classList.add("is-favorite");
 }
+    });
+});
 /* ==========================================
    STEP 9D: CONNECT DISH CARDS
 ========================================== */
@@ -509,3 +415,73 @@ dishCards.forEach(card => {
     });
 
 });
+/* ADVANCED DISH FILTERS */
+
+const advancedPanel = document.getElementById("advancedFilterPanel");
+const advancedVeg = document.getElementById("advancedVeg");
+const maxDishPrice = document.getElementById("maxDishPrice");
+const minDishRating = document.getElementById("minDishRating");
+
+filterToggle.addEventListener("click", function () {
+    advancedPanel.hidden = !advancedPanel.hidden;
+
+    this.textContent = advancedPanel.hidden
+        ? "☰ Filters"
+        : "✕ Close Filters";
+});
+
+document.getElementById("applyAdvancedFilters").addEventListener("click", function () {
+    filterDishes();
+});
+
+document.getElementById("resetAdvancedFilters").addEventListener("click", function () {
+    advancedVeg.checked = false;
+    maxDishPrice.value = "";
+    minDishRating.value = "0";
+
+    selectedFilter = "all";
+    filterButtons.forEach(btn => btn.classList.remove("active"));
+
+    const allButton = document.querySelector(
+        '.dish-filter[data-filter="all"]'
+    );
+
+    if (allButton) {
+        allButton.classList.add("active");
+    }
+
+    filterDishes();
+});
+// ================= CATEGORY FROM URL =================
+
+const params = new URLSearchParams(window.location.search);
+const categoryFromURL = params.get("category");
+
+if (categoryFromURL) {
+    const normalized = categoryFromURL.toLowerCase().trim();
+
+    const categoryAliases = {
+        "burgers": "burger",
+        "desserts": "dessert"
+    };
+
+    const targetCategory = categoryAliases[normalized] || normalized;
+
+    const matchingButton = Array.from(categoryButtons).find(button =>
+        button.dataset.category.toLowerCase().trim() === targetCategory
+    );
+
+    if (matchingButton) {
+        categoryButtons.forEach(button => button.classList.remove("active"));
+        matchingButton.classList.add("active");
+
+        selectedCategory = targetCategory;
+
+        if (dishSearch) dishSearch.value = "";
+        if (heroDishSearch) heroDishSearch.value = "";
+
+        filterDishes();
+    } else {
+        console.warn("No matching dish category found:", categoryFromURL);
+    }
+}
