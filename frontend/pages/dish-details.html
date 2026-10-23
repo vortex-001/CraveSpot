@@ -43,7 +43,23 @@
 
         <a href="../index.html" class="logo">
 
-            <span class="logo-icon">🍴</span>
+            <span class="logo-icon"><svg class="cutlery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <path d="M7 2v7"/>
+    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
+    <path d="M7 9v13"/>
+    <path d="M17 2c-2 2-3 5-3 8h6"/>
+    <path d="M17 10v12"/>
+</svg></span>
 
             <span>
                 Crave<span>Spot</span>
@@ -53,9 +69,20 @@
 
 
         <div class="location">
-
-            <span class="location-icon">📍</span>
-
+<span class="location-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 10C20 15 12 22 12 22S4 15 4 10
+                 A8 8 0 1 1 20 10Z"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+        <circle cx="12" cy="10" r="2.5"
+                stroke="currentColor"
+                stroke-width="1.8"/>
+    </svg>
+</span>
             <div>
                 <small>Location</small>
                 <strong>Chandigarh</strong>
@@ -67,8 +94,18 @@
 
 
         <div class="nav-search">
-
-            <span>🔍</span>
+<span class="search-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10.8" cy="10.8" r="6.8"
+                stroke="currentColor"
+                stroke-width="2"/>
+        <path d="m16 16 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"/>
+    </svg>
+</span>
 
             <input
                 type="text"
@@ -170,7 +207,15 @@
                         id="dishRating"
                         class="rating-badge"
                     >
-                        ⭐ 4.5
+                        <svg class="star-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="20"
+     height="20"
+     fill="currentColor"
+     aria-hidden="true">
+    <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z"/>
+</svg> 4.5
                     </span>
 
                     <span id="dishReviews">
@@ -198,14 +243,24 @@
 
 
                 <!-- Favorite -->
-
-                <button
-                    id="dishFavoriteBtn"
-                    class="dish-favorite-btn"
-                    onclick="toggleDishFavorite()"
-                >
-                    ♡ Add to Favorites
-                </button>
+<button
+    id="dishFavoriteBtn"
+    class="dish-favorite-btn"
+    onclick="toggleDishFavorite()"
+>
+    <svg class="favorite-icon"
+         viewBox="0 0 24 24"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg"
+         aria-hidden="true">
+        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+    </svg>
+    Add to Favorites
+</button>
 
 
                 <!-- Restaurant -->
@@ -294,7 +349,15 @@
             <div class="info-card">
 
                 <div class="info-icon">
-                    ⭐
+                    <svg class="star-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="20"
+     height="20"
+     fill="currentColor"
+     aria-hidden="true">
+    <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z"/>
+</svg>
                 </div>
 
                 <div>

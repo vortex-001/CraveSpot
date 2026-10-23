@@ -1470,3 +1470,432 @@ footer {
         right: 7px;
     }
 }
+/* Advanced dish filters */
+.advanced-filter-panel {
+    margin: 18px 0;
+    padding: 22px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.advanced-filter-panel[hidden] {
+    display: none;
+}
+
+.advanced-filter-panel h3 {
+    margin: 0 0 18px;
+}
+
+.advanced-filter-panel label {
+    display: block;
+    margin: 12px 0 6px;
+}
+
+.advanced-filter-panel input[type="number"],
+.advanced-filter-panel select {
+    width: 100%;
+    max-width: 320px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    background: white;
+}
+
+.advanced-filter-panel button {
+    margin: 18px 8px 0 0;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 7px;
+    background: #e23744;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.advanced-filter-panel #resetAdvancedFilters {
+    background: #eee;
+    color: #333;
+}
+/* =========================================
+   CRAVESPOT LOCATION SELECTOR
+========================================= */
+
+.location-wrapper {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    border-radius: 12px;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 180px;
+    padding: 9px 14px;
+    box-sizing: border-box;
+    background: #fffafa;
+    border: 1px solid #f4dede;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.location:hover {
+    background: #fff3f3;
+    border-color: #e63946;
+}
+
+.location:focus-visible {
+    outline: 2px solid #e63946;
+    outline-offset: 3px;
+}
+
+.location-icon {
+    font-size: 18px;
+    transition: transform 0.2s ease;
+}
+
+.location:hover .location-icon {
+    transform: scale(1.05);
+}
+
+.location small {
+    display: block;
+    margin-bottom: 3px;
+    color: #888;
+    font-size: 11px;
+}
+
+.location strong {
+    color: #292929;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Location dropdown */
+
+.location-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 9999;
+    width: 230px;
+    padding: 16px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.location-dropdown[hidden] {
+    display: none !important;
+}
+
+.location-dropdown label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.location-dropdown select,
+.location-dropdown button {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 7px;
+    font: inherit;
+}
+
+.location-dropdown select {
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.location-dropdown button {
+    border: none;
+    background: #e63946;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.location-dropdown button:hover {
+    background: #c92d39;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .location,
+    .location-icon {
+        transition: none;
+    }
+}
+/* Fix location selector alignment on Restaurants page */
+header .location-wrapper {
+    align-self: center !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    position: relative;
+    top: 0 !important;
+    transform: none !important;
+}
+
+header .location {
+    align-self: center !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    position: relative;
+    top: 0 !important;
+    transform: none;
+}
+.location-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    color: #e23744;
+    flex-shrink: 0;
+}
+
+.location-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.search-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.search-icon svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #e23744;
+filter: drop-shadow(0 0 3px rgba(226, 55, 68, 0.35));
+transition: filter 0.25s ease;
+}
+/* Fix oversized location icons inside restaurant and dish cards */
+svg.real-location-icon {
+    display: inline-block !important;
+    width: 18px !important;
+    height: 18px !important;
+    max-width: 18px !important;
+    max-height: 18px !important;
+    vertical-align: middle;
+    flex-shrink: 0;
+        color: #e23744;
+    filter: drop-shadow(0 0 3px rgba(226, 55, 68, 0.35));
+    transition: filter 0.25s ease;
+}
+/* SVG favorite heart */
+.favorite-btn .favorite-icon path {
+    fill: none;
+    transition: fill 0.2s ease;
+}
+
+.favorite-btn.is-favorite .favorite-icon path {
+    fill: currentColor;
+}
+/* CraveSpot favorite heart styling */
+.favorite-btn {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.favorite-btn .favorite-icon {
+    width: 23px;
+    height: 23px;
+    color: #e23744;
+}
+
+.favorite-btn .favorite-icon path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    transition: fill 0.2s ease;
+}
+
+.favorite-btn.is-favorite .favorite-icon path {
+    fill: currentColor;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 3px 10px rgba(226, 55, 68, 0.2);
+}
+/* Dish favorite SVG hearts */
+.dish-heart .favorite-icon path {
+    fill: none;
+    stroke: currentColor;
+    transition: fill 0.2s ease;
+}
+
+.dish-heart.is-favorite .favorite-icon path {
+    fill: currentColor;
+}
+/* FIX: Make all Dishes page hearts consistent */
+.dish-heart {
+    width: 40px !important;
+    height: 40px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 50% !important;
+
+    background: #ffffff !important;
+    color: #e23744 !important;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dish-heart .favorite-icon {
+    display: block !important;
+    width: 23px !important;
+    height: 23px !important;
+    color: #e23744 !important;
+}
+
+.dish-heart .favorite-icon path {
+    fill: none !important;
+    stroke: currentColor !important;
+    stroke-width: 1.8 !important;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: fill 0.2s ease;
+}
+
+.dish-heart.is-favorite .favorite-icon path {
+    fill: currentColor !important;
+}
+
+.dish-heart:hover {
+    transform: scale(1.06);
+    box-shadow: 0 3px 10px rgba(226, 55, 68, 0.2);
+}
+.cutlery-icon {
+    width: 24px;
+    height: 24px;
+    color: #e23744;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+.delivery-icon {
+    width: 32px;
+    height: 32px;
+    color: #e23744;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+.star-icon {
+    width: 20px;
+    height: 20px;
+    color: #f5b301;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+.salad-icon {
+    width: 24px;
+    height: 24px;
+    color: #4caf50;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+.curry-icon {
+    width: 24px;
+    height: 24px;
+    color: #e58a24;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+.pizza-icon {
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.pizza-icon:hover {
+    transform: rotate(-8deg) scale(1.08);
+}
+.burger-icon {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.burger-icon:hover {
+    transform: scale(1.08);
+}
+.dumpling-icon {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.dumpling-icon:hover {
+    transform: scale(1.08);
+}
+.cooking-pot-icon {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.cooking-pot-icon:hover {
+    transform: scale(1.06);
+}
+.cake-icon {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.cake-icon:hover {
+    transform: scale(1.08);
+
+}

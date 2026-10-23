@@ -9,8 +9,7 @@ const API_BASE = "http://127.0.0.1:5000/api";
 let currentRestaurant = null;
 const sampleRestaurant = {
     restaurant_id: 1,
-    name: "Spice Garden",
-    cuisine: "North Indian • Mughlai • Biryani",
+    name: "Spice Garden",    cuisine: "North Indian \u2022 Mughlai \u2022 Biryani",
     address: "Chandigarh",
     rating: 4.5
 };
@@ -83,7 +82,7 @@ function displayRestaurant() {
 
 
     document.getElementById("restaurantLocation").textContent =
-        "📍 " + (r.address || "Chandigarh");
+        (r.address || "Chandigarh");
 
 
     document.getElementById("restaurantRating").textContent =
@@ -100,7 +99,7 @@ function displayRestaurant() {
 
 
     document.getElementById("restaurantTime").textContent =
-        "—";
+        "Not available";
 
 
     document.getElementById("restaurantOffer").textContent =
@@ -270,20 +269,49 @@ async function loadMenu() {
 
         const price = document.createElement("p");
         price.className = "menu-price";
-        price.textContent = `₹${Number(dish.price || 0).toFixed(2)}`;
+        price.textContent = "\u20B9" + Number(dish.price || 0).toFixed(2);
 
         info.append(name, category, description, price);
 
         const favorite = document.createElement("button");
         favorite.className = "dish-favorite";
         favorite.type = "button";
-        favorite.textContent = "♡";
-        favorite.setAttribute("aria-label", "Add to favorites");
+
+        favorite.innerHTML = `
+            <svg class="favorite-icon"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 xmlns="http://www.w3.org/2000/svg"
+                 aria-hidden="true">
+                <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"/>
+            </svg>
+        `;
+
         favorite.addEventListener("click", function () {
             toggleDishFavorite(this);
         });
 
         card.append(imageElement, info, favorite);
+
+        card.style.cursor = "pointer";
+        card.addEventListener("click", function (event) {
+            if (event.target.closest("button")) return;
+
+            const dishSlug = (dish.name || "")
+                .toLowerCase()
+                .trim()
+                .replace(/&/g, "and")
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-+|-+$/g, "");
+
+            if (dishSlug) {
+                window.location.href = `dish-details.html?dish=${encodeURIComponent(dishSlug)}&name=${encodeURIComponent(dish.name || "")}&category=${encodeURIComponent(dish.category || "")}&description=${encodeURIComponent(dish.description || "")}&price=${encodeURIComponent(dish.price || 0)}&image=${encodeURIComponent(dish.image_url || "")}&restaurantId=${encodeURIComponent(currentRestaurant.restaurant_id || "")}`;
+            }
+        });
         menuGrid.appendChild(card);
     });
 
@@ -358,30 +386,25 @@ function showSection(section, button) {
 
 }
 
-
 /* ==========================================
    RESTAURANT FAVORITE
 ========================================== */
 
 function toggleFavorite() {
-
-    const button =
-        document.getElementById("favoriteBtn");
-
+    const button = document.getElementById("favoriteBtn");
 
     if (!button) {
         return;
     }
 
-
     button.classList.toggle("saved");
 
-
-    button.textContent =
+    button.setAttribute(
+        "aria-label",
         button.classList.contains("saved")
-            ? "♥"
-            : "♡";
-
+            ? "Remove from favorites"
+            : "Add to favorites"
+    );
 }
 
 
@@ -390,18 +413,23 @@ function toggleFavorite() {
 ========================================== */
 
 function toggleDishFavorite(button) {
+    if (!button) {
+        button = document.getElementById("dishFavoriteBtn");
+    }
+
+    if (!button) {
+        return;
+    }
 
     button.classList.toggle("saved");
 
-
-    button.textContent =
+    button.setAttribute(
+        "aria-label",
         button.classList.contains("saved")
-            ? "♥"
-            : "♡";
-
+            ? "Remove from favorites"
+            : "Add to favorites"
+    );
 }
-
-
 /* ==========================================
    SEARCH
 ========================================== */
@@ -585,93 +613,53 @@ function selectRating(rating) {
 
 }
 
-
 /* ==========================================
    SUBMIT REVIEW
 ========================================== */
 
 function submitReview() {
-
-    const nameInput =
-        document.getElementById("reviewerName");
-
-    const textInput =
-        document.getElementById("reviewText");
-
+    const nameInput = document.getElementById("reviewerName");
+    const textInput = document.getElementById("reviewText");
 
     if (!nameInput || !textInput) {
         return;
     }
 
-
-    const name =
-        nameInput.value.trim();
-
-
-    const text =
-        textInput.value.trim();
-
+    const name = nameInput.value.trim();
+    const text = textInput.value.trim();
 
     if (name === "") {
-
         alert("Please enter your name.");
-
         return;
-
     }
-
 
     if (selectedRating === 0) {
-
         alert("Please select a rating.");
-
         return;
-
     }
-
 
     if (text === "") {
-
         alert("Please write your review.");
-
         return;
-
     }
 
-
     const review = {
-
         name: name,
-
         rating: selectedRating,
-
         text: text,
-
-        date:
-            new Date().toLocaleDateString()
-
+        date: new Date().toLocaleDateString()
     };
-
 
     saveStoredReview(review);
 
-
-    alert(
-        "Your review has been added!"
-    );
-
+    alert("Your review has been added!");
 
     nameInput.value = "";
-
     textInput.value = "";
 
-
     closeReviewForm();
-
     loadReviews();
-
     loadRatingSummary();
-
 }
 
 
@@ -680,87 +668,62 @@ function submitReview() {
 ========================================== */
 
 function loadReviews() {
-
-    const container =
-        document.getElementById(
-            "reviewsContainer"
-        );
-
+    const container = document.getElementById("reviewsContainer");
 
     if (!container || !currentRestaurant) {
         return;
     }
 
-
-    const reviews =
-        getStoredReviews();
-
-
+    const reviews = getStoredReviews();
     container.innerHTML = "";
 
-
-    if (reviews.length === 0) {
-
+    if (!reviews || reviews.length === 0) {
         container.innerHTML = `
             <div class="review-card">
                 <p>No reviews yet.</p>
             </div>
         `;
-
         return;
-
     }
 
-
     reviews.forEach(review => {
+        const rating = Math.max(
+            0,
+            Math.min(5, Number(review.rating) || 0)
+        );
 
         const stars =
-            "★".repeat(
-                Number(review.rating)
-            ) +
-            "☆".repeat(
-                5 - Number(review.rating)
-            );
+            "\u2605".repeat(Math.floor(rating)) +
+            "\u2606".repeat(5 - Math.floor(rating));
 
-
-        const card =
-            document.createElement("div");
-
-
-        card.className =
-            "review-card";
-
+        const card = document.createElement("div");
+        card.className = "review-card";
 
         card.innerHTML = `
-
             <div class="review-top">
-
-                <span class="reviewer-name">
-                    ${review.name}
-                </span>
-
-                <span class="review-date">
-                    ${review.date}
-                </span>
-
+                <span class="reviewer-name"></span>
+                <span class="review-date"></span>
             </div>
 
-            <div class="review-stars">
-                ${stars}
-            </div>
+            <div class="review-stars">${stars}</div>
 
-            <p class="review-text">
-                ${review.text}
-            </p>
-
+            <p class="review-text"></p>
         `;
 
+        card.querySelector(".reviewer-name").textContent =
+            review.name || "Anonymous";
+
+        card.querySelector(".review-date").textContent =
+            review.date || "";
+
+        card.querySelector(".review-text").textContent =
+            review.text || "";
 
         container.appendChild(card);
-
     });
-
 }
+
+
 
 
 /* ==========================================
@@ -889,5 +852,4 @@ function loadRatingSummary() {
 /* ==========================================
    START
 ========================================== */
-
 loadRestaurant();
