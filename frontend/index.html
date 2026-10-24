@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html> 
 <html lang="en">
 
 <head>
@@ -32,7 +32,23 @@
         <a href="index.html" class="logo">
 
             <span class="logo-icon">
-                🍴
+<svg class="cutlery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <path d="M7 2v7"/>
+    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
+    <path d="M7 9v13"/>
+    <path d="M17 2c-2 2-3 5-3 8h6"/>
+    <path d="M17 10v12"/>
+</svg>
             </span>
 
             <span>
@@ -42,39 +58,69 @@
         </a>
 
 
-        <!-- LOCATION -->
-        <div class="location">
+        <!-- LOCATION WRAPPER -->
+        <div class="location-wrapper">
+            <div class="location"
+                 id="locationSelector"
+                 role="button"
+                 tabindex="0"
+                 aria-label="Choose your location">
 
-            <span class="location-icon">
-                📍
-            </span>
+                <span class="location-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 10C20 15 12 22 12 22S4 15 4 10
+                                 A8 8 0 1 1 20 10Z"
+                              stroke="currentColor"
+                              stroke-width="1.8"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <circle cx="12" cy="10" r="2.5"
+                                stroke="currentColor"
+                                stroke-width="1.8"/>
+                    </svg>
+                </span>
 
-            <div>
+                <div>
+                    <small>Location</small>
+                    <strong id="selectedLocation">Chandigarh</strong>
+                </div>
 
-                <small>
-                    Location
-                </small>
-
-                <strong>
-                    Chandigarh
-                </strong>
-
+                <span aria-hidden="true">&#9662;</span>
             </div>
 
-            <span>
-                ⌄
-            </span>
+            <!-- LOCATION DROPDOWN -->
+            <div class="location-dropdown" id="locationDropdown" hidden>
+                <label for="locationCity">Choose your city</label>
 
+                <select id="locationCity">
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Mohali">Mohali</option>
+                    <option value="Panchkula">Panchkula</option>
+                    <option value="Ludhiana">Ludhiana</option>
+                    <option value="Amritsar">Amritsar</option>
+                    <option value="Jalandhar">Jalandhar</option>
+                    <option value="Delhi">Delhi</option>
+                </select>
+
+                <button type="button" id="saveLocation">Save Location</button>
+            </div>
         </div>
-
 
         <!-- SEARCH BAR -->
         <div class="nav-search">
-
-            <span>
-                🔍
+            <span class="search-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10.8" cy="10.8" r="6.8"
+                            stroke="currentColor"
+                            stroke-width="2"/>
+                    <path d="m16 16 5 5"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"/>
+                </svg>
             </span>
-
             <input
                 type="text"
                 id="searchInput"
@@ -110,18 +156,13 @@
         </nav>
 
 
-        <!-- LOGIN -->
-
+        
 <!-- LOGIN / SIGN UP -->
 <div class="auth-buttons">
-    <a href="pages/login.html" class="login-btn">
-        Login
-    </a>
-
-    <a href="pages/register.html" class="signup-btn">
-        Sign Up
-    </a>
+    <a href="pages/login.html" class="login-btn">Login</a>
+    <a href="pages/register.html" class="signup-btn">Sign Up</a>
 </div>
+
 
     </div>
 
@@ -161,7 +202,18 @@
 
                 <div class="hero-search">
 
-                    <span>🔍</span>
+<span class="search-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10.8" cy="10.8" r="6.8"
+                stroke="currentColor"
+                stroke-width="2"/>
+        <path d="m16 16 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"/>
+    </svg>
+</span>
 
                     <input
                         type="text"
@@ -596,7 +648,19 @@
                         </div>
 
                         <p class="restaurant-location">
-                            📍 Sector 17, Chandigarh
+<svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg>
+Sector 17, Chandigarh
                         </p>
 
                     </div>
@@ -654,7 +718,19 @@
                         </div>
 
                         <p class="restaurant-location">
-                            📍 Phase 7, Mohali
+<svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg>
+Phase 7, Mohali
                         </p>
 
                     </div>
@@ -711,8 +787,19 @@
 
                         </div>
 
-                        <p class="restaurant-location">
-                            📍 Sector 35, Chandigarh
+                        <p class="restaurant-location"><svg class="real-location-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+          stroke="currentColor"
+          stroke-width="1.8"/>
+    <circle cx="12" cy="10" r="2.5"
+            stroke="currentColor"
+            stroke-width="1.8"/>
+</svg>
+Sector 35, Chandigarh
                         </p>
 
                     </div>
@@ -849,8 +936,24 @@
 
                 <div>
 
-                    <div class="footer-logo">
-                        🍴 CraveSpot
+                    <div class="footer-logo"><svg class="cutlery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <path d="M7 2v7"/>
+    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
+    <path d="M7 9v13"/>
+    <path d="M17 2c-2 2-3 5-3 8h6"/>
+    <path d="M17 10v12"/>
+</svg>
+CraveSpot
                     </div>
 
                     <p>

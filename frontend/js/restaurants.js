@@ -6,42 +6,69 @@
 const API_BASE = "http://127.0.0.1:5000/api";
 
 let restaurants = [];
+// Get the currently selected city
+function getSelectedCity() {
+    return localStorage.getItem("CraveSpotLocation") || "Chandigarh";
+}
 
+// Check whether a restaurant belongs to the selected city
+function matchesSelectedCity(restaurant) {
+    const selectedCity = getSelectedCity().toLowerCase();
+
+    const address = String(restaurant.address || "").toLowerCase();
+
+    // Keep restaurants without an address visible
+    if (!address.trim()) {
+        return true;
+    }
+
+    return address.includes(selectedCity);
+}
 const sampleRestaurants = [
     {
         restaurant_id: 1,
         name: "Spice Garden",
         cuisine: "North Indian",
         rating: 4.5,
-        address: "Sector 17, Chandigarh"
+        address: "Sector 17, Chandigarh",
+        is_veg: true,
+        offer: "20% OFF"
     },
     {
         restaurant_id: 2,
         name: "Pizza Corner",
         cuisine: "Italian",
         rating: 4.3,
-        address: "Sector 22, Chandigarh"
+        address: "Sector 22, Chandigarh",
+        is_veg: true,
+        offer: "30% OFF"
     },
     {
         restaurant_id: 3,
         name: "Wok Express",
         cuisine: "Chinese",
         rating: 4.2,
-        address: "Sector 35, Chandigarh"
+        address: "Sector 35, Chandigarh",
+        is_veg: false,
+        offer: ""
     },
     {
         restaurant_id: 4,
         name: "Burger House",
         cuisine: "Fast Food",
         rating: 4.1,
-        address: "Sector 8, Chandigarh"
+        address: "Sector 8, Chandigarh",
+        is_veg: false,
+        offer: "10% OFF"
     },
     {
         restaurant_id: 5,
         name: "Sweet Cravings",
         cuisine: "Desserts",
         rating: 4.7,
-        address: "Sector 10, Chandigarh"
+        address: "Sector 10, Chandigarh",
+        is_veg: true,
+        offer: ""
     }
 ];
 let menuItems = [];
@@ -53,6 +80,33 @@ const resultCount = document.getElementById("resultCount");
 const resultTitle = document.getElementById("resultTitle");
 const noResults = document.getElementById("noResults");
 const sortSelect = document.getElementById("sortRestaurants");
+
+// Delivery / Dining Out mode switching
+const modeButtons = document.querySelectorAll(".mode-btn");
+
+modeButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        const selectedMode = button.dataset.mode;
+
+        // Update the active button
+        modeButtons.forEach(btn => {
+            btn.classList.toggle("active", btn === button);
+        });
+
+        // Update the page heading
+        if (resultTitle) {
+            resultTitle.textContent =
+                selectedMode === "dining"
+                    ? "Restaurants for Dining Out"
+                    : "Restaurants Available for Delivery";
+        }
+
+        // Reapply existing search and filters
+        filterRestaurants();
+    });
+});
+
+
 
 /* =========================================
    LOAD DATA FROM FLASK
@@ -199,6 +253,21 @@ function renderRestaurants() {
 
         card.dataset.price =
             averagePrice || 0;
+card.dataset.veg = String(
+    restaurant.is_veg === true ||
+    restaurant.is_veg === 1 ||
+    restaurant.is_veg === "true" ||
+    restaurant.is_veg === "1"
+);
+
+card.dataset.offer = String(
+    Boolean(
+        restaurant.offer &&
+        String(restaurant.offer).trim()
+    )
+);
+
+
 
 
         card.innerHTML = `
@@ -216,7 +285,17 @@ function renderRestaurants() {
                     type="button"
                     aria-label="Add to favorites"
                 >
-                    ♡
+                    <svg class="favorite-icon"
+     viewBox="0 0 24 24"
+     fill="none"
+     xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true">
+    <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"/>
+</svg>
                 </button>
 
                 <span class="offer-badge">
@@ -269,7 +348,7 @@ function renderRestaurants() {
 
                 <p class="location">
 
-                    📍 ${escapeHtml(
+                    <svg class="real-location-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg> ${escapeHtml(
                         restaurant.address || "Chandigarh"
                     )}
 
@@ -357,22 +436,18 @@ function attachCardEvents() {
                     event.stopPropagation();
 
 
-                    if (
-                        this.textContent.trim() === "♡"
-                    ) {
+                  if (!this.classList.contains("is-favorite")) {
 
-                        this.textContent = "♥";
+    this.classList.add("is-favorite");
 
-                        this.style.color =
-                            "#e23744";
+    this.style.color = "#e23744";
 
-                    } else {
+} else {
 
-                        this.textContent = "♡";
+    this.classList.remove("is-favorite");
 
-                        this.style.color =
-                            "#222";
-                    }
+    this.style.color = "#222";
+}
 
                 }
             );
@@ -386,47 +461,75 @@ function attachCardEvents() {
    SEARCH
 ========================================= */
 
+
 function filterRestaurants() {
     const query = searchInput
         ? searchInput.value.toLowerCase().trim()
         : "";
 
+    const ratingFilter = document.getElementById("ratingFilter");
+    const vegFilter = document.getElementById("vegFilter");
+    const offersFilter = document.getElementById("offersFilter");
+
     const cards = document.querySelectorAll(".food-card");
     let visibleCount = 0;
 
     cards.forEach(card => {
-        const name = card.dataset.name || "";
-        const cuisine = card.dataset.cuisine || "";
+        const name = (card.dataset.name || "").toLowerCase();
+        const cuisine = (card.dataset.cuisine || "").toLowerCase();
         const rating = Number(card.dataset.rating || 0);
+        const isVeg = card.dataset.veg === "true";
+        const hasOffer = card.dataset.offer === "true";
 
         const matchesSearch =
             name.includes(query) || cuisine.includes(query);
+
+        const matchesRating =
+            !ratingFilter || !ratingFilter.checked || rating >= 4.0;
+
+        const matchesVeg =
+            !vegFilter || !vegFilter.checked || isVeg;
+
+        const matchesOffers =
+            !offersFilter || !offersFilter.checked || hasOffer;
 
         let matchesFilter = true;
 
         if (activeFilter === "rating") {
             matchesFilter = rating >= 4.0;
-        } else if (
-            activeFilter === "offers" ||
-            activeFilter === "veg" ||
-            activeFilter === "fast"
-        ) {
-            // Sample data doesn't include these details yet.
-            // Hide no restaurants for these unsupported filters.
-            matchesFilter = true;
+        } else if (activeFilter === "offers") {
+            matchesFilter = hasOffer;
+        } else if (activeFilter === "veg") {
+            matchesFilter = isVeg;
+        } else if (activeFilter === "fast") {
+            matchesFilter = cuisine.includes("fast");
         }
 
-        if (matchesSearch && matchesFilter) {
-            card.style.display = "";
+        const restaurant = restaurants.find(
+    item => String(item.restaurant_id) === String(card.dataset.id)
+);
+
+const matchesCity = restaurant
+    ? matchesSelectedCity(restaurant)
+    : false;
+
+const isVisible =
+    matchesCity &&
+    matchesSearch &&
+    matchesRating &&
+    matchesVeg &&
+    matchesOffers &&
+    matchesFilter;
+
+        card.style.display = isVisible ? "" : "none";
+
+        if (isVisible) {
             visibleCount++;
-        } else {
-            card.style.display = "none";
         }
     });
 
     if (resultCount) {
-        resultCount.textContent =
-            `${visibleCount} restaurants found`;
+        resultCount.textContent = `${visibleCount} restaurants found`;
     }
 
     if (noResults) {
@@ -434,6 +537,11 @@ function filterRestaurants() {
             visibleCount === 0 ? "block" : "none";
     }
 }
+
+
+
+
+
 /* =========================================
    SEARCH INPUT + HOMEPAGE SEARCH
 ========================================= */
@@ -526,6 +634,8 @@ if (sortSelect) {
 }
 
 
+
+
 /* =========================================
    FILTER BUTTONS
 ========================================= */
@@ -580,22 +690,16 @@ if (filterButton && filterPanel) {
     });
 }
 
+
 // Apply selected filters
 document.getElementById("applyFilters")?.addEventListener("click", function () {
-    const ratingChecked = document.getElementById("ratingFilter").checked;
-    const vegChecked = document.getElementById("vegFilter").checked;
-    const offersChecked = document.getElementById("offersFilter").checked;
-
-    activeFilter = ratingChecked ? "rating" : "all";
-
     filterRestaurants();
 
-    if (vegChecked || offersChecked) {
-        alert("Pure Veg and Offers need matching data from the backend. Those filters aren't available yet.");
+    if (filterPanel) {
+        filterPanel.style.display = "none";
     }
-
-    filterPanel.style.display = "none";
 });
+
 
 // Clear selected filters
 document.getElementById("clearFilters")?.addEventListener("click", function () {
@@ -603,6 +707,11 @@ document.getElementById("clearFilters")?.addEventListener("click", function () {
     document.getElementById("vegFilter").checked = false;
     document.getElementById("offersFilter").checked = false;
 
-    activeFilter = "all";
+
+activeFilter = "all";
+filterRestaurants();
+});
+// Refresh restaurant visibility when the selected city changes
+document.addEventListener("cravespot:locationChanged", function () {
     filterRestaurants();
 });

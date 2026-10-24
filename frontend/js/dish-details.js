@@ -19,8 +19,8 @@ const dishData = {
 
         image:
         "../assets/images/chicken-biryani.jpg",
-        
-           // "Aromatic basmati rice cooked with tender chicken, fragrant spices and traditional biryani masala.",
+        description:
+            "Aromatic basmati rice cooked with tender chicken and traditional Indian spices.",
 
         longDescription:
             "Chicken Biryani is a flavorful rice dish prepared with aromatic basmati rice, tender chicken and a blend of traditional Indian spices. It is slow-cooked to bring together the rich flavors and aroma."
@@ -201,9 +201,33 @@ const dishSlug =
 ========================================== */
 
 function loadDish() {
+    const normalizeDishSlug = value => (value || "")
+        .toLowerCase()
+        .trim()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
 
-    const dish =
-        dishData[dishSlug];
+    const dishKey = Object.keys(dishData).find(key =>
+        normalizeDishSlug(key) === normalizeDishSlug(dishSlug) ||
+        normalizeDishSlug(dishData[key].name) === normalizeDishSlug(dishSlug)
+    );
+
+    const queryDishName = urlParams.get("name");
+
+    const dish = dishData[dishKey] || (queryDishName ? {
+        name: queryDishName,
+        category: urlParams.get("category") || "Menu Item",
+        description: urlParams.get("description") || "Enjoy this dish at CraveSpot.",
+        longDescription: urlParams.get("description") || "Explore this menu item on CraveSpot.",
+        price: Number(urlParams.get("price") || 0),
+        rating: 0,
+        reviews: "No reviews yet",
+        image: urlParams.get("image") || "../assets/images/food-placeholder.jpg",
+        restaurant: "Restaurant",
+        restaurantSlug: "",
+        location: ""
+    } : null);
 
 
     if (!dish) {
@@ -242,26 +266,21 @@ function loadDish() {
     document.getElementById("dishCategory").textContent =
         dish.category;
 
+/* Rating */
 
-    /* Rating */
+const rating = Number(dish.rating) || 0;
 
-    document.getElementById("dishRating").textContent =
-        "⭐ " + dish.rating;
+document.getElementById("dishRating").textContent = Number(dish.rating) > 0 ? "\u2605 " + Number(dish.rating).toFixed(1) : "\u2605 New";
 
+document.getElementById("dishReviews").textContent =
+    dish.reviews || "No reviews yet";
+/* Price */
 
-    document.getElementById("dishReviews").textContent =
-        dish.reviews;
+const formattedPrice = "\u20B9" + Number(dish.price || 0);
 
+document.getElementById("dishPrice").textContent = formattedPrice;
 
-    /* Price */
-
-    document.getElementById("dishPrice").textContent =
-        "₹" + dish.price;
-
-    document.getElementById("dishPriceInfo").textContent =
-        "₹" + dish.price;
-
-
+document.getElementById("dishPriceInfo").textContent = formattedPrice;
     /* Description */
 
     document.getElementById("dishDescription").textContent =
@@ -320,8 +339,7 @@ function toggleDishFavorite() {
 
         favorites.push(dishSlug);
 
-        button.textContent =
-            "♥ Added to Favorites";
+        button.textContent = "\u2665 Added to Favorites";
 
         button.classList.add(
             "favorite-active"
@@ -331,8 +349,7 @@ function toggleDishFavorite() {
 
         favorites.splice(index, 1);
 
-        button.textContent =
-            "♡ Add to Favorites";
+        button.textContent = "\u2661 Add to Favorites";
 
         button.classList.remove(
             "favorite-active"
@@ -374,8 +391,7 @@ function loadFavoriteState() {
         favorites.includes(dishSlug)
     ) {
 
-        button.textContent =
-            "♥ Added to Favorites";
+        button.textContent = "\u2665 Added to Favorites";
 
         button.classList.add(
             "favorite-active"

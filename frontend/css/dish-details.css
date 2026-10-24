@@ -1,4 +1,4 @@
-
+﻿
 /* ==========================================
    DISH DETAILS PAGE
 ========================================== */
@@ -338,3 +338,54 @@
     }
 
 }
+/* Dish Details Favorite Button */
+#dishFavoriteBtn.dish-favorite-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    width: fit-content;
+    min-width: 190px;
+    height: 46px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    background: #fff;
+    color: #e23744;
+    border: 1.5px solid #e23744;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+#dishFavoriteBtn.dish-favorite-btn .favorite-icon {
+    width: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+}
+
+#dishFavoriteBtn.dish-favorite-btn .favorite-icon path {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+#dishFavoriteBtn.dish-favorite-btn:hover {
+    background: #fff1f2;
+    border-color: #d52b39;
+}
+
+#dishFavoriteBtn.dish-favorite-btn.saved {
+    background: #e23744;
+    color: #fff;
+}
+
+#dishFavoriteBtn.dish-favorite-btn.saved .favorite-icon path {
+    fill: currentColor;
+}
+

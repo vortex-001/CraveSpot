@@ -1,4 +1,4 @@
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +42,23 @@
         >
 
             <span class="logo-icon">
-                🍴
+                <svg class="cutlery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <path d="M7 2v7"/>
+    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
+    <path d="M7 9v13"/>
+    <path d="M17 2c-2 2-3 5-3 8h6"/>
+    <path d="M17 10v12"/>
+</svg>
             </span>
 
             <span>
@@ -50,40 +66,69 @@
             </span>
 
         </a>
+<div class="location-wrapper">
+    <div class="location"
+         id="locationSelector"
+         role="button"
+         tabindex="0"
+         aria-label="Choose your location">
 
+        <span class="location-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 10C20 15 12 22 12 22S4 15 4 10
+                 A8 8 0 1 1 20 10Z"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"/>
+        <circle cx="12" cy="10" r="2.5"
+                stroke="currentColor"
+                stroke-width="1.8"/>
+    </svg>
+</span>
 
-
-        <div class="location">
-
-            <span class="location-icon">
-                📍
-            </span>
-
-            <div>
-
-                <small>
-                    Location
-                </small>
-
-                <strong>
-                    Chandigarh
-                </strong>
-
-            </div>
-
-            <span>
-                ⌄
-            </span>
-
+        <div>
+            <small>Location</small>
+            <strong id="selectedLocation">Chandigarh</strong>
         </div>
+
+        <span>⌄</span>
+    </div>
+
+    <div class="location-dropdown" id="locationDropdown" hidden>
+        <label for="locationCity">Choose your city</label>
+
+        <select id="locationCity">
+            <option value="Chandigarh">Chandigarh</option>
+            <option value="Mohali">Mohali</option>
+            <option value="Panchkula">Panchkula</option>
+            <option value="Ludhiana">Ludhiana</option>
+            <option value="Amritsar">Amritsar</option>
+            <option value="Jalandhar">Jalandhar</option>
+            <option value="Delhi">Delhi</option>
+        </select>
+
+        <button type="button" id="saveLocation">Save Location</button>
+    </div>
+</div>
 
 
 
         <div class="nav-search">
 
-            <span>
-                🔍
-            </span>
+            <span class="search-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10.8" cy="10.8" r="6.8"
+                stroke="currentColor"
+                stroke-width="2"/>
+        <path d="m16 16 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"/>
+    </svg>
+</span>
 
             <input
                 type="text"
@@ -94,33 +139,21 @@
         </div>
 
 
+<nav>
+    <a href="../index.html">Home</a>
 
-        <nav>
+    <a href="restaurants.html">Restaurants</a>
 
-            <a href="restaurants.html">
-                Restaurants
-            </a>
+    <a href="dishes.html">Dishes</a>
 
-            <a href="dishes.html">
-                Dishes
-            </a>
-
-            <a
-                href="categories.html"
-                class="active-nav"
-            >
-                Categories
-            </a>
-
-        </nav>
+    <a href="categories.html">Categories</a>
+</nav>
 
 
-
-        <a href="login.html" class="login-btn">
-    Login
-</a>
-
-
+<div class="auth-buttons">
+    <a href="login.html" class="login-btn">Login</a>
+    <a href="register.html" class="signup-btn">Sign Up</a>
+</div>
     </div>
 
 </header>
@@ -149,9 +182,18 @@
 
             <div class="category-search">
 
-                <span>
-                    🔍
-                </span>
+               <span class="search-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10.8" cy="10.8" r="6.8"
+                stroke="currentColor"
+                stroke-width="2"/>
+        <path d="m16 16 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"/>
+    </svg>
+</span>
 
                 <input
                     type="text"
@@ -277,7 +319,7 @@
             <!-- BURGERS -->
 
             <a
-                href="dishes.html?category=Burger"
+            href="dishes.html?category=Burger"
                 class="big-category-card"
                 data-name="Burgers"
             >
@@ -536,7 +578,7 @@
             <!-- ROLLS -->
 
             <a
-                href="dishes.html?category=Rolls"
+               href="dishes.html?category=Rolls%20%26%20Wraps"
                 class="big-category-card"
                 data-name="Rolls"
             >
@@ -653,10 +695,21 @@
             class="category-no-results"
             id="categoryNoResults"
         >
-
-            <div>
-                🔎
-            </div>
+<div>
+    <svg class="real-search-icon"
+         viewBox="0 0 24 24"
+         fill="none"
+         xmlns="http://www.w3.org/2000/svg"
+         aria-hidden="true">
+        <circle cx="10.8" cy="10.8" r="6.8"
+                stroke="currentColor"
+                stroke-width="2"/>
+        <path d="m16 16 5 5"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"/>
+    </svg>
+</div>
 
             <h3>
                 No category found
@@ -683,7 +736,23 @@
             <div>
 
                 <span>
-                    🍴
+                    <svg class="cutlery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <path d="M7 2v7"/>
+    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
+    <path d="M7 9v13"/>
+    <path d="M17 2c-2 2-3 5-3 8h6"/>
+    <path d="M17 10v12"/>
+</svg>
                 </span>
 
                 <h3>
@@ -742,7 +811,23 @@
         <div>
 
             <div class="footer-logo">
-                🍴 CraveSpot
+                <svg class="cutlery-icon"
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 24 24"
+     width="24"
+     height="24"
+     fill="none"
+     stroke="currentColor"
+     stroke-width="1.8"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     aria-hidden="true">
+    <path d="M7 2v7"/>
+    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
+    <path d="M7 9v13"/>
+    <path d="M17 2c-2 2-3 5-3 8h6"/>
+    <path d="M17 10v12"/>
+</svg> CraveSpot
             </div>
 
             <p>
