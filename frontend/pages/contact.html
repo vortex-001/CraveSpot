@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | CraveSpot Support</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .contact-container {
+            max-width: 760px;
+            margin: 40px auto 60px;
+            padding: 0 24px;
+        }
+        .contact-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            border: 1px solid #F1F5F9;
+        }
+        .contact-card h1 {
+            font-size: 30px;
+            color: #0F172A;
+            margin-bottom: 8px;
+        }
+        .contact-card p {
+            color: #64748B;
+            font-size: 15px;
+            margin-bottom: 24px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1.5px solid #CBD5E1;
+            font-size: 15px;
+            color: #0F172A;
+            background: #F8FAFC;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #FF5200;
+            background: #FFF;
+        }
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .submit-btn {
+            background: #FF5200;
+            color: #FFF;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        .submit-btn:hover { background: #E04800; }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo"><span>Crave<span>Spot</span></span></a>
+            <nav aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="restaurants.html">Restaurants</a>
+                <a href="dishes.html">Dishes</a>
+                <a href="categories.html">Categories</a>
+                <a href="favorites.html">Saved</a>
+            </nav>
+            <div class="auth-buttons" id="authArea">
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="contact-container">
+        <div class="contact-card">
+            <h1>Get in Touch</h1>
+            <p>Have a question, vendor recommendation, or feedback on your craving search? We would love to hear from you!</p>
+
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="contactName">Your Name</label>
+                    <input type="text" id="contactName" class="form-control" placeholder="Harsh Garg" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactEmail">Email Address</label>
+                    <input type="email" id="contactEmail" class="form-control" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactSubject">Subject</label>
+                    <input type="text" id="contactSubject" class="form-control" placeholder="Vendor suggestion or feature idea">
+                </div>
+                <div class="form-group">
+                    <label for="contactMessage">Message</label>
+                    <textarea id="contactMessage" class="form-control" placeholder="Tell us how we can help..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn" id="contactSubmitBtn">Send Message</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">CraveSpot</div>
+                <p>Your guide to discovering delicious local food and hidden gems.</p>
+            </div>
+            <div>
+                <h3>Explore</h3>
+                <a href="restaurants.html">Restaurants</a>
+                <a href="dishes.html">Dishes</a>
+                <a href="categories.html">Categories</a>
+                <a href="favorites.html">Saved</a>
+            </div>
+            <div>
+                <h3>About & Legal</h3>
+                <a href="about.html">About CraveSpot</a>
+                <a href="contact.html">Contact & Partner</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2026 CraveSpot — The Ultimate Food Finder & DBMS Project</div>
+    </footer>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('contactSubmitBtn');
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+
+            setTimeout(() => {
+                showToast('Thank you! Your message has been received.', 'success');
+                e.target.reset();
+                btn.disabled = false;
+                btn.textContent = 'Send Message';
+            }, 600);
+        });
+    </script>
+</body>
+</html>

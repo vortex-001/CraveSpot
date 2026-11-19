@@ -570,13 +570,19 @@ const isVisible =
    SEARCH INPUT + HOMEPAGE SEARCH
 ========================================= */
 
-// Read the search query passed from the homepage.
+// Read the search query or craving passed from the homepage.
 const urlParams = new URLSearchParams(window.location.search);
-const initialSearch = urlParams.get("search");
+const initialSearch = urlParams.get("search") || urlParams.get("craving") || urlParams.get("q");
 
 // Fill the restaurant search box with the query.
 if (searchInput && initialSearch) {
     searchInput.value = initialSearch;
+    if (urlParams.get("craving")) {
+        const titleEl = document.getElementById("resultTitle");
+        if (titleEl) {
+            titleEl.innerHTML = `Craving Discovery: <span style="color:#FF5200">"${escapeHtml(urlParams.get("craving"))}"</span>`;
+        }
+    }
 }
 
 // Apply search whenever the user types.

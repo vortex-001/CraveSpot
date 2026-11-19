@@ -2000,3 +2000,51 @@ button,select,input{font:inherit}button:focus-visible,a:focus-visible,select:foc
     border-color: #e9c5bd !important;
 }
 
+
+
+/* Hero Craving Chips */
+.hero-craving-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+    align-items: center;
+}
+.hero-craving-chips .chip-label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.92);
+    font-weight: 700;
+    margin-right: 4px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+.hero-craving-chips a, .hero-craving-chips button {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 14px;
+    background: rgba(255, 255, 255, 0.95);
+    color: #1f2937;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+}
+.hero-craving-chips a:hover, .hero-craving-chips button:hover {
+    background: #ffffff;
+    color: #e23744;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+.hero-craving-chips .surprise-chip {
+    background: linear-gradient(135deg, #ff5200, #e23744);
+    color: #ffffff;
+    border: none;
+}
+.hero-craving-chips .surprise-chip:hover {
+    background: linear-gradient(135deg, #e04800, #c82835);
+    color: #ffffff;
+}

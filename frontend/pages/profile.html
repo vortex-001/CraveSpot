@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile & Preferences | CraveSpot</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .profile-container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .profile-header-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 30px;
+            border: 1px solid #F1F5F9;
+        }
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF5200, #FFA41B);
+            color: #FFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(255,82,0,0.25);
+            flex-shrink: 0;
+        }
+        .profile-info h1 {
+            font-size: 26px;
+            color: #0F172A;
+            margin-bottom: 6px;
+        }
+        .profile-info p {
+            color: #64748B;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        @media (max-width: 768px) {
+            .profile-grid { grid-template-columns: 1fr; }
+            .profile-header-card { flex-direction: column; text-align: center; }
+        }
+        .settings-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            border: 1px solid #F1F5F9;
+        }
+        .settings-card h2 {
+            font-size: 20px;
+            color: #0F172A;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1.5px solid #CBD5E1;
+            font-size: 15px;
+            color: #0F172A;
+            background: #F8FAFC;
+            transition: border-color 0.2s;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #FF5200;
+            background: #FFF;
+        }
+        .pill-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .pill-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1.5px solid #E2E8F0;
+            background: #FFF;
+            font-size: 14px;
+            font-weight: 500;
+            color: #475569;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pill-btn.active {
+            background: #FF5200;
+            color: #FFF;
+            border-color: #FF5200;
+        }
+        .save-btn {
+            background: #FF5200;
+            color: #FFF;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s;
+        }
+        .save-btn:hover { background: #E04800; }
+        .history-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #F1F5F9;
+        }
+        .history-item a {
+            color: #FF5200;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .history-time {
+            color: #94A3B8;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo"><span>Crave<span>Spot</span></span></a>
+            <nav aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="restaurants.html">Restaurants</a>
+                <a href="dishes.html">Dishes</a>
+                <a href="categories.html">Categories</a>
+                <a href="favorites.html">Saved</a>
+            </nav>
+            <div class="auth-buttons" id="authArea">
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="profile-container">
+        <!-- Profile Header -->
+        <div class="profile-header-card">
+            <div class="profile-avatar" id="avatarInitial">U</div>
+            <div class="profile-info">
+                <h1 id="profileName">Loading Profile...</h1>
+                <p id="profileEmail">user@example.com</p>
+                <p id="profilePhone">+91 ••••• •••••</p>
+                <div style="margin-top: 10px;">
+                    <a href="favorites.html" class="pill-btn" style="text-decoration: none;">❤️ View Saved Wishlist</a>
+                    <button class="pill-btn" id="logoutProfileBtn" style="color: #EF4444; border-color: #FECACA;">Sign Out</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-grid">
+            <!-- Dietary Preferences -->
+            <section class="settings-card">
+                <h2><span>🥗</span> Dining & Dietary Preferences</h2>
+                <form id="preferencesForm">
+                    <div class="form-group">
+                        <label>Dietary Requirement</label>
+                        <div class="pill-options" id="dietaryPills">
+                            <button type="button" class="pill-btn active" data-val="all">All Food</button>
+                            <button type="button" class="pill-btn" data-val="veg">Vegetarian</button>
+                            <button type="button" class="pill-btn" data-val="pure_veg">Pure Veg Only</button>
+                            <button type="button" class="pill-btn" data-val="non_veg">Non-Veg Friendly</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preferred Spice Level</label>
+                        <div class="pill-options" id="spicePills">
+                            <button type="button" class="pill-btn active" data-val="any">Any Spice</button>
+                            <button type="button" class="pill-btn" data-val="mild">Mild</button>
+                            <button type="button" class="pill-btn" data-val="medium">Medium</button>
+                            <button type="button" class="pill-btn" data-val="spicy">Extra Spicy 🔥</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Budget Tier</label>
+                        <div class="pill-options" id="budgetPills">
+                            <button type="button" class="pill-btn active" data-val="any">Any Budget</button>
+                            <button type="button" class="pill-btn" data-val="budget">Budget (&lt; ₹200)</button>
+                            <button type="button" class="pill-btn" data-val="moderate">Moderate (₹200-₹500)</button>
+                            <button type="button" class="pill-btn" data-val="premium">Splurge (&gt; ₹500)</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="favTags">Favorite Cravings (comma separated)</label>
+                        <input type="text" id="favTags" class="form-control" placeholder="e.g. cheesy pizza, butter chicken, momos">
+                    </div>
+
+                    <button type="submit" class="save-btn" id="savePrefBtn">Save Preferences</button>
+                </form>
+            </section>
+
+            <!-- Personal Info & Search History -->
+            <section class="settings-card">
+                <h2><span>🕒</span> Recent Craving Searches</h2>
+                <div id="searchHistoryContainer">
+                    <p style="color: #94A3B8; font-size: 14px;">No recent searches recorded.</p>
+                </div>
+
+                <h2 style="margin-top: 30px;"><span>📍</span> Default Location</h2>
+                <div class="form-group">
+                    <label for="profileCity">Primary City</label>
+                    <input type="text" id="profileCity" class="form-control" value="Chandigarh">
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('cravespot_token');
+            const userStr = localStorage.getItem('cravespot_user') || localStorage.getItem('CraveSpotUser');
+            
+            if (!token && !userStr) {
+                showToast('Please login to view your profile', 'warning');
+                setTimeout(() => window.location.href = 'login.html', 1000);
+                return;
+            }
+
+            let user = {};
+            try { user = JSON.parse(userStr) || {}; } catch(e) {}
+
+            document.getElementById('profileName').textContent = user.name || 'CraveSpot Foodie';
+            document.getElementById('profileEmail').textContent = user.email || 'user@example.com';
+            document.getElementById('avatarInitial').textContent = (user.name || 'U').charAt(0).toUpperCase();
+
+            // Setup pill group click handlers
+            function setupPills(containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                container.querySelectorAll('.pill-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        container.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                    });
+                });
+            }
+            setupPills('dietaryPills');
+            setupPills('spicePills');
+            setupPills('budgetPills');
+
+            // Load remote preferences if token available
+            if (token) {
+                try {
+                    const res = await apiRequest('/user/preferences');
+                    if (res?.preferences) {
+                        const p = res.preferences;
+                        if (p.dietary) {
+                            const btn = document.querySelector(`#dietaryPills [data-val="${p.dietary}"]`);
+                            if (btn) { btn.click(); }
+                        }
+                        if (p.spice_level) {
+                            const btn = document.querySelector(`#spicePills [data-val="${p.spice_level}"]`);
+                            if (btn) { btn.click(); }
+                        }
+                        if (p.budget_tier) {
+                            const btn = document.querySelector(`#budgetPills [data-val="${p.budget_tier}"]`);
+                            if (btn) { btn.click(); }
+                        }
+                        if (p.favorite_tags) {
+                            document.getElementById('favTags').value = p.favorite_tags;
+                        }
+                    }
+
+                    // Load search history
+                    const histRes = await apiRequest('/user/history');
+                    if (histRes?.history && histRes.history.length > 0) {
+                        const container = document.getElementById('searchHistoryContainer');
+                        container.innerHTML = histRes.history.map(h => `
+                            <div class="history-item">
+                                <a href="restaurants.html?craving=${encodeURIComponent(h.query)}">🔍 "${h.query}"</a>
+                                <span class="history-time">${new Date(h.created_at).toLocaleDateString()}</span>
+                            </div>
+                        `).join('');
+                    }
+                } catch(e) {
+                    console.log('Using local profile data.');
+                }
+            }
+
+            // Save preferences
+            document.getElementById('preferencesForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const dietary = document.querySelector('#dietaryPills .pill-btn.active')?.dataset.val || 'all';
+                const spice_level = document.querySelector('#spicePills .pill-btn.active')?.dataset.val || 'any';
+                const budget_tier = document.querySelector('#budgetPills .pill-btn.active')?.dataset.val || 'any';
+                const favorite_tags = document.getElementById('favTags').value.trim();
+
+                try {
+                    await apiRequest('/user/preferences', {
+                        method: 'PUT',
+                        body: { dietary, spice_level, budget_tier, favorite_tags }
+                    });
+                    showToast('Dining preferences saved!', 'success');
+                } catch (err) {
+                    showToast('Preferences saved locally', 'info');
+                }
+            });
+
+            document.getElementById('logoutProfileBtn').addEventListener('click', () => {
+                logoutCurrentUser();
+            });
+        });
+    </script>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">CraveSpot</div>
+                <p>Your guide to discovering delicious local food and hidden gems.</p>
+            </div>
+            <div>
+                <h3>Explore</h3>
+                <a href="restaurants.html">Restaurants</a>
+                <a href="dishes.html">Dishes</a>
+                <a href="categories.html">Categories</a>
+                <a href="favorites.html">Saved</a>
+            </div>
+            <div>
+                <h3>About & Legal</h3>
+                <a href="about.html">About CraveSpot</a>
+                <a href="contact.html">Contact & Partner</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2026 CraveSpot — The Ultimate Food Finder & DBMS Project</div>
+    </footer>
+</body>
+</html>

@@ -56,7 +56,7 @@ if errorlevel 1 (
 )
 
 echo [*] Starting CraveSpot Backend (Flask + MySQL)...
-echo [*] Target Database: CraveSpot
+echo [*] Target Database: project
 echo [*] API URL: http://127.0.0.1:5000/api
 echo.
 echo Press CTRL+C to stop the server at any time.
@@ -75,7 +75,7 @@ if not "%EXIT_CODE%"=="0" (
     echo  1. Port 5000 is already in use by another application.
     echo  2. MySQL Server is not running or credentials in .env are incorrect.
     echo  3. Missing dependencies: Run 'setup.bat' to reinstall.
-    echo  4. Database 'CraveSpot' does not exist: Run 'python init_db.py'.
+    echo  4. Database 'project' does not exist: Run 'python init_db.py'.
     echo =====================================================================
 )
 

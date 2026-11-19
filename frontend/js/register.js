@@ -11,7 +11,8 @@ const registerForm =
 
 
 const registerMessage =
-    document.getElementById("registerMessage");
+    document.getElementById("registerMessage") ||
+    document.getElementById("message");
 
 
 if (registerForm) {
@@ -23,25 +24,16 @@ if (registerForm) {
             event.preventDefault();
 
 
-            const name =
-                document
-                    .getElementById("name")
-                    .value
-                    .trim();
+            const nameInput =
+                document.getElementById("name") ||
+                document.getElementById("fullName");
+            const name = nameInput ? nameInput.value.trim() : "";
 
+            const emailInput = document.getElementById("email");
+            const email = emailInput ? emailInput.value.trim() : "";
 
-            const email =
-                document
-                    .getElementById("email")
-                    .value
-                    .trim();
-
-
-            const phone =
-                document
-                    .getElementById("phone")
-                    .value
-                    .trim();
+            const phoneInput = document.getElementById("phone");
+            const phone = phoneInput ? phoneInput.value.trim() : "";
 
 
             const password =
@@ -144,28 +136,24 @@ if (registerForm) {
                 // SUCCESS
                 // -------------------------------
 
-                if (
-                    response.ok &&
-                    data.success
-                ) {
+                if (response.ok && data.success) {
+                    if (data.token) {
+                        localStorage.setItem("cravespot_token", data.token);
+                        localStorage.setItem("CraveSpotLoggedIn", "true");
+                    }
+                    if (data.user) {
+                        localStorage.setItem("cravespot_user", JSON.stringify(data.user));
+                        localStorage.setItem("CraveSpotUser", JSON.stringify(data.user));
+                    }
 
                     showMessage(
                         "Account created successfully! Redirecting...",
                         "green"
                     );
 
-
-                    setTimeout(
-                        function () {
-
-                            window.location.href =
-                                "login.html";
-
-                        },
-                        1200
-                    );
-
-
+                    setTimeout(function () {
+                        window.location.href = data.token ? "../index.html" : "login.html";
+                    }, 1200);
                 } else {
 
                     showMessage(

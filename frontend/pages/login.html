@@ -223,22 +223,9 @@
         Don't have an account?
         <a href="register.html">Create an account</a>
     </p>
-
-    <div class="demo-note">
-        <strong>Demo mode:</strong> This sign-in is stored in this browser only. Use test credentials, not a real password.
-    </div>
 </main>
 
-<script>
-"use strict";
-const form=document.getElementById("loginForm"),emailInput=document.getElementById("email"),passwordInput=document.getElementById("password"),message=document.getElementById("message"),loginButton=document.getElementById("loginButton"),togglePassword=document.getElementById("togglePassword");
-togglePassword.addEventListener("click",()=>{const show=passwordInput.type==="password";passwordInput.type=show?"text":"password";togglePassword.textContent=show?"Hide":"Show";togglePassword.setAttribute("aria-label",show?"Hide password":"Show password");});
-async function hashPassword(value){if(!window.crypto?.subtle) throw new Error("Secure browser context required");const bytes=new TextEncoder().encode(value);const hash=await crypto.subtle.digest("SHA-256",bytes);return Array.from(new Uint8Array(hash)).map(x=>x.toString(16).padStart(2,"0")).join("");}
-const forgotBtn=document.getElementById("forgotPasswordBtn"),resetPanel=document.getElementById("resetPasswordPanel"),resetMessage=document.getElementById("resetMessage");
-forgotBtn.addEventListener("click",()=>{resetPanel.hidden=!resetPanel.hidden;document.getElementById("resetEmail").value=emailInput.value.trim();resetMessage.textContent="For this frontend demo, reset is saved locally in this browser.";});
-document.getElementById("cancelReset").addEventListener("click",()=>resetPanel.hidden=true);
-document.getElementById("resetPasswordSubmit").addEventListener("click",async()=>{const email=document.getElementById("resetEmail").value.trim().toLowerCase(),p1=document.getElementById("resetNewPassword").value,p2=document.getElementById("resetConfirmPassword").value;resetMessage.style.color="#b91c1c";if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){resetMessage.textContent="Enter a valid account email.";return;}if(p1.length<6){resetMessage.textContent="Password must be at least 6 characters.";return;}if(p1!==p2){resetMessage.textContent="Passwords do not match.";return;}try{const accounts=JSON.parse(localStorage.getItem("CraveSpotAccounts")||"[]"),account=accounts.find(a=>String(a.email||"").toLowerCase()===email);if(!account){resetMessage.textContent="No local account found for this email. Please sign up first.";return;}account.passwordHash=await hashPassword(p1);delete account.password;localStorage.setItem("CraveSpotAccounts",JSON.stringify(accounts));resetMessage.style.color="#15803d";resetMessage.textContent="Password updated. You can now log in.";passwordInput.value=p1;}catch{resetMessage.textContent="Unable to reset in this browser context. Open the site using localhost.";}});
-form.addEventListener("submit",async event=>{event.preventDefault();message.textContent="";message.style.color="#b91c1c";const email=emailInput.value.trim().toLowerCase(),password=passwordInput.value;const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;if(!emailPattern.test(email)){message.textContent="Please enter a valid email address.";emailInput.focus();return;}if(!password){message.textContent="Please enter your password.";passwordInput.focus();return;}loginButton.disabled=true;loginButton.textContent="Checking…";try{const accounts=JSON.parse(localStorage.getItem("CraveSpotAccounts")||"[]");if(!Array.isArray(accounts))throw new Error("Invalid account data");const hashed=await hashPassword(password);const account=accounts.find(item=>item&&String(item.email||"").toLowerCase()===email&&(item.passwordHash===hashed||item.password===password));if(!account){message.textContent="Invalid email or password. If you are new, create an account first.";passwordInput.focus();return;}if(account.password){account.passwordHash=hashed;delete account.password;localStorage.setItem("CraveSpotAccounts",JSON.stringify(accounts));}const remember=document.getElementById("rememberMe").checked;const store=remember?localStorage:sessionStorage;const other=remember?sessionStorage:localStorage;store.setItem("CraveSpotLoggedIn","true");store.setItem("CraveSpotUser",account.name||email);other.removeItem("CraveSpotLoggedIn");other.removeItem("CraveSpotUser");message.style.color="#15803d";message.textContent="Login successful. Welcome back!";setTimeout(()=>window.location.href="../index.html",500);}catch(error){message.textContent="For this demo, open the site through localhost so browser security features are available.";}finally{loginButton.disabled=false;loginButton.textContent="Login";}});
-</script>
+<script src="../js/api.js"></script>
+<script src="../js/login.js"></script>
 </body>
 </html>

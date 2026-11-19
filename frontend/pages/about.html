@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | CraveSpot — The Ultimate Food Finder</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .static-page-container {
+            max-width: 860px;
+            margin: 40px auto 60px;
+            padding: 0 24px;
+        }
+        .static-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            border: 1px solid #F1F5F9;
+        }
+        .static-card h1 {
+            font-size: 32px;
+            color: #0F172A;
+            margin-bottom: 12px;
+        }
+        .static-card h2 {
+            font-size: 22px;
+            color: #0F172A;
+            margin-top: 30px;
+            margin-bottom: 12px;
+        }
+        .static-card p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #475569;
+            margin-bottom: 16px;
+        }
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+            margin-top: 24px;
+        }
+        .team-badge {
+            background: #F8FAFC;
+            border: 1px solid #E2E8F0;
+            padding: 16px;
+            border-radius: 14px;
+            text-align: center;
+        }
+        .team-badge strong {
+            display: block;
+            color: #0F172A;
+            font-size: 16px;
+        }
+        .team-badge span {
+            color: #FF5200;
+            font-size: 13px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo"><span>Crave<span>Spot</span></span></a>
+            <nav aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="restaurants.html">Restaurants</a>
+                <a href="dishes.html">Dishes</a>
+                <a href="categories.html">Categories</a>
+                <a href="favorites.html">Saved</a>
+            </nav>
+            <div class="auth-buttons" id="authArea">
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="static-page-container">
+        <article class="static-card">
+            <span class="eyebrow" style="color: #FF5200; font-weight: 700; letter-spacing: 1px; font-size: 13px;">OUR VISION</span>
+            <h1>About CraveSpot</h1>
+            <p><strong>CraveSpot</strong> is built on a simple yet powerful human truth: <em>When hunger strikes, you don't always think of a restaurant brand — you think of a craving.</em></p>
+            
+            <p>Whether you're yearning for "something spicy and crispy under ₹200", a warm homestyle North Indian curry on a rainy evening, or a midnight cheesy pizza slice, CraveSpot connects your immediate desires to local chefs, vendors, and food artisans.</p>
+
+            <h2>Why CraveSpot is Different</h2>
+            <p>Unlike conventional delivery aggregators that push sponsored listings, CraveSpot puts <strong>craving-based discovery</strong> first. We prioritize:</p>
+            <ul>
+                <li style="margin-bottom: 10px; color: #475569;"><strong>Taste & Texture Matching:</strong> Finding foods by flavor profiles (spicy, cheesy, sweet, creamy, crispy, tangy).</li>
+                <li style="margin-bottom: 10px; color: #475569;"><strong>Real Geolocation Intelligence:</strong> Measuring true walking and driving distances to verified restaurants.</li>
+                <li style="margin-bottom: 10px; color: #475569;"><strong>Budget Transparency:</strong> Helping students and foodies find satisfying meals within their exact pocket limits.</li>
+            </ul>
+
+            <h2>The Team Behind CraveSpot</h2>
+            <p>Developed with passion by <strong>The Confluence</strong>:</p>
+            <div class="team-grid">
+                <div class="team-badge"><strong>Harsh Garg</strong><span>Team Leader & Architect</span></div>
+                <div class="team-badge"><strong>Simran</strong><span>Frontend Engineer</span></div>
+                <div class="team-badge"><strong>Taranpreet</strong><span>Frontend Engineer</span></div>
+                <div class="team-badge"><strong>Anshita</strong><span>Backend Developer</span></div>
+                <div class="team-badge"><strong>Divya</strong><span>Backend Developer</span></div>
+                <div class="team-badge"><strong>Babishya</strong><span>Database Engineer</span></div>
+                <div class="team-badge"><strong>Anshuman</strong><span>Database Engineer</span></div>
+                <div class="team-badge"><strong>Majid</strong><span>QA & Testing</span></div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">CraveSpot</div>
+                <p>Your guide to discovering delicious local food and hidden gems.</p>
+            </div>
+            <div>
+                <h3>Explore</h3>
+                <a href="restaurants.html">Restaurants</a>
+                <a href="dishes.html">Dishes</a>
+                <a href="categories.html">Categories</a>
+                <a href="favorites.html">Saved</a>
+            </div>
+            <div>
+                <h3>About & Legal</h3>
+                <a href="about.html">About CraveSpot</a>
+                <a href="contact.html">Contact & Partner</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2026 CraveSpot — The Ultimate Food Finder & DBMS Project</div>
+    </footer>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/app.js"></script>
+</body>
+</html>

@@ -1,153 +1,370 @@
 'use strict';
 
-/* Shared frontend behaviour for CraveSpot pages. */
+/**
+ * CraveSpot Core Application Script
+ * Features:
+ * - HTML5 Geolocation Auto-Detection & Geocoding Search Modal
+ * - Natural Language Craving Search & Quick Craving Tags
+ * - "Surprise Me" Interactive Food Discovery Modal
+ * - Auth Session Management (User Profile Pill, Saved Wishlist Link, Logout)
+ * - Mobile Navigation Drawer
+ * - Universal Image Fallback Handlers
+ */
 
-function performSearch() {
+// ---------------------------------------------------------------------
+// 1. Natural Language Craving Search & Navigation
+// ---------------------------------------------------------------------
+function performCravingSearch(customQuery) {
     const input = document.getElementById('heroSearch');
-    const query = input ? input.value.trim() : '';
+    const query = (customQuery || (input ? input.value : '')).trim();
+
     if (!query) {
-        input?.focus();
-        alert('Enter a dish, restaurant or cuisine to search.');
+        if (input) input.focus();
+        if (typeof showToast === 'function') {
+            showToast('Please type what you are craving (e.g. "spicy momos under ₹150")', 'info');
+        } else {
+            alert('Please enter what you are craving!');
+        }
         return;
     }
-    window.location.href = 'pages/restaurants.html?search=' + encodeURIComponent(query);
+
+    // Determine correct path depending on current page level
+    const isPagesDir = window.location.pathname.includes('/pages/');
+    const targetUrl = (isPagesDir ? 'restaurants.html' : 'pages/restaurants.html') + 
+        '?craving=' + encodeURIComponent(query);
+    
+    window.location.href = targetUrl;
 }
 
 const heroSearch = document.getElementById('heroSearch');
 const heroSearchButton = document.getElementById('heroSearchButton');
-heroSearchButton?.addEventListener('click', performSearch);
-heroSearch?.addEventListener('keydown', event => {
-    if (event.key === 'Enter') performSearch();
-});
 
-/* Shared location selector. */
-(function initLocationSelector() {
+if (heroSearchButton) {
+    heroSearchButton.addEventListener('click', () => performCravingSearch());
+}
+if (heroSearch) {
+    heroSearch.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') performCravingSearch();
+    });
+}
+
+// ---------------------------------------------------------------------
+// 2. Interactive Location Selector (Auto-detect + City Search Modal)
+// ---------------------------------------------------------------------
+function initLocationSystem() {
+    const label = document.getElementById('selectedLocation');
     const selector = document.getElementById('locationSelector');
     const dropdown = document.getElementById('locationDropdown');
-    const citySelect = document.getElementById('locationCity');
-    const label = document.getElementById('selectedLocation');
-    const save = document.getElementById('saveLocation');
-    if (!selector || !dropdown || !citySelect || !label || !save) return;
+    const detectBtn = document.getElementById('detectLocationBtn');
+    const cityInput = document.getElementById('locationSearchInput');
+    const suggestionsBox = document.getElementById('locationSuggestions');
 
-    const saved = localStorage.getItem('CraveSpotLocation') || 'Chandigarh';
-    if (![...citySelect.options].some(option => option.value === saved)) {
-        citySelect.value = 'Chandigarh';
-    } else citySelect.value = saved;
-    label.textContent = citySelect.value;
+    // Load initial saved location
+    const currentLoc = (typeof getUserLocation === 'function') 
+        ? getUserLocation() 
+        : { city: localStorage.getItem('CraveSpotLocation') || 'Chandigarh' };
 
-    function setOpen(open) {
-        dropdown.hidden = !open;
-        selector.setAttribute('aria-expanded', String(open));
-        if (open) citySelect.focus();
+    if (label) {
+        label.textContent = currentLoc.city || 'Chandigarh';
     }
-    selector.setAttribute('aria-haspopup', 'listbox');
-    selector.setAttribute('aria-expanded', 'false');
-    selector.addEventListener('click', () => setOpen(dropdown.hidden));
-    selector.addEventListener('keydown', event => {
-        if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault(); setOpen(dropdown.hidden);
+
+    if (selector && dropdown) {
+        selector.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.hidden = !dropdown.hidden;
+            if (!dropdown.hidden && cityInput) {
+                cityInput.focus();
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!selector.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.hidden = true;
+            }
+        });
+    }
+
+    // A. Browser HTML5 Geolocation (Auto-detect)
+    if (detectBtn) {
+        detectBtn.addEventListener('click', () => {
+            if (!navigator.geolocation) {
+                if (typeof showToast === 'function') showToast('Geolocation is not supported by your browser', 'error');
+                return;
+            }
+
+            detectBtn.disabled = true;
+            detectBtn.innerHTML = '<span>📍</span> Detecting location...';
+
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    let cityName = 'Current Location';
+                    try {
+                        const geocode = await apiRequest(`/location/geocode?q=${lat},${lng}`);
+                        if (geocode?.location?.city) {
+                            cityName = geocode.location.city;
+                        }
+                    } catch (err) {
+                        // Keep fallback
+                    }
+
+                    if (typeof setUserLocation === 'function') {
+                        setUserLocation(lat, lng, cityName, `${cityName} (GPS)`);
+                    } else {
+                        localStorage.setItem('CraveSpotLocation', cityName);
+                    }
+
+                    if (label) label.textContent = cityName;
+                    if (dropdown) dropdown.hidden = true;
+                    detectBtn.disabled = false;
+                    detectBtn.innerHTML = '<span>📍</span> Use my current location (GPS)';
+
+                    if (typeof showToast === 'function') {
+                        showToast(`Location set to ${cityName}`, 'success');
+                    }
+                },
+                (error) => {
+                    detectBtn.disabled = false;
+                    detectBtn.innerHTML = '<span>📍</span> Use my current location (GPS)';
+                    let msg = 'Could not access location';
+                    if (error.code === error.PERMISSION_DENIED) {
+                        msg = 'Location permission denied. Please select a city manually.';
+                    }
+                    if (typeof showToast === 'function') showToast(msg, 'warning');
+                },
+                { timeout: 8000, maximumAge: 60000 }
+            );
+        });
+    }
+
+    // B. Manual City / Locality Search
+    if (cityInput) {
+        cityInput.addEventListener('keydown', async (e) => {
+            if (e.key === 'Enter') {
+                const val = cityInput.value.trim();
+                if (!val) return;
+
+                cityInput.disabled = true;
+                try {
+                    const res = await apiRequest(`/location/geocode?q=${encodeURIComponent(val)}`);
+                    if (res?.location) {
+                        const loc = res.location;
+                        if (typeof setUserLocation === 'function') {
+                            setUserLocation(loc.latitude, loc.longitude, loc.city, loc.display_name);
+                        } else {
+                            localStorage.setItem('CraveSpotLocation', loc.city);
+                        }
+                        if (label) label.textContent = loc.city;
+                        if (dropdown) dropdown.hidden = true;
+                        if (typeof showToast === 'function') showToast(`Location updated to ${loc.city}`, 'success');
+                    }
+                } catch (err) {
+                    if (typeof showToast === 'function') showToast(`Location "${val}" not found`, 'error');
+                } finally {
+                    cityInput.disabled = false;
+                }
+            }
+        });
+    }
+
+    // Quick City Buttons
+    document.querySelectorAll('.quick-city-chip').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const cityName = btn.dataset.city;
+            if (!cityName) return;
+
+            try {
+                const res = await apiRequest(`/location/geocode?q=${encodeURIComponent(cityName)}`);
+                if (res?.location) {
+                    const loc = res.location;
+                    if (typeof setUserLocation === 'function') {
+                        setUserLocation(loc.latitude, loc.longitude, loc.city, loc.display_name);
+                    }
+                    if (label) label.textContent = loc.city;
+                }
+            } catch (e) {
+                if (label) label.textContent = cityName;
+                localStorage.setItem('CraveSpotLocation', cityName);
+            }
+
+            if (dropdown) dropdown.hidden = true;
+            if (typeof showToast === 'function') showToast(`Selected city: ${cityName}`, 'info');
+        });
+    });
+}
+
+// ---------------------------------------------------------------------
+// 3. "Surprise Me" Interactive Modal
+// ---------------------------------------------------------------------
+function initSurpriseMe() {
+    const triggerButtons = document.querySelectorAll('.surprise-me-trigger, #surpriseMeBtn');
+    if (!triggerButtons.length) return;
+
+    let modal = document.getElementById('surpriseModal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'surpriseModal';
+        modal.className = 'cravespot-modal';
+        modal.hidden = true;
+        modal.innerHTML = `
+            <div class="modal-backdrop"></div>
+            <div class="modal-content animate-pop">
+                <button class="modal-close" id="closeSurpriseModal" aria-label="Close">&times;</button>
+                <div class="surprise-card" id="surpriseCardContent">
+                    <div class="surprise-loader">
+                        <span class="spinner"></span>
+                        <p>Finding a delicious surprise for you...</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        modal.querySelector('.modal-backdrop').addEventListener('click', () => modal.hidden = true);
+        modal.querySelector('#closeSurpriseModal').addEventListener('click', () => modal.hidden = true);
+    }
+
+    triggerButtons.forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            modal.hidden = false;
+            const cardContent = document.getElementById('surpriseCardContent');
+            cardContent.innerHTML = `
+                <div class="surprise-loader">
+                    <span class="spinner"></span>
+                    <p>Cooking up your craving surprise...</p>
+                </div>
+            `;
+
+            try {
+                const loc = (typeof getUserLocation === 'function') ? getUserLocation() : { lat: 30.7333, lng: 76.7794 };
+                const res = await apiRequest(`/cravings/surprise-me?lat=${loc.lat}&lng=${loc.lng}`);
+                
+                if (res?.surprise) {
+                    const item = res.surprise;
+                    const isPagesDir = window.location.pathname.includes('/pages/');
+                    const detailsUrl = (isPagesDir ? 'dish-details.html' : 'pages/dish-details.html') + 
+                        `?dish=${encodeURIComponent(item.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'))}&name=${encodeURIComponent(item.name)}&price=${item.price}&restaurant=${encodeURIComponent(item.restaurant_name || '')}`;
+
+                    cardContent.innerHTML = `
+                        <div class="surprise-badge">🎲 CraveSpot Surprise</div>
+                        <img src="${item.image_url || 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600'}" alt="${item.name}" class="surprise-img" />
+                        <div class="surprise-details">
+                            <h3 class="surprise-title">${item.name}</h3>
+                            <p class="surprise-restaurant">By <strong>${item.restaurant_name || 'Top Local Vendor'}</strong></p>
+                            <p class="surprise-msg">"${item.surprise_message || 'Chef special recommendation for your cravings!'}"</p>
+                            <div class="surprise-meta">
+                                <span class="surprise-price">₹${item.price}</span>
+                                <span class="surprise-rating">★ ${item.rating || 4.5}</span>
+                            </div>
+                            <div class="surprise-actions">
+                                <a href="${detailsUrl}" class="primary-btn">View Dish Details</a>
+                                <button class="secondary-btn" id="rollAgainBtn">Roll Another 🎲</button>
+                            </div>
+                        </div>
+                    `;
+
+                    document.getElementById('rollAgainBtn')?.addEventListener('click', () => {
+                        btn.click();
+                    });
+                }
+            } catch (err) {
+                cardContent.innerHTML = `
+                    <div style="text-align: center; padding: 20px;">
+                        <p style="color: #EF4444; font-weight: 600;">Could not roll surprise right now.</p>
+                        <button class="primary-btn" onclick="document.getElementById('surpriseModal').hidden = true">Close</button>
+                    </div>
+                `;
+            }
+        });
+    });
+}
+
+// ---------------------------------------------------------------------
+// 4. Auth Navigation & User State (Profile, Saved Wishlist, Logout)
+// ---------------------------------------------------------------------
+function syncAuthState() {
+    const isPagesDir = window.location.pathname.includes('/pages/');
+    const loginPath = isPagesDir ? 'login.html' : 'pages/login.html';
+    const registerPath = isPagesDir ? 'register.html' : 'pages/register.html';
+    const profilePath = isPagesDir ? 'profile.html' : 'pages/profile.html';
+    const favoritesPath = isPagesDir ? 'favorites.html' : 'pages/favorites.html';
+
+    const token = localStorage.getItem('cravespot_token');
+    const user = (typeof getCurrentUser === 'function') ? getCurrentUser() : null;
+    const isLoggedIn = Boolean(token || localStorage.getItem('CraveSpotLoggedIn') === 'true');
+
+    document.querySelectorAll('.auth-buttons, #authArea').forEach(container => {
+        if (isLoggedIn) {
+            const displayName = user?.name ? user.name.split(' ')[0] : 'Foodie';
+            container.innerHTML = `
+                <div class="user-nav-dropdown">
+                    <a href="${favoritesPath}" class="nav-fav-link" title="My Wishlist">
+                        <span class="fav-heart">❤️</span>
+                        <span class="nav-fav-label">Saved</span>
+                    </a>
+                    <a href="${profilePath}" class="user-profile-pill">
+                        <span class="user-avatar-icon">👤</span>
+                        <span class="user-name">Hi, ${displayName}</span>
+                    </a>
+                    <button class="logout-btn" type="button" title="Sign Out">Logout</button>
+                </div>
+            `;
+
+            container.querySelector('.logout-btn')?.addEventListener('click', () => {
+                if (typeof logoutCurrentUser === 'function') {
+                    logoutCurrentUser();
+                } else {
+                    localStorage.clear();
+                    window.location.reload();
+                }
+            });
+        } else {
+            container.innerHTML = `
+                <a href="${loginPath}" class="login-btn">Login</a>
+                <a href="${registerPath}" class="signup-btn">Sign Up</a>
+            `;
         }
-        if (event.key === 'Escape') setOpen(false);
-    });
-    save.addEventListener('click', () => {
-        const city = citySelect.value;
-        localStorage.setItem('CraveSpotLocation', city);
-        label.textContent = city;
-        setOpen(false);
-        document.dispatchEvent(new CustomEvent('cravespot:locationChanged', {detail:{city}}));
-        const notice = document.getElementById('locationNotice');
-        if (notice) notice.textContent = 'Showing options for ' + city + '.';
-    });
-    document.addEventListener('click', event => {
-        if (!selector.contains(event.target) && !dropdown.contains(event.target)) setOpen(false);
-    });
-    window.addEventListener('pageshow', () => {
-        const latest = localStorage.getItem('CraveSpotLocation') || 'Chandigarh';
-        if ([...citySelect.options].some(option => option.value === latest)) citySelect.value = latest;
-        label.textContent = citySelect.value;
-    });
-})();
-
-/* Home-page quick diet filters. */
-(function initHomeFoodFilters() {
-    const buttons = document.querySelectorAll('.food-filter[data-filter]');
-    const cards = document.querySelectorAll('.quick-dish-card[data-diet]');
-    if (!buttons.length || !cards.length) return;
-    buttons.forEach(button => button.addEventListener('click', () => {
-        const filter = button.dataset.filter || 'all';
-        buttons.forEach(btn => {
-            const active = btn === button;
-            btn.classList.toggle('active', active);
-            btn.setAttribute('aria-pressed', String(active));
-        });
-        let count = 0;
-        cards.forEach(card => {
-            const show = filter === 'all' || card.dataset.diet === filter;
-            card.hidden = !show;
-            if (show) count++;
-        });
-        const countEl = document.getElementById('quickDishCount');
-        if (countEl) countEl.textContent = count + (count === 1 ? ' dish' : ' dishes');
-    }));
-})();
-
-/* Logged-in state across the site. */
-(function initAuthNav() {
-    const loggedIn = localStorage.getItem('CraveSpotLoggedIn') === 'true' || sessionStorage.getItem('CraveSpotLoggedIn') === 'true';
-    const user = localStorage.getItem('CraveSpotUser') || sessionStorage.getItem('CraveSpotUser') || 'Food lover';
-    document.querySelectorAll('.auth-buttons').forEach(area => {
-        if (!loggedIn) return;
-        area.innerHTML = `<span class="user-welcome" title="Signed in">Hi, ${escapeText(user.split(' ')[0])}</span><button class="logout-btn" type="button">Log out</button>`;
-        area.querySelector('.logout-btn').addEventListener('click', () => {
-            localStorage.removeItem('CraveSpotLoggedIn');
-            localStorage.removeItem('CraveSpotUser');
-            sessionStorage.removeItem('CraveSpotLoggedIn');
-            sessionStorage.removeItem('CraveSpotUser');
-            window.location.reload();
-        });
-    });
-})();
-function escapeText(value) {
-    return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-}
-
-/* Homepage card and collection navigation. */
-if (heroSearch) {
-    document.querySelectorAll('.restaurant-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const name = card.querySelector('.restaurant-name h3')?.textContent.trim();
-            if (name) window.location.href = 'pages/restaurant-details.html?vendor=' + encodeURIComponent(name);
-        });
-    });
-    const collectionTerms = ['burger','pizza','all'];
-    document.querySelectorAll('.collection-card').forEach((card, index) => {
-        card.setAttribute('role','link'); card.setAttribute('tabindex','0');
-        const go = () => window.location.href = 'pages/dishes.html?search=' + encodeURIComponent(collectionTerms[index] || '');
-        card.addEventListener('click', go);
-        card.addEventListener('keydown', event => { if(event.key==='Enter'||event.key===' '){event.preventDefault();go();} });
     });
 }
 
-/* Replace failed remote food images with a quiet branded placeholder. */
-document.querySelectorAll('img').forEach(image => {
-    const applyFallback = function() {
-        if (this.dataset.fallbackApplied) return;
-        this.dataset.fallbackApplied = '1';
-        this.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320"%3E%3Crect width="480" height="320" fill="%23f4eee8"/%3E%3Ccircle cx="240" cy="160" r="94" fill="none" stroke="%23d8c9bd" stroke-width="12"/%3E%3Ccircle cx="240" cy="160" r="67" fill="none" stroke="%23e2d4c8" stroke-width="8"/%3E%3Cpath d="M205 158c22-40 65-30 70 7-9 30-44 40-70-7Z" fill="%23e5b98f"/%3E%3C/svg%3E';
-    };
-    image.addEventListener('error', applyFallback);
-    if (image.complete && image.naturalWidth === 0) applyFallback.call(image);
+// ---------------------------------------------------------------------
+// 5. Global Image Fallback Handler
+// ---------------------------------------------------------------------
+function initImageFallbacks() {
+    const fallbackSvg = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400"%3E%3Crect width="600" height="400" fill="%23FFF5F0"/%3E%3Ccircle cx="300" cy="200" r="110" fill="%23FFE3D6"/%3E%3Ctext x="50%25" y="48%25" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="%23FF5200" text-anchor="middle" dominant-baseline="middle"%3ECraveSpot%3C/text%3E%3Ctext x="50%25" y="58%25" font-family="system-ui, sans-serif" font-size="16" fill="%23888" text-anchor="middle" dominant-baseline="middle"%3E%F0%9F%8D%B4 Food Discovery%3C/text%3E%3C/svg%3E';
+
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('error', function() {
+            if (!this.dataset.fallbackApplied) {
+                this.dataset.fallbackApplied = 'true';
+                this.src = fallbackSvg;
+            }
+        });
+        if (img.complete && img.naturalWidth === 0) {
+            img.src = fallbackSvg;
+        }
+    });
+}
+
+// ---------------------------------------------------------------------
+// 6. Application Initializer
+// ---------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+    initLocationSystem();
+    initSurpriseMe();
+    syncAuthState();
+    initImageFallbacks();
+
+    // Quick craving category pill clicks
+    document.querySelectorAll('.craving-chip, .quick-craving-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+            const craving = pill.dataset.craving || pill.textContent.trim();
+            performCravingSearch(craving);
+        });
+    });
+
+    window.addEventListener('cravespot:authChanged', syncAuthState);
 });
-
-/* Homepage featured dish favorites */
-(function initQuickFavorites(){
-  document.querySelectorAll('.quick-dish-card .quick-favorite').forEach(button=>{
-    const card=button.closest('.quick-dish-card');
-    const name=card?.querySelector('h3')?.textContent.trim();
-    if(!name) return;
-    let saved=[];try{saved=JSON.parse(localStorage.getItem('CraveSpot_favorite_dishes')||'[]')}catch{}
-    const on=saved.some(item=>String(item).toLowerCase()===name.toLowerCase());
-    button.classList.toggle('saved',on);button.textContent=on?'♥':'♡';button.setAttribute('aria-pressed',String(on));button.setAttribute('aria-label',on?'Remove from saved dishes':'Save dish');
-    button.addEventListener('click',event=>{event.stopPropagation();let list=[];try{list=JSON.parse(localStorage.getItem('CraveSpot_favorite_dishes')||'[]')}catch{};const exists=list.some(item=>String(item).toLowerCase()===name.toLowerCase());list=exists?list.filter(item=>String(item).toLowerCase()!==name.toLowerCase()):[...list,name];localStorage.setItem('CraveSpot_favorite_dishes',JSON.stringify(list));button.classList.toggle('saved',!exists);button.textContent=!exists?'♥':'♡';button.setAttribute('aria-pressed',String(!exists));button.setAttribute('aria-label',!exists?'Remove from saved dishes':'Save dish');});
-  });
-})();

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page Not Found | CraveSpot</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .error-wrapper {
+            min-height: calc(100vh - 180px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .error-card {
+            background: #FFFFFF;
+            max-width: 580px;
+            padding: 48px 36px;
+            border-radius: 24px;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.06);
+            border: 1px solid #F1F5F9;
+        }
+        .error-emoji {
+            font-size: 72px;
+            margin-bottom: 16px;
+            display: inline-block;
+            animation: floatEmoji 3s ease-in-out infinite;
+        }
+        @keyframes floatEmoji {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .error-code {
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #FF5200;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .error-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #0F172A;
+            margin-bottom: 12px;
+        }
+        .error-desc {
+            font-size: 15px;
+            color: #64748B;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+        .search-box-404 {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+        .search-box-404 input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1.5px solid #E2E8F0;
+            border-radius: 12px;
+            font-size: 14px;
+            outline: none;
+        }
+        .search-box-404 input:focus {
+            border-color: #FF5200;
+        }
+        .search-box-404 button {
+            background: #FF5200;
+            color: #FFFFFF;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .search-box-404 button:hover {
+            background: #E04800;
+        }
+        .quick-links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-outline {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: 1px solid #CBD5E1;
+            color: #334155;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-outline:hover {
+            border-color: #FF5200;
+            color: #FF5200;
+            background: #FFF7ED;
+        }
+        .btn-primary {
+            display: inline-block;
+            padding: 10px 22px;
+            border-radius: 10px;
+            background: #FF5200;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-primary:hover {
+            background: #E04800;
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo"><span>Crave<span>Spot</span></span></a>
+            <nav aria-label="Main navigation">
+                <a href="../index.html">Home</a>
+                <a href="restaurants.html">Restaurants</a>
+                <a href="dishes.html">Dishes</a>
+                <a href="categories.html">Categories</a>
+                <a href="favorites.html">Saved</a>
+            </nav>
+            <div class="auth-buttons" id="authArea">
+                <a href="login.html" class="login-btn">Login</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="error-wrapper">
+        <div class="error-card">
+            <div class="error-emoji" aria-hidden="true">🍽️🔍</div>
+            <div class="error-code">404 Error</div>
+            <h1 class="error-title">Looks like this plate is empty!</h1>
+            <p class="error-desc">We couldn't find the page or delicious dish you were searching for. Don't worry, thousands of cravings are waiting for you!</p>
+
+            <form class="search-box-404" onsubmit="event.preventDefault(); const q = document.getElementById('search404').value.trim(); if(q) window.location.href='restaurants.html?search='+encodeURIComponent(q);">
+                <input type="text" id="search404" placeholder="What are you craving? (e.g. biryani, pizza)">
+                <button type="submit">Search</button>
+            </form>
+
+            <div class="quick-links">
+                <a href="../index.html" class="btn-primary">Return Home</a>
+                <a href="restaurants.html" class="btn-outline">Find Restaurants</a>
+                <a href="dishes.html" class="btn-outline">Explore Dishes</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/app.js"></script>
+</body>
+</html>

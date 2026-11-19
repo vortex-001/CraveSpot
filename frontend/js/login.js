@@ -50,7 +50,8 @@ const loginForm =
     document.getElementById("loginForm");
 
 const loginMessage =
-    document.getElementById("loginMessage");
+    document.getElementById("loginMessage") ||
+    document.getElementById("message");
 
 
 if (loginForm) {
@@ -156,22 +157,15 @@ if (loginForm) {
 
 
                     // Save login information
-
-                    localStorage.setItem(
-                        "CraveSpotLoggedIn",
-                        "true"
-                    );
-
+                    localStorage.setItem("CraveSpotLoggedIn", "true");
+                    if (data.token) {
+                        localStorage.setItem("cravespot_token", data.token);
+                    }
 
                     // Save user information
-
                     if (data.user) {
-
-                        localStorage.setItem(
-                            "CraveSpotUser",
-                            JSON.stringify(data.user)
-                        );
-
+                        localStorage.setItem("CraveSpotUser", JSON.stringify(data.user));
+                        localStorage.setItem("cravespot_user", JSON.stringify(data.user));
                     }
 
 

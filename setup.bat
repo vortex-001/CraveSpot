@@ -72,13 +72,13 @@ if not exist ".env" (
     echo [*] .env file not found. Creating from .env.example...
     if exist ".env.example" (
         copy ".env.example" ".env" >nul
-        echo [*] Created .env with default settings (Database: CraveSpot).
+        echo [*] Created .env with default settings (Database: project).
     ) else (
         echo DB_HOST=localhost> .env
         echo DB_PORT=3306>> .env
         echo DB_USER=root>> .env
         echo DB_PASSWORD=>> .env
-        echo DB_NAME=CraveSpot>> .env
+        echo DB_NAME=project>> .env
         echo PORT=5000>> .env
         echo [*] Generated default .env file.
     )
@@ -94,7 +94,7 @@ echo =====================================================================
 echo                     Database Initialization
 echo =====================================================================
 echo.
-echo Would you like to initialize the 'CraveSpot' database now using init_db.py?
+echo Would you like to initialize the database now using init_db.py?
 echo (Make sure your MySQL Server is running)
 echo.
 set /p INIT_CHOICE="Initialize database now? [Y/N, default Y]: "

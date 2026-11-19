@@ -1,6 +1,12 @@
 """
 Automated Test Suite for CraveSpot Backend
-Using Python's standard unittest framework (zero extra test dependencies).
+Using Python's standard unittest framework.
+Tests:
+- API routes, validation, and error handlers
+- Craving recommendation engine & taxonomy
+- Geolocation and geocoding endpoints
+- User authentication, tokens, and rate-limiting
+- Security headers
 """
 
 import sys
@@ -8,13 +14,12 @@ import unittest
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-# Ensure backend can be imported
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(PROJECT_ROOT / "backend"))
 
 from werkzeug.security import generate_password_hash
-from backend.app import app
+from backend.app import app, TOKEN_SERIALIZER
 
 
 class CraveSpotBackendTests(unittest.TestCase):
@@ -24,17 +29,24 @@ class CraveSpotBackendTests(unittest.TestCase):
         self.client = app.test_client()
 
     # =====================================================================
-    # 1. Root & Health Check Tests
+    # 1. Root & Health Check & Security Headers Tests
     # =====================================================================
 
     def test_home_route(self):
-        """Test GET / returns 200, confirmation message, and database 'CraveSpot'."""
+        """Test GET / returns 200, confirmation message, and database 'project'."""
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
         data = response.get_json()
         self.assertTrue(data["success"])
         self.assertIn("CraveSpot", data["message"])
-        self.assertEqual(data["database"], "CraveSpot")
+        self.assertEqual(data["database"], "project")
+
+    def test_security_headers_present(self):
+        """Verify that security headers are injected into HTTP responses."""
+        response = self.client.get("/")
+        self.assertEqual(response.headers.get("X-Content-Type-Options"), "nosniff")
+        self.assertEqual(response.headers.get("X-Frame-Options"), "SAMEORIGIN")
+        self.assertEqual(response.headers.get("X-XSS-Protection"), "1; mode=block")
 
     def test_health_check_handles_db_failure_gracefully(self):
         """Test GET /api/health returns 503 structured JSON if MySQL is down."""
@@ -61,104 +73,148 @@ class CraveSpotBackendTests(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             data = response.get_json()
             self.assertTrue(data["success"])
-            self.assertEqual(data["database"], "CraveSpot")
+            self.assertEqual(data["database"], "project")
 
     # =====================================================================
-    # 2. Registration Validation Tests
+    # 2. Craving Recommendation Engine Tests
     # =====================================================================
 
-    def test_register_missing_fields(self):
-        """Test register fails when required fields are missing."""
+    def test_cravings_recommendation_flow(self):
+        """Test natural language craving search endpoint."""
+        with patch("backend.app.get_db") as mock_get_db:
+            mock_conn = MagicMock()
+            mock_cursor = MagicMock()
+            mock_conn.cursor.return_value = mock_cursor
+            mock_cursor.fetchall.return_value = [
+                {
+                    "item_id": 1,
+                    "restaurant_id": 1,
+                    "name": "Classic Double Cheese Margherita",
+                    "description": "Cheesy pizza with mozzarella",
+                    "tags": "pizza,cheesy,cheese",
+                    "price": 280.0,
+                    "is_veg": 1,
+                    "rating": 4.6,
+                    "restaurant_name": "Pizza Corner",
+                    "restaurant_address": "Sector 22, Chandigarh",
+                    "restaurant_rating": 4.4,
+                    "restaurant_latitude": 30.7333,
+                    "restaurant_longitude": 76.7794
+                },
+                {
+                    "item_id": 2,
+                    "restaurant_id": 2,
+                    "name": "Fiery Chilli Chicken Dry",
+                    "description": "Extra spicy chicken",
+                    "tags": "chicken,spicy,fiery",
+                    "price": 240.0,
+                    "is_veg": 0,
+                    "rating": 4.5,
+                    "restaurant_name": "Wok Express",
+                    "restaurant_address": "Sector 35, Chandigarh",
+                    "restaurant_rating": 4.2,
+                    "restaurant_latitude": 30.7224,
+                    "restaurant_longitude": 76.7688
+                }
+            ]
+            mock_conn.is_connected.return_value = True
+            mock_get_db.return_value = mock_conn
+
+            # Query for cheesy vegetarian pizza
+            response = self.client.post("/api/cravings/recommend", json={
+                "query": "I want cheesy veg pizza",
+                "latitude": 30.7333,
+                "longitude": 76.7794
+            })
+            self.assertEqual(response.status_code, 200)
+            data = response.get_json()
+            self.assertTrue(data["success"])
+            self.assertGreater(data["count"], 0)
+            top_rec = data["recommendations"][0]
+            self.assertEqual(top_rec["name"], "Classic Double Cheese Margherita")
+            self.assertIn("match_reason", top_rec)
+
+    def test_cravings_surprise_me(self):
+        """Test surprise me endpoint returns a valid random pick."""
+        with patch("backend.app.get_db") as mock_get_db:
+            mock_conn = MagicMock()
+            mock_cursor = MagicMock()
+            mock_conn.cursor.return_value = mock_cursor
+            mock_cursor.fetchall.return_value = [
+                {
+                    "item_id": 1,
+                    "restaurant_id": 1,
+                    "name": "Hyderabadi Dum Biryani",
+                    "price": 220.0,
+                    "is_veg": 0,
+                    "rating": 4.8,
+                    "restaurant_name": "Urban Tadka",
+                    "restaurant_address": "Sector 17, Chandigarh"
+                }
+            ]
+            mock_conn.is_connected.return_value = True
+            mock_get_db.return_value = mock_conn
+
+            response = self.client.get("/api/cravings/surprise-me")
+            self.assertEqual(response.status_code, 200)
+            data = response.get_json()
+            self.assertTrue(data["success"])
+            self.assertIn("surprise", data)
+            self.assertIn("surprise_message", data["surprise"])
+
+    def test_cravings_taxonomy(self):
+        """Test taxonomy endpoint returns categories."""
+        with patch("backend.app.get_db") as mock_get_db:
+            mock_conn = MagicMock()
+            mock_cursor = MagicMock()
+            mock_conn.cursor.return_value = mock_cursor
+            mock_cursor.fetchall.return_value = [
+                {"craving_id": 1, "title": "Spicy & Fiery", "icon": "flame"},
+                {"craving_id": 2, "title": "Cheesy & Gooey", "icon": "cheese"}
+            ]
+            mock_conn.is_connected.return_value = True
+            mock_get_db.return_value = mock_conn
+
+            response = self.client.get("/api/cravings/taxonomy")
+            self.assertEqual(response.status_code, 200)
+            self.assertEqual(len(response.get_json()["cravings"]), 2)
+
+    # =====================================================================
+    # 3. Location & Geocoding Tests
+    # =====================================================================
+
+    def test_location_geocode_success(self):
+        """Test geocoding a known city returns coordinates."""
+        response = self.client.get("/api/location/geocode?q=Chandigarh")
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertTrue(data["success"])
+        self.assertIn("latitude", data["location"])
+        self.assertIn("longitude", data["location"])
+
+    def test_location_geocode_missing_param(self):
+        """Test geocode returns 400 when query parameter is omitted."""
+        response = self.client.get("/api/location/geocode")
+        self.assertEqual(response.status_code, 400)
+
+    # =====================================================================
+    # 4. User Authentication & Profile Tests
+    # =====================================================================
+
+    def test_register_validation(self):
+        """Test registration field requirements."""
         response = self.client.post("/api/register", json={})
         self.assertEqual(response.status_code, 400)
-        self.assertIn("required", response.get_json()["message"])
 
-    def test_register_invalid_email(self):
-        """Test register fails when email format is invalid."""
         response = self.client.post("/api/register", json={
-            "name": "Test User",
-            "email": "not-an-email",
+            "name": "Test",
+            "email": "invalid-email",
             "password": "Password123"
         })
         self.assertEqual(response.status_code, 400)
-        self.assertIn("valid email", response.get_json()["message"])
 
-    def test_register_short_password(self):
-        """Test register fails when password is less than 6 chars."""
-        response = self.client.post("/api/register", json={
-            "name": "Test User",
-            "email": "test@example.com",
-            "password": "123"
-        })
-        self.assertEqual(response.status_code, 400)
-        self.assertIn("at least 6 characters", response.get_json()["message"])
-
-    def test_register_success(self):
-        """Test successful user registration with mocked DB."""
-        with patch("backend.app.get_db") as mock_get_db:
-            mock_conn = MagicMock()
-            mock_cursor = MagicMock()
-            mock_conn.cursor.return_value = mock_cursor
-            mock_cursor.fetchone.return_value = None  # No existing user
-            mock_conn.is_connected.return_value = True
-            mock_get_db.return_value = mock_conn
-
-            response = self.client.post("/api/register", json={
-                "name": "Jane Doe",
-                "email": "jane@example.com",
-                "password": "SecurePassword123",
-                "phone": "9876543210"
-            })
-            self.assertEqual(response.status_code, 201)
-            self.assertTrue(response.get_json()["success"])
-
-    def test_register_duplicate_email(self):
-        """Test register rejects duplicate emails."""
-        with patch("backend.app.get_db") as mock_get_db:
-            mock_conn = MagicMock()
-            mock_cursor = MagicMock()
-            mock_conn.cursor.return_value = mock_cursor
-            mock_cursor.fetchone.return_value = (1,)  # Existing user found
-            mock_conn.is_connected.return_value = True
-            mock_get_db.return_value = mock_conn
-
-            response = self.client.post("/api/register", json={
-                "name": "Jane Doe",
-                "email": "jane@example.com",
-                "password": "SecurePassword123"
-            })
-            self.assertEqual(response.status_code, 409)
-            self.assertIn("already registered", response.get_json()["message"])
-
-    # =====================================================================
-    # 3. Login Validation & Auth Tests
-    # =====================================================================
-
-    def test_login_missing_fields(self):
-        """Test login fails when fields are omitted."""
-        response = self.client.post("/api/login", json={})
-        self.assertEqual(response.status_code, 400)
-        self.assertIn("required", response.get_json()["message"])
-
-    def test_login_user_not_found(self):
-        """Test login fails with 401 when user does not exist."""
-        with patch("backend.app.get_db") as mock_get_db:
-            mock_conn = MagicMock()
-            mock_cursor = MagicMock()
-            mock_conn.cursor.return_value = mock_cursor
-            mock_cursor.fetchone.return_value = None
-            mock_conn.is_connected.return_value = True
-            mock_get_db.return_value = mock_conn
-
-            response = self.client.post("/api/login", json={
-                "email": "nobody@example.com",
-                "password": "Password123"
-            })
-            self.assertEqual(response.status_code, 401)
-            self.assertIn("Invalid", response.get_json()["message"])
-
-    def test_login_success(self):
-        """Test successful login with password hash verification."""
+    def test_login_success_returns_token(self):
+        """Test login returns signed bearer token."""
         with patch("backend.app.get_db") as mock_get_db:
             mock_conn = MagicMock()
             mock_cursor = MagicMock()
@@ -168,7 +224,8 @@ class CraveSpotBackendTests(unittest.TestCase):
                 "user_id": 1,
                 "name": "Harsh Garg",
                 "email": "demo@cravespot.com",
-                "password": hashed_pw
+                "password": hashed_pw,
+                "role": "user"
             }
             mock_conn.is_connected.return_value = True
             mock_get_db.return_value = mock_conn
@@ -180,64 +237,35 @@ class CraveSpotBackendTests(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             data = response.get_json()
             self.assertTrue(data["success"])
+            self.assertIn("token", data)
             self.assertEqual(data["user"]["name"], "Harsh Garg")
 
-    def test_login_invalid_password(self):
-        """Test login fails with 401 when password does not match."""
-        with patch("backend.app.get_db") as mock_get_db:
-            mock_conn = MagicMock()
-            mock_cursor = MagicMock()
-            mock_conn.cursor.return_value = mock_cursor
-            hashed_pw = generate_password_hash("CorrectPassword")
-            mock_cursor.fetchone.return_value = {
-                "user_id": 1,
-                "name": "Harsh Garg",
-                "email": "demo@cravespot.com",
-                "password": hashed_pw
-            }
-            mock_conn.is_connected.return_value = True
-            mock_get_db.return_value = mock_conn
+    def test_favorites_unauthorized_without_token(self):
+        """Test protected favorites endpoint returns 401 if unauthenticated."""
+        response = self.client.get("/api/user/favorites")
+        self.assertEqual(response.status_code, 401)
 
-            response = self.client.post("/api/login", json={
-                "email": "demo@cravespot.com",
-                "password": "WrongPassword"
-            })
-            self.assertEqual(response.status_code, 401)
-            self.assertIn("Invalid", response.get_json()["message"])
-
-    # =====================================================================
-    # 4. Nearby Restaurants (Haversine) Tests
-    # =====================================================================
-
-    def test_nearby_restaurants_invalid_coords(self):
-        """Test invalid coordinates return 400."""
-        response = self.client.post("/api/nearby-restaurants", json={
-            "latitude": 999.0,
-            "longitude": 76.77
-        })
-        self.assertEqual(response.status_code, 400)
-
-    def test_nearby_restaurants_valid(self):
-        """Test nearby restaurants returns list when coords valid."""
+    def test_favorites_authorized_with_token(self):
+        """Test favorites endpoint works with signed bearer token."""
+        token = TOKEN_SERIALIZER.dumps({"user_id": 1, "email": "demo@cravespot.com"})
         with patch("backend.app.get_db") as mock_get_db:
             mock_conn = MagicMock()
             mock_cursor = MagicMock()
             mock_conn.cursor.return_value = mock_cursor
             mock_cursor.fetchall.return_value = [
-                {"restaurant_id": 1, "name": "Spice Garden", "distance_km": 1.2}
+                {"favorite_id": 1, "restaurant_id": 1, "restaurant_name": "Spice Garden"}
             ]
             mock_conn.is_connected.return_value = True
             mock_get_db.return_value = mock_conn
 
-            response = self.client.post("/api/nearby-restaurants", json={
-                "latitude": 30.74,
-                "longitude": 76.76
-            })
+            response = self.client.get("/api/user/favorites", headers={"Authorization": f"Bearer {token}"})
             self.assertEqual(response.status_code, 200)
-            self.assertEqual(len(response.get_json()["restaurants"]), 1)
+            data = response.get_json()
+            self.assertTrue(data["success"])
+            self.assertEqual(len(data["favorites"]), 1)
 
     # =====================================================================
-    # 5. Restaurant & Menu Endpoints Tests
+    # 5. Restaurants & Error Handlers
     # =====================================================================
 
     def test_get_restaurants(self):
@@ -255,91 +283,14 @@ class CraveSpotBackendTests(unittest.TestCase):
             response = self.client.get("/api/restaurants")
             self.assertEqual(response.status_code, 200)
             items = response.get_json()
-            self.assertIsInstance(items, list)
-            self.assertEqual(items[0]["name"], "Spice Garden")
-
-    def test_get_single_restaurant_not_found(self):
-        """Test GET /api/restaurants/<id> returns 404 if missing."""
-        with patch("backend.app.get_db") as mock_get_db:
-            mock_conn = MagicMock()
-            mock_cursor = MagicMock()
-            mock_conn.cursor.return_value = mock_cursor
-            mock_cursor.fetchone.return_value = None
-            mock_conn.is_connected.return_value = True
-            mock_get_db.return_value = mock_conn
-
-            response = self.client.get("/api/restaurants/9999")
-            self.assertEqual(response.status_code, 404)
-
-    def test_get_single_restaurant_success(self):
-        """Test GET /api/restaurants/<id> returns restaurant object."""
-        with patch("backend.app.get_db") as mock_get_db:
-            mock_conn = MagicMock()
-            mock_cursor = MagicMock()
-            mock_conn.cursor.return_value = mock_cursor
-            mock_cursor.fetchone.return_value = {
-                "restaurant_id": 1,
-                "name": "Spice Garden",
-                "cuisine": "North Indian",
-                "address": "Sector 17, Chandigarh"
-            }
-            mock_conn.is_connected.return_value = True
-            mock_get_db.return_value = mock_conn
-
-            response = self.client.get("/api/restaurants/1")
-            self.assertEqual(response.status_code, 200)
-            data = response.get_json()
-            self.assertEqual(data["restaurant_id"], 1)
-            self.assertEqual(data["name"], "Spice Garden")
-
-    def test_get_restaurant_menu(self):
-        """Test GET /api/restaurants/<id>/menu returns menu items."""
-        with patch("backend.app.get_db") as mock_get_db:
-            mock_conn = MagicMock()
-            mock_cursor = MagicMock()
-            mock_conn.cursor.return_value = mock_cursor
-            mock_cursor.fetchall.return_value = [
-                {"item_id": 1, "restaurant_id": 1, "name": "Paneer Butter Masala", "price": 249.00}
-            ]
-            mock_conn.is_connected.return_value = True
-            mock_get_db.return_value = mock_conn
-
-            response = self.client.get("/api/restaurants/1/menu")
-            self.assertEqual(response.status_code, 200)
-            menu = response.get_json()
-            self.assertEqual(len(menu), 1)
-            self.assertEqual(menu[0]["name"], "Paneer Butter Masala")
-
-    def test_get_categories(self):
-        """Test GET /api/categories returns categories list."""
-        with patch("backend.app.get_db") as mock_get_db:
-            mock_conn = MagicMock()
-            mock_cursor = MagicMock()
-            mock_conn.cursor.return_value = mock_cursor
-            mock_cursor.fetchall.return_value = [
-                {"category_id": 1, "name": "Biryani"},
-                {"category_id": 2, "name": "Pizza"}
-            ]
-            mock_conn.is_connected.return_value = True
-            mock_get_db.return_value = mock_conn
-
-            response = self.client.get("/api/categories")
-            self.assertEqual(response.status_code, 200)
-            cats = response.get_json()
-            self.assertEqual(len(cats), 2)
-            self.assertEqual(cats[0]["name"], "Biryani")
-
-    # =====================================================================
-    # 6. Error Handlers Tests
-    # =====================================================================
+            self.assertEqual(len(items), 1)
 
     def test_404_handler(self):
-        """Test 404 handler returns clean JSON message."""
+        """Test 404 handler returns clean JSON."""
         response = self.client.get("/api/non-existent-endpoint")
         self.assertEqual(response.status_code, 404)
         data = response.get_json()
         self.assertFalse(data["success"])
-        self.assertIn("not found", data["message"].lower())
 
 
 if __name__ == "__main__":

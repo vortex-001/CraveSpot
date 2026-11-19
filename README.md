@@ -1,10 +1,10 @@
 # 🍴 CraveSpot
 
-### **The Ultimate Cheat-Meal & Street Food Finder**
+### **The Ultimate Food Discovery & Craving Finder**
 
-> **Find what you're craving. Discover where to get it.**
+> **"Find what you're craving. Discover where to get it."**
 
-CraveSpot is a food discovery web application designed to help users find dishes and restaurants based on their cravings. Instead of focusing solely on food delivery, CraveSpot centers on **discovering food, exploring categories, comparing options, and viewing rich restaurant and dish details**.
+CraveSpot is a full-stack, production-grade food discovery platform designed to connect hunger and immediate cravings directly with local restaurants, dishes, and street food gems. Unlike standard restaurant aggregators that push sponsored listings, CraveSpot centers on **craving-based discovery**—matching users by taste, texture, mood, budget, and dietary preference, alongside live geolocation-based discovery.
 
 ---
 
@@ -12,100 +12,122 @@ CraveSpot is a food discovery web application designed to help users find dishes
 
 | Member | Role |
 |---|---|
-| **Harsh Garg** | Team Leader / Documentation |
-| **Simran** | Frontend Development |
-| **Taranpreet** | Frontend Development |
-| **Anshita** | Backend Development |
-| **Divya** | Backend Development |
-| **Babishya** | Database Engineering |
-| **Anshuman** | Database Engineering |
-| **Majid** | Testing / QA |
+| **Harsh Garg** | Team Leader & System Architect |
+| **Simran** | Frontend Engineer |
+| **Taranpreet** | Frontend Engineer |
+| **Anshita** | Backend Developer |
+| **Divya** | Backend Developer |
+| **Babishya** | Database Engineer |
+| **Anshuman** | Database Engineer |
+| **Majid** | QA & Test Automation |
 
-**Project:** CraveSpot  
-**Course:** B.Tech Computer Science & Engineering  
+**Project:** CraveSpot Full-Stack Food Discovery Platform  
+**Course:** B.Tech Computer Science & Engineering (DBMS Project)  
 **Academic Year:** 2026  
 
 ---
 
-## 📌 Problem Statement
+## 📌 Problem Statement & Core Vision
 
-Finding the right food can be overwhelming when a user knows what they crave but does not know which restaurant or dish to choose:
-- Food options are fragmented across multiple platforms.
-- Users know what food they want (e.g., Momos, Biryani, Pasta) but not where to find the best local options.
-- Comparing dishes by price, rating, and dietary preferences (vegetarian vs. non-vegetarian) takes excessive effort.
-- Most food platforms prioritize complex ordering pipelines rather than an intuitive food discovery experience.
+Standard food apps assume you already know which restaurant brand you want to order from. In real life:
+- When hunger hits, people think in **cravings**: *"I want something spicy and crispy under ₹200"*, *"I'm craving late-night cheesy pizza"*, or *"I want homestyle comfort food"*.
+- Information is fragmented: prices, ratings, vegetarian/non-vegetarian flags, and real physical distances are often hidden behind ads or checkout funnels.
+- Students and food lovers need quick budget filters and authentic local discoveries.
 
 ### 💡 The CraveSpot Solution
-**CraveSpot unifies local vendors, categorized menus, dietary filters, and location-based discovery into a clean, modern web interface.**
+CraveSpot makes **craving-based discovery** the central experience:
+1. **Natural Language Craving Parser:** Understands tastes (*spicy, cheesy, sweet, tangy, creamy*), textures (*crispy, crunchy*), moods (*comfort, late-night*), dietary restrictions (*pure veg, non-veg*), and maximum budgets (*"under 200"*).
+2. **Multi-Factor Recommendation Algorithm:** Calculates a 0–100 matching score for every candidate dish, with human-readable match explanations (e.g., *"Matches spicy craving; Fits under ₹200 budget; High 4.7★ rating"*).
+3. **Live Geolocation & Real-World Discovery:** Queries the OpenStreetMap Overpass API and Nominatim geocoder to show real restaurants nearby with live Haversine walking/driving distances, with seamless automatic fallback to the local database.
+4. **Interactive "Surprise Me!" Feature:** Helps indecisive diners by picking a top-rated, crave-worthy dish nearby.
+5. **Full Account, Profile & Dietary Preferences Management:** Persists spice tolerance, dietary choices (veg/non-veg/jain), favorite cuisines, and saved wishlists.
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-- 🔎 **Instant Food Search** — Search for dishes, cuisines, and restaurants from the homepage or dedicated search bars.
-- 🍕 **Category Browsing** — Explore dishes by categories (Biryani, Pizza, Burger, Chinese, North Indian, Desserts, Fast Food, Beverages).
-- 🍽️ **Dish Catalog & Details** — Browse popular dishes with ratings, prices, dietary tags (Veg/Non-Veg), ingredients, and full descriptions.
-- 🏪 **Restaurant Directory** — Browse restaurants with average pricing, ratings, active discount offers, and multi-filter controls (ratings, veg-only, cuisines).
-- 📍 **Location / City Selection** — Filter restaurants by city (Chandigarh, Mohali, Panchkula) and compute distance using geolocation coordinates.
-- 🔐 **Authentication System** — Secure user registration and login with encrypted password storage (Werkzeug scrypt).
-- ⭐ **Ratings & Reviews** — Submit and read reviews and ratings for each restaurant.
-- ❤️ **Favorites** — Save favorite dishes and restaurants to browser storage.
-- 📱 **Responsive UI** — Modern, mobile-friendly interface styled with CSS3 and SVG iconography.
+- 🧠 **Smart Craving Discovery Engine** — Search dishes by natural phrases like *"spicy momos"*, *"cheesy burger under 250"*, or *"comfort food"*.
+- 🎲 **Surprise Me! Modal** — Instant dish recommendation with one click from any page.
+- 📍 **Live Geolocation & City Selector** — Browser GPS auto-detection, city selection (Chandigarh, Mohali, Panchkula, Ludhiana, Delhi, etc.), and reverse geocoding.
+- 🗺️ **Real-World Live Places Integration** — Live Overpass API queries with zero external API key requirements.
+- 🏪 **Comprehensive Restaurant Directory** — Filter by distance, rating, price tier, pure vegetarian status, and cuisine types.
+- 🍽️ **Dish Catalog & Detailed Dish View** — Deep-dive pages showing ingredients, nutritional badges, category tags, vendor information, and simulated reviews.
+- ❤️ **Saved Wishlist / Favorites** — Dual-tab bookmarking for both dishes and restaurants with local storage and backend sync.
+- 👤 **User Profile & Preference Center** — Custom spice tolerance slider, dietary switches, profile information, and recent search history.
+- 🔐 **Secure Token Authentication** — Signed session bearer tokens (`itsdangerous`), password hashing (`Werkzeug scrypt`), and rate limiting.
+- 🛡️ **Cybersecurity Defenses** — Parameterized SQL queries (preventing SQL injection), XSS-safe DOM scripting, and HTTP security headers (`nosniff`, `SAMEORIGIN`, `1; mode=block`).
+- 📄 **Complete Static Suite** — Dedicated About, Contact / Partner, Privacy Policy, Terms of Service, and custom 404 Error pages.
 
 ---
 
 ## 🛠️ Technology Stack
 
 ### Frontend
-- **HTML5 & CSS3** — Semantic structure and custom responsive styling.
-- **JavaScript (ES6+)** — Client-side routing, DOM manipulation, asynchronous API communication (`fetch`).
-- **Development Server** — Python `http.server` (zero Node.js dependencies required).
+- **HTML5 & CSS3** — Semantic HTML, CSS variables, fluid responsive grid, glassmorphism cards.
+- **JavaScript (ES6+)** — Modular architecture (`api.js`, `app.js`, `restaurants.js`, `dishes.js`, `details.js`, `dish-details.js`, `favorites.js`, `login.js`, `register.js`).
+- **Development Server** — Python `http.server` on port **5500** (Zero Node.js runtime required).
 
 ### Backend
-- **Python 3.10+**
-- **Flask** — Lightweight WSGI REST API framework.
+- **Python 3.10+** (Fully compatible with Python 3.14).
+- **Flask 3.1+** — Lightweight, high-performance WSGI microframework.
 - **Flask-CORS** — Cross-Origin Resource Sharing for seamless frontend-backend integration.
-- **python-dotenv** — Environment configuration loader.
-- **Werkzeug** — Cryptographic password hashing and verification.
+- **mysql-connector-python** — Official MySQL connector with connection pooling and dictionary cursors.
+- **python-dotenv** — Secure environment variable management.
+- **Werkzeug** — Cryptographic password hashing (`scrypt`).
+- **itsdangerous** — Signed, timestamped token serialization for stateless sessions.
 
 ### Database
 - **MySQL Server 8.0+**
-- **Database Name:** `CraveSpot`
-- **Connector:** `mysql-connector-python`
-- **Schema & Seeding:** `database/schema.sql` (idempotent DDL with constraints, indexes, foreign keys, and seed data).
+- **Database Name:** `project` (Strictly enforced)
+- **Schema & Seeding:** `database/schema.sql` (13 normalized tables, foreign keys with `CASCADE`, composite indexes, and rich Indian culinary seed data).
 
 ---
 
-## 🧩 Project Architecture
+## 🧩 Architecture Diagram
 
 ```mermaid
 flowchart TD
     User([User Browser])
-    
-    subgraph Frontend ["Frontend (Port 5500)"]
-        UI[index.html / pages/*.html]
-        JS[JavaScript Controllers & api.js]
+
+    subgraph Client ["Frontend Client (Port 5500)"]
+        HTML["Pages (index, restaurants, dishes, profile, etc.)"]
+        API_JS["api.js (Central HTTP Client & Token Handler)"]
+        APP_JS["app.js (Geolocation, Search, Surprise Me)"]
     end
 
-    subgraph Backend ["Backend API (Port 5000)"]
-        Flask[Flask REST Application]
-        Auth[Werkzeug Security / Password Hash]
-        CORS[Flask-CORS Middleware]
+    subgraph Server ["Backend WSGI Application (Port 5000)"]
+        Flask["Flask App (backend/app.py)"]
+        AuthMiddleware["Auth & Rate Limiter"]
+        CravingEngine["Craving Recommendation Engine (craving_engine.py)"]
+        PlacesService["Live Places & Geocoding Service (places_service.py)"]
     end
 
-    subgraph Database ["MySQL Database (Port 3306)"]
-        DB[(Database: CraveSpot)]
-        T1[(restaurants)]
-        T2[(menu_items)]
-        T3[(categories)]
-        T4[(users)]
-        T5[(reviews)]
+    subgraph External ["External Live Services (Zero API Keys)"]
+        OSM["OpenStreetMap Overpass API"]
+        Nominatim["OSM Nominatim Geocoder"]
     end
 
-    User -->|Interacts with| UI
-    UI -->|Triggers| JS
-    JS -->|HTTP REST / JSON| Flask
-    Flask -->|Query / Parameterized SQL| DB
+    subgraph Storage ["MySQL Database (Port 3306)"]
+        DB[(Database: project)]
+        T1[(users & user_profiles)]
+        T2[(restaurants & locations)]
+        T3[(food_items & categories)]
+        T4[(cravings & cuisines)]
+        T5[(favorites & reviews)]
+    end
+
+    User -->|Views / Interacts| HTML
+    HTML -->|Calls| APP_JS
+    APP_JS -->|Requests| API_JS
+    API_JS -->|REST API Calls (Bearer Token)| Flask
+    Flask --> AuthMiddleware
+    Flask --> CravingEngine
+    Flask --> PlacesService
+    PlacesService -.->|Live Query| OSM
+    PlacesService -.->|Geocoding| Nominatim
+    CravingEngine -->|Reads Data| DB
+    PlacesService -->|Local Fallback| DB
+    Flask -->|Parameterized SQL| DB
     DB --> T1
     DB --> T2
     DB --> T3
@@ -121,67 +143,103 @@ flowchart TD
 CraveSpot_Complete/
 │
 ├── .env                       # Local environment variables (DB credentials)
-├── .env.example               # Template for environment variables
-├── .gitignore                 # Protects .env, venv, and cache from Git
-├── requirements.txt           # Python backend dependencies
+├── .env.example               # Template for environment configuration
+├── .gitignore                 # Protects credentials, venv, and cache
+├── requirements.txt           # Python dependencies
 ├── init_db.py                 # Automated MySQL database setup script
-├── setup.bat                  # One-click Windows setup script
-├── run_backend.bat            # One-click Windows backend launcher
-├── run_frontend.bat           # One-click Windows frontend launcher
+├── setup.bat                  # One-click Windows setup & installation script
+├── run_backend.bat            # One-click Windows backend launcher (Port 5000)
+├── run_frontend.bat           # One-click Windows frontend launcher (Port 5500)
 │
 ├── backend/
-│   └── app.py                 # Core Flask REST API application
+│   ├── app.py                 # Core Flask REST API application
+│   └── services/
+│       ├── craving_engine.py  # NLP craving parser & scoring algorithm
+│       └── places_service.py  # OpenStreetMap live places & geocoder
 │
 ├── database/
-│   └── schema.sql             # SQL schema DDL, constraints, indexes & seed data
+│   └── schema.sql             # 13-table relational schema & seed data
 │
 ├── frontend/
-│   ├── index.html             # Homepage / Landing page
+│   ├── index.html             # Homepage / Craving Discovery Hub
 │   ├── css/
-│   │   ├── style.css          # Homepage styling
-│   │   ├── categories.css     # Categories styling
-│   │   ├── dishes.css         # Dishes catalog styling
-│   │   ├── dish-details.css   # Dish detail styling
-│   │   ├── restaurants.css    # Restaurant catalog styling
+│   │   ├── style.css          # Main styling & design system
+│   │   ├── categories.css     # Category grid styling
+│   │   ├── dishes.css         # Dish catalog styling
+│   │   ├── dish-details.css   # Dish detail view styling
+│   │   ├── restaurants.css    # Restaurant listing styling
 │   │   ├── details.css        # Restaurant details styling
+│   │   ├── favorites.css      # Saved wishlist styling
 │   │   └── login.css          # Auth styling
 │   ├── js/
-│   │   ├── api.js             # Central API request wrapper
-│   │   ├── app.js             # Shared interactions & search
-│   │   ├── categories.js      # Category page logic
-│   │   ├── dishes.js          # Dish filtering & search logic
-│   │   ├── dish-details.js    # Dish detail view logic
-│   │   ├── restaurants.js     # Restaurant directory & filtering
-│   │   ├── details.js         # Restaurant menu & review logic
-│   │   ├── login.js           # Login form submission
-│   │   └── register.js        # Registration form submission
-│   ├── pages/
-│   │   ├── categories.html
-│   │   ├── dishes.html
-│   │   ├── dish-details.html
-│   │   ├── restaurant-details.html
-│   │   ├── restaurants.html
-│   │   ├── login.html
-│   │   └── register.html
-│   └── assets/
-│       ├── icons/
-│       └── images/
+│   │   ├── api.js             # Central API client, token manager, toasts
+│   │   ├── app.js             # Shared interactions, geolocator, surprise me
+│   │   ├── categories.js      # Category browsing controller
+│   │   ├── dishes.js          # Dish filtering & search controller
+│   │   ├── dish-details.js    # Dish details & reviews controller
+│   │   ├── restaurants.js     # Restaurant directory & craving router
+│   │   ├── details.js         # Restaurant menu & review submission
+│   │   ├── favorites.js       # Saved dishes and restaurants manager
+│   │   ├── login.js           # Secure login submission controller
+│   │   └── register.js        # Registration submission controller
+│   └── pages/
+│       ├── restaurants.html   # Restaurant directory
+│       ├── restaurant-details.html # Restaurant details & live menu
+│       ├── dishes.html        # Dish catalog & craving search
+│       ├── dish-details.html  # Single dish deep-dive
+│       ├── categories.html    # Food category explorer
+│       ├── favorites.html     # Saved wishlist
+│       ├── profile.html       # User profile & dining preferences
+│       ├── login.html         # User sign-in
+│       ├── register.html      # User registration
+│       ├── about.html         # About the project & vision
+│       ├── contact.html       # Feedback & restaurant partnership
+│       ├── privacy.html       # Privacy policy
+│       ├── terms.html         # Terms of service
+│       └── 404.html           # Custom 404 error page
 │
-└── docs/                      # Project briefs, BRD, TRD, and architecture specs
+├── tests/
+│   └── test_backend.py        # Automated test suite (15 unit tests)
+│
+└── docs/                      # Project briefs, specifications, and design assets
 ```
+
+---
+
+## 🗄️ Database Schema & Data Dictionary
+
+Target Database Name: **`project`**
+
+The database is normalized across **13 relational tables and views**:
+
+1. **`users`** — Primary user credentials (`user_id`, `name`, `email`, `password` scrypt hash, `phone`, `role`, timestamps).
+2. **`user_profiles`** — Detailed user profile (`profile_id`, `user_id`, `avatar_url`, `city`, `address`, `bio`).
+3. **`user_preferences`** — Dining preferences (`preference_id`, `user_id`, `dietary_type`, `spice_tolerance`, `max_budget`, `favorite_cuisines`).
+4. **`food_categories`** — Master category catalog (`category_id`, `name`, `description`, `icon`, `image_url`).
+5. **`categories`** — Compatibility view ensuring backward compatibility for legacy queries.
+6. **`cuisines`** — Master cuisine taxonomy (`cuisine_id`, `name`, `description`, `origin_region`).
+7. **`cravings`** — Flavor, texture, and mood tags (`craving_id`, `tag`, `title`, `description`, `taste_profile`, `texture_profile`, `mood`).
+8. **`restaurants`** — Verified restaurant partners (`restaurant_id`, `name`, `cuisine`, `address`, `rating`, `is_veg`, `offer`, `price_for_two`, `opening_hours`, `contact_phone`, `is_open`).
+9. **`restaurant_locations`** — Geolocation coordinates (`location_id`, `restaurant_id`, `latitude`, `longitude`, `city`, `area`, `pincode`).
+10. **`restaurant_cuisines`** — Many-to-many junction (`restaurant_id`, `cuisine_id`).
+11. **`food_items`** — Dish catalog (`item_id`, `restaurant_id`, `category_id`, `name`, `description`, `price`, `image_url`, `is_veg`, `rating`, `tags`, `spice_level`, `calories`, `is_available`).
+12. **`menu_items`** — Compatibility view mapping `food_items` to legacy column names.
+13. **`favorites`** — User wishlist bookmarks (`favorite_id`, `user_id`, `item_id`, `restaurant_id`).
+14. **`search_history`** — Recent search and craving history (`history_id`, `user_id`, `query_text`, `search_type`).
+15. **`reviews`** — Customer reviews and star ratings (`review_id`, `restaurant_id`, `user_id`, `user_name`, `rating`, `comment`).
 
 ---
 
 ## 🚀 Quick Start Guide (Windows 11)
 
 ### Prerequisites
-1. **Python 3.10+** installed (with *"Add Python to PATH"* enabled during installation).
-2. **MySQL Server 8.0+** installed and running on `localhost:3306`.
+1. **Python 3.10+** (Python 3.14 tested and supported).
+2. **MySQL Server 8.0+** running locally on port `3306`.
 3. **MySQL Workbench** or command-line client.
 
 ---
 
-### Step 1: Automated Environment Setup
+### Step 1: Automated Setup
 
 Double-click `setup.bat` (or execute from terminal):
 
@@ -190,165 +248,88 @@ setup.bat
 ```
 
 This will automatically:
-1. Verify Python is installed.
-2. Create the Python virtual environment (`venv\`).
-3. Install all required dependencies (`Flask`, `Flask-Cors`, `mysql-connector-python`, `python-dotenv`).
-4. Generate `.env` from `.env.example` if not already present.
+1. Verify Python is installed and accessible in `PATH`.
+2. Create the Python virtual environment in `.\venv`.
+3. Install all required dependencies from `requirements.txt`.
+4. Create `.env` configured with database name `project`.
 5. Offer to initialize the database immediately.
 
 ---
 
 ### Step 2: Configure Database Credentials
 
-Open the generated `.env` file in your text editor and ensure the MySQL credentials match your local MySQL configuration:
+Open `.env` in any text editor and confirm your local MySQL password:
 
 ```ini
 DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=your_mysql_password_here
-DB_NAME=CraveSpot
+DB_NAME=project
 
 PORT=5000
 DEBUG=False
 CORS_ORIGINS=*
 ```
 
-> **Note:** The database name is configured to `CraveSpot`.
-
 ---
 
 ### Step 3: Initialize the MySQL Database
 
-You can initialize the database using either of the following two options:
+Choose either option:
 
-#### Option A: Using the Automated Python Script (Recommended)
-Run the initializer script using the virtual environment Python:
+#### Option A: Automated Python Script (Recommended)
 ```cmd
 venv\Scripts\python.exe init_db.py
 ```
 
 #### Option B: Using MySQL Workbench
-1. Open **MySQL Workbench** and connect to your local instance.
-2. Go to **File → Open SQL Script...** and select `database\schema.sql`.
-3. Click the ⚡ **Execute** button (Ctrl+Shift+Enter).
-4. Refresh the Schemas navigator — you will see the `CraveSpot` database with 5 tables and seed data.
+1. Open MySQL Workbench and connect to your local MySQL instance.
+2. Open `database\schema.sql`.
+3. Click ⚡ **Execute** (Ctrl+Shift+Enter).
+4. Refresh schemas — you will see the database `project` with all 13 tables and rich seed data.
 
 ---
 
-### Step 4: Start the Backend Server
+### Step 4: Run the Backend Server
 
-Double-click `run_backend.bat`:
+Double-click `run_backend.bat` (or run in terminal):
 
 ```cmd
 run_backend.bat
 ```
 
-- Backend URL: **http://127.0.0.1:5000**
-- Health Check: **http://127.0.0.1:5000/api/health**
+- Flask API URL: **http://127.0.0.1:5000/api**
+- Database Health Check: **http://127.0.0.1:5000/api/health**
 
 ---
 
-### Step 5: Start the Frontend Application
+### Step 5: Run the Frontend Application
 
-Double-click `run_frontend.bat`:
+Double-click `run_frontend.bat` (or run in terminal):
 
 ```cmd
 run_frontend.bat
 ```
 
-- The script starts a local web server on port **5500** and automatically opens your default browser at:
+- Launches a local server on port **5500** and automatically opens:
   **http://127.0.0.1:5500**
 
 ---
 
-## 💻 Manual Setup (Alternative to Batch Scripts)
+## 🧪 Running the Automated Test Suite
 
-For PowerShell or Command Prompt users who prefer manual commands:
+CraveSpot includes a comprehensive unit test suite covering health checks, security headers, craving algorithms, geocoding, and user authentication:
 
-```powershell
-# 1. Create and activate virtual environment
-python -m venv venv
-.\venv\Scripts\activate
-
-# 2. Install dependencies
-pip install -r requirements.txt
-
-# 3. Create .env if missing
-copy .env.example .env
-
-# 4. Initialize database
-python init_db.py
-
-# 5. Start Backend (Terminal 1)
-python backend/app.py
-
-# 6. Start Frontend (Terminal 2)
-python -m http.server 5500 --directory frontend
+```cmd
+venv\Scripts\python.exe tests/test_backend.py
 ```
 
----
-
-## 🗄️ Database Schema & Data Dictionary
-
-Database: **`CraveSpot`**
-
-### 1. `restaurants`
-| Column | Type | Constraints | Description |
-|---|---|---|---|
-| `restaurant_id` | INT | PK, AUTO_INCREMENT | Unique restaurant identifier |
-| `name` | VARCHAR(150) | NOT NULL | Restaurant / Vendor name |
-| `cuisine` | VARCHAR(150) | NOT NULL | Cuisines served (comma/bullet separated) |
-| `address` | VARCHAR(255) | NOT NULL | Physical address & city |
-| `rating` | DECIMAL(2,1) | DEFAULT 0.0 | Average star rating (0.0 to 5.0) |
-| `is_veg` | TINYINT(1) | DEFAULT 0 | 1 = Pure Vegetarian, 0 = Non-Veg / Mixed |
-| `offer` | VARCHAR(100) | NULL | Current promotional offer (e.g. "20% OFF") |
-| `image_url` | VARCHAR(500) | NULL | Restaurant display image URL |
-| `latitude` | DECIMAL(10,8)| NULL | Geolocation latitude |
-| `longitude`| DECIMAL(11,8)| NULL | Geolocation longitude |
-| `created_at`| TIMESTAMP | DEFAULT CURRENT_TIMESTAMP | Record creation timestamp |
-| `updated_at`| TIMESTAMP | ON UPDATE CURRENT_TIMESTAMP | Record modification timestamp |
-
-### 2. `menu_items`
-| Column | Type | Constraints | Description |
-|---|---|---|---|
-| `item_id` | INT | PK, AUTO_INCREMENT | Unique item identifier |
-| `restaurant_id` | INT | FK -> `restaurants.restaurant_id` | Parent restaurant |
-| `category_id` | INT | FK -> `categories.category_id` | Food category |
-| `name` | VARCHAR(150) | NOT NULL | Name of dish / menu item |
-| `category` | VARCHAR(100) | NULL | Category label |
-| `description` | TEXT | NULL | Dish description |
-| `price` | DECIMAL(10,2)| NOT NULL | Price in INR (₹) |
-| `image_url` | VARCHAR(500) | NULL | Dish image URL |
-| `is_veg` | TINYINT(1) | DEFAULT 0 | 1 = Vegetarian, 0 = Non-Veg |
-| `rating` | DECIMAL(2,1) | DEFAULT 0.0 | Star rating |
-
-### 3. `categories`
-| Column | Type | Constraints | Description |
-|---|---|---|---|
-| `category_id` | INT | PK, AUTO_INCREMENT | Unique category identifier |
-| `name` | VARCHAR(100) | NOT NULL, UNIQUE | Category name |
-| `description` | TEXT | NULL | Short summary of category |
-| `image_url` | VARCHAR(500) | NULL | Representative category image |
-
-### 4. `users`
-| Column | Type | Constraints | Description |
-|---|---|---|---|
-| `user_id` | INT | PK, AUTO_INCREMENT | Unique user identifier |
-| `name` | VARCHAR(150) | NOT NULL | User's full name |
-| `email` | VARCHAR(150) | NOT NULL, UNIQUE | User's email address |
-| `password` | VARCHAR(255) | NOT NULL | Werkzeug scrypt-hashed password |
-| `phone` | VARCHAR(20) | NULL | Contact phone number |
-
-### 5. `reviews`
-| Column | Type | Constraints | Description |
-|---|---|---|---|
-| `review_id` | INT | PK, AUTO_INCREMENT | Unique review identifier |
-| `restaurant_id` | INT | FK -> `restaurants.restaurant_id` | Target restaurant |
-| `user_id` | INT | FK -> `users.user_id` | Submitting user (optional) |
-| `user_name` | VARCHAR(150) | NOT NULL | Display name of reviewer |
-| `rating` | INT | CHECK (1 <= rating <= 5) | Star rating (1-5) |
-| `comment` | TEXT | NULL | Review text feedback |
+**Output:**
+```text
+Ran 15 tests in 0.793s
+OK
+```
 
 ---
 
@@ -356,54 +337,81 @@ Database: **`CraveSpot`**
 
 Base URL: `http://127.0.0.1:5000/api`
 
-| Endpoint | Method | Params / Payload | Description |
+### Core & Health
+| Endpoint | Method | Description |
+|---|---|---|
+| `/` | `GET` | API status, version, and active database confirmation (`"database": "project"`). |
+| `/api/health` | `GET` | Verifies active MySQL connectivity and returns server timestamp. |
+
+### Craving Discovery Engine
+| Endpoint | Method | Parameters / Payload | Description |
 |---|---|---|---|
-| `/` | `GET` | None | API root status & version |
-| `/api/health` | `GET` | None | MySQL database connectivity check |
-| `/api/restaurants` | `GET` | `?search=`, `?cuisine=`, `?city=`, `?veg_only=`, `?min_rating=`, `?sort=` | List all restaurants with optional filters |
-| `/api/restaurants/<id>` | `GET` | None | Get single restaurant details |
-| `/api/restaurants/<id>/menu` | `GET` | None | Get menu items for specific restaurant |
-| `/api/menu-items` *(or `/api/dishes`)* | `GET` | `?search=`, `?category=`, `?restaurant_id=`, `?veg_only=`, `?max_price=` | List menu items / dishes |
-| `/api/menu-items/<id>` *(or `/api/dishes/<id>`)* | `GET` | None | Get single dish details with restaurant info |
-| `/api/categories` | `GET` | None | List all food categories |
-| `/api/restaurants/<id>/reviews` | `GET` | None | List customer reviews for restaurant |
-| `/api/restaurants/<id>/reviews` | `POST` | `{"user_name": "...", "rating": 5, "comment": "..."}` | Submit new review |
-| `/api/register` | `POST` | `{"name": "...", "email": "...", "password": "...", "phone": "..."}` | Register new account |
-| `/api/login` | `POST` | `{"email": "...", "password": "..."}` | User login authentication |
-| `/api/nearby-restaurants` | `POST` | `{"latitude": 30.7333, "longitude": 76.7794, "radius_km": 10}` | Geolocation search via Haversine formula |
+| `/api/cravings/recommend` | `POST` | `{"query": "spicy pizza under 300", "latitude": 30.73, "longitude": 76.78}` | Natural-language craving search with match scoring and explanations. |
+| `/api/cravings/surprise-me` | `GET` | `?latitude=&longitude=&veg_only=` | Randomly selects a top-rated crave-worthy dish nearby. |
+| `/api/cravings/taxonomy` | `GET` | None | Returns list of craving profiles, flavor tags, and icons. |
+
+### Geolocation & Live Places
+| Endpoint | Method | Parameters / Payload | Description |
+|---|---|---|---|
+| `/api/location/geocode` | `GET` | `?q=Chandigarh` | Reverse-geocodes city or address to latitude/longitude. |
+| `/api/restaurants/live-nearby`| `GET` | `?latitude=30.73&longitude=76.78&radius=5` | Fetches real nearby restaurants via OpenStreetMap Overpass with local DB fallback. |
+| `/api/nearby-restaurants` | `POST` | `{"latitude": 30.73, "longitude": 76.78, "radius_km": 10}` | Computes exact Haversine distance to registered restaurants. |
+
+### Restaurants & Dishes
+| Endpoint | Method | Parameters / Payload | Description |
+|---|---|---|---|
+| `/api/restaurants` | `GET` | `?search=`, `?cuisine=`, `?city=`, `?veg_only=`, `?min_rating=`, `?sort=` | Filter and sort restaurants. |
+| `/api/restaurants/<id>` | `GET` | None | Full restaurant details and operating hours. |
+| `/api/restaurants/<id>/menu` | `GET` | None | Full menu categorized for the restaurant. |
+| `/api/menu-items` | `GET` | `?search=`, `?category=`, `?restaurant_id=`, `?veg_only=`, `?max_price=` | Search and filter dish catalog. |
+| `/api/menu-items/<id>` | `GET` | None | Deep details for a single dish with vendor info. |
+| `/api/categories` | `GET` | None | List food categories with icons and images. |
+| `/api/restaurants/<id>/reviews` | `GET` | None | List customer reviews. |
+| `/api/restaurants/<id>/reviews` | `POST` | `{"user_name": "...", "rating": 5, "comment": "..."}` | Submit new review. |
+
+### Authentication & User Profile
+| Endpoint | Method | Parameters / Payload | Description |
+|---|---|---|---|
+| `/api/register` | `POST` | `{"name": "...", "email": "...", "password": "...", "phone": "..."}` | Create user account with hashed password. |
+| `/api/login` | `POST` | `{"email": "...", "password": "..."}` | Authenticate user, rate-limited, returns signed bearer token. |
+| `/api/auth/me` | `GET` | Header: `Authorization: Bearer <token>` | Fetch current user session. |
+| `/api/user/profile` | `GET`, `PUT` | Header: `Authorization: Bearer <token>` | Read or update profile, city, address, bio. |
+| `/api/user/preferences` | `GET`, `PUT` | Header: `Authorization: Bearer <token>` | Read or update spice tolerance, dietary flags, max budget. |
+| `/api/user/favorites` | `GET`, `POST`, `DELETE`| Header: `Authorization: Bearer <token>` | Sync saved wishlists to user account. |
 
 ---
 
 ## 🧪 Default Test Credentials
 
-For quick testing of login and database functionality:
+For quick testing:
 - **Email:** `demo@cravespot.com`
 - **Password:** `Password123`
 
 ---
 
-## 🛠️ Troubleshooting
+## 🛠️ Troubleshooting Guide
 
-### 1. Database Connection Failed (`Database connection failed: 2003 / Can't connect to MySQL server`)
-- **Cause:** MySQL Server is stopped.
-- **Fix:** Open Windows Services (`services.msc`), find **MySQL80** (or your MySQL service), right-click and click **Start**.
+### 1. Database Connection Failed (`Error 2003 / Can't connect to MySQL server`)
+- **Cause:** MySQL Server service is stopped.
+- **Fix:** Open Windows Services (`services.msc`), locate **MySQL80** (or your MySQL service name), right-click and choose **Start**.
 
 ### 2. Access Denied for User 'root'@'localhost' (`Error 1045`)
-- **Cause:** Incorrect MySQL password in `.env`.
-- **Fix:** Open `.env` and verify `DB_PASSWORD=your_actual_password`. Save the file and restart the backend.
+- **Cause:** The password in `.env` does not match your local MySQL root password.
+- **Fix:** Open `.env`, set `DB_PASSWORD=your_actual_password`, save, and restart `run_backend.bat`.
 
-### 3. Unknown Database 'CraveSpot' (`Error 1049`)
-- **Cause:** Database `CraveSpot` has not been initialized yet.
-- **Fix:** Run `venv\Scripts\python.exe init_db.py` or run `database\schema.sql` in MySQL Workbench.
+### 3. Unknown Database 'project' (`Error 1049`)
+- **Cause:** The database has not been created yet.
+- **Fix:** Run `venv\Scripts\python.exe init_db.py` or execute `database\schema.sql` in MySQL Workbench.
 
-### 4. Port 5000 Already in Use
-- **Cause:** Another application (or a previous instance of Flask) is using port 5000.
-- **Fix:** Find and terminate the process holding port 5000:
+### 4. Port 5000 or Port 5500 Already in Use
+- **Cause:** A previous instance is still running in the background.
+- **Fix:** In PowerShell, find and terminate the process:
   ```powershell
   Get-Process -Id (Get-NetTCPConnection -LocalPort 5000).OwningProcess | Stop-Process -Force
   ```
-  Or change `PORT=5001` in `.env`.
 
-### 5. Frontend Displays "Using sample restaurant data"
-- **Cause:** Frontend cannot reach the Flask backend at `http://127.0.0.1:5000/api`.
-- **Fix:** Ensure `run_backend.bat` is running in an active terminal window before interacting with the frontend.
+---
+
+## 📜 License
+
+Created for academic demonstration and portfolio purposes by **The Confluence** © 2026 CraveSpot. All rights reserved.
