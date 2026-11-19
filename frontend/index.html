@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html> 
+<!DOCTYPE html> 
 <html lang="en">
 
 <head>
@@ -30,26 +30,6 @@
 
         <!-- LOGO -->
         <a href="index.html" class="logo">
-
-            <span class="logo-icon">
-<svg class="cutlery-icon"
-     xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 24 24"
-     width="24"
-     height="24"
-     fill="none"
-     stroke="currentColor"
-     stroke-width="1.8"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     aria-hidden="true">
-    <path d="M7 2v7"/>
-    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
-    <path d="M7 9v13"/>
-    <path d="M17 2c-2 2-3 5-3 8h6"/>
-    <path d="M17 10v12"/>
-</svg>
-            </span>
 
             <span>
                 Crave<span>Spot</span>
@@ -101,6 +81,10 @@
                     <option value="Amritsar">Amritsar</option>
                     <option value="Jalandhar">Jalandhar</option>
                     <option value="Delhi">Delhi</option>
+            <option value="Morinda">Morinda</option>
+            <option value="Nangal">Nangal</option>
+            <option value="Anandpur Sahib">Anandpur Sahib</option>
+            <option value="Rupnagar">Rupnagar</option>
                 </select>
 
                 <button type="button" id="saveLocation">Save Location</button>
@@ -152,8 +136,8 @@
             <a href="pages/categories.html">
                 Categories
             </a>
-
-        </nav>
+            <a href="pages/favorites.html" class="saved-nav-link">Saved</a>
+</nav>
 
 
         
@@ -436,24 +420,25 @@
                 class="food-filter"
                 data-filter="veg"
                 aria-pressed="false">
-            🥬 Veg
+            Veg
         </button>
 
         <button type="button"
                 class="food-filter"
                 data-filter="non-veg"
                 aria-pressed="false">
-            🍗 Non-Veg
+            Non-Veg
         </button>
 
         <button type="button"
                 class="food-filter"
                 data-filter="vegan"
                 aria-pressed="false">
-            🌱 Vegan
+            Vegan
         </button>
 
     </div>
+    <p id="quickDishCount" class="quick-dish-count" aria-live="polite">9 dishes</p>
 
     <!-- Dish cards -->
 
@@ -463,6 +448,7 @@
 
     <!-- VEGETARIAN DISHES -->
     <article class="quick-dish-card" data-diet="veg">
+        <button class="quick-favorite" type="button" aria-label="Save dish" aria-pressed="false">♡</button>
         <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=700&q=80"
              alt="Paneer Butter Masala" loading="lazy">
         <div class="quick-dish-info">
@@ -474,6 +460,7 @@
     </article>
 
     <article class="quick-dish-card" data-diet="veg">
+        <button class="quick-favorite" type="button" aria-label="Save dish" aria-pressed="false">♡</button>
         <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=700&q=80"
              alt="Garden Veg Pizza" loading="lazy">
         <div class="quick-dish-info">
@@ -485,6 +472,7 @@
     </article>
 
     <article class="quick-dish-card" data-diet="veg">
+        <button class="quick-favorite" type="button" aria-label="Save dish" aria-pressed="false">♡</button>
         <img src="https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=700&q=80"
              alt="Vegetable Biryani" loading="lazy">
         <div class="quick-dish-info">
@@ -497,6 +485,7 @@
 
     <!-- NON-VEGETARIAN DISHES -->
     <article class="quick-dish-card" data-diet="non-veg">
+        <button class="quick-favorite" type="button" aria-label="Save dish" aria-pressed="false">♡</button>
         <img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=700&q=80"
              alt="Chicken Curry" loading="lazy">
         <div class="quick-dish-info">
@@ -508,6 +497,7 @@
     </article>
 
     <article class="quick-dish-card" data-diet="non-veg">
+        <button class="quick-favorite" type="button" aria-label="Save dish" aria-pressed="false">♡</button>
         <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=700&q=80"
              alt="Tandoori Chicken" loading="lazy">
         <div class="quick-dish-info">
@@ -519,6 +509,7 @@
     </article>
 
     <article class="quick-dish-card" data-diet="non-veg">
+        <button class="quick-favorite" type="button" aria-label="Save dish" aria-pressed="false">♡</button>
         <img src="https://images.unsplash.com/photo-1562967916-eb82221dfb92?auto=format&fit=crop&w=700&q=80"
              alt="Crispy Chicken" loading="lazy">
         <div class="quick-dish-info">
@@ -531,6 +522,7 @@
 
     <!-- VEGAN DISHES -->
     <article class="quick-dish-card" data-diet="vegan">
+        <button class="quick-favorite" type="button" aria-label="Save dish" aria-pressed="false">♡</button>
         <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=700&q=80"
              alt="Fresh Buddha Bowl" loading="lazy">
         <div class="quick-dish-info">
@@ -542,6 +534,7 @@
     </article>
 
     <article class="quick-dish-card" data-diet="vegan">
+        <button class="quick-favorite" type="button" aria-label="Save dish" aria-pressed="false">♡</button>
         <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80"
              alt="Fresh Vegetable Salad" loading="lazy">
         <div class="quick-dish-info">
@@ -553,6 +546,7 @@
     </article>
 
     <article class="quick-dish-card" data-diet="vegan">
+        <button class="quick-favorite" type="button" aria-label="Save dish" aria-pressed="false">♡</button>
         <img src="https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?auto=format&fit=crop&w=700&q=80"
              alt="Healthy Grain Bowl" loading="lazy">
         <div class="quick-dish-info">
@@ -936,24 +930,7 @@ Sector 35, Chandigarh
 
                 <div>
 
-                    <div class="footer-logo"><svg class="cutlery-icon"
-     xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 24 24"
-     width="24"
-     height="24"
-     fill="none"
-     stroke="currentColor"
-     stroke-width="1.8"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     aria-hidden="true">
-    <path d="M7 2v7"/>
-    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
-    <path d="M7 9v13"/>
-    <path d="M17 2c-2 2-3 5-3 8h6"/>
-    <path d="M17 10v12"/>
-</svg>
-CraveSpot
+                    <div class="footer-logo">CraveSpot
                     </div>
 
                     <p>
@@ -997,9 +974,6 @@ CraveSpot
                         About CraveSpot
                     </a>
 
-                    <a href="pages/reviews.html">
-                        Reviews
-                    </a>
 
                     <a href="#">
                         Contact
@@ -1026,7 +1000,6 @@ CraveSpot
 
 
     <script src="js/app.js"></script>
-
 </body>
 
 </html>

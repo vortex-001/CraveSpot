@@ -1,4 +1,4 @@
-﻿
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,16 +27,6 @@
     <div class="nav-container">
 
     <a href="../index.html" class="logo">
-    <span class="logo-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 2v8M4 2v5a3 3 0 0 0 6 0V2M7 10v12M17 2c-2 2-3 5-3 9h3v11M17 2v9"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"/>
-        </svg>
-    </span>
     <span>Crave<span>Spot</span></span>
 </a>
 
@@ -87,6 +77,10 @@
             <option value="Amritsar">Amritsar</option>
             <option value="Jalandhar">Jalandhar</option>
             <option value="Delhi">Delhi</option>
+            <option value="Morinda">Morinda</option>
+            <option value="Nangal">Nangal</option>
+            <option value="Anandpur Sahib">Anandpur Sahib</option>
+            <option value="Rupnagar">Rupnagar</option>
         </select>
 
         <button type="button" id="saveLocation">Save Location</button>
@@ -127,6 +121,7 @@
     <a href="dishes.html">Dishes</a>
 
     <a href="categories.html">Categories</a>
+    <a href="favorites.html" class="saved-nav-link">Saved</a>
 </nav>
 
 
@@ -238,7 +233,7 @@
                 class="mode-btn"
                 data-mode="dining"
             >
-                🍽️ Dining Out
+                Dining Out
             </button>
 
         </div>
@@ -247,13 +242,15 @@
         <!-- ================= FILTERS ================= -->
 
         <div class="filter-row">
+<button type="button" id="nearbyRestaurantsBtn" class="filter-btn">Nearby</button>
+<span id="nearbyStatus" aria-live="polite" style="font-size:13px;color:#777"></span>
 
 
             <button
                 class="filter-btn"
                 data-filter="all"
             >
-                ☰ Filters
+                Filters
             </button>
 <div id="filterPanel" class="filter-panel" style="display: none;">
     <label>
@@ -294,7 +291,7 @@
     class="filter-btn"
     data-filter="offers"
 >
-    🏷️ Offers
+    Offers
 </button>
 
 <button
@@ -326,7 +323,7 @@
     class="filter-btn"
     data-filter="fast"
 >
-    ⚡ Fast Delivery
+    Fast Food
 </button>
 
 <select
@@ -336,6 +333,7 @@
                 class="sort-select"
             >
 
+                <option value="distance">Nearest (when available)</option>
                 <option value="recommended">
                     Recommended
                 </option>
@@ -910,7 +908,7 @@
                     <div class="card-bottom">
 
                         <span class="delivery-tag">
-                            ⚡ Fast delivery
+                             Fast delivery
                         </span>
 
                         <span class="card-arrow">
@@ -1018,7 +1016,7 @@
                     <div class="card-bottom">
 
                         <span class="delivery-tag">
-                            🏷️ Special offer
+                            Special offer
                         </span>
 
                         <span class="card-arrow">
@@ -1122,7 +1120,7 @@
                     <div class="card-bottom">
 
                         <span class="delivery-tag">
-                            ⚡ Fast delivery
+                             Fast delivery
                         </span>
 
                         <span class="card-arrow">
@@ -1189,23 +1187,7 @@
         <div>
 
             <div class="footer-logo">
-               <svg class="cutlery-icon"
-     xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 24 24"
-     width="24"
-     height="24"
-     fill="none"
-     stroke="currentColor"
-     stroke-width="1.8"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     aria-hidden="true">
-    <path d="M7 2v7"/>
-    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
-    <path d="M7 9v13"/>
-    <path d="M17 2c-2 2-3 5-3 8h6"/>
-    <path d="M17 10v12"/>
-</svg> CraveSpot
+               CraveSpot
             </div>
 
             <p>
@@ -1243,9 +1225,6 @@
                 Community
             </h3>
 
-            <a href="reviews.html">
-                Reviews
-            </a>
 
             <a href="#">
                 About CraveSpot

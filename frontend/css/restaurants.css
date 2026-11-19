@@ -620,3 +620,13 @@
         font-size: 12px;
     }
 }
+
+/* CraveSpot page polish */
+.page-label,.category-heading>div>p,.section-heading>p,.dish-result-heading>p{color:var(--brand)!important}
+.filter-btn,.dish-filter,.dish-category,.mode-btn{border-radius:999px!important;transition:background .18s,border-color .18s,color .18s,transform .18s}
+.filter-btn:hover,.dish-filter:hover,.dish-category:hover,.mode-btn:hover{transform:translateY(-1px)}
+.filter-panel,.advanced-filter-panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.restaurants-grid,.dish-grid{gap:22px}
+.food-card,.dish-card{background:#fff}
+.rating,.dish-rating{border-radius:7px}
+@media(max-width:640px){.restaurant-heading h1,.category-hero-content h1,.dishes-hero-content h1{font-size:clamp(30px,8vw,40px)}.filter-row,.dish-filters{gap:8px}.sort-select{margin-left:0;flex:1;min-width:145px}}

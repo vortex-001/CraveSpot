@@ -1,0 +1,4 @@
+CraveSpot frontend image sources
+
+Food photographs used in the frontend are served from Unsplash image URLs and are covered by the Unsplash License: https://unsplash.com/license
+The site needs an internet connection for these photos. The custom CraveSpot logo is original project artwork (SVG).

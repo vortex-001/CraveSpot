@@ -20,23 +20,6 @@
 
         <!-- Logo -->
         <a href="../index.html" class="logo">
-            <span class="logo-icon"><svg class="cutlery-icon"
-     xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 24 24"
-     width="24"
-     height="24"
-     fill="none"
-     stroke="currentColor"
-     stroke-width="1.8"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     aria-hidden="true">
-    <path d="M7 2v7"/>
-    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
-    <path d="M7 9v13"/>
-    <path d="M17 2c-2 2-3 5-3 8h6"/>
-    <path d="M17 10v12"/>
-</svg></span>
             <span>Crave<span>Spot</span></span>
         </a>
 
@@ -77,6 +60,7 @@
             <a href="restaurants.html">Restaurants</a>
             <a href="dishes.html">Dishes</a>
             <a href="categories.html">Categories</a>
+    <a href="favorites.html" class="saved-nav-link">Saved</a>
         </nav>
 
         <!-- Authentication buttons -->
@@ -157,7 +141,7 @@
                     </span>
 
                     <span>
-                        🕒 <span id="restaurantTime">30</span> min
+                        Delivery time: <span id="restaurantTime">30</span> min
                     </span>
 
                 </div>
@@ -166,7 +150,7 @@
                     class="offer"
                     id="restaurantOffer"
                 >
-                    🎉 20% OFF on selected items
+                    20% OFF on selected items
                 </div>
 
             </div>
@@ -220,7 +204,7 @@
         <div class="section-heading">
 
             <div>
-                <h2>🍽️ Menu</h2>
+                <h2>Menu</h2>
 
                 <p>
                     Explore popular dishes from this restaurant.
@@ -261,23 +245,7 @@
             <div class="overview-details">
 
                 <div>
-                    <strong><svg class="cutlery-icon"
-     xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 24 24"
-     width="24"
-     height="24"
-     fill="none"
-     stroke="currentColor"
-     stroke-width="1.8"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     aria-hidden="true">
-    <path d="M7 2v7"/>
-    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
-    <path d="M7 9v13"/>
-    <path d="M17 2c-2 2-3 5-3 8h6"/>
-    <path d="M17 10v12"/>
-</svg> Cuisine</strong>
+                    <strong><svg class="cuisine-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3v7m-2-7v4a2 2 0 0 0 4 0V3m-2 7v11M15 3c-3 3-3 7-2 9h3v9M15 3v9"/></svg> Cuisine</strong>
                     <span id="overviewCuisine">
                         -
                     </span>
@@ -302,14 +270,14 @@
                 </div>
 
                 <div>
-                    <strong>💰 Average Cost</strong>
+                    <strong>Average Cost</strong>
                     <span id="overviewPrice">
                         -
                     </span>
                 </div>
 
                 <div>
-                    <strong>🚴 Delivery</strong>
+                    <strong>Delivery</strong>
                     <span id="overviewTime">
                         -
                     </span>
@@ -340,7 +308,7 @@
             class="write-review-btn"
             onclick="openReviewForm()"
         >
-            ✍️ Write a Review
+            Write a Review
         </button>
 
     </div>

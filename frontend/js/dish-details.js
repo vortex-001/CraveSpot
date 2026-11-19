@@ -18,7 +18,7 @@ const dishData = {
         location: "Sector 17, Chandigarh",
 
         image:
-        "../assets/images/chicken-biryani.jpg",
+        "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=900&q=85",
         description:
             "Aromatic basmati rice cooked with tender chicken and traditional Indian spices.",
 
@@ -40,7 +40,7 @@ const dishData = {
         location: "Sector 34, Chandigarh",
 
        image:
-    "../assets/images/classic-cheese-pizza.jpg",
+    "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85",
         description:
             "Classic pizza topped with rich tomato sauce, mozzarella cheese and Italian herbs.",
 
@@ -62,7 +62,7 @@ const dishData = {
         location: "Phase 7, Mohali",
 
         image:
-    "../assets/images/classic-chicken-burger.jpg",
+    "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=85",
         description:
             "Juicy chicken patty served inside a soft bun with fresh vegetables and signature sauce.",
 
@@ -84,7 +84,7 @@ const dishData = {
         location: "Sector 35, Chandigarh",
 
         image:
-    "../assets/images/steamed-veg-momos.jpg",
+    "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=900&q=85",
         description:
             "Soft steamed dumplings filled with seasoned vegetables and served with spicy chutney.",
 
@@ -106,7 +106,7 @@ const dishData = {
         location: "Sector 17, Chandigarh",
 
         image:
-    "../assets/images/butter-chicken.jpg",
+    "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=900&q=85",
         description:
             "Tender chicken cooked in a rich, creamy tomato-based gravy with aromatic Indian spices.",
 
@@ -128,7 +128,7 @@ const dishData = {
         location: "Phase 7, Mohali",
 
         image:
-    "../assets/images/loaded-fries.jpg",
+    "https://images.unsplash.com/photo-1573080496219-bb080dd4f4c2?auto=format&fit=crop&w=900&q=85",
         description:
             "Crispy fries loaded with delicious toppings and creamy sauces.",
 
@@ -150,7 +150,7 @@ const dishData = {
         location: "Sector 35, Chandigarh",
 
         image:
-    "../assets/images/chilli-garlic-noodles.jpg",
+    "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=900&q=85",
         description:
             "Stir-fried noodles tossed with garlic, chilli and flavorful Chinese sauces.",
 
@@ -172,7 +172,7 @@ const dishData = {
         location: "Chandigarh",
 
        image:
-    "../assets/images/chocolate-brownie.jpg",
+    "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=85",
         description:
             "Rich and fudgy chocolate brownie with a soft centre and deep chocolate flavor.",
 
@@ -223,7 +223,7 @@ function loadDish() {
         price: Number(urlParams.get("price") || 0),
         rating: 0,
         reviews: "No reviews yet",
-        image: urlParams.get("image") || "../assets/images/food-placeholder.jpg",
+        image: urlParams.get("image") || "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=85",
         restaurant: "Restaurant",
         restaurantSlug: "",
         location: ""
@@ -492,3 +492,4 @@ if (dishSearch) {
 loadDish();
 
 loadFavoriteState();
+
