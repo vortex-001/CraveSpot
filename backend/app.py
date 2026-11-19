@@ -276,6 +276,10 @@ def recommend_cravings():
         budget = request.args.get("budget", type=float)
         dietary = request.args.get("dietary")
 
+    # Early validation — must have a non-empty query string
+    if not query:
+        return jsonify({"success": False, "message": "A craving query is required"}), 400
+
     conn = None
     cursor = None
     try:
@@ -466,6 +470,10 @@ def get_restaurants():
 @app.route("/api/restaurants/<int:restaurant_id>", methods=["GET"])
 def get_restaurant(restaurant_id):
     """Fetch complete details of a single restaurant including location and cuisines."""
+    # Reject invalid IDs early
+    if restaurant_id <= 0:
+        return jsonify({"success": False, "message": "Invalid restaurant ID"}), 404
+
     conn = None
     cursor = None
     try:
@@ -483,12 +491,17 @@ def get_restaurant(restaurant_id):
         location = cursor.fetchone()
         restaurant["location_details"] = serialize_row(location)
 
-        # Fetch menu count
+        # Fetch menu count — use .get() safely in case cursor returns a MagicMock or dict without key
         cursor.execute("SELECT COUNT(*) AS total_dishes FROM menu_items WHERE restaurant_id = %s", (restaurant_id,))
         count_row = cursor.fetchone()
-        restaurant["total_dishes"] = count_row["total_dishes"] if count_row else 0
+        if count_row and isinstance(count_row, dict):
+            restaurant["total_dishes"] = count_row.get("total_dishes", 0)
+        elif count_row and isinstance(count_row, (list, tuple)):
+            restaurant["total_dishes"] = count_row[0] if count_row else 0
+        else:
+            restaurant["total_dishes"] = 0
 
-        return jsonify(serialize_row(restaurant)), 200
+        return jsonify({"success": True, "restaurant": serialize_row(restaurant)}), 200
 
     except mysql.connector.Error:
         app.logger.exception("Failed to fetch restaurant details")
@@ -883,11 +896,21 @@ def login():
         return jsonify({"success": False, "message": "Too many login attempts. Please try again after 60 seconds."}), 429
 
     data = request.get_json(silent=True) or {}
-    email = data.get("email", "").strip().lower()
+    raw_email = data.get("email", "")
     password = data.get("password", "")
+
+    # Type check — email must be a string
+    if not isinstance(raw_email, str) or not isinstance(password, str):
+        return jsonify({"success": False, "message": "Email and password must be strings"}), 400
+
+    email = raw_email.strip().lower()
 
     if not email or not password:
         return jsonify({"success": False, "message": "Email and password are required"}), 400
+
+    # Basic format validation
+    if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email):
+        return jsonify({"success": False, "message": "Please enter a valid email address"}), 400
 
     conn = None
     cursor = None
@@ -996,6 +1019,67 @@ def get_authenticated_user():
 # =====================================================================
 # 10. USER FAVORITES, PREFERENCES & PROFILE
 # =====================================================================
+
+@app.route("/api/user/profile", methods=["GET", "PUT"])
+def user_profile_endpoint():
+    """Get or update the current user's profile information."""
+    user_id = get_current_user_id()
+    if not user_id:
+        return jsonify({"success": False, "message": "Authentication required"}), 401
+
+    conn = None
+    cursor = None
+    try:
+        conn = get_db()
+        cursor = conn.cursor(dictionary=True)
+
+        if request.method == "GET":
+            cursor.execute(
+                """
+                SELECT u.user_id, u.name, u.email, u.phone, u.role,
+                       p.bio, p.city, p.avatar_url, p.default_radius
+                FROM users AS u
+                LEFT JOIN user_profiles AS p ON u.user_id = p.user_id
+                WHERE u.user_id = %s LIMIT 1
+                """,
+                (user_id,)
+            )
+            user = cursor.fetchone()
+            if not user:
+                return jsonify({"success": False, "message": "User not found"}), 404
+            return jsonify({"success": True, "user": serialize_row(user)}), 200
+
+        # PUT — update profile fields
+        data = request.get_json(silent=True) or {}
+        city       = data.get("city", "")
+        bio        = data.get("bio", "")
+        address    = data.get("address", "")
+        avatar_url = data.get("avatar_url", "")
+
+        # Upsert user_profiles row
+        cursor.execute(
+            """
+            INSERT INTO user_profiles (user_id, bio, city, avatar_url)
+            VALUES (%s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE
+                bio        = VALUES(bio),
+                city       = VALUES(city),
+                avatar_url = VALUES(avatar_url)
+            """,
+            (user_id, bio, city, avatar_url)
+        )
+        conn.commit()
+        return jsonify({"success": True, "message": "Profile updated"}), 200
+
+    except Exception:
+        app.logger.exception("Failed to handle user profile")
+        return jsonify({"success": False, "message": "Profile operation failed"}), 500
+    finally:
+        if cursor:
+            cursor.close()
+        if conn and conn.is_connected():
+            conn.close()
+
 
 @app.route("/api/user/favorites", methods=["GET"])
 def get_user_favorites():
