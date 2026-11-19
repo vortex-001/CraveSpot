@@ -1899,3 +1899,104 @@ svg.real-location-icon {
     transform: scale(1.08);
 
 }
+
+/* ===== CraveSpot visual refresh ===== */
+:root{--brand-soft:#fff0f1;--brand:#e43b45;--brand-dark:#bf2637;--ink:#252321;--muted:#74716e;--line:#e9e5e1;--paper:#fffaf6;--surface:#fff;--soft:#f7f2ed;--green:#21864b}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:var(--paper);color:var(--ink)}
+.navbar{height:auto;min-height:76px;background:rgba(255,255,255,.96);border-bottom:1px solid #eee8e2;backdrop-filter:blur(14px)}
+.nav-container{gap:clamp(10px,2vw,25px);padding:12px 22px;flex-wrap:wrap}
+.logo{gap:9px;font-size:clamp(21px,2vw,27px);letter-spacing:-.8px;font-weight:850}
+.logo-icon{display:flex;align-items:center}.brand-mark{display:block;width:38px;height:38px;object-fit:contain;vertical-align:middle}
+.location{border:1px solid #f1dfe0;border-right:1px solid #f1dfe0;border-radius:12px;padding:9px 13px;min-width:155px;background:#fffdfc;cursor:pointer;transition:.2s}
+.location:hover,.location:focus-visible{border-color:var(--brand);box-shadow:0 0 0 3px #e43b4512;outline:none}
+.location-icon svg{width:22px;height:22px;color:var(--brand)}
+.nav-search{background:#faf8f6;border-radius:12px;border-color:#e9e5e1}
+.nav-container nav a{font-size:15px;font-weight:550;padding:7px 0}
+.nav-container nav a:hover{color:var(--brand)}
+.login-btn,.signup-btn{border-radius:10px;padding:11px 18px!important;border:1px solid var(--brand);font-weight:650!important;transition:.2s}
+.login-btn:hover{background:#fff4f4;color:var(--brand)}
+.signup-btn{background:var(--brand);color:#fff!important}.signup-btn:hover{background:var(--brand-dark)}
+.hero{background-position:center 54%;min-height:430px}
+.hero h1 span{color:#ffdf9b}.hero-search{border-radius:14px;overflow:hidden}.hero-search button{background:var(--brand);border-radius:0 12px 12px 0}.hero-search button:hover{background:var(--brand-dark)}
+.container{width:min(1200px,calc(100% - 40px));margin-inline:auto}
+.section-title{margin:34px 0 22px}.section-title h2{letter-spacing:-.6px}
+.category-row{gap:24px}.category-image{border:3px solid #fff;box-shadow:0 8px 20px #32251c10;transition:transform .2s,box-shadow .2s}.category-item:hover .category-image{transform:translateY(-4px);box-shadow:0 12px 24px #32251c1b}
+.quick-food-section{padding-bottom:45px}.food-filter-buttons{gap:10px}.food-filter{border-radius:999px!important;padding:11px 20px!important;font-weight:650;display:inline-flex;align-items:center;gap:8px}.filter-symbol{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.food-filter.active{background:var(--brand)!important;border-color:var(--brand)!important}.quick-dish-card,.food-card,.dish-card,.big-category-card{border:1px solid #eee8e3!important;border-radius:15px!important;box-shadow:0 4px 16px #2d21190a!important;overflow:hidden;transition:transform .2s,box-shadow .2s}.quick-dish-card:hover,.food-card:hover,.dish-card:hover,.big-category-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #2d211915!important}
+.quick-dish-card img,.food-image,.dish-image img,.category-image img{object-fit:cover}
+.quick-dish-info{padding:17px!important}.quick-dish-info h3{font-size:17px}.quick-dish-info p{line-height:1.55;color:var(--muted)}
+.collection-card{border-radius:16px;overflow:hidden;transition:transform .2s,box-shadow .2s}.collection-card:hover{transform:translateY(-3px);box-shadow:0 12px 24px #22160f20}
+footer,.footer{background:#242321!important;color:#eee!important}
+.footer-logo .brand-mark{width:35px;height:35px}
+button,select,input{font:inherit}button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #e43b4533;outline-offset:2px}
+.location-dropdown{z-index:1200;box-shadow:0 12px 35px #1d16151a;border:1px solid var(--line);border-radius:12px}
+@media(max-width:900px){.nav-container{justify-content:center}.nav-container nav{flex-wrap:wrap;justify-content:center}.nav-search{max-width:none;flex-basis:100%;order:5}.location-wrapper{order:4}}
+@media(max-width:600px){.hero{min-height:370px}.hero h1{font-size:clamp(36px,10vw,48px)}.container{width:calc(100% - 28px)}.nav-container{padding:10px 14px}.category-row{gap:14px}.food-filter-buttons{overflow-x:auto;padding-bottom:5px}.food-filter{white-space:nowrap}.section-title{align-items:flex-start}}
+
+[hidden]{display:none!important}
+.auth-buttons{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.user-welcome{font-size:14px;color:#5b514c;font-weight:650}.logout-btn{border:1px solid var(--brand);border-radius:10px;padding:10px 15px;background:#fff;color:var(--brand);font-weight:650;cursor:pointer}.logout-btn:hover{background:#fff4f4}.filter-btn.active,.dish-filter.active,.dish-category.active{background:#fff0f1!important;border-color:var(--brand)!important;color:var(--brand)!important}
+
+/* Final brand refinement: clean wordmark, no artificial symbol */
+.logo { gap: 0 !important; font-size: clamp(23px, 2vw, 29px); letter-spacing: -1.15px; font-weight: 850; }
+.logo-icon, .brand-mark { display: none !important; }
+.logo > span:last-child { display: inline-block; }
+.saved-nav-link { color: #e23744 !important; font-weight: 700 !important; }
+/* Food preference filters use restrained, standard indicator dots instead of emoji */
+.food-filter { display: inline-flex; align-items: center; gap: 8px; }
+.food-filter[data-filter="veg"]::before, .food-filter[data-filter="vegan"]::before { content: ""; width: 10px; height: 10px; border: 1.5px solid #16833b; border-radius: 2px; display: inline-block; position: relative; }
+.food-filter[data-filter="veg"]::before::after, .food-filter[data-filter="vegan"]::before::after { content: ""; position: absolute; inset: 2px; background: #16833b; border-radius: 50%; }
+.food-filter[data-filter="non-veg"]::before { content: ""; width: 10px; height: 10px; border: 1.5px solid #c53b45; border-radius: 2px; display: inline-block; position: relative; }
+.food-filter[data-filter="non-veg"]::before::after { content: ""; position: absolute; inset: 2px; background: #c53b45; border-radius: 50%; }
+
+/* Simplified food preference markers — standard restaurant-style indicators */
+.filter-symbol{display:none!important}
+.food-filter[data-filter="veg"]::before,.food-filter[data-filter="vegan"]::before{content:"";width:12px;height:12px;border:1.5px solid #16833b;border-radius:2px;display:inline-block;background:radial-gradient(circle at center,#16833b 0 2.5px,transparent 3px)}
+.food-filter[data-filter="non-veg"]::before{content:"";width:12px;height:12px;border:1.5px solid #c53b45;border-radius:2px;display:inline-block;background:radial-gradient(circle at center,#c53b45 0 2.5px,transparent 3px)}
+.brand{font-weight:850;letter-spacing:-1px;font-size:26px;color:#252525;text-decoration:none}
+.brand::first-letter{color:inherit}
+
+.quick-dish-card{position:relative}
+.quick-favorite{position:absolute;top:12px;right:12px;z-index:2;width:38px;height:38px;border:1px solid #e9e9e9;border-radius:50%;background:#fff;color:#555;font-size:24px;line-height:1;display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 8px #00000012}
+.quick-favorite.saved{color:#e23744;border-color:#f7c8cd}
+.quick-favorite:focus-visible{outline:2px solid #e23744;outline-offset:2px}
+
+
+/* Submission refinement: understated wordmark and cleaner food controls */
+.logo {
+    gap: 0 !important;
+    font-size: clamp(22px, 1.8vw, 27px) !important;
+    font-weight: 750 !important;
+    letter-spacing: -0.9px !important;
+    line-height: 1 !important;
+    text-transform: none;
+}
+.logo > span { display: inline-block; }
+.logo > span > span {
+    color: #e23744 !important;
+    font-weight: 750 !important;
+}
+.logo:focus-visible { outline: 2px solid #e23744; outline-offset: 4px; border-radius: 3px; }
+
+/* Category pills are text-first: no cartoon food drawings */
+.dish-category {
+    gap: 0 !important;
+    min-height: 44px;
+    padding: 11px 22px !important;
+    font-weight: 600 !important;
+    letter-spacing: .1px;
+}
+.dish-category > span { display: none !important; }
+.dish-category:not(.active) {
+    background: #fff !important;
+    color: #3f3f46 !important;
+    border-color: #e5e5e5 !important;
+}
+.dish-category:hover {
+    border-color: #cfcfcf !important;
+    background: #f8f7f6 !important;
+}
+.dish-category.active {
+    background: #fff1f0 !important;
+    color: #c85a47 !important;
+    border-color: #e9c5bd !important;
+}
+

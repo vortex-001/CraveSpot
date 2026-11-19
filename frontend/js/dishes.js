@@ -45,7 +45,7 @@ function filterDishes() {
 
 
     dishCards.forEach(card => {
-
+        card.dataset.originalOrder = card.dataset.originalOrder || String(Array.from(dishCards).indexOf(card));
         const name =
             card.dataset.name.toLowerCase();
 
@@ -161,6 +161,9 @@ function handleDishSearch(value) {
 
     const categoryAliases = {
         "all": "all",
+        "street food": "burger",
+        "fast food": "burger",
+        "popular": "all",
         "burger": "burger",
         "burgers": "burger",
         "chinese": "chinese",
@@ -285,6 +288,10 @@ dishSort.addEventListener(
             );
 
 
+        if (this.value === "recommended") {
+            cards.sort((a, b) => Number(a.dataset.originalOrder || 0) - Number(b.dataset.originalOrder || 0));
+        }
+
         if (
             this.value ===
             "price-low"
@@ -347,17 +354,22 @@ const hearts =
         ".dish-heart"
     );
 
+const savedDishFavorites = (() => { try { return JSON.parse(localStorage.getItem("CraveSpot_favorite_dishes") || "[]"); } catch { return []; } })();
 hearts.forEach(heart => {
+    const card = heart.closest(".dish-card");
+    const favoriteName = card?.dataset.name || card?.querySelector("h3")?.textContent.trim();
+    if (savedDishFavorites.includes(favoriteName)) heart.classList.add("is-favorite");
+    heart.setAttribute("aria-pressed", String(heart.classList.contains("is-favorite")));
     heart.addEventListener("click", function(event) {
         event.stopPropagation();
 
-        const isFavorite = this.classList.contains("is-favorite");
-
-       if (isFavorite) {
-    this.classList.remove("is-favorite");
-} else {
-    this.classList.add("is-favorite");
-}
+        const id = this.dataset.dishId || this.closest(".dish-card")?.dataset.name || this.closest(".quick-dish-card")?.querySelector("h3")?.textContent.trim();
+        const favorites = JSON.parse(localStorage.getItem("CraveSpot_favorite_dishes") || "[]");
+        const saved = favorites.includes(id);
+        const next = saved ? favorites.filter(item => item !== id) : [...favorites, id];
+        localStorage.setItem("CraveSpot_favorite_dishes", JSON.stringify(next));
+        this.classList.toggle("is-favorite", !saved);
+        this.setAttribute("aria-pressed", String(!saved));
     });
 });
 /* ==========================================
@@ -484,4 +496,8 @@ if (categoryFromURL) {
     } else {
         console.warn("No matching dish category found:", categoryFromURL);
     }
+}
+const initialDishQuery = new URLSearchParams(window.location.search).get("search");
+if (initialDishQuery) {
+    handleDishSearch(initialDishQuery);
 }

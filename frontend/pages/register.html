@@ -17,7 +17,7 @@
             place-items: center;
             padding: 20px;
             font-family: Arial, sans-serif;
-            background: #fff7ed;
+            background: linear-gradient(135deg,#fff8f3,#f6eee7);
             color: #292524;
         }
 
@@ -26,18 +26,19 @@
             max-width: 430px;
             padding: 30px;
             background: white;
-            border: 1px solid #fed7aa;
+            border: 1px solid #eee3dd;
             border-radius: 18px;
             box-shadow: 0 12px 35px #7c2d1812;
         }
 
         .brand {
-            display: block;
+            display: flex; align-items: center; justify-content: center; gap: 9px;
             margin-bottom: 16px;
-            color: #f97316;
+            color: #e43b45;
             text-align: center;
-            font-size: 28px;
-            font-weight: 800;
+            font-size: 27px;
+            font-weight: 850;
+            letter-spacing: -.6px;
             text-decoration: none;
         }
 
@@ -87,7 +88,7 @@
             cursor: pointer;
         }
 
-        .password-toggle:hover { color: #f97316; }
+        .password-toggle:hover { color: #e43b45; }
 
         .password-toggle svg {
             width: 21px;
@@ -126,14 +127,14 @@
             padding: 13px;
             border: 0;
             border-radius: 9px;
-            background: #f97316;
+            background: #e43b45;
             color: white;
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
         }
 
-        .primary:hover { background: #ea580c; }
+        .primary:hover { background: #bf2637; }
         .primary:disabled { opacity: .65; cursor: not-allowed; }
 
         #message {
@@ -149,12 +150,12 @@
             font-size: 14px;
         }
 
-        .auth-card a { color: #ea580c; }
+        .auth-card a { color: #e43b45; }
 
         .demo-note {
             margin-top: 18px;
             padding: 12px;
-            background: #fff7ed;
+            background: linear-gradient(135deg,#fff8f3,#f6eee7);
             font-size: 12px;
             line-height: 1.5;
         }
@@ -162,28 +163,13 @@
         @media (max-width: 480px) {
             .auth-card { padding: 22px; }
         }
+    
     </style>
 </head>
 
 <body>
 <main class="auth-card">
-    <a class="brand" href="../index.html"><svg class="cutlery-icon"
-     xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 24 24"
-     width="24"
-     height="24"
-     fill="none"
-     stroke="currentColor"
-     stroke-width="1.8"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     aria-hidden="true">
-    <path d="M7 2v7"/>
-    <path d="M4 2v4a3 3 0 0 0 6 0V2"/>
-    <path d="M7 9v13"/>
-    <path d="M17 2c-2 2-3 5-3 8h6"/>
-    <path d="M17 10v12"/>
-</svg> CraveSpot</a>
+    <a class="brand" href="../index.html">CraveSpot</a>
     <h1>Create Your Account</h1>
     <p class="subtitle">Join CraveSpot and discover food you'll love.</p>
     <p id="message" role="status" aria-live="polite"></p>
@@ -206,8 +192,8 @@
             <label for="password">Password</label>
             <div class="password-field">
                 <input id="password" name="password" type="password"
-                       placeholder="Create an 8-character password"
-                       minlength="8" maxlength="8"
+                       placeholder="Create a password (6+ characters)"
+                       minlength="6" maxlength="64"
                        autocomplete="new-password"
                        aria-describedby="strengthText" required>
                 <button type="button" class="password-toggle"
@@ -224,7 +210,7 @@
                 <div id="strengthFill" class="strength-fill"></div>
             </div>
             <p id="strengthText" class="strength-text">
-                Exactly 8 characters with a letter, number, and special character.
+                Use at least 6 characters. No special character is required.
             </p>
         </div>
 
@@ -233,7 +219,7 @@
             <div class="password-field">
                 <input id="confirmPassword" name="confirmPassword"
                        type="password" placeholder="Confirm your password"
-                       minlength="8" maxlength="8"
+                       minlength="6" maxlength="64"
                        autocomplete="new-password" required>
                 <button type="button" class="password-toggle"
                         onclick="togglePassword('confirmPassword', this)"
@@ -254,164 +240,19 @@
     <p class="bottom">Already have an account? <a href="login.html">Login</a></p>
 
     <div class="demo-note">
-        <strong>Demo only:</strong> Account details and passwords are stored in browser localStorage.
-        This is not secure for real accounts. Use test details only.
+        <strong>Demo mode:</strong> Accounts are saved in this browser only. Use test credentials, not a real password.
     </div>
 </main>
 
 <script>
 "use strict";
-
-const form = document.getElementById("registerForm");
-const nameInput = document.getElementById("fullName");
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
-const confirmInput = document.getElementById("confirmPassword");
-const message = document.getElementById("message");
-const strengthFill = document.getElementById("strengthFill");
-const strengthText = document.getElementById("strengthText");
-const registerButton = document.getElementById("registerButton");
-
-function isValidPassword(password) {
-    return password.length === 8 &&
-        !/\s/.test(password) &&
-        /[A-Za-z]/.test(password) &&
-        /[0-9]/.test(password) &&
-        /[^A-Za-z0-9\s]/.test(password);
-}
-
-function eyeSvg(showing) {
-    if (showing) {
-        return `<svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M3 3l18 18"/>
-            <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/>
-            <path d="M9.9 5.2A10 10 0 0 1 12 5c6.5 0 10 7 10 7a16 16 0 0 1-3.1 3.8"/>
-            <path d="M6.2 6.2C3.5 8 2 12 2 12s3.5 7 10 7a10 10 0 0 0 4-.8"/>
-        </svg>`;
-    }
-
-    return `<svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
-        <circle cx="12" cy="12" r="3"/>
-    </svg>`;
-}
-
-function togglePassword(inputId, button) {
-    const input = document.getElementById(inputId);
-    const showing = input.type === "password";
-    input.type = showing ? "text" : "password";
-    button.setAttribute("aria-label", showing ? "Hide password" : "Show password");
-    button.innerHTML = eyeSvg(showing);
-}
-
-passwordInput.addEventListener("input", function () {
-    const value = passwordInput.value;
-    const checks = [
-        value.length === 8 && !/\s/.test(value),
-        /[A-Za-z]/.test(value),
-        /[0-9]/.test(value),
-        /[^A-Za-z0-9\s]/.test(value)
-    ];
-
-    const passed = checks.filter(Boolean).length;
-    const valid = isValidPassword(value);
-    strengthFill.style.width = (passed * 25) + "%";
-
-    if (!value) {
-        strengthText.textContent =
-            "Exactly 8 characters with a letter, number, and special character.";
-        strengthFill.style.background = "#e7e5e4";
-    } else if (valid) {
-        strengthText.textContent = "Password meets all requirements.";
-        strengthFill.style.background = "#16a34a";
-    } else {
-        strengthText.textContent =
-            "Use exactly 8 characters, including a letter, number, and special character.";
-        strengthFill.style.background = "#dc2626";
-    }
-});
-
-form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    message.style.color = "#b91c1c";
-    message.textContent = "";
-
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim().toLowerCase();
-    const password = passwordInput.value;
-    const confirmation = confirmInput.value;
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!name) {
-        message.textContent = "Please enter your full name.";
-        nameInput.focus();
-        return;
-    }
-
-    if (!emailPattern.test(email)) {
-        message.textContent = "Please enter a valid email address.";
-        emailInput.focus();
-        return;
-    }
-
-    if (!isValidPassword(password)) {
-        message.textContent =
-            "Password must be exactly 8 characters and contain a letter, a number, and a special character.";
-        passwordInput.focus();
-        return;
-    }
-
-    if (password !== confirmation) {
-        message.textContent = "The passwords do not match.";
-        confirmInput.focus();
-        return;
-    }
-
-    try {
-        const accounts = JSON.parse(
-            localStorage.getItem("CraveSpotAccounts") || "[]"
-        );
-
-        if (!Array.isArray(accounts)) {
-            throw new Error("Invalid account data");
-        }
-
-        if (accounts.some(account =>
-            account &&
-            typeof account.email === "string" &&
-            account.email.toLowerCase() === email
-        )) {
-            message.textContent =
-                "An account with this email already exists. Please log in.";
-            emailInput.focus();
-            return;
-        }
-
-        accounts.push({
-            name: name,
-            email: email,
-            password: password
-        });
-
-        localStorage.setItem("CraveSpotAccounts", JSON.stringify(accounts));
-        localStorage.setItem("CraveSpotLoggedIn", "true");
-        localStorage.setItem("CraveSpotUser", name);
-        sessionStorage.removeItem("CraveSpotLoggedIn");
-        sessionStorage.removeItem("CraveSpotUser");
-    } catch (error) {
-        message.textContent =
-            "Could not save the demo account. Check browser storage and try again.";
-        return;
-    }
-
-    message.style.color = "#15803d";
-    message.textContent = "Demo account created successfully. Redirecting...";
-    registerButton.disabled = true;
-
-    window.setTimeout(function () {
-        window.location.href = "../index.html";
-    }, 600);
-});
+const form=document.getElementById("registerForm"),nameInput=document.getElementById("fullName"),emailInput=document.getElementById("email"),passwordInput=document.getElementById("password"),confirmInput=document.getElementById("confirmPassword"),message=document.getElementById("message"),strengthFill=document.getElementById("strengthFill"),strengthText=document.getElementById("strengthText"),registerButton=document.getElementById("registerButton");
+function isValidPassword(value){return value.length>=6;}
+async function hashPassword(value){if(!window.crypto?.subtle)return value;const bytes=new TextEncoder().encode(value);const hash=await crypto.subtle.digest("SHA-256",bytes);return Array.from(new Uint8Array(hash)).map(x=>x.toString(16).padStart(2,"0")).join("");}
+function eyeSvg(showing){return showing?`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.2A10 10 0 0 1 12 5c6.5 0 10 7 10 7a16 16 0 0 1-3.1 3.8M6.2 6.2C3.5 8 2 12 2 12s3.5 7 10 7a10 10 0 0 0 4-.8"/></svg>`:`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>`;}
+function togglePassword(inputId,button){const input=document.getElementById(inputId),show=input.type==="password";input.type=show?"text":"password";button.setAttribute("aria-label",show?"Hide password":"Show password");button.innerHTML=eyeSvg(show);}
+passwordInput.addEventListener("input",()=>{const v=passwordInput.value;const checks=[v.length>=6,v.length>=10,/[A-Z]/.test(v)&&/[0-9]/.test(v)];strengthFill.style.width=(checks.filter(Boolean).length/3*100)+"%";strengthFill.style.background=checks.every(Boolean)?"#16a34a":v.length>=6?"#d97706":"#e43b45";strengthText.textContent=!v?"Use at least 6 characters. No special character is required.":v.length<6?"Add "+(6-v.length)+" more character"+(6-v.length===1?"":"s")+".":checks.every(Boolean)?"Password strength: good.":"Password is acceptable; longer passwords are safer.";});
+form.addEventListener("submit",async event=>{event.preventDefault();message.textContent="";message.style.color="#b91c1c";const name=nameInput.value.trim(),email=emailInput.value.trim().toLowerCase(),password=passwordInput.value,confirmation=confirmInput.value,emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;if(!name){message.textContent="Please enter your name.";nameInput.focus();return;}if(!emailPattern.test(email)){message.textContent="Please enter a valid email address.";emailInput.focus();return;}if(!isValidPassword(password)){message.textContent="Password must be at least 6 characters.";passwordInput.focus();return;}if(password!==confirmation){message.textContent="The passwords do not match.";confirmInput.focus();return;}registerButton.disabled=true;registerButton.textContent="Creating account…";try{const accounts=JSON.parse(localStorage.getItem("CraveSpotAccounts")||"[]");if(!Array.isArray(accounts))throw new Error("Invalid account data");if(accounts.some(item=>item&&String(item.email||"").toLowerCase()===email)){message.textContent="This email already has an account. Please log in.";emailInput.focus();return;}const passwordHash=await hashPassword(password);accounts.push({name,email,passwordHash});localStorage.setItem("CraveSpotAccounts",JSON.stringify(accounts));localStorage.setItem("CraveSpotLoggedIn","true");localStorage.setItem("CraveSpotUser",name);sessionStorage.removeItem("CraveSpotLoggedIn");sessionStorage.removeItem("CraveSpotUser");message.style.color="#15803d";message.textContent="Account created. Welcome to CraveSpot!";setTimeout(()=>window.location.href="../index.html",500);}catch(error){message.textContent="Could not save the demo account. Open the site through localhost and try again.";}finally{registerButton.disabled=false;registerButton.textContent="Create Account";}});
 </script>
 </body>
 </html>

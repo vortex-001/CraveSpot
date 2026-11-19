@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Saved | CraveSpot</title><link rel="stylesheet" href="../css/style.css"><link rel="stylesheet" href="../css/favorites.css">
+</head><body>
+<header class="navbar"><div class="nav-container">
+<a href="../index.html" class="logo"><span>Crave<span>Spot</span></span></a>
+<nav aria-label="Main navigation"><a href="../index.html">Home</a><a href="restaurants.html">Restaurants</a><a href="dishes.html">Dishes</a><a href="categories.html">Categories</a><a href="favorites.html" class="saved-nav-link" aria-current="page">Saved</a></nav>
+<div class="auth-buttons"><a href="login.html" class="login-btn">Login</a><a href="register.html" class="signup-btn">Sign Up</a></div></div></header>
+<main class="favorites-page container">
+<section class="favorites-intro"><span class="eyebrow">YOUR COLLECTION</span><h1>Saved for later</h1><p>Keep the places and dishes you want to come back to.</p></section>
+<div class="favorites-tabs" role="tablist" aria-label="Saved items"><button class="favorites-tab active" type="button" data-tab="dishes" role="tab" aria-selected="true">Dishes <span id="dishFavCount">0</span></button><button class="favorites-tab" type="button" data-tab="restaurants" role="tab" aria-selected="false">Restaurants <span id="restaurantFavCount">0</span></button></div>
+<section id="favoritesGrid" class="favorites-grid" aria-live="polite"></section>
+<div id="favoritesEmpty" class="favorites-empty" hidden><div class="empty-heart" aria-hidden="true">♡</div><h2>Nothing saved yet</h2><p>Tap the heart on a dish or restaurant to save it here.</p><div class="empty-actions"><a class="primary-action" href="dishes.html">Explore dishes</a><a class="secondary-action" href="restaurants.html">Browse restaurants</a></div></div>
+</main>
+<script src="../js/favorites.js"></script>
+</body></html>

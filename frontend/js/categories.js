@@ -42,7 +42,7 @@ const categoryCount =
 function searchCategories() {
 
     const query =
-        categorySearch.value
+        (categorySearch?.value || "")
         .toLowerCase()
         .trim();
 
@@ -76,22 +76,10 @@ function searchCategories() {
     });
 
 
-    categoryCount.textContent =
-        visibleCount +
-        " categories";
+    if (categoryCount) categoryCount.textContent = visibleCount + " categories";
 
 
-    if (visibleCount === 0) {
-
-        categoryNoResults.style.display =
-            "block";
-
-    } else {
-
-        categoryNoResults.style.display =
-            "none";
-
-    }
+    if (categoryNoResults) categoryNoResults.style.display = visibleCount === 0 ? "block" : "none";
 
 }
 

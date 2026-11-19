@@ -28,13 +28,13 @@ if (togglePassword && passwordInput) {
 
                 passwordInput.type = "text";
 
-                togglePassword.textContent = "🙈";
+                togglePassword.textContent = "Hide";
 
             } else {
 
                 passwordInput.type = "password";
 
-                togglePassword.textContent = "👁";
+                togglePassword.textContent = "Show";
 
             }
 
