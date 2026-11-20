@@ -2048,3 +2048,804 @@ button,select,input{font:inherit}button:focus-visible,a:focus-visible,select:foc
     background: linear-gradient(135deg, #e04800, #c82835);
     color: #ffffff;
 }
+
+
+/* =====================================================================
+   CRAVESPOT MODERN FOOD-TECH & GOOGLE MAPS LOCATION PICKER STYLES
+   ===================================================================== */
+
+:root {
+    --cs-primary: #FF5200;
+    --cs-primary-hover: #E04800;
+    --cs-primary-light: #FFF5F0;
+    --cs-dark: #111827;
+    --cs-gray-900: #1F2937;
+    --cs-gray-700: #4B5563;
+    --cs-gray-500: #6B7280;
+    --cs-gray-200: #E5E7EB;
+    --cs-gray-100: #F3F4F6;
+    --cs-gray-50: #F9FAFB;
+    --cs-green: #10B981;
+    --cs-amber: #F59E0B;
+    --cs-red: #EF4444;
+    --cs-radius-sm: 8px;
+    --cs-radius-md: 12px;
+    --cs-radius-lg: 18px;
+    --cs-radius-xl: 24px;
+    --cs-shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+    --cs-shadow-md: 0 4px 16px -2px rgba(0,0,0,0.08);
+    --cs-shadow-lg: 0 12px 28px -4px rgba(0,0,0,0.12);
+    --cs-shadow-xl: 0 24px 48px -12px rgba(0,0,0,0.22);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    color: var(--cs-dark);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- Location Selector Pill in Navbar --- */
+.location-wrapper {
+    position: relative;
+}
+
+.location {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: #FAFAF9;
+    border: 1px solid #E5E7EB;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    user-select: none;
+    min-width: unset !important;
+    border-right: none !important;
+}
+
+.location:hover {
+    background: #FFFFFF;
+    border-color: #D1D5DB;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transform: translateY(-1px);
+}
+
+.location:active {
+    transform: translateY(0);
+}
+
+.location .location-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: #FFF1EB;
+    color: var(--cs-primary);
+    border-radius: 50%;
+}
+
+.location .location-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.location small {
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--cs-gray-500);
+}
+
+.location strong {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cs-dark);
+    max-width: 130px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.location-dropdown {
+    display: none !important; /* replaced by modern map modal */
+}
+
+/* --- Modern Google Maps Location Picker Modal --- */
+.cravespot-loc-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.loc-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(17, 24, 39, 0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.loc-modal-dialog {
+    position: relative;
+    z-index: 2;
+    background: #FFFFFF;
+    width: 100%;
+    max-width: 740px;
+    max-height: 92vh;
+    border-radius: var(--cs-radius-xl);
+    box-shadow: var(--cs-shadow-xl);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes modalSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.loc-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 22px 28px 16px;
+    border-bottom: 1px solid #F3F4F6;
+    background: #FFFFFF;
+}
+
+.loc-modal-title-group {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.loc-badge-icon {
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: #FFF5F0;
+    border-radius: 14px;
+    border: 1px solid #FFE4D6;
+}
+
+.loc-modal-title-group h2 {
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--cs-dark);
+    margin: 0 0 2px 0;
+}
+
+.loc-modal-subtitle {
+    font-size: 13px;
+    color: var(--cs-gray-500);
+    margin: 0;
+}
+
+.loc-modal-close {
+    background: #F3F4F6;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 20px;
+    color: var(--cs-gray-700);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.loc-modal-close:hover {
+    background: #E5E7EB;
+    color: var(--cs-dark);
+    transform: rotate(90deg);
+}
+
+/* Search & GPS Controls */
+.loc-modal-controls {
+    display: flex;
+    gap: 12px;
+    padding: 16px 28px 12px;
+    background: #FAFAFA;
+    border-bottom: 1px solid #F0F0F0;
+    flex-wrap: wrap;
+}
+
+.loc-search-box {
+    flex: 1;
+    min-width: 260px;
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    border: 1.5px solid #E5E7EB;
+    border-radius: var(--cs-radius-md);
+    padding: 4px 6px 4px 14px;
+    transition: all 0.2s;
+}
+
+.loc-search-box:focus-within {
+    border-color: var(--cs-primary);
+    box-shadow: 0 0 0 3px rgba(255, 82, 0, 0.12);
+}
+
+.loc-search-icon {
+    font-size: 15px;
+    color: var(--cs-gray-500);
+    margin-right: 8px;
+}
+
+.loc-search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--cs-dark);
+    background: transparent;
+}
+
+.loc-search-box button {
+    background: var(--cs-gray-900);
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.loc-search-box button:hover {
+    background: var(--cs-dark);
+}
+
+/* GPS Detect Button with Pulse Animation */
+.gps-detect-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: #FFFFFF;
+    border: 1.5px solid #FFD3BF;
+    color: var(--cs-primary);
+    font-weight: 700;
+    font-size: 13px;
+    border-radius: var(--cs-radius-md);
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 6px rgba(255, 82, 0, 0.08);
+}
+
+.gps-detect-btn:hover {
+    background: #FFF5F0;
+    border-color: var(--cs-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 82, 0, 0.15);
+}
+
+.gps-icon-svg {
+    width: 17px;
+    height: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gps-icon-svg svg {
+    width: 100%;
+    height: 100%;
+}
+
+.gps-pulse-ring {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--cs-primary);
+    border-radius: 50%;
+    position: relative;
+}
+
+.gps-detect-btn.is-detecting .gps-pulse-ring::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--cs-primary);
+    border-radius: 50%;
+    animation: gpsRadar 1.2s infinite ease-out;
+}
+
+@keyframes gpsRadar {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Quick city chips */
+.loc-quick-chips {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 28px;
+    background: #FFFFFF;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-bottom: 1px solid #F3F4F6;
+}
+
+.quick-chip-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--cs-gray-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 4px;
+}
+
+.loc-chip-btn {
+    background: #F3F4F6;
+    border: 1px solid #E5E7EB;
+    border-radius: 9999px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cs-gray-700);
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.loc-chip-btn:hover {
+    background: #FFF1EB;
+    color: var(--cs-primary);
+    border-color: #FFD3BF;
+    transform: translateY(-1px);
+}
+
+/* Leaflet Map Canvas */
+.loc-map-wrapper {
+    position: relative;
+    width: 100%;
+    height: 310px;
+    background: #E5E7EB;
+}
+
+.loc-leaflet-map {
+    width: 100%;
+    height: 100%;
+}
+
+.map-hint-banner {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(17, 24, 39, 0.88);
+    backdrop-filter: blur(4px);
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Custom pulsing map marker */
+.cravespot-map-pin-container {
+    background: transparent !important;
+    border: none !important;
+}
+
+.map-pin-marker {
+    width: 36px;
+    height: 42px;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.3));
+    animation: pinBounce 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: bottom center;
+}
+
+@keyframes pinBounce {
+    0% { transform: translateY(-16px) scale(1.1); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+/* Selected Address Card */
+.loc-selected-address-card {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 16px 28px;
+    background: #FFFDFB;
+    border-top: 1px solid #FFEFE6;
+    border-bottom: 1px solid #F3F4F6;
+}
+
+.loc-pin-icon-wrap {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #FFF0E6;
+    border: 1.5px solid #FFD3BF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.loc-address-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.loc-address-primary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 2px;
+}
+
+.loc-address-primary strong {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--cs-dark);
+}
+
+.loc-verified-pill {
+    background: #ECFDF5;
+    color: #059669;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 9999px;
+    border: 1px solid #A7F3D0;
+}
+
+.loc-address-secondary {
+    font-size: 12.5px;
+    color: var(--cs-gray-700);
+    margin: 0 0 3px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.loc-coords-preview {
+    font-size: 11px;
+    color: var(--cs-gray-500);
+    font-family: ui-monospace, monospace;
+}
+
+/* Modal Footer */
+.loc-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 16px 28px;
+    background: #FFFFFF;
+}
+
+.loc-cancel-btn {
+    background: #F3F4F6;
+    color: var(--cs-gray-700);
+    border: 1px solid #E5E7EB;
+    padding: 11px 20px;
+    border-radius: var(--cs-radius-md);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.loc-cancel-btn:hover {
+    background: #E5E7EB;
+    color: var(--cs-dark);
+}
+
+.loc-confirm-btn {
+    background: linear-gradient(135deg, #FF5200 0%, #FF3008 100%);
+    color: #FFFFFF;
+    border: none;
+    padding: 12px 26px;
+    border-radius: var(--cs-radius-md);
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(255, 82, 0, 0.35);
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.loc-confirm-btn:hover {
+    background: linear-gradient(135deg, #E04800 0%, #E62804 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(255, 82, 0, 0.45);
+}
+
+/* =====================================================================
+   LIVE RESTAURANT CARD ENHANCEMENTS (REAL DISTANCES & BADGES)
+   ===================================================================== */
+
+/* Distance & Delivery Time Badge Pills */
+.loc-distance-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #FFF5F0;
+    color: var(--cs-primary);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 9999px;
+    border: 1px solid #FFE2D4;
+}
+
+.delivery-time-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #F3F4F6;
+    color: var(--cs-gray-700);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 9999px;
+}
+
+.live-badge-gps {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #ECFDF5;
+    color: #047857;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    border: 1px solid #A7F3D0;
+}
+
+/* Real Indian Food-Tech Veg / Non-Veg Icons */
+.cs-diet-dot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.cs-diet-dot.veg {
+    border: 1.5px solid #10B981;
+}
+
+.cs-diet-dot.veg::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #10B981;
+    border-radius: 50%;
+}
+
+.cs-diet-dot.non-veg {
+    border: 1.5px solid #E11D48;
+}
+
+.cs-diet-dot.non-veg::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #E11D48;
+    border-radius: 2px;
+}
+
+/* Radius filter chips row */
+.live-radius-chips {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 14px 0 24px;
+    flex-wrap: wrap;
+}
+
+.live-radius-chips span {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cs-gray-700);
+}
+
+.radius-chip {
+    padding: 6px 14px;
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cs-gray-700);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.radius-chip:hover {
+    border-color: #D1D5DB;
+    background: #F9FAFB;
+}
+
+.radius-chip.active {
+    background: var(--cs-dark);
+    color: #FFFFFF;
+    border-color: var(--cs-dark);
+}
+
+/* Refined Restaurant Card Grid */
+.restaurant-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)) !important;
+    gap: 26px !important;
+}
+
+.restaurant-card {
+    background: #FFFFFF;
+    border-radius: var(--cs-radius-lg);
+    border: 1px solid rgba(0,0,0,0.06);
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.1);
+    border-color: rgba(255, 82, 0, 0.2);
+}
+
+.restaurant-image {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: #F3F4F6;
+}
+
+.restaurant-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.restaurant-card:hover .restaurant-image img {
+    transform: scale(1.05);
+}
+
+.restaurant-image .offer {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(17, 24, 39, 0.88);
+    backdrop-filter: blur(4px);
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.02em;
+}
+
+.restaurant-info {
+    padding: 16px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.restaurant-name {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.restaurant-name h3 {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--cs-dark);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.restaurant-name .rating {
+    background: #059669;
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.restaurant-info .cuisine {
+    font-size: 13.5px;
+    color: var(--cs-gray-500);
+    margin: 0 0 10px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.restaurant-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.restaurant-location {
+    font-size: 12.5px;
+    color: var(--cs-gray-500);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid #F3F4F6;
+}
+
+@media (max-width: 640px) {
+    .loc-modal-dialog {
+        max-height: 96vh;
+        border-radius: 16px 16px 0 0;
+    }
+    .loc-modal-header {
+        padding: 16px 18px 12px;
+    }
+    .loc-modal-controls {
+        padding: 12px 18px;
+    }
+    .loc-selected-address-card {
+        padding: 12px 18px;
+    }
+    .loc-modal-footer {
+        padding: 12px 18px;
+    }
+    .loc-map-wrapper {
+        height: 240px;
+    }
+}

@@ -49,15 +49,11 @@ if (heroSearch) {
 }
 
 // ---------------------------------------------------------------------
-// 2. Interactive Location Selector (Auto-detect + City Search Modal)
+// 2. Interactive Location Selector (Auto-detect + Google Maps Modal)
 // ---------------------------------------------------------------------
 function initLocationSystem() {
     const label = document.getElementById('selectedLocation');
     const selector = document.getElementById('locationSelector');
-    const dropdown = document.getElementById('locationDropdown');
-    const detectBtn = document.getElementById('detectLocationBtn');
-    const cityInput = document.getElementById('locationSearchInput');
-    const suggestionsBox = document.getElementById('locationSuggestions');
 
     // Load initial saved location
     const currentLoc = (typeof getUserLocation === 'function') 
@@ -68,130 +64,164 @@ function initLocationSystem() {
         label.textContent = currentLoc.city || 'Chandigarh';
     }
 
-    if (selector && dropdown) {
+    if (selector) {
         selector.addEventListener('click', (e) => {
+            e.preventDefault();
             e.stopPropagation();
-            dropdown.hidden = !dropdown.hidden;
-            if (!dropdown.hidden && cityInput) {
-                cityInput.focus();
-            }
-        });
-
-        document.addEventListener('click', (e) => {
-            if (!selector.contains(e.target) && !dropdown.contains(e.target)) {
-                dropdown.hidden = true;
+            if (typeof window.openLocationPickerModal === 'function') {
+                window.openLocationPickerModal();
             }
         });
     }
 
-    // A. Browser HTML5 Geolocation (Auto-detect)
-    if (detectBtn) {
-        detectBtn.addEventListener('click', () => {
-            if (!navigator.geolocation) {
-                if (typeof showToast === 'function') showToast('Geolocation is not supported by your browser', 'error');
-                return;
-            }
+    // Listen for global location change
+    window.addEventListener('cravespot:locationChanged', (e) => {
+        const newLoc = e.detail;
+        if (label && newLoc?.city) {
+            label.textContent = newLoc.city;
+        }
+    });
+}
 
-            detectBtn.disabled = true;
-            detectBtn.innerHTML = '<span>📍</span> Detecting location...';
+// ---------------------------------------------------------------------
+// 2B. Live Nearby Restaurant Discovery on Homepage (GPS & Live Map Aware)
+// ---------------------------------------------------------------------
+let currentHomeRadius = 15;
 
-            navigator.geolocation.getCurrentPosition(
-                async (position) => {
-                    const lat = position.coords.latitude;
-                    const lng = position.coords.longitude;
+async function loadHomeLiveRestaurants() {
+    const grid = document.getElementById('homeRestaurantGrid');
+    const cityTitle = document.getElementById('homeCurrentCityName');
+    if (!grid) return; // not on homepage
 
-                    let cityName = 'Current Location';
-                    try {
-                        const geocode = await apiRequest(`/location/geocode?q=${lat},${lng}`);
-                        if (geocode?.location?.city) {
-                            cityName = geocode.location.city;
-                        }
-                    } catch (err) {
-                        // Keep fallback
-                    }
+    const loc = (typeof getUserLocation === 'function') 
+        ? getUserLocation() 
+        : { lat: 30.7333, lng: 76.7794, city: 'Chandigarh' };
 
-                    if (typeof setUserLocation === 'function') {
-                        setUserLocation(lat, lng, cityName, `${cityName} (GPS)`);
-                    } else {
-                        localStorage.setItem('CraveSpotLocation', cityName);
-                    }
-
-                    if (label) label.textContent = cityName;
-                    if (dropdown) dropdown.hidden = true;
-                    detectBtn.disabled = false;
-                    detectBtn.innerHTML = '<span>📍</span> Use my current location (GPS)';
-
-                    if (typeof showToast === 'function') {
-                        showToast(`Location set to ${cityName}`, 'success');
-                    }
-                },
-                (error) => {
-                    detectBtn.disabled = false;
-                    detectBtn.innerHTML = '<span>📍</span> Use my current location (GPS)';
-                    let msg = 'Could not access location';
-                    if (error.code === error.PERMISSION_DENIED) {
-                        msg = 'Location permission denied. Please select a city manually.';
-                    }
-                    if (typeof showToast === 'function') showToast(msg, 'warning');
-                },
-                { timeout: 8000, maximumAge: 60000 }
-            );
-        });
+    if (cityTitle) {
+        cityTitle.textContent = loc.city || 'your area';
     }
 
-    // B. Manual City / Locality Search
-    if (cityInput) {
-        cityInput.addEventListener('keydown', async (e) => {
-            if (e.key === 'Enter') {
-                const val = cityInput.value.trim();
-                if (!val) return;
+    // Show stylish skeleton loaders while fetching
+    grid.innerHTML = `
+        <div class="restaurant-card" style="opacity:0.6; pointer-events:none;">
+            <div class="restaurant-image" style="background:#e5e7eb;"></div>
+            <div class="restaurant-info"><div style="height:20px; background:#e5e7eb; border-radius:4px; margin-bottom:8px;"></div><div style="height:14px; background:#f3f4f6; border-radius:4px; width:70%;"></div></div>
+        </div>
+        <div class="restaurant-card" style="opacity:0.6; pointer-events:none;">
+            <div class="restaurant-image" style="background:#e5e7eb;"></div>
+            <div class="restaurant-info"><div style="height:20px; background:#e5e7eb; border-radius:4px; margin-bottom:8px;"></div><div style="height:14px; background:#f3f4f6; border-radius:4px; width:70%;"></div></div>
+        </div>
+        <div class="restaurant-card" style="opacity:0.6; pointer-events:none;">
+            <div class="restaurant-image" style="background:#e5e7eb;"></div>
+            <div class="restaurant-info"><div style="height:20px; background:#e5e7eb; border-radius:4px; margin-bottom:8px;"></div><div style="height:14px; background:#f3f4f6; border-radius:4px; width:70%;"></div></div>
+        </div>
+    `;
 
-                cityInput.disabled = true;
-                try {
-                    const res = await apiRequest(`/location/geocode?q=${encodeURIComponent(val)}`);
-                    if (res?.location) {
-                        const loc = res.location;
-                        if (typeof setUserLocation === 'function') {
-                            setUserLocation(loc.latitude, loc.longitude, loc.city, loc.display_name);
-                        } else {
-                            localStorage.setItem('CraveSpotLocation', loc.city);
-                        }
-                        if (label) label.textContent = loc.city;
-                        if (dropdown) dropdown.hidden = true;
-                        if (typeof showToast === 'function') showToast(`Location updated to ${loc.city}`, 'success');
-                    }
-                } catch (err) {
-                    if (typeof showToast === 'function') showToast(`Location "${val}" not found`, 'error');
-                } finally {
-                    cityInput.disabled = false;
-                }
-            }
-        });
-    }
-
-    // Quick City Buttons
-    document.querySelectorAll('.quick-city-chip').forEach(btn => {
-        btn.addEventListener('click', async () => {
-            const cityName = btn.dataset.city;
-            if (!cityName) return;
-
+    try {
+        let places = [];
+        if (typeof apiRequest === 'function') {
             try {
-                const res = await apiRequest(`/location/geocode?q=${encodeURIComponent(cityName)}`);
-                if (res?.location) {
-                    const loc = res.location;
-                    if (typeof setUserLocation === 'function') {
-                        setUserLocation(loc.latitude, loc.longitude, loc.city, loc.display_name);
-                    }
-                    if (label) label.textContent = loc.city;
+                const res = await apiRequest(`/restaurants/live-nearby?lat=${loc.lat}&lng=${loc.lng}&radius=${currentHomeRadius}`);
+                if (res?.restaurants && res.restaurants.length > 0) {
+                    places = res.restaurants;
                 }
-            } catch (e) {
-                if (label) label.textContent = cityName;
-                localStorage.setItem('CraveSpotLocation', cityName);
+            } catch (err) {
+                console.warn('Live nearby failed, trying /restaurants fallback:', err);
             }
 
-            if (dropdown) dropdown.hidden = true;
-            if (typeof showToast === 'function') showToast(`Selected city: ${cityName}`, 'info');
+            if (!places.length) {
+                const allRest = await apiRequest('/restaurants');
+                if (Array.isArray(allRest)) {
+                    places = allRest;
+                }
+            }
+        }
+
+        if (!places || !places.length) {
+            grid.innerHTML = `
+                <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; background:#fafafa; border-radius:16px; border:1px dashed #d1d5db;">
+                    <span style="font-size:36px;">🍴</span>
+                    <h3 style="margin: 12px 0 6px 0; color:#111827;">No food spots within ${currentHomeRadius} km</h3>
+                    <p style="color:#6b7280; font-size:14px; margin-bottom: 16px;">Try expanding the distance filter or pick another location on the map.</p>
+                    <button type="button" class="radius-chip active" onclick="if(window.openLocationPickerModal) window.openLocationPickerModal()">Change Location on Map 📍</button>
+                </div>
+            `;
+            return;
+        }
+
+        // Limit to top 6 for homepage
+        const topPlaces = places.slice(0, 6);
+
+        grid.innerHTML = topPlaces.map((r, i) => {
+            const dist = typeof r.distance_km === 'number' ? r.distance_km : null;
+            const distBadge = dist !== null 
+                ? `<span class="loc-distance-pill">📍 ${dist < 1 ? Math.round(dist * 1000) + ' m' : dist.toFixed(1) + ' km'}</span>` 
+                : `<span class="loc-distance-pill">📍 Near you</span>`;
+            
+            const deliveryMins = r.delivery_time_mins || (dist ? Math.max(15, Math.min(60, Math.round(15 + dist * 3.5))) : 25);
+            const isVeg = r.is_veg === 1 || r.is_veg === true || r.is_veg === '1';
+            const dietDot = isVeg 
+                ? `<span class="cs-diet-dot veg" title="Pure Veg"></span>` 
+                : `<span class="cs-diet-dot non-veg" title="Non-Veg & Multi-Cuisine"></span>`;
+
+            const imgUrl = r.image_url || r.cover_image || `https://images.unsplash.com/photo-${['1517248135467-4c7edcad34c4', '1552566626-52f8b828add9', '1559339352-11d035aa65de', '1515003197210-e0cd71810b5f', '1555396273-367ea4eb4db5'][i % 5]}?auto=format&fit=crop&w=800&q=80`;
+            const offerText = r.offer || (i % 2 === 0 ? '20% OFF up to ₹100' : 'Free Delivery');
+            const rating = r.rating ? Number(r.rating).toFixed(1) : '4.4';
+            const priceForTwo = r.price_for_two ? `₹${r.price_for_two} for two` : '₹350 for two';
+
+            return `
+                <article class="restaurant-card" onclick="window.location.href='pages/restaurant-details.html?id=${r.restaurant_id}'">
+                    <div class="restaurant-image">
+                        <img src="${imgUrl}" alt="${r.name || 'Restaurant'}" loading="lazy">
+                        <span class="offer">${offerText}</span>
+                    </div>
+                    <div class="restaurant-info">
+                        <div class="restaurant-name">
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                ${dietDot}
+                                <h3>${r.name || 'Top Eatery'}</h3>
+                            </div>
+                            <span class="rating">★ ${rating}</span>
+                        </div>
+                        <p class="cuisine">${r.cuisine || 'North Indian • Fast Food • Beverages'}</p>
+                        <div class="restaurant-meta">
+                            ${distBadge}
+                            <span class="delivery-time-pill">⚡ ~${deliveryMins} mins</span>
+                            <span style="font-size:12px; font-weight:600; color:#6B7280;">• ${priceForTwo}</span>
+                        </div>
+                        <p class="restaurant-location">
+                            <svg style="width:14px; height:14px; flex-shrink:0; color:#FF5200;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                                <circle cx="12" cy="10" r="2.5"/>
+                            </svg>
+                            <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${r.address || loc.city || 'Chandigarh'}</span>
+                        </p>
+                    </div>
+                </article>
+            `;
+        }).join('');
+
+    } catch (e) {
+        console.error('Failed to load home live restaurants:', e);
+    }
+}
+
+function initHomeLiveSection() {
+    loadHomeLiveRestaurants();
+
+    // Radius chip click handlers
+    document.querySelectorAll('#homeRadiusChips .radius-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#homeRadiusChips .radius-chip').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentHomeRadius = parseFloat(btn.dataset.radius) || 15;
+            loadHomeLiveRestaurants();
         });
+    });
+
+    // Re-fetch when location is changed on map or GPS
+    window.addEventListener('cravespot:locationChanged', () => {
+        loadHomeLiveRestaurants();
     });
 }
 
@@ -354,6 +384,7 @@ function initImageFallbacks() {
 // ---------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     initLocationSystem();
+    initHomeLiveSection();
     initSurpriseMe();
     syncAuthState();
     initImageFallbacks();

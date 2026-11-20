@@ -580,18 +580,18 @@
 
         <!-- ================= RESTAURANTS ================= -->
 
-        <section class="container restaurant-section">
+        <section class="container restaurant-section" id="homeLiveSection">
 
             <div class="section-title">
 
                 <div>
 
                     <p>
-                        TOP PICKS
+                        TOP PICKS • <span class="live-badge-gps">📍 Live Discovery</span>
                     </p>
 
                     <h2>
-                        Popular near you
+                        Popular near <span id="homeCurrentCityName" style="color: var(--cs-primary);">Chandigarh</span>
                     </h2>
 
                 </div>
@@ -602,8 +602,16 @@
 
             </div>
 
+            <!-- Live Radius Chips -->
+            <div class="live-radius-chips" id="homeRadiusChips" role="group" aria-label="Filter radius">
+                <span>Distance:</span>
+                <button type="button" class="radius-chip" data-radius="5">Within 5 km</button>
+                <button type="button" class="radius-chip active" data-radius="15">Within 15 km</button>
+                <button type="button" class="radius-chip" data-radius="30">Within 30 km</button>
+                <button type="button" class="radius-chip" data-radius="100">All Nearby</button>
+            </div>
 
-            <div class="restaurant-grid">
+            <div class="restaurant-grid" id="homeRestaurantGrid">
 
 
                 <!-- Restaurant 1 -->
@@ -1020,6 +1028,7 @@ Sector 35, Chandigarh
 
 
     <script src="js/api.js"></script>
+    <script src="js/location-modal.js"></script>
     <script src="js/app.js"></script>
 </body>
 

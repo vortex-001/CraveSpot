@@ -115,15 +115,41 @@ function enableNearby(){const status=document.getElementById("nearbyStatus"),but
 const nearbyBtn=document.getElementById("nearbyRestaurantsBtn");if(nearbyBtn)nearbyBtn.addEventListener("click",()=>{if(nearbyActive){nearbyActive=false;userCoordinates=null;nearbyBtn.textContent="Nearby";const st=document.getElementById("nearbyStatus");if(st)st.textContent="";filterRestaurants();}else enableNearby();});
 
 /* =========================================
-   LOAD DATA FROM FLASK
+   LOAD DATA FROM FLASK & LIVE GPS DISCOVERY
 ========================================= */
 
 async function loadRestaurants() {
     try {
-        restaurantGrid.innerHTML = "<p>Loading restaurants...</p>";
+        restaurantGrid.innerHTML = "<p>Loading live restaurants...</p>";
 
-        // Load restaurants using the shared API helper
-        restaurants = await apiRequest("/restaurants");
+        const loc = (typeof getUserLocation === "function") 
+            ? getUserLocation() 
+            : { lat: 30.7333, lng: 76.7794, city: "Chandigarh" };
+
+        let fetched = [];
+        try {
+            const liveRes = await apiRequest(`/restaurants/live-nearby?lat=${loc.lat}&lng=${loc.lng}&radius=35`);
+            if (liveRes?.restaurants && liveRes.restaurants.length > 0) {
+                fetched = liveRes.restaurants;
+            }
+        } catch (e) {
+            console.warn("Live nearby query failed; trying /restaurants fallback:", e);
+        }
+
+        if (!fetched.length) {
+            fetched = await apiRequest("/restaurants");
+        }
+
+        // Compute distance for all items if not already computed
+        restaurants = (Array.isArray(fetched) ? fetched : []).map(r => {
+            if (typeof r.distance_km !== "number" && r.latitude && r.longitude) {
+                r.distance_km = distanceKm(
+                    { latitude: loc.lat, longitude: loc.lng },
+                    { latitude: parseFloat(r.latitude), longitude: parseFloat(r.longitude) }
+                );
+            }
+            return r;
+        });
 
         // Load menu items too
         try {
@@ -145,6 +171,11 @@ async function loadRestaurants() {
         renderRestaurants();
     }
 }
+
+// Reload restaurants whenever user changes location on the map or GPS
+window.addEventListener("cravespot:locationChanged", () => {
+    loadRestaurants();
+});
 
 
 /* =========================================
@@ -349,6 +380,11 @@ card.dataset.offer = String(
                     )}
 
                 </p>
+
+                <div class="restaurant-meta" style="margin: 6px 0 10px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <span class="loc-distance-pill">📍 ${typeof restaurant.distance_km === 'number' ? (restaurant.distance_km < 1 ? Math.round(restaurant.distance_km * 1000) + ' m' : restaurant.distance_km.toFixed(1) + ' km') : 'Nearby'}</span>
+                    <span class="delivery-time-pill">⚡ ~${restaurant.delivery_time_mins || 25} mins</span>
+                </div>
 
 
                 <p class="price">

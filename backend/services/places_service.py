@@ -56,8 +56,11 @@ def haversine_distance(lat1, lon1, lat2, lon2):
 def geocode_address(query):
     """
     Geocode an address, area, city, or pincode into (latitude, longitude, display_name).
-    Uses OpenStreetMap Nominatim API with fallback dictionary.
+    Supports:
+    - Coordinate strings "lat,lng" for reverse geocoding
+    - Area and city text searches with OpenStreetMap Nominatim API + local directory
     """
+    import re
     clean_query = query.strip().lower()
     if not clean_query:
         return None
@@ -69,6 +72,57 @@ def geocode_address(query):
         cached_data, timestamp = _PLACES_CACHE[cache_key]
         if now - timestamp < 3600:
             return cached_data
+
+    # Coordinate reverse geocoding check (e.g. "30.7333,76.7794" or "30.7333, 76.7794")
+    coord_match = re.match(r"^([-+]?\d*\.?\d+)\s*,\s*([-+]?\d*\.?\d+)$", clean_query)
+    if coord_match:
+        try:
+            q_lat = float(coord_match.group(1))
+            q_lng = float(coord_match.group(2))
+
+            # Find closest city in popular locations
+            best_city = "Chandigarh"
+            min_dist = 999999.0
+            for name, data in POPULAR_LOCATIONS.items():
+                d = haversine_distance(q_lat, q_lng, data["lat"], data["lng"])
+                if d < min_dist:
+                    min_dist = d
+                    best_city = data["city"]
+
+            disp = f"{best_city}, India" if min_dist < 30 else f"Location ({round(q_lat, 4)}, {round(q_lng, 4)})"
+
+            # Try online reverse geocode if possible
+            try:
+                rev_url = f"https://nominatim.openstreetmap.org/reverse?lat={q_lat}&lon={q_lng}&format=json"
+                req = urllib.request.Request(rev_url, headers={"User-Agent": "CraveSpot-Food-Platform/2.0"})
+                with urllib.request.urlopen(req, timeout=3) as resp:
+                    if resp.status == 200:
+                        r_data = json.loads(resp.read().decode("utf-8"))
+                        r_addr = r_data.get("address", {})
+                        city_candidate = (
+                            r_addr.get("city")
+                            or r_addr.get("town")
+                            or r_addr.get("suburb")
+                            or r_addr.get("neighbourhood")
+                            or r_addr.get("county")
+                        )
+                        if city_candidate:
+                            best_city = city_candidate.title()
+                        disp = r_data.get("display_name", disp)
+            except Exception:
+                pass
+
+            res = {
+                "latitude": q_lat,
+                "longitude": q_lng,
+                "display_name": disp,
+                "city": best_city,
+                "source": "reverse_geocode"
+            }
+            _PLACES_CACHE[cache_key] = (res, now)
+            return res
+        except Exception:
+            pass
 
     # Check local dictionary for instant match
     for loc_name, coords in POPULAR_LOCATIONS.items():

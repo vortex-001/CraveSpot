@@ -207,14 +207,19 @@ def live_nearby_restaurants():
     records with OpenStreetMap Overpass live data.
     """
     try:
-        lat = float(request.args.get("lat"))
-        lng = float(request.args.get("lng"))
-        radius_km = float(request.args.get("radius", 5.0))
+        lat_val = request.args.get("lat") if request.args.get("lat") is not None else request.args.get("latitude")
+        lng_val = request.args.get("lng") if request.args.get("lng") is not None else request.args.get("longitude")
+        if lat_val is None or lng_val is None:
+            raise ValueError("Missing coordinates")
+        lat = float(lat_val)
+        lng = float(lng_val)
+        radius_km = float(request.args.get("radius") or request.args.get("radius_km") or 15.0)
     except (TypeError, ValueError):
         return jsonify({"success": False, "message": "Valid 'lat' and 'lng' query parameters are required"}), 400
 
-    # 1. Fetch DB restaurants within radius
-    db_restaurants = []
+    # 1. Fetch DB restaurants and calculate real Haversine distance
+    all_db_restaurants = []
+    in_radius_restaurants = []
     conn = None
     cursor = None
     try:
@@ -224,10 +229,13 @@ def live_nearby_restaurants():
         rows = cursor.fetchall()
         for r in rows:
             dist = haversine_distance(lat, lng, float(r["latitude"]), float(r["longitude"]))
+            r["distance_km"] = dist
+            r["delivery_time_mins"] = max(15, min(65, int(15 + dist * 3.5)))
+            r["source"] = "database"
+            serialized = serialize_row(r)
+            all_db_restaurants.append(serialized)
             if dist <= radius_km:
-                r["distance_km"] = dist
-                r["source"] = "database"
-                db_restaurants.append(serialize_row(r))
+                in_radius_restaurants.append(serialized)
     except Exception as e:
         app.logger.warning(f"Error querying DB for live nearby restaurants: {e}")
     finally:
@@ -236,11 +244,29 @@ def live_nearby_restaurants():
         if conn and conn.is_connected():
             conn.close()
 
-    # 2. Fetch Live OpenStreetMap Overpass restaurants
+    # Sort in-radius restaurants by distance
+    in_radius_restaurants.sort(key=lambda x: x.get("distance_km", 999))
+
+    # If within-radius count is low, supplement with the closest DB restaurants
+    # so discovery never leaves the user with a blank screen
+    if len(in_radius_restaurants) < 5 and all_db_restaurants:
+        all_db_restaurants.sort(key=lambda x: x.get("distance_km", 999))
+        seen_ids = {r.get("restaurant_id") for r in in_radius_restaurants}
+        for r in all_db_restaurants:
+            if r.get("restaurant_id") not in seen_ids:
+                in_radius_restaurants.append(r)
+                seen_ids.add(r.get("restaurant_id"))
+            if len(in_radius_restaurants) >= 8:
+                break
+
+    # 2. Fetch Live OpenStreetMap Overpass restaurants if online
     live_osm = fetch_osm_overpass_restaurants(lat, lng, radius_km=radius_km, limit=15)
+    for osm_r in live_osm:
+        dist = osm_r.get("distance_km", 2.0)
+        osm_r["delivery_time_mins"] = max(15, min(65, int(15 + dist * 3.5)))
 
     # Combine and sort by distance
-    all_nearby = db_restaurants + live_osm
+    all_nearby = in_radius_restaurants + live_osm
     all_nearby.sort(key=lambda x: x.get("distance_km", 999))
 
     return jsonify({
