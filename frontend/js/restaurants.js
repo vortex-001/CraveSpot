@@ -421,6 +421,7 @@ function renderRestaurants() {
 
         card.dataset.latitude = restaurant.latitude ?? restaurant.lat ?? "";
         card.dataset.longitude = restaurant.longitude ?? restaurant.lng ?? restaurant.lon ?? "";
+        card.dataset.spotType = restaurant.spot_type || "";
         card.dataset.offer = String(
             Boolean(
                 restaurant.offer &&
@@ -428,8 +429,14 @@ function renderRestaurants() {
             )
         );
 
-
-
+        const spotBadge = restaurant.spot_badge || (
+            restaurant.spot_type === 'street_food' ? '🍢 Street Food' :
+            restaurant.spot_type === 'dhaba' ? '🍲 Dhaba' :
+            restaurant.spot_type === 'cafe_tea' ? '☕ Chai Tapri' :
+            restaurant.cuisine && restaurant.cuisine.toLowerCase().includes('dhaba') ? '🍲 Dhaba' :
+            restaurant.cuisine && (restaurant.cuisine.toLowerCase().includes('street') || restaurant.cuisine.toLowerCase().includes('chaat')) ? '🍢 Street Food' :
+            'Restaurant'
+        );
 
         card.innerHTML = `
 
@@ -461,7 +468,7 @@ function renderRestaurants() {
                 </button>
 
                 <span class="offer-badge">
-                    Restaurant
+                    ${escapeHtml(spotBadge)}
                 </span>
 
             </div>
@@ -664,6 +671,10 @@ function filterRestaurants() {
             matchesFilter = isVeg;
         } else if (activeFilter === "fast") {
             matchesFilter = cuisine.includes("fast");
+        } else if (activeFilter === "street") {
+            matchesFilter = card.dataset.spotType === "street_food" || cuisine.includes("street") || cuisine.includes("chaat") || cuisine.includes("roll") || cuisine.includes("snack") || cuisine.includes("golgapp") || cuisine.includes("momo") || name.includes("chaat") || name.includes("corner");
+        } else if (activeFilter === "dhaba") {
+            matchesFilter = card.dataset.spotType === "dhaba" || cuisine.includes("dhaba") || cuisine.includes("kulcha") || cuisine.includes("thali") || cuisine.includes("paratha") || name.includes("dhaba") || name.includes("kulcha");
         }
 
         const restaurant = restaurants.find(

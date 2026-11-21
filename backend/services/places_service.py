@@ -207,6 +207,20 @@ def geocode_address(query):
     return default_res
 
 
+def classify_spot_type(name, cuisine, amenity="", shop=""):
+    """Classify food location into street_food, dhaba, cafe_tea, bakery_sweets, or restaurant."""
+    combined = f"{name} {cuisine} {amenity} {shop}".lower()
+    if any(k in combined for k in ["street", "chaat", "golgappe", "panipuri", "momos", "roll", "rolls", "stall", "kiosk", "thela", "snack", "tikki", "burger stall", "samosa", "pakora", "fast_food", "street_vendor", "chowmein", "maggi", "kulcha junction"]):
+        return "street_food", "🍢 Street Food Stall"
+    if any(k in combined for k in ["dhaba", "kulcha", "paratha", "thali", "amritsari", "tandoori"]):
+        return "dhaba", "🍲 Authentic Dhaba"
+    if any(k in combined for k in ["chai", "tea", "tapri", "cafe", "coffee", "bistro", "bun maska"]):
+        return "cafe_tea", "☕ Tea & Snacks"
+    if any(k in combined for k in ["sweet", "sweets", "mithai", "halwai", "bakery", "pastry", "cake", "confectionery", "jalebi", "ice_cream", "dessert"]):
+        return "bakery_sweets", "🍰 Sweets & Bakery"
+    return "restaurant", "🍽️ Restaurant"
+
+
 def fetch_osm_overpass_restaurants(lat, lng, radius_km=5, limit=20):
     """
     Fetch live restaurants from OpenStreetMap Overpass API around (lat, lng).
@@ -225,8 +239,10 @@ def fetch_osm_overpass_restaurants(lat, lng, radius_km=5, limit=20):
     overpass_query = f"""
     [out:json][timeout:5];
     (
-      node["amenity"~"restaurant|cafe|fast_food"](around:{radius_meters},{lat},{lng});
-      way["amenity"~"restaurant|cafe|fast_food"](around:{radius_meters},{lat},{lng});
+      node["amenity"~"restaurant|cafe|fast_food|food_court|ice_cream|marketplace|street_vendor"](around:{radius_meters},{lat},{lng});
+      way["amenity"~"restaurant|cafe|fast_food|food_court|ice_cream|marketplace|street_vendor"](around:{radius_meters},{lat},{lng});
+      node["shop"~"bakery|confectionery|deli|pastry|sweets|ice_cream|kiosk"](around:{radius_meters},{lat},{lng});
+      way["shop"~"bakery|confectionery|deli|pastry|sweets|ice_cream|kiosk"](around:{radius_meters},{lat},{lng});
     );
     out center {limit};
     """
@@ -257,10 +273,14 @@ def fetch_osm_overpass_restaurants(lat, lng, radius_km=5, limit=20):
                     if not e_lat or not e_lng:
                         continue
 
-                    cuisine = tags.get("cuisine", "Multi-Cuisine").replace(";", " • ").title()
+                    cuisine = tags.get("cuisine", "Local Food").replace(";", " • ").title()
+                    amenity = tags.get("amenity", "")
+                    shop = tags.get("shop", "")
+                    spot_type, spot_badge = classify_spot_type(name, cuisine, amenity, shop)
+
                     street = tags.get("addr:street", "")
                     city = tags.get("addr:city", "")
-                    addr = f"{street}, {city}".strip(" ,") or "Nearby, Local Market"
+                    addr = f"{street}, {city}".strip(" ,") or "Nearby, Local Food Spot"
 
                     dist = haversine_distance(lat, lng, e_lat, e_lng)
                     is_veg = 1 if tags.get("diet:vegetarian") == "yes" else 0
@@ -269,10 +289,12 @@ def fetch_osm_overpass_restaurants(lat, lng, radius_km=5, limit=20):
                         "restaurant_id": f"osm_{el.get('id')}",
                         "name": name,
                         "cuisine": cuisine,
+                        "spot_type": spot_type,
+                        "spot_badge": spot_badge,
                         "address": addr,
-                        "rating": 4.2,
+                        "rating": 4.3,
                         "review_count": 45,
-                        "price_for_two": 350,
+                        "price_for_two": 180 if spot_type == "street_food" else (280 if spot_type == "dhaba" else 350),
                         "is_veg": is_veg,
                         "is_open_now": 1,
                         "offer": "Live Nearby Vendor",
@@ -313,7 +335,7 @@ def fetch_google_places_restaurants(lat, lng, radius_km=15, limit=20):
 
     url = (
         f"https://maps.googleapis.com/maps/api/place/nearbysearch/json"
-        f"?location={lat},{lng}&radius={radius_meters}&type=restaurant&key={api_key}"
+        f"?location={lat},{lng}&radius={radius_meters}&keyword=food|street+food|dhaba|chaat|cafe|sweets|bakery|restaurant&key={api_key}"
     )
 
     try:
@@ -341,18 +363,22 @@ def fetch_google_places_restaurants(lat, lng, radius_km=15, limit=20):
                         cover = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80"
 
                     types = [t.replace("_", " ").title() for t in item.get("types", []) if t not in ("restaurant", "food", "point_of_interest", "establishment")]
-                    cuisine = " • ".join(types[:2]) if types else "Multi-Cuisine"
+                    cuisine = " • ".join(types[:2]) if types else "Local Food"
 
-                    price_level = item.get("price_level", 2)
-                    price_for_two = 250 if price_level == 1 else (450 if price_level == 2 else (850 if price_level == 3 else 1600))
+                    name = item.get("name", "Food Spot")
+                    spot_type, spot_badge = classify_spot_type(name, cuisine)
 
-                    name = item.get("name", "Restaurant")
+                    price_level = item.get("price_level", 1 if spot_type == "street_food" else 2)
+                    price_for_two = 160 if price_level == 1 else (350 if price_level == 2 else (850 if price_level == 3 else 1600))
+
                     is_veg = 1 if ("pure veg" in name.lower() or "veg" in cuisine.lower() or "vegetarian" in cuisine.lower()) else 0
 
                     restaurants.append({
                         "restaurant_id": f"gp_{item.get('place_id')}",
                         "name": name,
                         "cuisine": cuisine,
+                        "spot_type": spot_type,
+                        "spot_badge": spot_badge,
                         "address": item.get("vicinity") or "Nearby, Local Area",
                         "rating": float(item.get("rating", 4.3)),
                         "review_count": int(item.get("user_ratings_total", 50)),
