@@ -16,7 +16,7 @@ function getSelectedCity() {
 }
 
 // Tricity metropolitan agglomeration: places in Chandigarh, Mohali, Panchkula are adjacent
-const TRICITY_AREAS = ["chandigarh", "mohali", "panchkula", "zirakpur", "kharar", "sas nagar", "tricity"];
+const TRICITY_AREAS = ["chandigarh", "mohali", "panchkula", "zirakpur", "kharar", "sas nagar", "tricity", "punjab", "haryana"];
 
 // Check whether a restaurant belongs to or is near the selected city
 function matchesSelectedCity(restaurant) {
@@ -29,19 +29,19 @@ function matchesSelectedCity(restaurant) {
     }
 
     // Direct address match
-    if (address.includes(selectedCity)) {
+    if (address.includes(selectedCity) || selectedCity.includes(address)) {
         return true;
     }
 
-    // Tricity metro cluster: if user selected Mohali / Chandigarh / Panchkula
+    // Tricity metro cluster: if user selected Mohali / Chandigarh / Panchkula / Kharar
     const isUserInTricity = TRICITY_AREAS.some(c => selectedCity.includes(c));
     const isRestaurantInTricity = TRICITY_AREAS.some(c => address.includes(c));
     if (isUserInTricity && isRestaurantInTricity) {
         return true;
     }
 
-    // Distance proximity check: within 35 km
-    if (typeof restaurant.distance_km === "number" && restaurant.distance_km <= 35) {
+    // Distance proximity check: within 45 km
+    if (typeof restaurant.distance_km === "number" && restaurant.distance_km <= 45) {
         return true;
     }
 
@@ -51,7 +51,7 @@ const sampleRestaurants = [
     {
         restaurant_id: 1,
         name: "Spice Garden",
-        cuisine: "North Indian",
+        cuisine: "North Indian & Mughlai",
         rating: 4.5,
         address: "Sector 17, Chandigarh", latitude: 30.7415, longitude: 76.7680,
         is_veg: true,
@@ -60,7 +60,7 @@ const sampleRestaurants = [
     {
         restaurant_id: 2,
         name: "Pizza Corner",
-        cuisine: "Italian",
+        cuisine: "Italian & Wood-fired Pizza",
         rating: 4.3,
         address: "Sector 22, Chandigarh", latitude: 30.7336, longitude: 76.7725,
         is_veg: true,
@@ -69,7 +69,7 @@ const sampleRestaurants = [
     {
         restaurant_id: 3,
         name: "Wok Express",
-        cuisine: "Chinese",
+        cuisine: "Chinese & Asian Bowls",
         rating: 4.2,
         address: "Sector 35, Chandigarh", latitude: 30.7253, longitude: 76.7642,
         is_veg: false,
@@ -78,7 +78,7 @@ const sampleRestaurants = [
     {
         restaurant_id: 4,
         name: "Burger House",
-        cuisine: "Fast Food",
+        cuisine: "Fast Food & Shakes",
         rating: 4.1,
         address: "Sector 8, Chandigarh", latitude: 30.7358, longitude: 76.8010,
         is_veg: false,
@@ -87,7 +87,7 @@ const sampleRestaurants = [
     {
         restaurant_id: 5,
         name: "Sweet Cravings",
-        cuisine: "Desserts",
+        cuisine: "Desserts & Cakes",
         rating: 4.7,
         address: "Sector 10, Chandigarh", latitude: 30.7500, longitude: 76.7820,
         is_veg: true,
@@ -96,8 +96,8 @@ const sampleRestaurants = [
     {
         restaurant_id: 6,
         name: "Katani Dhaba",
-        cuisine: "North Indian & Punjabi",
-        rating: 4.4,
+        cuisine: "North Indian & Punjabi Thali",
+        rating: 4.5,
         address: "Phase 3B2, Mohali", latitude: 30.7071, longitude: 76.7161,
         is_veg: true,
         offer: "15% OFF"
@@ -105,7 +105,7 @@ const sampleRestaurants = [
     {
         restaurant_id: 7,
         name: "Amrit Sweets & Restaurant",
-        cuisine: "Desserts & Snacks",
+        cuisine: "Desserts & Authentic Snacks",
         rating: 4.6,
         address: "Phase 5, Mohali", latitude: 30.7188, longitude: 76.7123,
         is_veg: true,
@@ -114,11 +114,20 @@ const sampleRestaurants = [
     {
         restaurant_id: 8,
         name: "Barbeque Nation",
-        cuisine: "BBQ & Multi-Cuisine",
+        cuisine: "BBQ & Multi-Cuisine Buffet",
         rating: 4.5,
         address: "Sector 5, Panchkula", latitude: 30.6931, longitude: 76.8524,
         is_veg: false,
         offer: "Flat ₹150 OFF"
+    },
+    {
+        restaurant_id: 9,
+        name: "Urban Cafe & Bistro",
+        cuisine: "Cafe & Continental",
+        rating: 4.4,
+        address: "Sector 70, Mohali", latitude: 30.6990, longitude: 76.7080,
+        is_veg: false,
+        offer: "10% OFF"
     }
 ];
 let menuItems = [];
@@ -189,52 +198,52 @@ async function loadRestaurants() {
         renderRestaurants();
     }
 
-    // 2. Fetch fresh live GPS & Database restaurants in the background
+    // 2. Fetch fresh live GPS & Database restaurants in the background (tight 1500ms timeout)
     try {
         let fetched = [];
         try {
-            const liveRes = await apiRequest(`/restaurants/live-nearby?lat=${loc.lat}&lng=${loc.lng}&radius=35`, { timeout: 3000 });
+            const liveRes = await apiRequest(`/restaurants/live-nearby?lat=${loc.lat}&lng=${loc.lng}&radius=15`, { timeout: 1500 });
             if (liveRes?.restaurants && liveRes.restaurants.length > 0) {
                 fetched = liveRes.restaurants;
             }
         } catch (e) {
-            console.warn("Live nearby query failed, trying /restaurants fallback:", e);
+            // Live nearby query fallback
         }
 
         if (!fetched.length) {
             try {
-                const allRest = await apiRequest("/restaurants", { timeout: 2500 });
+                const allRest = await apiRequest("/restaurants", { timeout: 1200 });
                 if (Array.isArray(allRest) && allRest.length > 0) {
                     fetched = allRest;
                 }
             } catch (err) {
-                console.warn("/restaurants fallback failed:", err);
+                // Keep rendered baseline
             }
         }
 
         // If fresh data received, update restaurants and re-render
         if (fetched && fetched.length > 0) {
             restaurants = fetched.map(r => {
-                if (typeof r.distance_km !== "number" && r.latitude && r.longitude) {
-                    r.distance_km = distanceKm(
+                const item = { ...r };
+                if (typeof item.distance_km !== "number" && item.latitude && item.longitude) {
+                    item.distance_km = distanceKm(
                         { latitude: loc.lat, longitude: loc.lng },
-                        { latitude: parseFloat(r.latitude), longitude: parseFloat(r.longitude) }
+                        { latitude: parseFloat(item.latitude), longitude: parseFloat(item.longitude) }
                     );
                 }
-                return r;
+                return item;
             });
             renderRestaurants();
         }
 
         // Load menu items in background
         try {
-            menuItems = await apiRequest("/menu-items", { timeout: 2000 });
+            menuItems = await apiRequest("/menu-items", { timeout: 1500 });
         } catch (error) {
             menuItems = [];
         }
 
     } catch (error) {
-        console.warn("Background restaurant refresh completed with fallback:", error);
         if (!restaurants || restaurants.length === 0) {
             restaurants = sampleRestaurants;
             renderRestaurants();
@@ -649,21 +658,38 @@ function filterRestaurants() {
         }
     });
 
-    if (nearbyActive && sortSelect && sortSelect.value === "distance") { const ordered = [...cards].sort((a, b) => { const da = a.dataset.distance === "" ? Infinity : Number(a.dataset.distance), db = b.dataset.distance === "" ? Infinity : Number(b.dataset.distance); return da - db; }); ordered.forEach(card => restaurantGrid.appendChild(card)); }
-
-    if (resultCount) {
-        resultCount.textContent = `${visibleCount} restaurants found`;
-    }
-
-    if (noResults) {
-        noResults.style.display = visibleCount === 0 ? "block" : "none";
-        const message = noResults.querySelector("p");
-        if (message && !query && activeFilter === "all") {
-            message.textContent = `No restaurants found matching ${getSelectedCity()} directly. Click below to explore all spots.`;
-        } else if (message) {
-            message.textContent = "Try clearing your filters or searching another cuisine.";
+    // Auto-broadening: If selected city has no direct string matches,
+    // show nearby restaurants with proximity note so user NEVER gets an empty screen
+    if (visibleCount === 0 && !query && activeFilter === "all" && cards.length > 0) {
+        cards.forEach(c => {
+            c.style.display = "";
+            visibleCount++;
+        });
+        if (resultTitle) {
+            resultTitle.textContent = `Restaurants Delivering Near ${getSelectedCity()}`;
+        }
+        if (resultCount) {
+            resultCount.textContent = `Showing all ${visibleCount} top-rated spots delivering to your area`;
+        }
+        if (noResults) {
+            noResults.style.display = "none";
+        }
+    } else {
+        if (resultCount) {
+            resultCount.textContent = `${visibleCount} restaurants found`;
+        }
+        if (noResults) {
+            noResults.style.display = visibleCount === 0 ? "block" : "none";
+            const message = noResults.querySelector("p");
+            if (message && query) {
+                message.textContent = `No results found for "${query}". Try searching another dish or cuisine.`;
+            } else if (message) {
+                message.textContent = "Try clearing your filters to explore all delicious spots.";
+            }
         }
     }
+
+    if (nearbyActive && sortSelect && sortSelect.value === "distance") { const ordered = [...cards].sort((a, b) => { const da = a.dataset.distance === "" ? Infinity : Number(a.dataset.distance), db = b.dataset.distance === "" ? Infinity : Number(b.dataset.distance); return da - db; }); ordered.forEach(card => restaurantGrid.appendChild(card)); }
 
     // Hook up empty state reset button
     const emptyResetBtn = document.getElementById("emptyResetFiltersBtn");

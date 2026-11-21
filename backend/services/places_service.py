@@ -209,7 +209,8 @@ def fetch_osm_overpass_restaurants(lat, lng, radius_km=5, limit=20):
     Fetch live restaurants from OpenStreetMap Overpass API around (lat, lng).
     Requires zero API keys. Completely free and open data.
     """
-    radius_meters = int(radius_km * 1000)
+    # Cap radius to max 6000m to prevent Overpass API timeouts
+    radius_meters = min(6000, max(500, int(radius_km * 1000)))
     cache_key = f"osm_{round(lat, 3)}_{round(lng, 3)}_{radius_meters}"
     now = time.time()
 
@@ -219,7 +220,7 @@ def fetch_osm_overpass_restaurants(lat, lng, radius_km=5, limit=20):
             return cached_data
 
     overpass_query = f"""
-    [out:json][timeout:8];
+    [out:json][timeout:5];
     (
       node["amenity"~"restaurant|cafe|fast_food"](around:{radius_meters},{lat},{lng});
       way["amenity"~"restaurant|cafe|fast_food"](around:{radius_meters},{lat},{lng});
@@ -236,7 +237,7 @@ def fetch_osm_overpass_restaurants(lat, lng, radius_km=5, limit=20):
             headers={"User-Agent": "CraveSpot-Food-App/2.0"}
         )
 
-        with urllib.request.urlopen(req, timeout=2.0) as response:
+        with urllib.request.urlopen(req, timeout=1.5) as response:
             if response.status == 200:
                 raw_json = json.loads(response.read().decode("utf-8"))
                 elements = raw_json.get("elements", [])
