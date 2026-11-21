@@ -3193,3 +3193,250 @@ body {
     border: 1px solid #FFD3BF;
     margin-right: 6px;
 }
+
+/* ==========================================================================
+   CRAVESPOT POLISH: DISTANCE FILTER, CRAVING MOOD, SPACING & ANIMATIONS
+   ========================================================================== */
+
+/* 1. Distance Range Filter Ribbon */
+.distance-range-ribbon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    background: #FAFAFA;
+    border: 1px solid #EDEDED;
+    border-radius: 12px;
+    padding: 10px 16px;
+    margin: 14px 0 20px;
+}
+
+.distance-ribbon-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #4B5563;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-right: 4px;
+}
+
+.distance-ribbon-title svg {
+    color: #FF5200;
+}
+
+.dist-pill-btn {
+    background: #FFFFFF;
+    border: 1px solid #D1D5DB;
+    border-radius: 9999px;
+    padding: 6px 14px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dist-pill-btn:hover {
+    border-color: #FF5200;
+    color: #FF5200;
+    background: #FFF7ED;
+    transform: translateY(-1px);
+}
+
+.dist-pill-btn.active {
+    background: #111827;
+    border-color: #111827;
+    color: #FFFFFF;
+    box-shadow: 0 4px 12px rgba(17, 24, 39, 0.2);
+}
+
+.distance-summary-badge {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6B7280;
+    background: #F3F4F6;
+    padding: 4px 10px;
+    border-radius: 6px;
+}
+
+/* 2. Craving Mood Ribbon */
+.craving-ribbon-section {
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
+
+.craving-mood-ribbon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 10px 4px 12px;
+    scrollbar-width: none;
+}
+
+.craving-mood-ribbon::-webkit-scrollbar {
+    display: none;
+}
+
+.craving-ribbon-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #FF5200;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+}
+
+.craving-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #FFFFFF;
+    border: 1.5px solid #E5E7EB;
+    border-radius: 9999px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.craving-chip svg {
+    flex-shrink: 0;
+}
+
+.craving-chip:hover {
+    border-color: #FF5200;
+    color: #FF5200;
+    background: #FFF7ED;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(255, 82, 0, 0.12);
+}
+
+.craving-chip.active {
+    background: linear-gradient(135deg, #FF5200, #E23744);
+    border-color: #E23744;
+    color: #FFFFFF;
+    box-shadow: 0 6px 16px rgba(226, 55, 68, 0.32);
+    transform: translateY(-1px);
+}
+
+.craving-chip.active svg {
+    color: #FFFFFF;
+    fill: currentColor;
+}
+
+/* 3. Diet Indicator Badges (Clean SVG) */
+.diet-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+/* 4. Global Animations & Micro-Interactions */
+@keyframes fadeInUpSmooth {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.food-card,
+.dish-card,
+.restaurant-card {
+    animation: fadeInUpSmooth 0.36s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.28s ease !important;
+    border-radius: 14px !important;
+    overflow: hidden;
+}
+
+.food-card:hover,
+.dish-card:hover,
+.restaurant-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08) !important;
+    border-color: #F3F4F6 !important;
+}
+
+.food-card .food-image,
+.dish-card .dish-image img,
+.restaurant-card img {
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.food-card:hover .food-image,
+.dish-card:hover .dish-image img,
+.restaurant-card:hover img {
+    transform: scale(1.05) !important;
+}
+
+/* Button click tactile feedback */
+button:active,
+.btn:active,
+.dist-pill-btn:active,
+.craving-chip:active,
+.mode-btn:active,
+.filter-btn:active {
+    transform: scale(0.96) !important;
+}
+
+/* Navbar refinement & global spacing */
+.navbar {
+    padding: 0 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.nav-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    gap: 18px;
+}
+
+.container {
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Card Distance and Meta Pills */
+.loc-distance-pill {
+    background: #F3F4F6;
+    color: #374151;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.delivery-time-pill {
+    background: #ECFDF5;
+    color: #065F46;
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}

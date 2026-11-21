@@ -29,6 +29,10 @@ let selectedCategory = "all";
 
 let selectedFilter = "all";
 
+let selectedCraving = "all";
+
+let selectedRestaurant = "all";
+
 
 
 /* =========================================
@@ -98,6 +102,28 @@ function filterDishes() {
 
         
 
+        const cravingAttr = (card.dataset.craving || "").toLowerCase();
+        let matchesCraving = true;
+        if (selectedCraving === "spicy") {
+            matchesCraving = cravingAttr.includes("spicy") || name.includes("chilli") || name.includes("biryani") || name.includes("tikka") || name.includes("curry") || name.includes("spic");
+        } else if (selectedCraving === "cheesy") {
+            matchesCraving = cravingAttr.includes("cheesy") || name.includes("cheese") || name.includes("pizza") || name.includes("fries") || name.includes("paneer");
+        } else if (selectedCraving === "crispy") {
+            matchesCraving = cravingAttr.includes("crispy") || name.includes("burger") || name.includes("fries") || name.includes("crisp") || name.includes("kulcha") || name.includes("crunch");
+        } else if (selectedCraving === "comfort") {
+            matchesCraving = cravingAttr.includes("comfort") || name.includes("dal") || name.includes("butter") || name.includes("noodles") || name.includes("momos") || name.includes("kulcha");
+        } else if (selectedCraving === "sweet") {
+            matchesCraving = cravingAttr.includes("sweet") || category.includes("dessert") || name.includes("brownie") || name.includes("jamun") || name.includes("sweet");
+        } else if (selectedCraving === "budget") {
+            matchesCraving = price < 150;
+        }
+
+        const restaurantName = (card.dataset.restaurant || card.querySelector(".dish-price-row span")?.textContent || "").toLowerCase();
+        let matchesRestaurant = true;
+        if (selectedRestaurant !== "all") {
+            matchesRestaurant = restaurantName.includes(selectedRestaurant);
+        }
+
         const advancedPrice = maxDishPrice.value.trim();
         const maxPrice = advancedPrice === "" ? Infinity : Number(advancedPrice);
         const minRating = Number(minDishRating.value);
@@ -111,7 +137,9 @@ function filterDishes() {
             matchesSearch &&
             matchesCategory &&
             matchesFilter &&
-            matchesAdvanced
+            matchesAdvanced &&
+            matchesCraving &&
+            matchesRestaurant
         ) {
             card.style.display = "block";
             visibleCount++;
@@ -129,7 +157,19 @@ function filterDishes() {
         dishNoResults.style.display = "none";
     }
 
-    if (selectedCategory === "all") {
+    if (selectedCraving !== "all") {
+        const cravingTitles = {
+            spicy: "Spicy & Fiery Cravings",
+            cheesy: "Cheesy & Melty Cravings",
+            crispy: "Crispy & Crunchy Cravings",
+            comfort: "Warm & Soulful Comfort Cravings",
+            sweet: "Sweet Tooth Delights",
+            budget: "Pocket-Friendly Bites (< ₹150)"
+        };
+        dishResultTitle.textContent = cravingTitles[selectedCraving] || "Craving Discovery";
+    } else if (selectedRestaurant !== "all") {
+        dishResultTitle.textContent = `Dishes from ${selectedRestaurant.toUpperCase()}`;
+    } else if (selectedCategory === "all") {
         dishResultTitle.textContent = "Popular dishes";
     } else {
         dishResultTitle.textContent =
@@ -501,3 +541,39 @@ const initialDishQuery = new URLSearchParams(window.location.search).get("search
 if (initialDishQuery) {
     handleDishSearch(initialDishQuery);
 }
+
+// ================= CRAVING MOOD CHIPS =================
+const cravingChips = document.querySelectorAll(".craving-chip");
+cravingChips.forEach(chip => {
+    chip.addEventListener("click", function() {
+        cravingChips.forEach(c => c.classList.remove("active"));
+        this.classList.add("active");
+        selectedCraving = this.dataset.craving || "all";
+        filterDishes();
+    });
+});
+
+// ================= RESTAURANT FILTER DROPDOWN =================
+const dishRestaurantFilter = document.getElementById("dishRestaurantFilter");
+if (dishRestaurantFilter) {
+    dishRestaurantFilter.addEventListener("change", function() {
+        selectedRestaurant = this.value.toLowerCase().trim();
+        filterDishes();
+    });
+}
+
+// ================= CRAVING FROM URL =================
+const cravingFromURL = params.get("craving");
+if (cravingFromURL) {
+    const normCraving = cravingFromURL.toLowerCase().trim();
+    const matchingChip = Array.from(cravingChips).find(c =>
+        (c.dataset.craving || "").toLowerCase().trim() === normCraving
+    );
+    if (matchingChip) {
+        cravingChips.forEach(c => c.classList.remove("active"));
+        matchingChip.classList.add("active");
+        selectedCraving = normCraving;
+        filterDishes();
+    }
+}
+

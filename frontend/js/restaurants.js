@@ -168,6 +168,7 @@ const sampleRestaurants = [
 ];
 let menuItems = [];
 let activeFilter = "all";
+let activeDistanceRadius = "all";
 
 const restaurantGrid = document.getElementById("restaurantGrid");
 const searchInput = document.getElementById("restaurantSearch");
@@ -757,11 +758,28 @@ function filterRestaurants() {
             ? true
             : (restaurant ? matchesSelectedCity(restaurant) : false);
 
+        // Compute distance from user location or GPS coordinates
+        const curLoc = (typeof getUserLocation === "function") ? getUserLocation() : { lat: 30.7333, lng: 76.7794 };
+        const userPoint = userCoordinates || { latitude: curLoc.lat, longitude: curLoc.lng };
+        const cardLat = Number(card.dataset.latitude);
+        const cardLon = Number(card.dataset.longitude);
+        if (Number.isFinite(cardLat) && Number.isFinite(cardLon) && cardLat && cardLon) {
+            card.dataset.distance = distanceKm(userPoint, { latitude: cardLat, longitude: cardLon }).toFixed(1);
+        } else if (!card.dataset.distance) {
+            card.dataset.distance = "";
+        }
+
+        let matchesDistance = true;
+        if (activeDistanceRadius !== "all") {
+            const maxRadius = Number(activeDistanceRadius);
+            matchesDistance = card.dataset.distance !== "" && Number(card.dataset.distance) <= maxRadius;
+        }
+
         let nearbyMatch = true;
-        if (nearbyActive && userCoordinates) { const lat = Number(card.dataset.latitude), lon = Number(card.dataset.longitude); if (Number.isFinite(lat) && Number.isFinite(lon) && lat && lon) { card.dataset.distance = distanceKm(userCoordinates, { latitude: lat, longitude: lon }).toFixed(1); } else { card.dataset.distance = ""; nearbyMatch = true; } }
         const isVisible =
             nearbyMatch &&
             matchesCity &&
+            matchesDistance &&
             matchesSearch &&
             matchesRating &&
             matchesVeg &&
@@ -769,7 +787,14 @@ function filterRestaurants() {
             matchesFilter;
 
         card.style.display = isVisible ? "" : "none";
-        const distanceBadge = card.querySelector(".nearby-distance"); if (distanceBadge) distanceBadge.remove(); if (isVisible && nearbyActive && card.dataset.distance !== "") { const badge = document.createElement("small"); badge.className = "nearby-distance"; badge.textContent = card.dataset.distance + " km away"; card.querySelector(".food-card-content")?.appendChild(badge); }
+        const distanceBadge = card.querySelector(".nearby-distance");
+        if (distanceBadge) distanceBadge.remove();
+        if (isVisible && card.dataset.distance !== "") {
+            const badge = document.createElement("small");
+            badge.className = "nearby-distance";
+            badge.textContent = `${card.dataset.distance} km away`;
+            card.querySelector(".food-card-content")?.appendChild(badge);
+        }
 
         if (isVisible) {
             visibleCount++;
@@ -807,7 +832,14 @@ function filterRestaurants() {
         }
     }
 
-    if (nearbyActive && sortSelect && sortSelect.value === "distance") { const ordered = [...cards].sort((a, b) => { const da = a.dataset.distance === "" ? Infinity : Number(a.dataset.distance), db = b.dataset.distance === "" ? Infinity : Number(b.dataset.distance); return da - db; }); ordered.forEach(card => restaurantGrid.appendChild(card)); }
+    if (sortSelect && sortSelect.value === "distance") {
+        const ordered = [...cards].sort((a, b) => {
+            const da = a.dataset.distance === "" ? Infinity : Number(a.dataset.distance);
+            const db = b.dataset.distance === "" ? Infinity : Number(b.dataset.distance);
+            return da - db;
+        });
+        ordered.forEach(card => restaurantGrid.appendChild(card));
+    }
 
     // Hook up empty state reset button
     const emptyResetBtn = document.getElementById("emptyResetFiltersBtn");
@@ -1019,3 +1051,29 @@ document.getElementById("clearFilters")?.addEventListener("click", function () {
 document.addEventListener("cravespot:locationChanged", function () {
     filterRestaurants();
 });
+
+// Distance range filter ribbon handling
+function initDistanceRibbon() {
+    const distPills = document.querySelectorAll("#restaurantDistanceRibbon .dist-pill-btn");
+    distPills.forEach(btn => {
+        btn.addEventListener("click", () => {
+            distPills.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            activeDistanceRadius = btn.dataset.radius || "all";
+
+            const summary = document.getElementById("activeDistanceSummary");
+            if (summary) {
+                summary.textContent = activeDistanceRadius === "all"
+                    ? "Showing all nearby"
+                    : `Within ${activeDistanceRadius} km`;
+            }
+
+            filterRestaurants();
+        });
+    });
+}
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initDistanceRibbon);
+} else {
+    initDistanceRibbon();
+}
