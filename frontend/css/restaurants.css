@@ -566,9 +566,6 @@
 /* Keep the filter panel anchored to its button area */
 .filter-btn[data-filter="all"] {
     position: relative;
-/* Keep the filter panel anchored to its button area */
-.filter-btn[data-filter="all"] {
-    position: relative;
 }
 
 /* ===== LOGIN / SIGN UP NAVIGATION ===== */

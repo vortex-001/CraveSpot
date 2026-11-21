@@ -172,8 +172,8 @@ async function loadRestaurants() {
     try {
         restaurantGrid.innerHTML = "<p>Loading live restaurants...</p>";
 
-        const loc = (typeof getUserLocation === "function") 
-            ? getUserLocation() 
+        const loc = (typeof getUserLocation === "function")
+            ? getUserLocation()
             : { lat: 30.7333, lng: 76.7794, city: "Chandigarh" };
 
         let fetched = [];
