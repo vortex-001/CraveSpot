@@ -63,7 +63,10 @@ echo Press CTRL+C to stop the server at any time.
 echo =====================================================================
 echo.
 
-python backend\app.py
+python -m backend.app
+if errorlevel 1 (
+    python backend\app.py
+)
 set "EXIT_CODE=%errorlevel%"
 
 if not "%EXIT_CODE%"=="0" (

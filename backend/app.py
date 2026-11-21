@@ -11,6 +11,7 @@ Features:
 """
 
 import os
+import sys
 import re
 import math
 import time
@@ -26,8 +27,23 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 from dotenv import load_dotenv
 
-from .services.places_service import geocode_address, fetch_osm_overpass_restaurants, haversine_distance
-from .services.craving_engine import parse_craving_intent, rank_cravings, surprise_me_pick
+# Ensure project root and backend folder are in Python path for all execution modes
+backend_dir = Path(__file__).resolve().parent
+project_root = backend_dir.parent
+for p in [str(project_root), str(backend_dir)]:
+    if p not in sys.path:
+        sys.path.insert(0, p)
+
+try:
+    from backend.services.places_service import geocode_address, fetch_osm_overpass_restaurants, haversine_distance
+    from backend.services.craving_engine import parse_craving_intent, rank_cravings, surprise_me_pick
+except ImportError:
+    try:
+        from services.places_service import geocode_address, fetch_osm_overpass_restaurants, haversine_distance
+        from services.craving_engine import parse_craving_intent, rank_cravings, surprise_me_pick
+    except ImportError:
+        from .services.places_service import geocode_address, fetch_osm_overpass_restaurants, haversine_distance
+        from .services.craving_engine import parse_craving_intent, rank_cravings, surprise_me_pick
 
 # ---------------------------------------------------------------------
 # Load Environment Variables from project root
