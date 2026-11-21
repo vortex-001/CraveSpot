@@ -211,7 +211,6 @@ async function loadHomeLiveRestaurants() {
         console.warn('Live update fallback used:', e);
     }
 }
-}
 
 function initHomeLiveSection() {
     loadHomeLiveRestaurants();
