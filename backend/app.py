@@ -391,6 +391,66 @@ CURATED_FALLBACK_RESTAURANTS = [
         "offer": "10% OFF",
         "is_active": 1,
         "phone": "+91 98765 43218"
+    },
+    {
+        "restaurant_id": 10,
+        "name": "Grand Punjab Dhaba",
+        "cuisine": "North Indian, Punjabi, Parathas",
+        "rating": 4.5,
+        "review_count": 160,
+        "address": "Chandigarh-Kharar Highway, Kharar",
+        "latitude": 30.7485,
+        "longitude": 76.6430,
+        "is_veg": 1,
+        "price_for_two": 300,
+        "offer": "20% OFF",
+        "is_active": 1,
+        "phone": "+91 98765 43220"
+    },
+    {
+        "restaurant_id": 11,
+        "name": "Kharar Food Hub & Cafe",
+        "cuisine": "Fast Food, Burgers, Pizza",
+        "rating": 4.3,
+        "review_count": 92,
+        "address": "Sunny Enclave, Kharar",
+        "latitude": 30.7420,
+        "longitude": 76.6580,
+        "is_veg": 0,
+        "price_for_two": 350,
+        "offer": "15% OFF",
+        "is_active": 1,
+        "phone": "+91 98765 43221"
+    },
+    {
+        "restaurant_id": 12,
+        "name": "Rolls Mania & Fast Bites",
+        "cuisine": "Rolls, Shawarma, Snacks",
+        "rating": 4.4,
+        "review_count": 105,
+        "address": "Khanpur Chowk, Kharar",
+        "latitude": 30.7550,
+        "longitude": 76.6380,
+        "is_veg": 0,
+        "price_for_two": 250,
+        "offer": "Flat ₹50 OFF",
+        "is_active": 1,
+        "phone": "+91 98765 43222"
+    },
+    {
+        "restaurant_id": 13,
+        "name": "Amritsari Kulcha Junction",
+        "cuisine": "North Indian, Kulchas, Lassi",
+        "rating": 4.6,
+        "review_count": 130,
+        "address": "Landran Road, Kharar",
+        "latitude": 30.7390,
+        "longitude": 76.6500,
+        "is_veg": 1,
+        "price_for_two": 200,
+        "offer": "10% OFF",
+        "is_active": 1,
+        "phone": "+91 98765 43223"
     }
 ]
 
@@ -454,9 +514,9 @@ def live_nearby_restaurants():
     # Sort in-radius restaurants by distance
     in_radius_restaurants.sort(key=lambda x: x.get("distance_km", 999))
 
-    # If within-radius count is low, supplement with the closest DB restaurants
-    # so discovery never leaves the user with a blank screen
-    if len(in_radius_restaurants) < 5 and all_db_restaurants:
+    # Only supplement with closest DB restaurants if radius_km >= 25 (e.g. broad search)
+    # Never pollute tight distance filters (e.g. 5km, 15km) with distant places
+    if radius_km >= 25 and len(in_radius_restaurants) < 5 and all_db_restaurants:
         all_db_restaurants.sort(key=lambda x: x.get("distance_km", 999))
         seen_ids = {r.get("restaurant_id") for r in in_radius_restaurants}
         for r in all_db_restaurants:
@@ -472,8 +532,11 @@ def live_nearby_restaurants():
         dist = ext_r.get("distance_km", 2.0)
         ext_r["delivery_time_mins"] = max(15, min(65, int(15 + dist * 3.5)))
 
+    # Filter external restaurants strictly to the requested radius
+    filtered_external = [r for r in live_external if r.get("distance_km", 999) <= radius_km]
+
     # Combine and sort by distance
-    all_nearby = in_radius_restaurants + live_external
+    all_nearby = in_radius_restaurants + filtered_external
     all_nearby.sort(key=lambda x: x.get("distance_km", 999))
 
     return jsonify({

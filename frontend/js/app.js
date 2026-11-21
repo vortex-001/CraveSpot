@@ -89,17 +89,61 @@ function initLocationSystem() {
 let currentHomeRadius = 15;
 
 const fallbackHomeRestaurants = [
+    // Kharar (Khanpur, Sunny Enclave, Landran Rd)
+    { restaurant_id: 10, name: "Grand Punjab Dhaba", cuisine: "North Indian & Punjabi", rating: 4.5, address: "Chandigarh-Kharar Highway, Kharar", latitude: 30.7485, longitude: 76.6430, is_veg: 1, offer: "20% OFF", price_for_two: 300 },
+    { restaurant_id: 11, name: "Kharar Food Hub & Cafe", cuisine: "Fast Food, Burgers & Pizza", rating: 4.3, address: "Sunny Enclave, Kharar", latitude: 30.7420, longitude: 76.6580, is_veg: 0, offer: "15% OFF", price_for_two: 350 },
+    { restaurant_id: 12, name: "Rolls Mania & Fast Bites", cuisine: "Rolls, Shawarma & Snacks", rating: 4.4, address: "Khanpur Chowk, Kharar", latitude: 30.7550, longitude: 76.6380, is_veg: 0, offer: "Flat ₹50 OFF", price_for_two: 250 },
+    { restaurant_id: 13, name: "Amritsari Kulcha Junction", cuisine: "North Indian, Kulchas & Lassi", rating: 4.6, address: "Landran Road, Kharar", latitude: 30.7390, longitude: 76.6500, is_veg: 1, offer: "10% OFF", price_for_two: 200 },
+    // Mohali
     { restaurant_id: 6, name: "Katani Dhaba", cuisine: "North Indian & Punjabi", rating: 4.4, address: "Phase 3B2, Mohali", latitude: 30.7071, longitude: 76.7161, is_veg: 1, offer: "15% OFF", price_for_two: 300 },
     { restaurant_id: 7, name: "Amrit Sweets & Restaurant", cuisine: "Desserts & Snacks", rating: 4.6, address: "Phase 5, Mohali", latitude: 30.7188, longitude: 76.7123, is_veg: 1, offer: "20% OFF", price_for_two: 250 },
+    { restaurant_id: 9, name: "Urban Cafe & Bistro", cuisine: "Cafe, Italian & Continental", rating: 4.4, address: "Sector 70, Mohali", latitude: 30.6990, longitude: 76.7080, is_veg: 0, offer: "10% OFF", price_for_two: 500 },
+    // Chandigarh
     { restaurant_id: 1, name: "Spice Garden", cuisine: "North Indian", rating: 4.5, address: "Sector 17, Chandigarh", latitude: 30.7415, longitude: 76.7680, is_veg: 1, offer: "20% OFF", price_for_two: 450 },
     { restaurant_id: 2, name: "Pizza Corner", cuisine: "Italian & Fast Food", rating: 4.3, address: "Sector 22, Chandigarh", latitude: 30.7336, longitude: 76.7725, is_veg: 1, offer: "30% OFF", price_for_two: 400 },
     { restaurant_id: 3, name: "Wok Express", cuisine: "Chinese & Asian", rating: 4.2, address: "Sector 35, Chandigarh", latitude: 30.7253, longitude: 76.7642, is_veg: 0, offer: "Free Delivery", price_for_two: 350 },
+    { restaurant_id: 4, name: "Burger House", cuisine: "Fast Food & Shakes", rating: 4.1, address: "Sector 8, Chandigarh", latitude: 30.7358, longitude: 76.8010, is_veg: 0, offer: "10% OFF", price_for_two: 300 },
+    // Panchkula
     { restaurant_id: 8, name: "Barbeque Nation", cuisine: "BBQ & Multi-Cuisine", rating: 4.5, address: "Sector 5, Panchkula", latitude: 30.6931, longitude: 76.8524, is_veg: 0, offer: "Flat ₹150 OFF", price_for_two: 800 }
 ];
 
 function renderHomeRestaurantCards(grid, places, loc) {
     if (!grid) return;
-    const topPlaces = places.slice(0, 6);
+
+    // Filter strictly by the active distance radius
+    const filtered = (places || []).filter(r => {
+        if (currentHomeRadius >= 100) return true;
+        if (typeof r.distance_km === 'number') {
+            return r.distance_km <= currentHomeRadius;
+        }
+        return true;
+    });
+
+    if (filtered.length === 0) {
+        grid.innerHTML = `
+            <div class="no-restaurants-radius" style="grid-column: 1 / -1; text-align: center; padding: 45px 20px; background: #FFFBFB; border-radius: 16px; border: 1.5px dashed #FFD1D5; margin: 10px 0;">
+                <div style="width: 52px; height: 52px; background: #FFE4E6; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px; color: #E23744;">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M12 6v6l4 2"></path>
+                    </svg>
+                </div>
+                <h3 style="font-size: 18px; font-weight: 700; color: #1F2937; margin-bottom: 6px;">No spots found within ${currentHomeRadius} km</h3>
+                <p style="font-size: 14px; color: #6B7280; max-width: 440px; margin: 0 auto 16px;">Try expanding your delivery distance to discover great restaurants delivering right to ${loc.city || 'your area'}.</p>
+                <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+                    <button type="button" class="empty-state-reset-btn" onclick="document.querySelector('#homeRadiusChips [data-radius=\\'15\\']')?.click()" style="padding: 9px 20px; font-size: 13px; font-weight:600; background:#E23744; color:#fff; border:none; border-radius:8px; cursor:pointer;">
+                        Explore Within 15 km →
+                    </button>
+                    <button type="button" class="empty-state-reset-btn" onclick="document.querySelector('#homeRadiusChips [data-radius=\\'100\\']')?.click()" style="padding: 9px 20px; font-size: 13px; font-weight:600; background:#F3F4F6; color:#374151; border:none; border-radius:8px; cursor:pointer;">
+                        Show All Nearby
+                    </button>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    const topPlaces = filtered.slice(0, 6);
     grid.innerHTML = topPlaces.map((r, i) => {
         const dist = typeof r.distance_km === 'number' ? r.distance_km : null;
         const distBadge = dist !== null
@@ -176,7 +220,7 @@ async function loadHomeLiveRestaurants() {
         distance_km: calcDist(loc.lat, loc.lng, r.latitude, r.longitude)
     })).sort((a, b) => a.distance_km - b.distance_km);
 
-    // Initial render with fallbacks immediately so skeleton loaders never get stuck!
+    // Initial instant render strictly honoring the selected radius
     renderHomeRestaurantCards(grid, fallbacksWithDist, loc);
 
     // Fetch fresh live nearby data from API in background
@@ -184,22 +228,28 @@ async function loadHomeLiveRestaurants() {
         let places = [];
         if (typeof apiRequest === 'function') {
             try {
-                const res = await apiRequest(`/restaurants/live-nearby?lat=${loc.lat}&lng=${loc.lng}&radius=${currentHomeRadius}`, { timeout: 3000 });
+                const res = await apiRequest(`/restaurants/live-nearby?lat=${loc.lat}&lng=${loc.lng}&radius=${currentHomeRadius}`, { timeout: 1500 });
                 if (res?.restaurants && res.restaurants.length > 0) {
                     places = res.restaurants;
                 }
             } catch (err) {
-                console.warn('Live nearby failed, trying /restaurants fallback:', err);
+                // Live nearby failed or timed out, try standard fallback
             }
 
             if (!places.length) {
                 try {
-                    const allRest = await apiRequest('/restaurants', { timeout: 2500 });
+                    const allRest = await apiRequest('/restaurants', { timeout: 1200 });
                     if (Array.isArray(allRest) && allRest.length > 0) {
-                        places = allRest;
+                        places = allRest.map(r => {
+                            const item = { ...r };
+                            if (typeof item.distance_km !== 'number' && item.latitude && item.longitude) {
+                                item.distance_km = calcDist(loc.lat, loc.lng, parseFloat(item.latitude), parseFloat(item.longitude));
+                            }
+                            return item;
+                        }).sort((a, b) => (a.distance_km || 999) - (b.distance_km || 999));
                     }
                 } catch (e) {
-                    console.warn('/restaurants fallback failed:', e);
+                    // non-fatal
                 }
             }
         }

@@ -128,6 +128,42 @@ const sampleRestaurants = [
         address: "Sector 70, Mohali", latitude: 30.6990, longitude: 76.7080,
         is_veg: false,
         offer: "10% OFF"
+    },
+    {
+        restaurant_id: 10,
+        name: "Grand Punjab Dhaba",
+        cuisine: "North Indian & Punjabi Parathas",
+        rating: 4.5,
+        address: "Chandigarh-Kharar Highway, Kharar", latitude: 30.7485, longitude: 76.6430,
+        is_veg: true,
+        offer: "20% OFF"
+    },
+    {
+        restaurant_id: 11,
+        name: "Kharar Food Hub & Cafe",
+        cuisine: "Fast Food & Pizza",
+        rating: 4.3,
+        address: "Sunny Enclave, Kharar", latitude: 30.7420, longitude: 76.6580,
+        is_veg: false,
+        offer: "15% OFF"
+    },
+    {
+        restaurant_id: 12,
+        name: "Rolls Mania & Fast Bites",
+        cuisine: "Rolls & Street Bites",
+        rating: 4.4,
+        address: "Khanpur Chowk, Kharar", latitude: 30.7550, longitude: 76.6380,
+        is_veg: false,
+        offer: "Flat ₹50 OFF"
+    },
+    {
+        restaurant_id: 13,
+        name: "Amritsari Kulcha Junction",
+        cuisine: "North Indian & Crispy Kulchas",
+        rating: 4.6,
+        address: "Landran Road, Kharar", latitude: 30.7390, longitude: 76.6500,
+        is_veg: true,
+        offer: "10% OFF"
     }
 ];
 let menuItems = [];
