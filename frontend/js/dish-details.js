@@ -178,6 +178,66 @@ const dishData = {
 
         longDescription:
             "This rich chocolate brownie has a soft, fudgy centre and an intense chocolate flavor. It is a perfect sweet treat after a delicious meal."
+    },
+
+    "amritsari-kulcha-with-chole": {
+        name: "Amritsari Kulcha & Chole",
+        category: "North Indian",
+        cuisine: "Punjabi",
+        price: 140,
+        rating: 4.8,
+        reviews: "140+ reviews",
+        restaurant: "Kulcha Junction",
+        restaurantSlug: "kulcha-junction",
+        location: "Sector 22, Chandigarh",
+        image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=85",
+        description: "Flaky layered tandoor-baked kulcha with spiced Amritsari chole and butter.",
+        longDescription: "Authentic Amritsari stuffed kulcha made with spiced potato and paneer stuffing, roasted in a clay tandoor until golden and crispy, served with slow-cooked dark chole and spicy tamarind onion relish."
+    },
+
+    "delhi-golgappe-pani-puri": {
+        name: "Crispy Golgappe (Pani Puri)",
+        category: "Street Food",
+        cuisine: "Street Food",
+        price: 80,
+        rating: 4.9,
+        reviews: "210+ reviews",
+        restaurant: "Chaat Chaska",
+        restaurantSlug: "chaat-chaska",
+        location: "Sector 34, Chandigarh",
+        image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85",
+        description: "Crunchy semolina puris with spicy mint water, potato-chickpea mash and sweet tamarind.",
+        longDescription: "Crispy hollow puri balls filled with mashed potatoes, black chickpeas, sweet date-tamarind chutney, and dipped into ice-cold spicy mint-coriander water for an explosion of flavors."
+    },
+
+    "paneer-tikka-kathi-roll": {
+        name: "Paneer Tikka Kathi Roll",
+        category: "Rolls",
+        cuisine: "Street Food",
+        price: 130,
+        rating: 4.6,
+        reviews: "115+ reviews",
+        restaurant: "Rolls Mania",
+        restaurantSlug: "rolls-mania",
+        location: "Phase 7, Mohali",
+        image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=900&q=85",
+        description: "Char-grilled paneer cubes wrapped in layered flaky paratha with mint chutney and onions.",
+        longDescription: "Smoky tandoori paneer cubes wrapped in a freshly roasted, flaky laccha paratha with crunchy julienned red onions, tangy chaat masala, and house special mint mayo."
+    },
+
+    "dal-makhani-handi": {
+        name: "Dal Makhani Handi",
+        category: "North Indian",
+        cuisine: "North Indian",
+        price: 210,
+        rating: 4.7,
+        reviews: "165+ reviews",
+        restaurant: "Katani Dhaba",
+        restaurantSlug: "katani-dhaba",
+        location: "Phase 3B2, Mohali",
+        image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85",
+        description: "Slow-cooked black lentils simmered overnight with fresh white butter and rich cream.",
+        longDescription: "Traditional Punjabi black urad dal simmered with tomatoes, ginger, and garlic over gentle tandoor coals for over 12 hours, finished with generous dollops of churned white butter and fresh cream."
     }
 
 };
@@ -228,6 +288,10 @@ function loadDish() {
         restaurantSlug: "",
         location: ""
     } : null);
+
+    if (dish && urlParams.get("image")) {
+        dish.image = urlParams.get("image");
+    }
 
 
     if (!dish) {

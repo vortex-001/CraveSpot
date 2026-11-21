@@ -457,12 +457,19 @@ dishCards.forEach(card => {
                 .replace(/[^a-z0-9]+/g, "-")
                 .replace(/^-+|-+$/g, "");
 
+        const dishImg = card.querySelector(".dish-image img")?.src || "";
+        const dishCat = card.dataset.category || "";
+        const dishPrice = card.dataset.price || "";
 
-        /* Open dish details */
+        /* Open dish details with full metadata and image */
 
         window.location.href =
             "dish-details.html?dish=" +
-            encodeURIComponent(dishSlug);
+            encodeURIComponent(dishSlug) +
+            "&name=" + encodeURIComponent(dishName) +
+            "&category=" + encodeURIComponent(dishCat) +
+            "&price=" + encodeURIComponent(dishPrice) +
+            "&image=" + encodeURIComponent(dishImg);
 
     });
 
