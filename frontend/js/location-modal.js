@@ -392,8 +392,19 @@
         const initialLat = currentSelectedLoc.lat || 30.7333;
         const initialLng = currentSelectedLoc.lng || 76.7794;
 
-        if (window.L && !mapInstance) {
-            // Full OpenStreetMap tiles — 100% free, zero watermark, full street level detail
+        if (window.L) {
+            // Destroy any previous map instance to ensure clean fresh tiles and zero cached layers
+            if (mapInstance) {
+                try {
+                    mapInstance.remove();
+                } catch (e) {
+                    console.warn('Map cleanup error:', e);
+                }
+                mapInstance = null;
+                markerInstance = null;
+            }
+
+            // Create fresh map instance
             mapInstance = window.L.map(container, {
                 center: [initialLat, initialLng],
                 zoom: 14,
@@ -401,10 +412,25 @@
                 attributionControl: false
             });
 
-            window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            // Google Maps Roadmap tiles (official clean roadmap with landmarks, zero watermark)
+            const googleRoadmap = window.L.tileLayer('https://mt{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                maxZoom: 20,
+                subdomains: ['0', '1', '2', '3']
+            });
+
+            // Standard OpenStreetMap fallback
+            const osmFallback = window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 subdomains: ['a', 'b', 'c']
-            }).addTo(mapInstance);
+            });
+
+            googleRoadmap.on('tileerror', () => {
+                if (mapInstance && !mapInstance.hasLayer(osmFallback)) {
+                    osmFallback.addTo(mapInstance);
+                }
+            });
+
+            googleRoadmap.addTo(mapInstance);
 
             const customPin = createCustomPinIcon();
             markerInstance = window.L.marker([initialLat, initialLng], {
@@ -422,11 +448,6 @@
             mapInstance.on('click', async (e) => {
                 await updateLocationPosition(e.latlng.lat, e.latlng.lng);
             });
-
-        } else if (mapInstance) {
-            mapInstance.invalidateSize();
-            mapInstance.setView([initialLat, initialLng], 14);
-            if (markerInstance) markerInstance.setLatLng([initialLat, initialLng]);
         }
     }
 
