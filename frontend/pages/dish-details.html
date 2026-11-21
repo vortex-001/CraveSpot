@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,26 +5,17 @@
 
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Dish Details | CraveSpot</title>
 
     <!-- Main CSS -->
-    <link
-        rel="stylesheet"
-        href="../css/style.css"
-    >
+    <link rel="stylesheet" href="../css/style.css">
 
     <!-- Dish Details CSS -->
-    <link
-        rel="stylesheet"
-        href="../css/dish-details.css"
-    >
+    <link rel="stylesheet" href="../css/dish-details.css">
 
-    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg?v=2.6.0">
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
 </head>
 
 
@@ -38,96 +28,80 @@
 
     <!-- ================= NAVBAR ================= -->
 
-<header class="navbar">
+    <header class="navbar">
 
-    <div class="nav-container">
+        <div class="nav-container">
 
         <a href="../index.html" class="logo">
-            <span class="logo-icon"><img src="../assets/icons/logo.png?v=3.0.0" alt="CraveSpot Food Logo" width="36" height="36"></span>
+            <span class="logo-icon"><img src="../assets/icons/logo.svg?v=2.6.0" alt="CraveSpot Logo" width="36" height="36"></span>
             <span>Crave<span>Spot</span></span>
         </a>
 
 
-        <div class="location">
-<span class="location-icon" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none"
-         xmlns="http://www.w3.org/2000/svg">
-        <path d="M20 10C20 15 12 22 12 22S4 15 4 10
-                 A8 8 0 1 1 20 10Z"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"/>
-        <circle cx="12" cy="10" r="2.5"
-                stroke="currentColor"
-                stroke-width="1.8"/>
-    </svg>
-</span>
-            <div>
-                <small>Location</small>
-                <strong>Chandigarh</strong>
+            <div class="location">
+                <span class="location-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 10C20 15 12 22 12 22S4 15 4 10
+                 A8 8 0 1 1 20 10Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.8" />
+                    </svg>
+                </span>
+                <div>
+                    <small>Location</small>
+                    <strong>Chandigarh</strong>
+                </div>
+
+                <span>⌄</span>
+
             </div>
 
-            <span>⌄</span>
+
+            <div class="nav-search">
+                <span class="search-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="2" />
+                        <path d="m16 16 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </span>
+
+                <input type="text" id="dishSearch" placeholder="Search dishes, cuisines...">
+
+            </div>
+
+
+            <nav>
+
+                <a href="restaurants.html">
+                    Restaurants
+                </a>
+
+                <a href="dishes.html" class="active-nav">
+                    Dishes
+                </a>
+
+                <a href="categories.html">
+                    Categories
+                </a>
+
+                <a href="favorites.html" class="saved-nav-link">
+                    Saved
+                </a>
+
+            </nav>
+
+            <div class="auth-buttons">
+                <a href="login.html" class="login-btn">
+                    Login
+                </a>
+                <a href="register.html" class="signup-btn">
+                    Sign Up
+                </a>
+            </div>
 
         </div>
 
-
-        <div class="nav-search">
-<span class="search-icon" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none"
-         xmlns="http://www.w3.org/2000/svg">
-        <circle cx="10.8" cy="10.8" r="6.8"
-                stroke="currentColor"
-                stroke-width="2"/>
-        <path d="m16 16 5 5"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"/>
-    </svg>
-</span>
-
-            <input
-                type="text"
-                id="dishSearch"
-                placeholder="Search dishes, cuisines..."
-            >
-
-        </div>
-
-
-        <nav>
-
-            <a href="restaurants.html">
-                Restaurants
-            </a>
-
-            <a href="dishes.html" class="active-nav">
-                Dishes
-            </a>
-
-            <a href="categories.html">
-                Categories
-            </a>
-
-            <a href="favorites.html" class="saved-nav-link">
-                Saved
-            </a>
-
-        </nav>
-
-        <div class="auth-buttons">
-            <a href="login.html" class="login-btn">
-                Login
-            </a>
-            <a href="register.html" class="signup-btn">
-                Sign Up
-            </a>
-        </div>
-
-    </div>
-
-</header>
+    </header>
 
 
     <!-- ==========================================
@@ -164,11 +138,7 @@
 
             <div class="dish-image-container">
 
-                <img
-                    id="dishImage"
-                    src=""
-                    alt="Dish"
-                >
+                <img id="dishImage" src="" alt="Dish">
 
             </div>
 
@@ -178,8 +148,7 @@
 
             <div class="dish-info">
 
-                <div class="dish-category"
-                     id="dishCategory">
+                <div class="dish-category" id="dishCategory">
                     Category
                 </div>
 
@@ -191,19 +160,12 @@
 
                 <div class="dish-rating">
 
-                    <span
-                        id="dishRating"
-                        class="rating-badge"
-                    >
-                        <svg class="star-icon"
-     xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 24 24"
-     width="20"
-     height="20"
-     fill="currentColor"
-     aria-hidden="true">
-    <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z"/>
-</svg> 4.5
+                    <span id="dishRating" class="rating-badge">
+                        <svg class="star-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                            height="20" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z" />
+                        </svg> 4.5
                     </span>
 
                     <span id="dishReviews">
@@ -213,42 +175,27 @@
                 </div>
 
 
-                <div
-                    id="dishPrice"
-                    class="dish-price"
-                >
+                <div id="dishPrice" class="dish-price">
                     ₹0
                 </div>
 
 
-                <p
-                    id="dishDescription"
-                    class="dish-description"
-                >
+                <p id="dishDescription" class="dish-description">
                     Delicious food prepared with
                     fresh ingredients.
                 </p>
 
 
                 <!-- Favorite -->
-<button
-    id="dishFavoriteBtn"
-    class="dish-favorite-btn"
-    onclick="toggleDishFavorite()"
->
-    <svg class="favorite-icon"
-         viewBox="0 0 24 24"
-         fill="none"
-         xmlns="http://www.w3.org/2000/svg"
-         aria-hidden="true">
-        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"/>
-    </svg>
-    Add to Favorites
-</button>
+                <button id="dishFavoriteBtn" class="dish-favorite-btn" onclick="toggleDishFavorite()">
+                    <svg class="favorite-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true">
+                        <path
+                            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+                            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Add to Favorites
+                </button>
 
 
                 <!-- Restaurant -->
@@ -259,10 +206,7 @@
                         Available at
                     </h3>
 
-                    <div
-                        id="restaurantName"
-                        class="restaurant-name"
-                    >
+                    <div id="restaurantName" class="restaurant-name">
                         Restaurant
                     </div>
 
@@ -270,10 +214,7 @@
                         Chandigarh
                     </p>
 
-                    <button
-                        class="view-restaurant-btn"
-                        onclick="viewRestaurant()"
-                    >
+                    <button class="view-restaurant-btn" onclick="viewRestaurant()">
                         View Restaurant →
                     </button>
 
@@ -295,7 +236,9 @@
             <div class="info-card">
 
                 <div class="info-icon">
-                    <svg class="cuisine-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#E23744" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <svg class="cuisine-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22"
+                        height="22" fill="none" stroke="#E23744" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
                         <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
                         <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
                         <line x1="6" y1="1" x2="6" y2="4"></line>
@@ -322,7 +265,9 @@
             <div class="info-card">
 
                 <div class="info-icon">
-                    <svg class="price-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#E23744" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <svg class="price-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22"
+                        height="22" fill="none" stroke="#E23744" stroke-width="2.2" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
                         <line x1="6" y1="4" x2="18" y2="4"></line>
                         <line x1="6" y1="9" x2="18" y2="9"></line>
                         <path d="M6 4h6a3.5 3.5 0 0 1 0 7H6"></path>
@@ -348,15 +293,11 @@
             <div class="info-card">
 
                 <div class="info-icon">
-                    <svg class="star-icon"
-     xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 24 24"
-     width="22"
-     height="22"
-     fill="#FFA500"
-     aria-hidden="true">
-    <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z"/>
-</svg>
+                    <svg class="star-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"
+                        fill="#FFA500" aria-hidden="true">
+                        <path
+                            d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z" />
+                    </svg>
                 </div>
 
                 <div>
@@ -409,7 +350,7 @@
                 <div>
 
                     <div class="footer-logo">
-                        <span class="logo-icon"><img src="../assets/icons/logo.png?v=3.0.0" alt="CraveSpot Food Logo" width="28" height="28"></span> Crave<span>Spot</span>
+                        <span class="logo-icon"><img src="../assets/icons/logo.svg?v=2.6.0" alt="CraveSpot Logo" width="28" height="28"></span> Crave<span>Spot</span>
                     </div>
 
                     <p>
@@ -471,8 +412,8 @@
 
     <!-- JavaScript -->
 
-    <script src="../js/api.js?v=2.6.0"></script>
-    <script src="../js/app.js?v=2.6.0"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/app.js"></script>
     <script src="../js/dish-details.js"></script>
 </body>
 
