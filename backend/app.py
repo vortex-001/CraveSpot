@@ -541,6 +541,32 @@ CURATED_FALLBACK_RESTAURANTS = [
     }
 ]
 
+CURATED_FALLBACK_CATEGORIES = [
+    {"category_id": 1, "name": "Biryani", "icon": "🍲", "image": "biryani.jpg", "display_order": 1},
+    {"category_id": 2, "name": "Pizza", "icon": "🍕", "image": "pizza.jpg", "display_order": 2},
+    {"category_id": 3, "name": "Burgers", "icon": "🍔", "image": "burgers.jpg", "display_order": 3},
+    {"category_id": 4, "name": "Chinese", "icon": "🥡", "image": "chinese.jpg", "display_order": 4},
+    {"category_id": 5, "name": "North Indian", "icon": "🍛", "image": "north_indian.jpg", "display_order": 5},
+    {"category_id": 6, "name": "Desserts", "icon": "🍰", "image": "desserts.jpg", "display_order": 6},
+    {"category_id": 7, "name": "Street Food", "icon": "🍢", "image": "street_food.jpg", "display_order": 7},
+    {"category_id": 8, "name": "Dhaba & Kulchas", "icon": "🍲", "image": "dhaba.jpg", "display_order": 8}
+]
+
+CURATED_FALLBACK_DISHES = [
+    {"item_id": 1, "restaurant_id": 1, "name": "Butter Chicken", "description": "Tender chicken cooked in rich makhani gravy", "price": 380, "rating": 4.8, "is_veg": 0, "category": "North Indian", "image": "butter_chicken.jpg"},
+    {"item_id": 2, "restaurant_id": 1, "name": "Dal Makhani", "description": "Slow-cooked black lentils with cream and butter", "price": 260, "rating": 4.7, "is_veg": 1, "category": "North Indian", "image": "dal_makhani.jpg"},
+    {"item_id": 3, "restaurant_id": 2, "name": "Fiery Paneer Pizza", "description": "Spicy marinated paneer with capsicum and mozzarella", "price": 320, "rating": 4.5, "is_veg": 1, "category": "Pizza", "image": "paneer_pizza.jpg"},
+    {"item_id": 4, "restaurant_id": 2, "name": "Classic Margherita Pizza", "description": "Fresh tomato basil sauce with premium mozzarella", "price": 280, "rating": 4.4, "is_veg": 1, "category": "Pizza", "image": "margherita.jpg"},
+    {"item_id": 5, "restaurant_id": 3, "name": "Chicken Hakka Noodles", "description": "Wok-tossed noodles with chicken and fresh vegetables", "price": 240, "rating": 4.6, "is_veg": 0, "category": "Chinese", "image": "noodles.jpg"},
+    {"item_id": 6, "restaurant_id": 3, "name": "Veg Manchurian Dry", "description": "Crispy vegetable balls tossed in ginger garlic soy glaze", "price": 220, "rating": 4.5, "is_veg": 1, "category": "Chinese", "image": "manchurian.jpg"},
+    {"item_id": 7, "restaurant_id": 4, "name": "Hyderabadi Dum Biryani", "description": "Aromatic basmati rice cooked with saffron and spices", "price": 350, "rating": 4.8, "is_veg": 0, "category": "Biryani", "image": "biryani.jpg"},
+    {"item_id": 8, "restaurant_id": 5, "name": "Smoky Grilled Chicken", "description": "Juicy charcoal grilled chicken wings with barbecue glaze", "price": 390, "rating": 4.7, "is_veg": 0, "category": "Barbecue", "image": "wings.jpg"},
+    {"item_id": 9, "restaurant_id": 13, "name": "Amritsari Stuffed Kulcha Thali", "description": "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney", "price": 140, "rating": 4.9, "is_veg": 1, "category": "North Indian", "image": "kulcha.jpg"},
+    {"item_id": 10, "restaurant_id": 14, "name": "Dahi Papdi Chaat & Golgappe", "description": "Crispy papdi with sweetened yogurt, tangy saunth, and crispy golgappe", "price": 90, "rating": 4.8, "is_veg": 1, "category": "Street Food", "image": "chaat.jpg"},
+    {"item_id": 11, "restaurant_id": 12, "name": "Special Paneer Kathi Roll", "description": "Flaky paratha loaded with spiced paneer, onions and mint chutney", "price": 150, "rating": 4.6, "is_veg": 1, "category": "Street Food", "image": "roll.jpg"},
+    {"item_id": 12, "restaurant_id": 15, "name": "Kadak Masala Chai & Bun Maska", "description": "Steaming hot ginger cardamom chai served with soft toasted bun and butter", "price": 70, "rating": 4.7, "is_veg": 1, "category": "Street Food", "image": "chai.jpg"}
+]
+
 
 @app.route("/api/restaurants/live-nearby", methods=["GET"])
 def live_nearby_restaurants():
@@ -939,7 +965,10 @@ def get_restaurant_menu(restaurant_id):
 
     except mysql.connector.Error:
         app.logger.exception("Failed to fetch restaurant menu")
-        return jsonify({"success": False, "message": "Unable to fetch restaurant menu"}), 500
+        fallback = [d for d in CURATED_FALLBACK_DISHES if d.get("restaurant_id") == restaurant_id]
+        if not fallback:
+            fallback = CURATED_FALLBACK_DISHES[:4]
+        return jsonify(fallback), 200
 
     finally:
         if cursor:
@@ -1004,7 +1033,21 @@ def get_menu_items():
 
     except mysql.connector.Error:
         app.logger.exception("Failed to fetch menu items")
-        return jsonify({"success": False, "message": "Unable to fetch menu items"}), 500
+        items = list(CURATED_FALLBACK_DISHES)
+        if search:
+            s = search.lower()
+            items = [i for i in items if s in i["name"].lower() or s in i.get("description", "").lower() or s in i.get("category", "").lower()]
+        if category and category.lower() != "all":
+            items = [i for i in items if i.get("category", "").lower() == category.lower()]
+        if restaurant_id is not None:
+            items = [i for i in items if i.get("restaurant_id") == restaurant_id]
+        if veg_only:
+            items = [i for i in items if i.get("is_veg") == 1]
+        if max_price is not None:
+            items = [i for i in items if i.get("price", 0) <= max_price]
+        if min_rating is not None:
+            items = [i for i in items if i.get("rating", 0) >= min_rating]
+        return jsonify(items), 200
 
     finally:
         if cursor:
@@ -1043,7 +1086,17 @@ def get_single_dish(item_id):
 
     except mysql.connector.Error:
         app.logger.exception("Failed to fetch dish")
-        return jsonify({"success": False, "message": "Unable to fetch dish"}), 500
+        dish = next((d for d in CURATED_FALLBACK_DISHES if d["item_id"] == item_id), None)
+        if dish:
+            rest = next((r for r in CURATED_FALLBACK_RESTAURANTS if r["restaurant_id"] == dish.get("restaurant_id")), None)
+            dish_copy = dict(dish)
+            if rest:
+                dish_copy["restaurant_name"] = rest["name"]
+                dish_copy["restaurant_address"] = rest["address"]
+                dish_copy["restaurant_rating"] = rest["rating"]
+                dish_copy["restaurant_phone"] = rest.get("phone", "")
+            return jsonify(dish_copy), 200
+        return jsonify({"success": False, "message": f"Dish {item_id} not found"}), 404
 
     finally:
         if cursor:
@@ -1068,7 +1121,7 @@ def get_categories():
         return jsonify(categories), 200
     except mysql.connector.Error:
         app.logger.exception("Failed to fetch categories")
-        return jsonify({"success": False, "message": "Unable to fetch categories"}), 500
+        return jsonify(CURATED_FALLBACK_CATEGORIES), 200
     finally:
         if cursor:
             cursor.close()
@@ -1088,7 +1141,15 @@ def get_cuisines():
         return jsonify(serialize_rows(cursor.fetchall())), 200
     except mysql.connector.Error:
         app.logger.exception("Failed to fetch cuisines")
-        return jsonify({"success": False, "message": "Unable to fetch cuisines"}), 500
+        return jsonify([
+            {"cuisine_id": 1, "name": "North Indian"},
+            {"cuisine_id": 2, "name": "Pizza"},
+            {"cuisine_id": 3, "name": "Chinese"},
+            {"cuisine_id": 4, "name": "Biryani"},
+            {"cuisine_id": 5, "name": "Street Food"},
+            {"cuisine_id": 6, "name": "Dhaba"},
+            {"cuisine_id": 7, "name": "Desserts"}
+        ]), 200
     finally:
         if cursor:
             cursor.close()
