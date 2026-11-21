@@ -35,14 +35,23 @@ for p in [str(project_root), str(backend_dir)]:
         sys.path.insert(0, p)
 
 try:
-    from backend.services.places_service import geocode_address, fetch_osm_overpass_restaurants, haversine_distance
+    from backend.services.places_service import (
+        geocode_address, fetch_osm_overpass_restaurants, fetch_google_places_restaurants,
+        fetch_live_restaurants, haversine_distance
+    )
     from backend.services.craving_engine import parse_craving_intent, rank_cravings, surprise_me_pick
 except ImportError:
     try:
-        from services.places_service import geocode_address, fetch_osm_overpass_restaurants, haversine_distance
+        from services.places_service import (
+            geocode_address, fetch_osm_overpass_restaurants, fetch_google_places_restaurants,
+            fetch_live_restaurants, haversine_distance
+        )
         from services.craving_engine import parse_craving_intent, rank_cravings, surprise_me_pick
     except ImportError:
-        from .services.places_service import geocode_address, fetch_osm_overpass_restaurants, haversine_distance
+        from .services.places_service import (
+            geocode_address, fetch_osm_overpass_restaurants, fetch_google_places_restaurants,
+            fetch_live_restaurants, haversine_distance
+        )
         from .services.craving_engine import parse_craving_intent, rank_cravings, surprise_me_pick
 
 # ---------------------------------------------------------------------
@@ -95,15 +104,45 @@ def check_rate_limit(key, max_requests=5, window_seconds=60):
 # =====================================================================
 
 def get_db():
-    """Create and return a new MySQL database connection."""
-    return mysql.connector.connect(
-        host=os.getenv("DB_HOST", "localhost"),
-        port=int(os.getenv("DB_PORT", 3306)),
-        user=os.getenv("DB_USER", "root"),
-        password=os.getenv("DB_PASSWORD", ""),
-        database=os.getenv("DB_NAME", "project"),
-        connection_timeout=5
-    )
+    """
+    Create and return a new MySQL database connection.
+    Supports both standard parameters and cloud DATABASE_URL / MYSQL_URL with SSL.
+    """
+    db_url = os.getenv("DATABASE_URL") or os.getenv("MYSQL_URL")
+    if db_url:
+        try:
+            import urllib.parse
+            parsed = urllib.parse.urlparse(db_url)
+            port = parsed.port or 3306
+            db_name = parsed.path.lstrip("/").split("?")[0] or os.getenv("DB_NAME", "project")
+            params = {
+                "host": parsed.hostname,
+                "port": port,
+                "user": parsed.username or "root",
+                "password": parsed.password or "",
+                "database": db_name,
+                "connection_timeout": 10
+            }
+            # Enable SSL if connecting to cloud provider
+            if parsed.hostname and parsed.hostname not in ("localhost", "127.0.0.1"):
+                params["ssl_disabled"] = False
+            return mysql.connector.connect(**params)
+        except Exception as e:
+            app.logger.warning(f"DATABASE_URL parse/connect failed: {e}. Falling back to DB_* env vars.")
+
+    # Standard configuration with optional SSL
+    ssl_enabled = os.getenv("DB_SSL", "false").lower() in ("true", "1", "yes", "required")
+    kwargs = {
+        "host": os.getenv("DB_HOST", "localhost"),
+        "port": int(os.getenv("DB_PORT", 3306)),
+        "user": os.getenv("DB_USER", "root"),
+        "password": os.getenv("DB_PASSWORD", ""),
+        "database": os.getenv("DB_NAME", "project"),
+        "connection_timeout": 8
+    }
+    if ssl_enabled:
+        kwargs["ssl_disabled"] = False
+    return mysql.connector.connect(**kwargs)
 
 
 def serialize_row(row):
@@ -275,14 +314,14 @@ def live_nearby_restaurants():
             if len(in_radius_restaurants) >= 8:
                 break
 
-    # 2. Fetch Live OpenStreetMap Overpass restaurants if online
-    live_osm = fetch_osm_overpass_restaurants(lat, lng, radius_km=radius_km, limit=15)
-    for osm_r in live_osm:
-        dist = osm_r.get("distance_km", 2.0)
-        osm_r["delivery_time_mins"] = max(15, min(65, int(15 + dist * 3.5)))
+    # 2. Fetch Live Google Places / OSM Overpass restaurants
+    live_external = fetch_live_restaurants(lat, lng, radius_km=radius_km, limit=15)
+    for ext_r in live_external:
+        dist = ext_r.get("distance_km", 2.0)
+        ext_r["delivery_time_mins"] = max(15, min(65, int(15 + dist * 3.5)))
 
     # Combine and sort by distance
-    all_nearby = in_radius_restaurants + live_osm
+    all_nearby = in_radius_restaurants + live_external
     all_nearby.sort(key=lambda x: x.get("distance_km", 999))
 
     return jsonify({
@@ -1413,7 +1452,7 @@ def internal_error(error):
 # =====================================================================
 
 if __name__ == "__main__":
-    host = os.getenv("HOST", "127.0.0.1")
+    host = os.getenv("HOST", "0.0.0.0")
     port = int(os.getenv("PORT", 5000))
     debug = os.getenv("DEBUG", "False").lower() in ("true", "1")
 

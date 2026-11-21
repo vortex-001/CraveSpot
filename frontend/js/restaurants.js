@@ -3,7 +3,11 @@
    MySQL → Flask API → Frontend
 ========================================= */
 
-const API_BASE = "http://127.0.0.1:5000/api";
+const API_BASE = (typeof CRAVESPOT_API_BASE !== "undefined")
+    ? CRAVESPOT_API_BASE
+    : (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
+        ? "http://127.0.0.1:5000/api"
+        : "/api");
 
 let restaurants = [];
 // Get the currently selected city
@@ -11,10 +15,12 @@ function getSelectedCity() {
     return localStorage.getItem("CraveSpotLocation") || "Chandigarh";
 }
 
-// Check whether a restaurant belongs to the selected city
-function matchesSelectedCity(restaurant) {
-    const selectedCity = getSelectedCity().toLowerCase();
+// Tricity metropolitan agglomeration: places in Chandigarh, Mohali, Panchkula are adjacent
+const TRICITY_AREAS = ["chandigarh", "mohali", "panchkula", "zirakpur", "kharar", "sas nagar", "tricity"];
 
+// Check whether a restaurant belongs to or is near the selected city
+function matchesSelectedCity(restaurant) {
+    const selectedCity = getSelectedCity().toLowerCase().trim();
     const address = String(restaurant.address || "").toLowerCase();
 
     // Keep restaurants without an address visible
@@ -22,7 +28,24 @@ function matchesSelectedCity(restaurant) {
         return true;
     }
 
-    return address.includes(selectedCity);
+    // Direct address match
+    if (address.includes(selectedCity)) {
+        return true;
+    }
+
+    // Tricity metro cluster: if user selected Mohali / Chandigarh / Panchkula
+    const isUserInTricity = TRICITY_AREAS.some(c => selectedCity.includes(c));
+    const isRestaurantInTricity = TRICITY_AREAS.some(c => address.includes(c));
+    if (isUserInTricity && isRestaurantInTricity) {
+        return true;
+    }
+
+    // Distance proximity check: within 35 km
+    if (typeof restaurant.distance_km === "number" && restaurant.distance_km <= 35) {
+        return true;
+    }
+
+    return false;
 }
 const sampleRestaurants = [
     {
@@ -69,6 +92,33 @@ const sampleRestaurants = [
         address: "Sector 10, Chandigarh", latitude: 30.7500, longitude: 76.7820,
         is_veg: true,
         offer: ""
+    },
+    {
+        restaurant_id: 6,
+        name: "Katani Dhaba",
+        cuisine: "North Indian & Punjabi",
+        rating: 4.4,
+        address: "Phase 3B2, Mohali", latitude: 30.7071, longitude: 76.7161,
+        is_veg: true,
+        offer: "15% OFF"
+    },
+    {
+        restaurant_id: 7,
+        name: "Amrit Sweets & Restaurant",
+        cuisine: "Desserts & Snacks",
+        rating: 4.6,
+        address: "Phase 5, Mohali", latitude: 30.7188, longitude: 76.7123,
+        is_veg: true,
+        offer: "20% OFF"
+    },
+    {
+        restaurant_id: 8,
+        name: "Barbeque Nation",
+        cuisine: "BBQ & Multi-Cuisine",
+        rating: 4.5,
+        address: "Sector 5, Panchkula", latitude: 30.6931, longitude: 76.8524,
+        is_veg: false,
+        offer: "Flat ₹150 OFF"
     }
 ];
 let menuItems = [];
@@ -110,9 +160,9 @@ modeButtons.forEach(button => {
 
 let nearbyActive = false;
 let userCoordinates = null;
-function distanceKm(a,b){const R=6371,rad=x=>x*Math.PI/180,dLat=rad(b.latitude-a.latitude),dLon=rad(b.longitude-a.longitude),lat1=rad(a.latitude),lat2=rad(b.latitude);const q=Math.sin(dLat/2)**2+Math.cos(lat1)*Math.cos(lat2)*Math.sin(dLon/2)**2;return 2*R*Math.atan2(Math.sqrt(q),Math.sqrt(1-q));}
-function enableNearby(){const status=document.getElementById("nearbyStatus"),button=document.getElementById("nearbyRestaurantsBtn");if(!navigator.geolocation){if(status)status.textContent="Location is not supported; showing your selected city.";return;}if(status)status.textContent="Getting your location…";button.disabled=true;navigator.geolocation.getCurrentPosition(pos=>{userCoordinates={latitude:pos.coords.latitude,longitude:pos.coords.longitude};nearbyActive=true;if(status)status.textContent="Nearby restaurants sorted by distance where coordinates are available.";button.textContent="Nearby ✓";button.disabled=false;if(sortSelect)sortSelect.value="distance";filterRestaurants();},err=>{nearbyActive=false;if(status)status.textContent=err.code===1?"Location permission denied. Choose a city above.":"Could not get location. Choose a city above.";button.disabled=false;filterRestaurants();},{enableHighAccuracy:false,timeout:10000,maximumAge:300000});}
-const nearbyBtn=document.getElementById("nearbyRestaurantsBtn");if(nearbyBtn)nearbyBtn.addEventListener("click",()=>{if(nearbyActive){nearbyActive=false;userCoordinates=null;nearbyBtn.textContent="Nearby";const st=document.getElementById("nearbyStatus");if(st)st.textContent="";filterRestaurants();}else enableNearby();});
+function distanceKm(a, b) { const R = 6371, rad = x => x * Math.PI / 180, dLat = rad(b.latitude - a.latitude), dLon = rad(b.longitude - a.longitude), lat1 = rad(a.latitude), lat2 = rad(b.latitude); const q = Math.sin(dLat / 2) ** 2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon / 2) ** 2; return 2 * R * Math.atan2(Math.sqrt(q), Math.sqrt(1 - q)); }
+function enableNearby() { const status = document.getElementById("nearbyStatus"), button = document.getElementById("nearbyRestaurantsBtn"); if (!navigator.geolocation) { if (status) status.textContent = "Location is not supported; showing your selected city."; return; } if (status) status.textContent = "Getting your location…"; button.disabled = true; navigator.geolocation.getCurrentPosition(pos => { userCoordinates = { latitude: pos.coords.latitude, longitude: pos.coords.longitude }; nearbyActive = true; if (status) status.textContent = "Nearby restaurants sorted by distance where coordinates are available."; button.textContent = "Nearby ✓"; button.disabled = false; if (sortSelect) sortSelect.value = "distance"; filterRestaurants(); }, err => { nearbyActive = false; if (status) status.textContent = err.code === 1 ? "Location permission denied. Choose a city above." : "Could not get location. Choose a city above."; button.disabled = false; filterRestaurants(); }, { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }); }
+const nearbyBtn = document.getElementById("nearbyRestaurantsBtn"); if (nearbyBtn) nearbyBtn.addEventListener("click", () => { if (nearbyActive) { nearbyActive = false; userCoordinates = null; nearbyBtn.textContent = "Nearby"; const st = document.getElementById("nearbyStatus"); if (st) st.textContent = ""; filterRestaurants(); } else enableNearby(); });
 
 /* =========================================
    LOAD DATA FROM FLASK & LIVE GPS DISCOVERY
@@ -297,21 +347,21 @@ function renderRestaurants() {
 
         card.dataset.price =
             averagePrice || 0;
-card.dataset.veg = String(
-    restaurant.is_veg === true ||
-    restaurant.is_veg === 1 ||
-    restaurant.is_veg === "true" ||
-    restaurant.is_veg === "1"
-);
+        card.dataset.veg = String(
+            restaurant.is_veg === true ||
+            restaurant.is_veg === 1 ||
+            restaurant.is_veg === "true" ||
+            restaurant.is_veg === "1"
+        );
 
-card.dataset.latitude = restaurant.latitude ?? restaurant.lat ?? "";
+        card.dataset.latitude = restaurant.latitude ?? restaurant.lat ?? "";
         card.dataset.longitude = restaurant.longitude ?? restaurant.lng ?? restaurant.lon ?? "";
-card.dataset.offer = String(
-    Boolean(
-        restaurant.offer &&
-        String(restaurant.offer).trim()
-    )
-);
+        card.dataset.offer = String(
+            Boolean(
+                restaurant.offer &&
+                String(restaurant.offer).trim()
+            )
+        );
 
 
 
@@ -362,11 +412,10 @@ card.dataset.offer = String(
 
                     <span class="rating">
 
-                        ${
-                            restaurant.rating
-                            ? Number(restaurant.rating).toFixed(1)
-                            : "N/A"
-                        } ★
+                        ${restaurant.rating
+                ? Number(restaurant.rating).toFixed(1)
+                : "N/A"
+            } ★
 
                     </span>
 
@@ -376,8 +425,8 @@ card.dataset.offer = String(
                 <p class="cuisine">
 
                     ${escapeHtml(
-                        restaurant.cuisine || "Restaurant"
-                    )}
+                restaurant.cuisine || "Restaurant"
+            )}
 
                 </p>
 
@@ -389,11 +438,10 @@ card.dataset.offer = String(
 
                 <p class="price">
 
-                    ${
-                        averagePrice
-                        ? "₹" + averagePrice + " avg. menu price"
-                        : "View menu"
-                    }
+                    ${averagePrice
+                ? "₹" + averagePrice + " avg. menu price"
+                : "View menu"
+            }
 
                 </p>
 
@@ -401,8 +449,8 @@ card.dataset.offer = String(
                 <p class="location">
 
                     <svg class="real-location-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.8"/></svg> ${escapeHtml(
-                        restaurant.address || "Chandigarh"
-                    )}
+                restaurant.address || "Chandigarh"
+            )}
 
                 </p>
 
@@ -448,7 +496,7 @@ function attachCardEvents() {
 
         /* RESTAURANT CLICK */
 
-        card.addEventListener("click", function(event) {
+        card.addEventListener("click", function (event) {
 
             // Don't open restaurant when favorite button clicked
             if (
@@ -483,7 +531,7 @@ function attachCardEvents() {
 
             favoriteButton.addEventListener(
                 "click",
-                function(event) {
+                function (event) {
 
                     event.stopPropagation();
 
@@ -554,34 +602,34 @@ function filterRestaurants() {
         }
 
         const restaurant = restaurants.find(
-    item => String(item.restaurant_id) === String(card.dataset.id)
-);
+            item => String(item.restaurant_id) === String(card.dataset.id)
+        );
 
-const hasCoordinates = card.dataset.latitude !== "" && card.dataset.longitude !== "";
-const matchesCity = nearbyActive && hasCoordinates
-    ? true
-    : (restaurant ? matchesSelectedCity(restaurant) : false);
+        const hasCoordinates = card.dataset.latitude !== "" && card.dataset.longitude !== "";
+        const matchesCity = nearbyActive && hasCoordinates
+            ? true
+            : (restaurant ? matchesSelectedCity(restaurant) : false);
 
-let nearbyMatch = true;
-if(nearbyActive && userCoordinates){const lat=Number(card.dataset.latitude),lon=Number(card.dataset.longitude);if(Number.isFinite(lat)&&Number.isFinite(lon)&&lat&&lon){card.dataset.distance=distanceKm(userCoordinates,{latitude:lat,longitude:lon}).toFixed(1);}else{card.dataset.distance="";nearbyMatch=true;}}
-const isVisible =
-    nearbyMatch &&
-    matchesCity &&
-    matchesSearch &&
-    matchesRating &&
-    matchesVeg &&
-    matchesOffers &&
-    matchesFilter;
+        let nearbyMatch = true;
+        if (nearbyActive && userCoordinates) { const lat = Number(card.dataset.latitude), lon = Number(card.dataset.longitude); if (Number.isFinite(lat) && Number.isFinite(lon) && lat && lon) { card.dataset.distance = distanceKm(userCoordinates, { latitude: lat, longitude: lon }).toFixed(1); } else { card.dataset.distance = ""; nearbyMatch = true; } }
+        const isVisible =
+            nearbyMatch &&
+            matchesCity &&
+            matchesSearch &&
+            matchesRating &&
+            matchesVeg &&
+            matchesOffers &&
+            matchesFilter;
 
         card.style.display = isVisible ? "" : "none";
-        const distanceBadge=card.querySelector(".nearby-distance");if(distanceBadge)distanceBadge.remove();if(isVisible&&nearbyActive&&card.dataset.distance!==""){const badge=document.createElement("small");badge.className="nearby-distance";badge.textContent=card.dataset.distance+" km away";card.querySelector(".food-card-content")?.appendChild(badge);}
+        const distanceBadge = card.querySelector(".nearby-distance"); if (distanceBadge) distanceBadge.remove(); if (isVisible && nearbyActive && card.dataset.distance !== "") { const badge = document.createElement("small"); badge.className = "nearby-distance"; badge.textContent = card.dataset.distance + " km away"; card.querySelector(".food-card-content")?.appendChild(badge); }
 
         if (isVisible) {
             visibleCount++;
         }
     });
 
-    if(nearbyActive && sortSelect && sortSelect.value === "distance"){const ordered=[...cards].sort((a,b)=>{const da=a.dataset.distance===""?Infinity:Number(a.dataset.distance),db=b.dataset.distance===""?Infinity:Number(b.dataset.distance);return da-db;});ordered.forEach(card=>restaurantGrid.appendChild(card));}
+    if (nearbyActive && sortSelect && sortSelect.value === "distance") { const ordered = [...cards].sort((a, b) => { const da = a.dataset.distance === "" ? Infinity : Number(a.dataset.distance), db = b.dataset.distance === "" ? Infinity : Number(b.dataset.distance); return da - db; }); ordered.forEach(card => restaurantGrid.appendChild(card)); }
 
     if (resultCount) {
         resultCount.textContent = `${visibleCount} restaurants found`;
@@ -591,10 +639,27 @@ const isVisible =
         noResults.style.display = visibleCount === 0 ? "block" : "none";
         const message = noResults.querySelector("p");
         if (message && !query && activeFilter === "all") {
-            message.textContent = `No restaurants are listed for ${getSelectedCity()} yet. Try another city or search.`;
+            message.textContent = `No restaurants found matching ${getSelectedCity()} directly. Click below to explore all spots.`;
         } else if (message) {
-            message.textContent = "Try another restaurant, cuisine or filter.";
+            message.textContent = "Try clearing your filters or searching another cuisine.";
         }
+    }
+
+    // Hook up empty state reset button
+    const emptyResetBtn = document.getElementById("emptyResetFiltersBtn");
+    if (emptyResetBtn && !emptyResetBtn.dataset.bound) {
+        emptyResetBtn.dataset.bound = "true";
+        emptyResetBtn.addEventListener("click", () => {
+            if (searchInput) searchInput.value = "";
+            activeFilter = "all";
+            const filterBtns = document.querySelectorAll(".filter-btn, .mode-btn");
+            filterBtns.forEach(b => b.classList.remove("active"));
+            const allBtn = document.querySelector('.filter-btn[data-filter="all"]');
+            if (allBtn) allBtn.classList.add("active");
+            cards.forEach(c => c.style.display = "");
+            if (resultCount) resultCount.textContent = `${cards.length} restaurants found`;
+            if (noResults) noResults.style.display = "none";
+        });
     }
 }
 
@@ -637,7 +702,7 @@ if (sortSelect) {
 
     sortSelect.addEventListener(
         "change",
-        function() {
+        function () {
 
             const cards =
                 Array.from(
@@ -648,7 +713,7 @@ if (sortSelect) {
 
 
             if (this.value === "distance") {
-                cards.sort((a,b)=>{const da=a.dataset.distance===""?Infinity:Number(a.dataset.distance),db=b.dataset.distance===""?Infinity:Number(b.dataset.distance);return da-db;});
+                cards.sort((a, b) => { const da = a.dataset.distance === "" ? Infinity : Number(a.dataset.distance), db = b.dataset.distance === "" ? Infinity : Number(b.dataset.distance); return da - db; });
             }
 
             if (this.value === "recommended") {
@@ -722,7 +787,7 @@ filterButtons.forEach(button => {
 
     button.addEventListener(
         "click",
-        function() {
+        function () {
 
             filterButtons.forEach(btn => {
 
@@ -782,9 +847,9 @@ document.getElementById("clearFilters")?.addEventListener("click", function () {
     document.getElementById("offersFilter").checked = false;
 
 
-activeFilter = "all";
-filterButtons.forEach(button => button.classList.toggle("active", button.dataset.filter === "all"));
-filterRestaurants();
+    activeFilter = "all";
+    filterButtons.forEach(button => button.classList.toggle("active", button.dataset.filter === "all"));
+    filterRestaurants();
 });
 // Refresh restaurant visibility when the selected city changes
 document.addEventListener("cravespot:locationChanged", function () {

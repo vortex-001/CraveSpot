@@ -23,6 +23,7 @@
         href="../css/categories.css"
     >
 
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg">
 </head>
 
 
@@ -40,11 +41,8 @@
             href="../index.html"
             class="logo"
         >
-
-            <span>
-                Crave<span>Spot</span>
-            </span>
-
+            <span class="logo-icon"><img src="../assets/icons/logo.svg" alt="CraveSpot Logo" width="34" height="34"></span>
+            <span>Crave<span>Spot</span></span>
         </a>
 <div class="location-wrapper">
     <div class="location"
@@ -680,21 +678,12 @@
             class="category-no-results"
             id="categoryNoResults"
         >
-<div>
-    <svg class="real-search-icon"
-         viewBox="0 0 24 24"
-         fill="none"
-         xmlns="http://www.w3.org/2000/svg"
-         aria-hidden="true">
-        <circle cx="10.8" cy="10.8" r="6.8"
-                stroke="currentColor"
-                stroke-width="2"/>
-        <path d="m16 16 5 5"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"/>
-    </svg>
-</div>
+            <div class="empty-state-badge">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#E23744" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 8v4l3 3"></path>
+                </svg>
+            </div>
 
             <h3>
                 No category found
@@ -779,9 +768,7 @@
 
         <div>
 
-            <div class="footer-logo">
-                CraveSpot
-            </div>
+            <div class="footer-logo"><span class="logo-icon"><img src="../assets/icons/logo.svg" alt="CraveSpot Logo" width="28" height="28"></span> Crave<span>Spot</span></div>
 
             <p>
                 Discover delicious local food

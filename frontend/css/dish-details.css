@@ -231,6 +231,13 @@
     background: #fff1f2;
     border-radius: 10px;
     font-size: 22px;
+    flex-shrink: 0;
+}
+
+.info-icon svg {
+    display: block;
+    width: 22px;
+    height: 22px;
 }
 
 .info-card h3 {
@@ -275,7 +282,63 @@
 ========================================== */
 
 .footer {
-    margin-top: 50px;
+    margin-top: 60px;
+    background: #18181b !important;
+    color: #e4e4e7 !important;
+    padding: 45px 20px 25px;
+    border-top: 1px solid #27272a;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+}
+
+.footer-container p {
+    color: #a1a1aa !important;
+    line-height: 1.6;
+    margin-top: 10px;
+    max-width: 320px;
+}
+
+.footer-container h3 {
+    color: #fff !important;
+    font-size: 16px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.footer-container a {
+    display: block;
+    color: #a1a1aa !important;
+    text-decoration: none;
+    margin-bottom: 9px;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.footer-container a:hover {
+    color: #e23744 !important;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 35px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid #27272a;
+    text-align: center;
+    color: #71717a !important;
+    font-size: 13px;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
 }
 
 

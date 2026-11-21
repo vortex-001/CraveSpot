@@ -137,6 +137,31 @@ def geocode_address(query):
             _PLACES_CACHE[cache_key] = (res, now)
             return res
 
+    # Try Google Geocoding API if key configured
+    google_key = os.getenv("GOOGLE_PLACES_API_KEY", "").strip()
+    if google_key:
+        try:
+            g_url = f"https://maps.googleapis.com/maps/api/geocode/json?address={urllib.parse.quote(query)}&key={google_key}"
+            req = urllib.request.Request(g_url, headers={"User-Agent": "CraveSpot-Food-App/2.0"})
+            with urllib.request.urlopen(req, timeout=4) as resp:
+                if resp.status == 200:
+                    g_data = json.loads(resp.read().decode("utf-8"))
+                    if g_data.get("status") == "OK" and g_data.get("results"):
+                        first = g_data["results"][0]
+                        g_loc = first.get("geometry", {}).get("location", {})
+                        if g_loc.get("lat") and g_loc.get("lng"):
+                            res = {
+                                "latitude": float(g_loc.get("lat")),
+                                "longitude": float(g_loc.get("lng")),
+                                "display_name": first.get("formatted_address"),
+                                "city": query.split(",")[0].strip().title(),
+                                "source": "google_geocoding"
+                            }
+                            _PLACES_CACHE[cache_key] = (res, now)
+                            return res
+        except Exception as e:
+            logger.warning(f"Google geocoding attempt failed for '{query}': {e}")
+
     # Try OpenStreetMap Nominatim Geocoding API
     try:
         params = urllib.parse.urlencode({
@@ -263,3 +288,99 @@ def fetch_osm_overpass_restaurants(lat, lng, radius_km=5, limit=20):
         logger.warning(f"Overpass API query failed: {err}")
 
     return []
+
+
+def fetch_google_places_restaurants(lat, lng, radius_km=15, limit=20):
+    """
+    Fetch live restaurants from Google Places Nearby Search API.
+    Uses GOOGLE_PLACES_API_KEY from environment with graceful fallback.
+    """
+    api_key = os.getenv("GOOGLE_PLACES_API_KEY", "").strip()
+    if not api_key:
+        return []
+
+    radius_meters = int(radius_km * 1000)
+    cache_key = f"gplaces_{round(lat, 3)}_{round(lng, 3)}_{radius_meters}"
+    now = time.time()
+    if cache_key in _PLACES_CACHE:
+        cached_data, timestamp = _PLACES_CACHE[cache_key]
+        if now - timestamp < CACHE_TTL_SECONDS:
+            return cached_data
+
+    url = (
+        f"https://maps.googleapis.com/maps/api/place/nearbysearch/json"
+        f"?location={lat},{lng}&radius={radius_meters}&type=restaurant&key={api_key}"
+    )
+
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "CraveSpot-Food-App/2.0"})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            if resp.status == 200:
+                data = json.loads(resp.read().decode("utf-8"))
+                results = data.get("results", [])
+                restaurants = []
+                for item in results:
+                    loc = item.get("geometry", {}).get("location", {})
+                    r_lat = loc.get("lat")
+                    r_lng = loc.get("lng")
+                    if not r_lat or not r_lng:
+                        continue
+
+                    dist = haversine_distance(lat, lng, float(r_lat), float(r_lng))
+
+                    # Photo reference
+                    photos = item.get("photos", [])
+                    if photos and photos[0].get("photo_reference"):
+                        pref = photos[0]["photo_reference"]
+                        cover = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=800&photoreference={pref}&key={api_key}"
+                    else:
+                        cover = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80"
+
+                    types = [t.replace("_", " ").title() for t in item.get("types", []) if t not in ("restaurant", "food", "point_of_interest", "establishment")]
+                    cuisine = " • ".join(types[:2]) if types else "Multi-Cuisine"
+
+                    price_level = item.get("price_level", 2)
+                    price_for_two = 250 if price_level == 1 else (450 if price_level == 2 else (850 if price_level == 3 else 1600))
+
+                    name = item.get("name", "Restaurant")
+                    is_veg = 1 if ("pure veg" in name.lower() or "veg" in cuisine.lower() or "vegetarian" in cuisine.lower()) else 0
+
+                    restaurants.append({
+                        "restaurant_id": f"gp_{item.get('place_id')}",
+                        "name": name,
+                        "cuisine": cuisine,
+                        "address": item.get("vicinity") or "Nearby, Local Area",
+                        "rating": float(item.get("rating", 4.3)),
+                        "review_count": int(item.get("user_ratings_total", 50)),
+                        "price_for_two": price_for_two,
+                        "is_veg": is_veg,
+                        "is_open_now": 1 if item.get("opening_hours", {}).get("open_now") else 0,
+                        "offer": "Google Verified",
+                        "latitude": float(r_lat),
+                        "longitude": float(r_lng),
+                        "distance_km": dist,
+                        "cover_image": cover,
+                        "image_url": cover,
+                        "source": "google_places"
+                    })
+
+                restaurants.sort(key=lambda x: x["distance_km"])
+                _PLACES_CACHE[cache_key] = (restaurants, now)
+                return restaurants[:limit]
+    except Exception as err:
+        logger.warning(f"Google Places API query error: {err}")
+
+    return []
+
+
+def fetch_live_restaurants(lat, lng, radius_km=15, limit=20):
+    """
+    Combined Live Discovery:
+    1. Tries Google Places API if GOOGLE_PLACES_API_KEY is configured.
+    2. Falls back to OpenStreetMap Overpass API if Google Places has 0 results or errors.
+    3. Guarantees live nearby discovery with accurate distance tags.
+    """
+    results = fetch_google_places_restaurants(lat, lng, radius_km=radius_km, limit=limit)
+    if not results:
+        results = fetch_osm_overpass_restaurants(lat, lng, radius_km=radius_km, limit=limit)
+    return results

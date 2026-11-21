@@ -1935,10 +1935,13 @@ button,select,input{font:inherit}button:focus-visible,a:focus-visible,select:foc
 [hidden]{display:none!important}
 .auth-buttons{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.user-welcome{font-size:14px;color:#5b514c;font-weight:650}.logout-btn{border:1px solid var(--brand);border-radius:10px;padding:10px 15px;background:#fff;color:var(--brand);font-weight:650;cursor:pointer}.logout-btn:hover{background:#fff4f4}.filter-btn.active,.dish-filter.active,.dish-category.active{background:#fff0f1!important;border-color:var(--brand)!important;color:var(--brand)!important}
 
-/* Final brand refinement: clean wordmark, no artificial symbol */
-.logo { gap: 0 !important; font-size: clamp(23px, 2vw, 29px); letter-spacing: -1.15px; font-weight: 850; }
-.logo-icon, .brand-mark { display: none !important; }
+/* Brand Logo & Wordmark with circular red plate icon */
+.logo { display: inline-flex; align-items: center; gap: 9px !important; font-size: clamp(22px, 2vw, 28px); letter-spacing: -0.7px; font-weight: 850; text-decoration: none; }
+.logo-icon, .brand-mark { display: inline-flex !important; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; vertical-align: middle; flex-shrink: 0; }
+.logo-icon img, .logo-icon svg, .brand-mark img, .brand-mark svg { width: 100%; height: 100%; display: block; border-radius: 50%; }
 .logo > span:last-child { display: inline-block; }
+.footer-logo { display: inline-flex; align-items: center; gap: 9px; font-size: 24px; font-weight: 800; }
+.footer-logo .logo-icon { width: 30px; height: 30px; }
 .saved-nav-link { color: #e23744 !important; font-weight: 700 !important; }
 /* Food preference filters use restrained, standard indicator dots instead of emoji */
 .food-filter { display: inline-flex; align-items: center; gap: 8px; }
@@ -2846,6 +2849,58 @@ body {
         padding: 12px 18px;
     }
     .loc-map-wrapper {
+        min-height: 260px;
+    }
+}
+
+/* Empty State Modern Styling */
+.empty-state-badge {
+    width: 72px;
+    height: 72px;
+    background: #fff1f2;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px auto;
+    box-shadow: 0 4px 14px rgba(226, 55, 68, 0.12);
+}
+
+.empty-state-badge svg {
+    width: 38px !important;
+    height: 38px !important;
+    max-width: 38px !important;
+    max-height: 38px !important;
+    stroke: #e23744 !important;
+}
+
+.no-results svg, .dish-no-results svg, .category-no-results svg {
+    max-width: 48px !important;
+    max-height: 48px !important;
+}
+
+.empty-state-reset-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 18px;
+    padding: 11px 24px;
+    background: #e23744;
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(226, 55, 68, 0.25);
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.empty-state-reset-btn:hover {
+    background: #c52733;
+    transform: translateY(-1px);
+}
+
         height: 240px;
     }
 }

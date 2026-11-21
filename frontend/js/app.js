@@ -30,9 +30,9 @@ function performCravingSearch(customQuery) {
 
     // Determine correct path depending on current page level
     const isPagesDir = window.location.pathname.includes('/pages/');
-    const targetUrl = (isPagesDir ? 'restaurants.html' : 'pages/restaurants.html') + 
+    const targetUrl = (isPagesDir ? 'restaurants.html' : 'pages/restaurants.html') +
         '?craving=' + encodeURIComponent(query);
-    
+
     window.location.href = targetUrl;
 }
 
@@ -56,8 +56,8 @@ function initLocationSystem() {
     const selector = document.getElementById('locationSelector');
 
     // Load initial saved location
-    const currentLoc = (typeof getUserLocation === 'function') 
-        ? getUserLocation() 
+    const currentLoc = (typeof getUserLocation === 'function')
+        ? getUserLocation()
         : { city: localStorage.getItem('CraveSpotLocation') || 'Chandigarh' };
 
     if (label) {
@@ -271,11 +271,11 @@ function initSurpriseMe() {
             try {
                 const loc = (typeof getUserLocation === 'function') ? getUserLocation() : { lat: 30.7333, lng: 76.7794 };
                 const res = await apiRequest(`/cravings/surprise-me?lat=${loc.lat}&lng=${loc.lng}`);
-                
+
                 if (res?.surprise) {
                     const item = res.surprise;
                     const isPagesDir = window.location.pathname.includes('/pages/');
-                    const detailsUrl = (isPagesDir ? 'dish-details.html' : 'pages/dish-details.html') + 
+                    const detailsUrl = (isPagesDir ? 'dish-details.html' : 'pages/dish-details.html') +
                         `?dish=${encodeURIComponent(item.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'))}&name=${encodeURIComponent(item.name)}&price=${item.price}&restaurant=${encodeURIComponent(item.restaurant_name || '')}`;
 
                     cardContent.innerHTML = `
@@ -367,7 +367,7 @@ function initImageFallbacks() {
     const fallbackSvg = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400"%3E%3Crect width="600" height="400" fill="%23FFF5F0"/%3E%3Ccircle cx="300" cy="200" r="110" fill="%23FFE3D6"/%3E%3Ctext x="50%25" y="48%25" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="%23FF5200" text-anchor="middle" dominant-baseline="middle"%3ECraveSpot%3C/text%3E%3Ctext x="50%25" y="58%25" font-family="system-ui, sans-serif" font-size="16" fill="%23888" text-anchor="middle" dominant-baseline="middle"%3E%F0%9F%8D%B4 Food Discovery%3C/text%3E%3C/svg%3E';
 
     document.querySelectorAll('img').forEach(img => {
-        img.addEventListener('error', function() {
+        img.addEventListener('error', function () {
             if (!this.dataset.fallbackApplied) {
                 this.dataset.fallbackApplied = 'true';
                 this.src = fallbackSvg;
