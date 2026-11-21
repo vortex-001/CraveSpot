@@ -88,40 +88,103 @@ function initLocationSystem() {
 // ---------------------------------------------------------------------
 let currentHomeRadius = 15;
 
+const fallbackHomeRestaurants = [
+    { restaurant_id: 6, name: "Katani Dhaba", cuisine: "North Indian & Punjabi", rating: 4.4, address: "Phase 3B2, Mohali", latitude: 30.7071, longitude: 76.7161, is_veg: 1, offer: "15% OFF", price_for_two: 300 },
+    { restaurant_id: 7, name: "Amrit Sweets & Restaurant", cuisine: "Desserts & Snacks", rating: 4.6, address: "Phase 5, Mohali", latitude: 30.7188, longitude: 76.7123, is_veg: 1, offer: "20% OFF", price_for_two: 250 },
+    { restaurant_id: 1, name: "Spice Garden", cuisine: "North Indian", rating: 4.5, address: "Sector 17, Chandigarh", latitude: 30.7415, longitude: 76.7680, is_veg: 1, offer: "20% OFF", price_for_two: 450 },
+    { restaurant_id: 2, name: "Pizza Corner", cuisine: "Italian & Fast Food", rating: 4.3, address: "Sector 22, Chandigarh", latitude: 30.7336, longitude: 76.7725, is_veg: 1, offer: "30% OFF", price_for_two: 400 },
+    { restaurant_id: 3, name: "Wok Express", cuisine: "Chinese & Asian", rating: 4.2, address: "Sector 35, Chandigarh", latitude: 30.7253, longitude: 76.7642, is_veg: 0, offer: "Free Delivery", price_for_two: 350 },
+    { restaurant_id: 8, name: "Barbeque Nation", cuisine: "BBQ & Multi-Cuisine", rating: 4.5, address: "Sector 5, Panchkula", latitude: 30.6931, longitude: 76.8524, is_veg: 0, offer: "Flat ₹150 OFF", price_for_two: 800 }
+];
+
+function renderHomeRestaurantCards(grid, places, loc) {
+    if (!grid) return;
+    const topPlaces = places.slice(0, 6);
+    grid.innerHTML = topPlaces.map((r, i) => {
+        const dist = typeof r.distance_km === 'number' ? r.distance_km : null;
+        const distBadge = dist !== null
+            ? `<span class="loc-distance-pill">📍 ${dist < 1 ? Math.round(dist * 1000) + ' m' : dist.toFixed(1) + ' km'}</span>`
+            : `<span class="loc-distance-pill">📍 Near you</span>`;
+
+        const deliveryMins = r.delivery_time_mins || (dist ? Math.max(15, Math.min(60, Math.round(15 + dist * 3.5))) : 25);
+        const isVeg = r.is_veg === 1 || r.is_veg === true || r.is_veg === '1';
+        const dietDot = isVeg
+            ? `<span class="cs-diet-dot veg" title="Pure Veg"></span>`
+            : `<span class="cs-diet-dot non-veg" title="Non-Veg & Multi-Cuisine"></span>`;
+
+        const imgUrl = r.image_url || r.cover_image || `https://images.unsplash.com/photo-${['1517248135467-4c7edcad34c4', '1552566626-52f8b828add9', '1559339352-11d035aa65de', '1515003197210-e0cd71810b5f', '1555396273-367ea4eb4db5'][i % 5]}?auto=format&fit=crop&w=800&q=80`;
+        const offerText = r.offer || (i % 2 === 0 ? '20% OFF up to ₹100' : 'Free Delivery');
+        const rating = r.rating ? Number(r.rating).toFixed(1) : '4.4';
+        const priceForTwo = r.price_for_two ? `₹${r.price_for_two} for two` : '₹350 for two';
+
+        return `
+            <article class="restaurant-card" onclick="window.location.href='pages/restaurant-details.html?id=${r.restaurant_id}'">
+                <div class="restaurant-image">
+                    <img src="${imgUrl}" alt="${r.name || 'Restaurant'}" loading="lazy">
+                    <span class="offer">${offerText}</span>
+                </div>
+                <div class="restaurant-info">
+                    <div class="restaurant-name">
+                        <div style="display:flex; align-items:center; gap:8px;">
+                            ${dietDot}
+                            <h3>${r.name || 'Top Eatery'}</h3>
+                        </div>
+                        <span class="rating">★ ${rating}</span>
+                    </div>
+                    <p class="cuisine">${r.cuisine || 'North Indian • Fast Food • Beverages'}</p>
+                    <div class="restaurant-meta">
+                        ${distBadge}
+                        <span class="delivery-time-pill">⚡ ~${deliveryMins} mins</span>
+                        <span style="font-size:12px; font-weight:600; color:#6B7280;">• ${priceForTwo}</span>
+                    </div>
+                    <p class="restaurant-location">
+                        <svg style="width:14px; height:14px; flex-shrink:0; color:#FF5200;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/>
+                            <circle cx="12" cy="10" r="2.5"/>
+                        </svg>
+                        <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${r.address || loc.city || 'Chandigarh'}</span>
+                    </p>
+                </div>
+            </article>
+        `;
+    }).join('');
+}
+
 async function loadHomeLiveRestaurants() {
     const grid = document.getElementById('homeRestaurantGrid');
     const cityTitle = document.getElementById('homeCurrentCityName');
     if (!grid) return; // not on homepage
 
-    const loc = (typeof getUserLocation === 'function') 
-        ? getUserLocation() 
+    const loc = (typeof getUserLocation === 'function')
+        ? getUserLocation()
         : { lat: 30.7333, lng: 76.7794, city: 'Chandigarh' };
 
     if (cityTitle) {
         cityTitle.textContent = loc.city || 'your area';
     }
 
-    // Show stylish skeleton loaders while fetching
-    grid.innerHTML = `
-        <div class="restaurant-card" style="opacity:0.6; pointer-events:none;">
-            <div class="restaurant-image" style="background:#e5e7eb;"></div>
-            <div class="restaurant-info"><div style="height:20px; background:#e5e7eb; border-radius:4px; margin-bottom:8px;"></div><div style="height:14px; background:#f3f4f6; border-radius:4px; width:70%;"></div></div>
-        </div>
-        <div class="restaurant-card" style="opacity:0.6; pointer-events:none;">
-            <div class="restaurant-image" style="background:#e5e7eb;"></div>
-            <div class="restaurant-info"><div style="height:20px; background:#e5e7eb; border-radius:4px; margin-bottom:8px;"></div><div style="height:14px; background:#f3f4f6; border-radius:4px; width:70%;"></div></div>
-        </div>
-        <div class="restaurant-card" style="opacity:0.6; pointer-events:none;">
-            <div class="restaurant-image" style="background:#e5e7eb;"></div>
-            <div class="restaurant-info"><div style="height:20px; background:#e5e7eb; border-radius:4px; margin-bottom:8px;"></div><div style="height:14px; background:#f3f4f6; border-radius:4px; width:70%;"></div></div>
-        </div>
-    `;
+    // Helper to calculate simple haversine distance
+    function calcDist(lat1, lon1, lat2, lon2) {
+        const R = 6371, rad = x => x * Math.PI / 180;
+        const dLat = rad(lat2 - lat1), dLon = rad(lon2 - lon1);
+        const a = Math.sin(dLat/2)**2 + Math.cos(rad(lat1))*Math.cos(rad(lat2))*Math.sin(dLon/2)**2;
+        return Number((2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))).toFixed(1));
+    }
 
+    const fallbacksWithDist = fallbackHomeRestaurants.map(r => ({
+        ...r,
+        distance_km: calcDist(loc.lat, loc.lng, r.latitude, r.longitude)
+    })).sort((a, b) => a.distance_km - b.distance_km);
+
+    // Initial render with fallbacks immediately so skeleton loaders never get stuck!
+    renderHomeRestaurantCards(grid, fallbacksWithDist, loc);
+
+    // Fetch fresh live nearby data from API in background
     try {
         let places = [];
         if (typeof apiRequest === 'function') {
             try {
-                const res = await apiRequest(`/restaurants/live-nearby?lat=${loc.lat}&lng=${loc.lng}&radius=${currentHomeRadius}`);
+                const res = await apiRequest(`/restaurants/live-nearby?lat=${loc.lat}&lng=${loc.lng}&radius=${currentHomeRadius}`, { timeout: 3000 });
                 if (res?.restaurants && res.restaurants.length > 0) {
                     places = res.restaurants;
                 }
@@ -130,80 +193,24 @@ async function loadHomeLiveRestaurants() {
             }
 
             if (!places.length) {
-                const allRest = await apiRequest('/restaurants');
-                if (Array.isArray(allRest)) {
-                    places = allRest;
+                try {
+                    const allRest = await apiRequest('/restaurants', { timeout: 2500 });
+                    if (Array.isArray(allRest) && allRest.length > 0) {
+                        places = allRest;
+                    }
+                } catch (e) {
+                    console.warn('/restaurants fallback failed:', e);
                 }
             }
         }
 
-        if (!places || !places.length) {
-            grid.innerHTML = `
-                <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; background:#fafafa; border-radius:16px; border:1px dashed #d1d5db;">
-                    <span style="font-size:36px;">🍴</span>
-                    <h3 style="margin: 12px 0 6px 0; color:#111827;">No food spots within ${currentHomeRadius} km</h3>
-                    <p style="color:#6b7280; font-size:14px; margin-bottom: 16px;">Try expanding the distance filter or pick another location on the map.</p>
-                    <button type="button" class="radius-chip active" onclick="if(window.openLocationPickerModal) window.openLocationPickerModal()">Change Location on Map 📍</button>
-                </div>
-            `;
-            return;
+        if (places && places.length > 0) {
+            renderHomeRestaurantCards(grid, places, loc);
         }
-
-        // Limit to top 6 for homepage
-        const topPlaces = places.slice(0, 6);
-
-        grid.innerHTML = topPlaces.map((r, i) => {
-            const dist = typeof r.distance_km === 'number' ? r.distance_km : null;
-            const distBadge = dist !== null 
-                ? `<span class="loc-distance-pill">📍 ${dist < 1 ? Math.round(dist * 1000) + ' m' : dist.toFixed(1) + ' km'}</span>` 
-                : `<span class="loc-distance-pill">📍 Near you</span>`;
-            
-            const deliveryMins = r.delivery_time_mins || (dist ? Math.max(15, Math.min(60, Math.round(15 + dist * 3.5))) : 25);
-            const isVeg = r.is_veg === 1 || r.is_veg === true || r.is_veg === '1';
-            const dietDot = isVeg 
-                ? `<span class="cs-diet-dot veg" title="Pure Veg"></span>` 
-                : `<span class="cs-diet-dot non-veg" title="Non-Veg & Multi-Cuisine"></span>`;
-
-            const imgUrl = r.image_url || r.cover_image || `https://images.unsplash.com/photo-${['1517248135467-4c7edcad34c4', '1552566626-52f8b828add9', '1559339352-11d035aa65de', '1515003197210-e0cd71810b5f', '1555396273-367ea4eb4db5'][i % 5]}?auto=format&fit=crop&w=800&q=80`;
-            const offerText = r.offer || (i % 2 === 0 ? '20% OFF up to ₹100' : 'Free Delivery');
-            const rating = r.rating ? Number(r.rating).toFixed(1) : '4.4';
-            const priceForTwo = r.price_for_two ? `₹${r.price_for_two} for two` : '₹350 for two';
-
-            return `
-                <article class="restaurant-card" onclick="window.location.href='pages/restaurant-details.html?id=${r.restaurant_id}'">
-                    <div class="restaurant-image">
-                        <img src="${imgUrl}" alt="${r.name || 'Restaurant'}" loading="lazy">
-                        <span class="offer">${offerText}</span>
-                    </div>
-                    <div class="restaurant-info">
-                        <div class="restaurant-name">
-                            <div style="display:flex; align-items:center; gap:8px;">
-                                ${dietDot}
-                                <h3>${r.name || 'Top Eatery'}</h3>
-                            </div>
-                            <span class="rating">★ ${rating}</span>
-                        </div>
-                        <p class="cuisine">${r.cuisine || 'North Indian • Fast Food • Beverages'}</p>
-                        <div class="restaurant-meta">
-                            ${distBadge}
-                            <span class="delivery-time-pill">⚡ ~${deliveryMins} mins</span>
-                            <span style="font-size:12px; font-weight:600; color:#6B7280;">• ${priceForTwo}</span>
-                        </div>
-                        <p class="restaurant-location">
-                            <svg style="width:14px; height:14px; flex-shrink:0; color:#FF5200;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/>
-                                <circle cx="12" cy="10" r="2.5"/>
-                            </svg>
-                            <span style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${r.address || loc.city || 'Chandigarh'}</span>
-                        </p>
-                    </div>
-                </article>
-            `;
-        }).join('');
-
     } catch (e) {
-        console.error('Failed to load home live restaurants:', e);
+        console.warn('Live update fallback used:', e);
     }
+}
 }
 
 function initHomeLiveSection() {
@@ -331,10 +338,6 @@ function syncAuthState() {
             const displayName = user?.name ? user.name.split(' ')[0] : 'Foodie';
             container.innerHTML = `
                 <div class="user-nav-dropdown">
-                    <a href="${favoritesPath}" class="nav-fav-link" title="My Wishlist">
-                        <span class="fav-heart">❤️</span>
-                        <span class="nav-fav-label">Saved</span>
-                    </a>
                     <a href="${profilePath}" class="user-profile-pill">
                         <span class="user-avatar-icon">👤</span>
                         <span class="user-name">Hi, ${displayName}</span>

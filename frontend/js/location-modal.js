@@ -393,7 +393,7 @@
         const initialLng = currentSelectedLoc.lng || 76.7794;
 
         if (window.L && !mapInstance) {
-            // CartoDB Voyager tiles (clean Google Maps aesthetic for food discovery)
+            // Full OpenStreetMap tiles — 100% free, zero watermark, full street level detail
             mapInstance = window.L.map(container, {
                 center: [initialLat, initialLng],
                 zoom: 14,
@@ -401,9 +401,9 @@
                 attributionControl: false
             });
 
-            window.L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
-                subdomains: 'abcd'
+                subdomains: ['a', 'b', 'c']
             }).addTo(mapInstance);
 
             const customPin = createCustomPinIcon();
@@ -454,14 +454,16 @@
         if (addressEl) addressEl.textContent = currentSelectedLoc.display_name || `${currentSelectedLoc.city}, India`;
         if (coordsEl) coordsEl.textContent = `Lat: ${Number(currentSelectedLoc.lat).toFixed(4)} • Lng: ${Number(currentSelectedLoc.lng).toFixed(4)}`;
 
-        // Load Leaflet and initialize map
+        // Load Leaflet and initialize map with multiple resize recalculations
         loadLeaflet(() => {
-            setTimeout(() => {
-                initMap();
-                if (mapInstance) {
-                    mapInstance.invalidateSize();
-                }
-            }, 100);
+            initMap();
+            [50, 150, 300, 600].forEach(delay => {
+                setTimeout(() => {
+                    if (mapInstance) {
+                        mapInstance.invalidateSize();
+                    }
+                }, delay);
+            });
         });
     };
 

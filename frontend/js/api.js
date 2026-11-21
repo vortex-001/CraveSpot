@@ -88,9 +88,14 @@ async function apiRequest(endpoint, options = {}) {
         headers["Authorization"] = `Bearer ${token}`;
     }
 
+    const controller = new AbortController();
+    const timeoutMs = options.timeout || 3500;
+    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
     const config = {
         ...options,
-        headers
+        headers,
+        signal: options.signal || controller.signal
     };
 
     if (config.body && typeof config.body === "object") {
@@ -99,6 +104,7 @@ async function apiRequest(endpoint, options = {}) {
 
     try {
         const response = await fetch(`${CRAVESPOT_API_BASE}${endpoint}`, config);
+        clearTimeout(timeoutId);
         const data = await response.json().catch(() => ({}));
 
         if (!response.ok) {
@@ -108,6 +114,7 @@ async function apiRequest(endpoint, options = {}) {
 
         return data;
     } catch (err) {
+        clearTimeout(timeoutId);
         console.warn(`API Error [${endpoint}]:`, err.message);
         throw err;
     }

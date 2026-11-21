@@ -169,56 +169,76 @@ const nearbyBtn = document.getElementById("nearbyRestaurantsBtn"); if (nearbyBtn
 ========================================= */
 
 async function loadRestaurants() {
+    const loc = (typeof getUserLocation === "function")
+        ? getUserLocation()
+        : { lat: 30.7333, lng: 76.7794, city: "Chandigarh" };
+
+    // 1. Instant Render: immediately display base restaurants with real distance tags
+    // so the user is NEVER stuck on "Loading live restaurants..."
+    if (!restaurants || restaurants.length === 0) {
+        restaurants = sampleRestaurants.map(r => {
+            const item = { ...r };
+            if (typeof item.distance_km !== "number" && item.latitude && item.longitude) {
+                item.distance_km = distanceKm(
+                    { latitude: loc.lat, longitude: loc.lng },
+                    { latitude: parseFloat(item.latitude), longitude: parseFloat(item.longitude) }
+                );
+            }
+            return item;
+        });
+        renderRestaurants();
+    }
+
+    // 2. Fetch fresh live GPS & Database restaurants in the background
     try {
-        restaurantGrid.innerHTML = "<p>Loading live restaurants...</p>";
-
-        const loc = (typeof getUserLocation === "function")
-            ? getUserLocation()
-            : { lat: 30.7333, lng: 76.7794, city: "Chandigarh" };
-
         let fetched = [];
         try {
-            const liveRes = await apiRequest(`/restaurants/live-nearby?lat=${loc.lat}&lng=${loc.lng}&radius=35`);
+            const liveRes = await apiRequest(`/restaurants/live-nearby?lat=${loc.lat}&lng=${loc.lng}&radius=35`, { timeout: 3000 });
             if (liveRes?.restaurants && liveRes.restaurants.length > 0) {
                 fetched = liveRes.restaurants;
             }
         } catch (e) {
-            console.warn("Live nearby query failed; trying /restaurants fallback:", e);
+            console.warn("Live nearby query failed, trying /restaurants fallback:", e);
         }
 
         if (!fetched.length) {
-            fetched = await apiRequest("/restaurants");
+            try {
+                const allRest = await apiRequest("/restaurants", { timeout: 2500 });
+                if (Array.isArray(allRest) && allRest.length > 0) {
+                    fetched = allRest;
+                }
+            } catch (err) {
+                console.warn("/restaurants fallback failed:", err);
+            }
         }
 
-        // Compute distance for all items if not already computed
-        restaurants = (Array.isArray(fetched) ? fetched : []).map(r => {
-            if (typeof r.distance_km !== "number" && r.latitude && r.longitude) {
-                r.distance_km = distanceKm(
-                    { latitude: loc.lat, longitude: loc.lng },
-                    { latitude: parseFloat(r.latitude), longitude: parseFloat(r.longitude) }
-                );
-            }
-            return r;
-        });
+        // If fresh data received, update restaurants and re-render
+        if (fetched && fetched.length > 0) {
+            restaurants = fetched.map(r => {
+                if (typeof r.distance_km !== "number" && r.latitude && r.longitude) {
+                    r.distance_km = distanceKm(
+                        { latitude: loc.lat, longitude: loc.lng },
+                        { latitude: parseFloat(r.latitude), longitude: parseFloat(r.longitude) }
+                    );
+                }
+                return r;
+            });
+            renderRestaurants();
+        }
 
-        // Load menu items too
+        // Load menu items in background
         try {
-            menuItems = await apiRequest("/menu-items");
+            menuItems = await apiRequest("/menu-items", { timeout: 2000 });
         } catch (error) {
-            console.log("Menu data could not be loaded.");
             menuItems = [];
         }
 
-        renderRestaurants();
-
     } catch (error) {
-        console.error("Could not load restaurants from API:", error);
-
-        // Keep the frontend usable when the backend is unavailable
-        restaurants = sampleRestaurants;
-        menuItems = [];
-
-        renderRestaurants();
+        console.warn("Background restaurant refresh completed with fallback:", error);
+        if (!restaurants || restaurants.length === 0) {
+            restaurants = sampleRestaurants;
+            renderRestaurants();
+        }
     }
 }
 

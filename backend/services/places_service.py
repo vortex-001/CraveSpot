@@ -236,7 +236,7 @@ def fetch_osm_overpass_restaurants(lat, lng, radius_km=5, limit=20):
             headers={"User-Agent": "CraveSpot-Food-App/2.0"}
         )
 
-        with urllib.request.urlopen(req, timeout=6) as response:
+        with urllib.request.urlopen(req, timeout=2.0) as response:
             if response.status == 200:
                 raw_json = json.loads(response.read().decode("utf-8"))
                 elements = raw_json.get("elements", [])
@@ -314,7 +314,7 @@ def fetch_google_places_restaurants(lat, lng, radius_km=15, limit=20):
 
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "CraveSpot-Food-App/2.0"})
-        with urllib.request.urlopen(req, timeout=5) as resp:
+        with urllib.request.urlopen(req, timeout=1.8) as resp:
             if resp.status == 200:
                 data = json.loads(resp.read().decode("utf-8"))
                 results = data.get("results", [])
