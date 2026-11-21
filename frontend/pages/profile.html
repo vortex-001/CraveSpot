@@ -3,161 +3,446 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Profile & Preferences | CraveSpot</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>My Profile & Foodie Preferences | CraveSpot</title>
+    <link rel="stylesheet" href="../css/style.css?v=2.6.0">
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg?v=2.6.0">
     <style>
-        .profile-container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
+        .profile-page-wrapper {
+            background: #F8FAFC;
+            min-height: calc(100vh - 76px);
+            padding: 40px 20px 80px;
         }
-        .profile-header-card {
-            background: #FFFFFF;
-            border-radius: 20px;
-            padding: 32px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        .profile-container {
+            max-width: 1040px;
+            margin: 0 auto;
+        }
+
+        /* Profile Hero Card */
+        .profile-hero-card {
+            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            border-radius: 24px;
+            padding: 36px 40px;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+            box-shadow: 0 16px 36px rgba(15, 23, 42, 0.14);
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+        .profile-hero-card::after {
+            content: "";
+            position: absolute;
+            right: -60px;
+            bottom: -60px;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, rgba(255, 82, 0, 0.22) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .profile-user-left {
             display: flex;
             align-items: center;
             gap: 24px;
-            margin-bottom: 30px;
-            border: 1px solid #F1F5F9;
+            z-index: 1;
         }
-        .profile-avatar {
-            width: 90px;
-            height: 90px;
+        .profile-avatar-wrap {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .profile-avatar-circle {
+            width: 94px;
+            height: 94px;
             border-radius: 50%;
             background: linear-gradient(135deg, #FF5200, #FFA41B);
-            color: #FFF;
+            color: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 38px;
-            font-weight: 700;
-            box-shadow: 0 8px 20px rgba(255,82,0,0.25);
-            flex-shrink: 0;
+            font-weight: 800;
+            box-shadow: 0 8px 24px rgba(255, 82, 0, 0.4);
+            border: 3.5px solid rgba(255, 255, 255, 0.2);
         }
-        .profile-info h1 {
-            font-size: 26px;
-            color: #0F172A;
+        .profile-badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255, 82, 0, 0.18);
+            border: 1px solid rgba(255, 82, 0, 0.4);
+            color: #FF8A4C;
+            font-size: 11.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            padding: 3px 10px;
+            border-radius: 9999px;
             margin-bottom: 6px;
         }
-        .profile-info p {
-            color: #64748B;
-            font-size: 15px;
+        .profile-info h1 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
             margin-bottom: 4px;
+            color: #FFFFFF;
         }
-        .profile-grid {
+        .profile-info p {
+            color: #94A3B8;
+            font-size: 14.5px;
+            margin-bottom: 2px;
+        }
+        .profile-hero-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 1;
+            flex-shrink: 0;
+        }
+        .profile-action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 13.5px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+        .profile-action-btn.primary {
+            background: #FF5200;
+            color: #FFFFFF;
+            border: none;
+            box-shadow: 0 4px 14px rgba(255, 82, 0, 0.35);
+        }
+        .profile-action-btn.primary:hover {
+            background: #EA580C;
+            transform: translateY(-1px);
+        }
+        .profile-action-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #FFFFFF;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+        }
+        .profile-action-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.18);
+        }
+
+        /* Stats Cards */
+        .profile-stats-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 28px;
         }
-        @media (max-width: 768px) {
-            .profile-grid { grid-template-columns: 1fr; }
-            .profile-header-card { flex-direction: column; text-align: center; }
-        }
-        .settings-card {
+        .stat-card {
             background: #FFFFFF;
-            border-radius: 20px;
-            padding: 28px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            border: 1px solid #F1F5F9;
+            border-radius: 18px;
+            padding: 22px 20px;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-        .settings-card h2 {
-            font-size: 20px;
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        }
+        .stat-icon-wrap {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+        .stat-icon-wrap.orange { background: #FFF7ED; color: #FF5200; }
+        .stat-icon-wrap.red { background: #FFF1F2; color: #E11D48; }
+        .stat-icon-wrap.blue { background: #EFF6FF; color: #2563EB; }
+        .stat-icon-wrap.emerald { background: #ECFDF5; color: #059669; }
+        .stat-meta small {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #64748B;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+        }
+        .stat-meta strong {
+            font-size: 18px;
+            font-weight: 800;
             color: #0F172A;
-            margin-bottom: 18px;
+            line-height: 1.2;
+            display: block;
+        }
+
+        /* 2-Column Content Grid */
+        .profile-main-grid {
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 28px;
+        }
+        .profile-card {
+            background: #FFFFFF;
+            border-radius: 22px;
+            padding: 30px;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+        .profile-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #F1F5F9;
+        }
+        .profile-card-header h2 {
+            font-size: 18.5px;
+            font-weight: 800;
+            color: #0F172A;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .form-group {
-            margin-bottom: 18px;
+        .profile-card-header .header-badge {
+            font-size: 12px;
+            font-weight: 700;
+            color: #FF5200;
+            background: #FFF7ED;
+            padding: 3px 10px;
+            border-radius: 9999px;
+            border: 1px solid #FFEDD5;
         }
-        .form-group label {
+
+        /* Form Controls */
+        .taste-form-group {
+            margin-bottom: 22px;
+        }
+        .taste-form-group label {
             display: block;
             font-size: 13px;
-            font-weight: 600;
-            color: #475569;
-            margin-bottom: 8px;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        .form-control {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 12px;
-            border: 1.5px solid #CBD5E1;
-            font-size: 15px;
-            color: #0F172A;
-            background: #F8FAFC;
-            transition: border-color 0.2s;
-        }
-        .form-control:focus {
-            outline: none;
-            border-color: #FF5200;
-            background: #FFF;
-        }
-        .pill-options {
+        .taste-pills-row {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
-        .pill-btn {
-            padding: 8px 16px;
-            border-radius: 20px;
+        .taste-pill-btn {
+            background: #F8FAFC;
             border: 1.5px solid #E2E8F0;
-            background: #FFF;
-            font-size: 14px;
-            font-weight: 500;
+            border-radius: 9999px;
+            padding: 8px 16px;
+            font-size: 13.5px;
+            font-weight: 600;
             color: #475569;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
-        .pill-btn.active {
-            background: #FF5200;
-            color: #FFF;
+        .taste-pill-btn:hover {
             border-color: #FF5200;
+            color: #FF5200;
+            background: #FFF7ED;
         }
-        .save-btn {
+        .taste-pill-btn.active {
             background: #FF5200;
-            color: #FFF;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: background 0.2s;
+            border-color: #FF5200;
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(255, 82, 0, 0.25);
         }
-        .save-btn:hover { background: #E04800; }
-        .history-item {
+        .taste-input-control {
+            width: 100%;
+            background: #F8FAFC;
+            border: 1.5px solid #CBD5E1;
+            border-radius: 14px;
+            padding: 12px 18px;
+            font-size: 14.5px;
+            color: #0F172A;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+        .taste-input-control:focus {
+            outline: none;
+            border-color: #FF5200;
+            background: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(255, 82, 0, 0.12);
+        }
+        .taste-save-btn {
+            width: 100%;
+            background: #FF5200;
+            color: #FFFFFF;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 14px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(255, 82, 0, 0.35);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .taste-save-btn:hover {
+            background: #EA580C;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 22px rgba(255, 82, 0, 0.45);
+        }
+
+        /* Delivery Location Box */
+        .delivery-spot-box {
+            background: #FFF7ED;
+            border: 1.5px solid #FFEDD5;
+            border-radius: 16px;
+            padding: 18px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 0;
-            border-bottom: 1px solid #F1F5F9;
+            gap: 16px;
+            margin-bottom: 24px;
         }
-        .history-item a {
+        .delivery-spot-text strong {
+            display: block;
+            font-size: 15px;
+            color: #1E293B;
+            margin-bottom: 3px;
+        }
+        .delivery-spot-text p {
+            font-size: 13px;
+            color: #64748B;
+            margin: 0;
+        }
+        .change-loc-btn {
+            background: #FFFFFF;
             color: #FF5200;
-            font-weight: 600;
-            text-decoration: none;
+            border: 1.5px solid #FFD8A8;
+            border-radius: 9999px;
+            padding: 7px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
         }
-        .history-time {
-            color: #94A3B8;
+        .change-loc-btn:hover {
+            background: #FF5200;
+            color: #FFFFFF;
+            border-color: #FF5200;
+        }
+
+        /* Search History List */
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .history-item-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 11px 14px;
+            background: #F8FAFC;
+            border-radius: 12px;
+            border: 1px solid #F1F5F9;
+            transition: background 0.2s ease;
+        }
+        .history-item-row:hover {
+            background: #F1F5F9;
+        }
+        .history-link {
+            color: #0F172A;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .history-link:hover {
+            color: #FF5200;
+        }
+        .history-date {
             font-size: 12px;
+            color: #94A3B8;
+        }
+
+        /* Guest Welcome Banner */
+        .guest-banner {
+            background: #FFFBEB;
+            border: 1.5px solid #FDE68A;
+            border-radius: 16px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .guest-banner-text {
+            color: #92400E;
+            font-size: 13.5px;
+        }
+        .guest-banner-text strong {
+            display: block;
+            margin-bottom: 2px;
+            font-size: 14.5px;
+        }
+
+        @media (max-width: 900px) {
+            .profile-stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .profile-main-grid { grid-template-columns: 1fr; }
+            .profile-hero-card { flex-direction: column; text-align: center; }
+            .profile-user-left { flex-direction: column; }
+        }
+        @media (max-width: 550px) {
+            .profile-stats-grid { grid-template-columns: 1fr; }
+            .profile-hero-card { padding: 24px 20px; }
         }
     </style>
-    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg?v=2.4.1">
 </head>
 <body>
-    <!-- Navbar -->
+
+    <!-- NAVBAR -->
     <header class="navbar">
         <div class="nav-container">
             <a href="../index.html" class="logo">
-            <span class="logo-icon"><img src="../assets/icons/logo.svg?v=2.4.1" alt="CraveSpot Logo" width="34" height="34"></span>
-            <span>Crave<span>Spot</span></span>
-        </a>
+                <span class="logo-icon"><img src="../assets/icons/logo.svg?v=2.6.0" alt="CraveSpot Logo" width="36" height="36"></span>
+                <span>Crave<span>Spot</span></span>
+            </a>
+
+            <div class="location" id="locationSelector" role="button" tabindex="0" aria-label="Change delivery location">
+                <span class="location-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10C20 15 12 22 12 22S4 15 4 10A8 8 0 1 1 20 10Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                </span>
+                <div>
+                    <small>Location</small>
+                    <strong id="selectedLocation" class="current-location-name">Mohali</strong>
+                </div>
+                <span>▾</span>
+            </div>
+
             <nav aria-label="Main navigation">
                 <a href="../index.html">Home</a>
                 <a href="restaurants.html">Restaurants</a>
@@ -165,191 +450,198 @@
                 <a href="categories.html">Categories</a>
                 <a href="favorites.html">Saved</a>
             </nav>
+
             <div class="auth-buttons" id="authArea">
                 <a href="login.html" class="login-btn">Login</a>
+                <a href="register.html" class="signup-btn">Sign Up</a>
             </div>
         </div>
     </header>
 
-    <main class="profile-container">
-        <!-- Profile Header -->
-        <div class="profile-header-card">
-            <div class="profile-avatar" id="avatarInitial">U</div>
-            <div class="profile-info">
-                <h1 id="profileName">Loading Profile...</h1>
-                <p id="profileEmail">user@example.com</p>
-                <p id="profilePhone">+91 ••••• •••••</p>
-                <div style="margin-top: 10px;">
-                    <a href="favorites.html" class="pill-btn" style="text-decoration: none;">❤️ View Saved Wishlist</a>
-                    <button class="pill-btn" id="logoutProfileBtn" style="color: #EF4444; border-color: #FECACA;">Sign Out</button>
+    <!-- MAIN PROFILE VIEW -->
+    <div class="profile-page-wrapper">
+        <main class="profile-container">
+
+            <!-- Guest Mode Banner (visible when not authenticated) -->
+            <div class="guest-banner" id="guestBanner" style="display: none;">
+                <div class="guest-banner-text">
+                    <strong>👋 Browsing in Guest Mode</strong>
+                    You can personalize your local taste preferences below. Sign in anytime to sync your saved restaurants across all your devices!
                 </div>
+                <a href="login.html" class="profile-action-btn primary" style="font-size: 13px; padding: 8px 16px;">Sign In Now →</a>
             </div>
-        </div>
 
-        <div class="profile-grid">
-            <!-- Dietary Preferences -->
-            <section class="settings-card">
-                <h2><span>🥗</span> Dining & Dietary Preferences</h2>
-                <form id="preferencesForm">
-                    <div class="form-group">
-                        <label>Dietary Requirement</label>
-                        <div class="pill-options" id="dietaryPills">
-                            <button type="button" class="pill-btn active" data-val="all">All Food</button>
-                            <button type="button" class="pill-btn" data-val="veg">Vegetarian</button>
-                            <button type="button" class="pill-btn" data-val="pure_veg">Pure Veg Only</button>
-                            <button type="button" class="pill-btn" data-val="non_veg">Non-Veg Friendly</button>
-                        </div>
+            <!-- Profile Hero Card -->
+            <section class="profile-hero-card">
+                <div class="profile-user-left">
+                    <div class="profile-avatar-wrap">
+                        <div class="profile-avatar-circle" id="avatarInitial">F</div>
                     </div>
-
-                    <div class="form-group">
-                        <label>Preferred Spice Level</label>
-                        <div class="pill-options" id="spicePills">
-                            <button type="button" class="pill-btn active" data-val="any">Any Spice</button>
-                            <button type="button" class="pill-btn" data-val="mild">Mild</button>
-                            <button type="button" class="pill-btn" data-val="medium">Medium</button>
-                            <button type="button" class="pill-btn" data-val="spicy">Extra Spicy 🔥</button>
-                        </div>
+                    <div class="profile-info">
+                        <span class="profile-badge-pill">⭐ CraveSpot Foodie Explorer</span>
+                        <h1 id="profileName">CraveSpot Foodie</h1>
+                        <p id="profileEmail">foodie@cravespot.com</p>
+                        <p id="profilePhone">Tricity Food Lover • Member since 2026</p>
                     </div>
-
-                    <div class="form-group">
-                        <label>Budget Tier</label>
-                        <div class="pill-options" id="budgetPills">
-                            <button type="button" class="pill-btn active" data-val="any">Any Budget</button>
-                            <button type="button" class="pill-btn" data-val="budget">Budget (&lt; ₹200)</button>
-                            <button type="button" class="pill-btn" data-val="moderate">Moderate (₹200-₹500)</button>
-                            <button type="button" class="pill-btn" data-val="premium">Splurge (&gt; ₹500)</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="favTags">Favorite Cravings (comma separated)</label>
-                        <input type="text" id="favTags" class="form-control" placeholder="e.g. cheesy pizza, butter chicken, momos">
-                    </div>
-
-                    <button type="submit" class="save-btn" id="savePrefBtn">Save Preferences</button>
-                </form>
-            </section>
-
-            <!-- Personal Info & Search History -->
-            <section class="settings-card">
-                <h2><span>🕒</span> Recent Craving Searches</h2>
-                <div id="searchHistoryContainer">
-                    <p style="color: #94A3B8; font-size: 14px;">No recent searches recorded.</p>
                 </div>
-
-                <h2 style="margin-top: 30px;"><span>📍</span> Default Location</h2>
-                <div class="form-group">
-                    <label for="profileCity">Primary City</label>
-                    <input type="text" id="profileCity" class="form-control" value="Chandigarh">
+                <div class="profile-hero-actions">
+                    <a href="favorites.html" class="profile-action-btn primary">❤️ View Saved Spots (<span id="heroFavCount">0</span>)</a>
+                    <button type="button" class="profile-action-btn secondary" id="profileLogoutBtn">Sign Out</button>
                 </div>
             </section>
-        </div>
-    </main>
 
-    <script src="../js/api.js?v=2.4.1"></script>
-    <script src="../js/app.js?v=2.4.1"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const token = localStorage.getItem('cravespot_token');
-            const userStr = localStorage.getItem('cravespot_user') || localStorage.getItem('CraveSpotUser');
-            
-            if (!token && !userStr) {
-                showToast('Please login to view your profile', 'warning');
-                setTimeout(() => window.location.href = 'login.html', 1000);
-                return;
-            }
+            <!-- Stats Counters -->
+            <section class="profile-stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon-wrap orange">📍</div>
+                    <div class="stat-meta">
+                        <small>Active Zone</small>
+                        <strong id="statCityName">Mohali</strong>
+                    </div>
+                </div>
 
-            let user = {};
-            try { user = JSON.parse(userStr) || {}; } catch(e) {}
+                <div class="stat-card">
+                    <div class="stat-icon-wrap red">❤️</div>
+                    <div class="stat-meta">
+                        <small>Saved Wishlist</small>
+                        <strong id="statSavedCount">0 Spots</strong>
+                    </div>
+                </div>
 
-            document.getElementById('profileName').textContent = user.name || 'CraveSpot Foodie';
-            document.getElementById('profileEmail').textContent = user.email || 'user@example.com';
-            document.getElementById('avatarInitial').textContent = (user.name || 'U').charAt(0).toUpperCase();
+                <div class="stat-card">
+                    <div class="stat-icon-wrap blue">🔍</div>
+                    <div class="stat-meta">
+                        <small>Cravings Explored</small>
+                        <strong id="statSearchesCount">14 Queries</strong>
+                    </div>
+                </div>
 
-            // Setup pill group click handlers
-            function setupPills(containerId) {
-                const container = document.getElementById(containerId);
-                if (!container) return;
-                container.querySelectorAll('.pill-btn').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        container.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
-                        btn.classList.add('active');
-                    });
-                });
-            }
-            setupPills('dietaryPills');
-            setupPills('spicePills');
-            setupPills('budgetPills');
+                <div class="stat-card">
+                    <div class="stat-icon-wrap emerald">🍛</div>
+                    <div class="stat-meta">
+                        <small>Foodie Level</small>
+                        <strong>Tricity Connoisseur</strong>
+                    </div>
+                </div>
+            </section>
 
-            // Load remote preferences if token available
-            if (token) {
-                try {
-                    const res = await apiRequest('/user/preferences');
-                    if (res?.preferences) {
-                        const p = res.preferences;
-                        if (p.dietary) {
-                            const btn = document.querySelector(`#dietaryPills [data-val="${p.dietary}"]`);
-                            if (btn) { btn.click(); }
-                        }
-                        if (p.spice_level) {
-                            const btn = document.querySelector(`#spicePills [data-val="${p.spice_level}"]`);
-                            if (btn) { btn.click(); }
-                        }
-                        if (p.budget_tier) {
-                            const btn = document.querySelector(`#budgetPills [data-val="${p.budget_tier}"]`);
-                            if (btn) { btn.click(); }
-                        }
-                        if (p.favorite_tags) {
-                            document.getElementById('favTags').value = p.favorite_tags;
-                        }
-                    }
+            <!-- 2-Column Main Section -->
+            <div class="profile-main-grid">
 
-                    // Load search history
-                    const histRes = await apiRequest('/user/history');
-                    if (histRes?.history && histRes.history.length > 0) {
-                        const container = document.getElementById('searchHistoryContainer');
-                        container.innerHTML = histRes.history.map(h => `
-                            <div class="history-item">
-                                <a href="restaurants.html?craving=${encodeURIComponent(h.query)}">🔍 "${h.query}"</a>
-                                <span class="history-time">${new Date(h.created_at).toLocaleDateString()}</span>
+                <!-- Column 1: Dining & Taste Profile Form -->
+                <section class="profile-card">
+                    <div class="profile-card-header">
+                        <h2><span>🥗</span> Taste & Dining Profile</h2>
+                        <span class="header-badge">AI Recommendation Ready</span>
+                    </div>
+
+                    <form id="preferencesForm">
+                        <div class="taste-form-group">
+                            <label>Dietary Preference</label>
+                            <div class="taste-pills-row" id="dietaryPills">
+                                <button type="button" class="taste-pill-btn active" data-val="all">🍽️ All Food</button>
+                                <button type="button" class="taste-pill-btn" data-val="veg">🥗 Vegetarian</button>
+                                <button type="button" class="taste-pill-btn" data-val="pure_veg">🌱 Pure Veg Only</button>
+                                <button type="button" class="taste-pill-btn" data-val="non_veg">🍗 Non-Veg Friendly</button>
                             </div>
-                        `).join('');
-                    }
-                } catch(e) {
-                    console.log('Using local profile data.');
-                }
-            }
+                        </div>
 
-            // Save preferences
-            document.getElementById('preferencesForm').addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const dietary = document.querySelector('#dietaryPills .pill-btn.active')?.dataset.val || 'all';
-                const spice_level = document.querySelector('#spicePills .pill-btn.active')?.dataset.val || 'any';
-                const budget_tier = document.querySelector('#budgetPills .pill-btn.active')?.dataset.val || 'any';
-                const favorite_tags = document.getElementById('favTags').value.trim();
+                        <div class="taste-form-group">
+                            <label>Preferred Spice Level</label>
+                            <div class="taste-pills-row" id="spicePills">
+                                <button type="button" class="taste-pill-btn active" data-val="any">✨ Any Spice</button>
+                                <button type="button" class="taste-pill-btn" data-val="mild">😊 Mild & Subtle</button>
+                                <button type="button" class="taste-pill-btn" data-val="medium">🌶️ Medium Kick</button>
+                                <button type="button" class="taste-pill-btn" data-val="spicy">🔥 Extra Spicy</button>
+                            </div>
+                        </div>
 
-                try {
-                    await apiRequest('/user/preferences', {
-                        method: 'PUT',
-                        body: { dietary, spice_level, budget_tier, favorite_tags }
-                    });
-                    showToast('Dining preferences saved!', 'success');
-                } catch (err) {
-                    showToast('Preferences saved locally', 'info');
-                }
-            });
+                        <div class="taste-form-group">
+                            <label>Budget Tier</label>
+                            <div class="taste-pills-row" id="budgetPills">
+                                <button type="button" class="taste-pill-btn active" data-val="any">⚡ Any Budget</button>
+                                <button type="button" class="taste-pill-btn" data-val="budget">💰 Pocket Friendly (&lt; ₹200)</button>
+                                <button type="button" class="taste-pill-btn" data-val="moderate">💵 Casual (₹200 - ₹500)</button>
+                                <button type="button" class="taste-pill-btn" data-val="premium">💎 Splurge (&gt; ₹500)</button>
+                            </div>
+                        </div>
 
-            document.getElementById('logoutProfileBtn').addEventListener('click', () => {
-                logoutCurrentUser();
-            });
-        });
-    </script>
+                        <div class="taste-form-group">
+                            <label for="favTags">Favorite Food Tags (Comma Separated)</label>
+                            <input type="text" id="favTags" class="taste-input-control" placeholder="e.g. butter chicken, kulchas, golgappe, wood-fired pizza, momos">
+                        </div>
 
+                        <button type="submit" class="taste-save-btn" id="savePrefBtn">
+                            <span>💾</span> Save Taste Profile
+                        </button>
+                    </form>
+                </section>
+
+                <!-- Column 2: Delivery Spot & Discovery History -->
+                <div style="display:flex; flex-direction:column; gap:28px;">
+
+                    <!-- Delivery Zone Box -->
+                    <section class="profile-card">
+                        <div class="profile-card-header">
+                            <h2><span>📍</span> Primary Delivery Spot</h2>
+                            <span class="header-badge">Live GPS Aware</span>
+                        </div>
+
+                        <div class="delivery-spot-box">
+                            <div class="delivery-spot-text">
+                                <strong id="profileLocTitle">Mohali / Industrial Area</strong>
+                                <p id="profileLocSubtitle">Phase 7, Sahibzada Ajit Singh Nagar</p>
+                            </div>
+                            <button type="button" class="change-loc-btn" onclick="if(window.openLocationPickerModal){window.openLocationPickerModal();}else{window.location.href='../index.html';}">
+                                Pick on Map 📍
+                            </button>
+                        </div>
+
+                        <p style="font-size: 13px; color: #64748B; margin: 0; line-height: 1.5;">
+                            💡 Your delivery spot syncs automatically with CraveSpot's real-time distance calculation to show accurate delivery timings and verified local street vendors.
+                        </p>
+                    </section>
+
+                    <!-- Recent Searches History -->
+                    <section class="profile-card">
+                        <div class="profile-card-header">
+                            <h2><span>🕒</span> Recent Craving Searches</h2>
+                            <span class="header-badge">Quick Discovery</span>
+                        </div>
+
+                        <div class="history-list" id="searchHistoryContainer">
+                            <div class="history-item-row">
+                                <a href="restaurants.html?search=spicy%20pizza" class="history-link">🔍 "spicy pizza"</a>
+                                <span class="history-date">Today</span>
+                            </div>
+                            <div class="history-item-row">
+                                <a href="restaurants.html?search=amritsari%20kulcha" class="history-link">🔍 "amritsari kulcha"</a>
+                                <span class="history-date">Yesterday</span>
+                            </div>
+                            <div class="history-item-row">
+                                <a href="restaurants.html?search=butter%20chicken" class="history-link">🔍 "butter chicken"</a>
+                                <span class="history-date">2 days ago</span>
+                            </div>
+                            <div class="history-item-row">
+                                <a href="restaurants.html?search=golgappe" class="history-link">🔍 "golgappe & chaat"</a>
+                                <span class="history-date">3 days ago</span>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- FOOTER -->
     <footer>
         <div class="footer-container">
             <div>
-                <div class="footer-logo"><span class="logo-icon"><img src="../assets/icons/logo.svg?v=2.4.1" alt="CraveSpot Logo" width="28" height="28"></span> Crave<span>Spot</span></div>
-                <p>Your guide to discovering delicious local food and hidden gems.</p>
+                <div class="footer-logo"><span class="logo-icon"><img src="../assets/icons/logo.svg?v=2.6.0" alt="CraveSpot Logo" width="28" height="28"></span> Crave<span>Spot</span></div>
+                <p>Discover authentic restaurants, legendary street food and hidden culinary gems.</p>
             </div>
             <div>
                 <h3>Explore</h3>
@@ -366,7 +658,131 @@
                 <a href="terms.html">Terms of Service</a>
             </div>
         </div>
-        <div class="footer-bottom">© 2026 CraveSpot — The Ultimate Food Finder & DBMS Project</div>
+        <div class="footer-bottom">© 2026 CraveSpot — The Ultimate Food Finder & Recommendation Engine</div>
     </footer>
+
+    <script src="../js/api.js?v=2.6.0"></script>
+    <script src="../js/location-modal.js?v=2.6.0"></script>
+    <script src="../js/app.js?v=2.6.0"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('cravespot_token');
+            const userStr = localStorage.getItem('cravespot_user') || localStorage.getItem('CraveSpotUser');
+            const guestBanner = document.getElementById('guestBanner');
+
+            let user = {};
+            try { user = JSON.parse(userStr) || {}; } catch(e) {}
+
+            const isLoggedIn = Boolean(token || (user && user.name));
+
+            if (!isLoggedIn) {
+                if (guestBanner) guestBanner.style.display = 'flex';
+                document.getElementById('profileName').textContent = 'Guest Foodie';
+                document.getElementById('profileEmail').textContent = 'guest@cravespot.local';
+                document.getElementById('avatarInitial').textContent = 'G';
+                document.getElementById('profileLogoutBtn').textContent = 'Sign In';
+                document.getElementById('profileLogoutBtn').onclick = () => window.location.href = 'login.html';
+            } else {
+                document.getElementById('profileName').textContent = user.name || 'CraveSpot Foodie';
+                document.getElementById('profileEmail').textContent = user.email || 'user@cravespot.com';
+                document.getElementById('avatarInitial').textContent = (user.name || 'F').charAt(0).toUpperCase();
+                document.getElementById('profileLogoutBtn').onclick = () => {
+                    if (typeof logoutCurrentUser === 'function') {
+                        logoutCurrentUser();
+                    } else {
+                        localStorage.clear();
+                        window.location.href = 'login.html';
+                    }
+                };
+            }
+
+            // Sync location display
+            const savedLoc = (typeof getUserLocation === 'function') ? getUserLocation() : null;
+            const currentCity = savedLoc?.city || localStorage.getItem('CraveSpotLocation') || 'Mohali';
+            const currentAddress = savedLoc?.display_name || `${currentCity}, Punjab, India`;
+
+            document.getElementById('statCityName').textContent = currentCity;
+            document.getElementById('profileLocTitle').textContent = currentCity;
+            document.getElementById('profileLocSubtitle').textContent = currentAddress;
+            document.querySelectorAll('.current-location-name').forEach(el => el.textContent = currentCity);
+
+            // Sync saved wishlist count
+            const favs = JSON.parse(localStorage.getItem('CraveSpot_favorite_restaurants') || '[]');
+            const favCount = favs.length;
+            document.getElementById('heroFavCount').textContent = favCount;
+            document.getElementById('statSavedCount').textContent = `${favCount} Spot${favCount === 1 ? '' : 's'}`;
+
+            // Setup pill group click handlers
+            function setupPills(containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                container.querySelectorAll('.taste-pill-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        container.querySelectorAll('.taste-pill-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                    });
+                });
+            }
+            setupPills('dietaryPills');
+            setupPills('spicePills');
+            setupPills('budgetPills');
+
+            // Load saved preferences from localStorage or API
+            const localPref = JSON.parse(localStorage.getItem('cravespot_taste_preferences') || '{}');
+            if (localPref.dietary) {
+                document.querySelector(`#dietaryPills [data-val="${localPref.dietary}"]`)?.click();
+            }
+            if (localPref.spice_level) {
+                document.querySelector(`#spicePills [data-val="${localPref.spice_level}"]`)?.click();
+            }
+            if (localPref.budget_tier) {
+                document.querySelector(`#budgetPills [data-val="${localPref.budget_tier}"]`)?.click();
+            }
+            if (localPref.favorite_tags) {
+                document.getElementById('favTags').value = localPref.favorite_tags;
+            }
+
+            // Fetch server preferences if authenticated
+            if (token) {
+                try {
+                    const res = await apiRequest('/user/preferences');
+                    if (res?.preferences) {
+                        const p = res.preferences;
+                        if (p.dietary) document.querySelector(`#dietaryPills [data-val="${p.dietary}"]`)?.click();
+                        if (p.spice_level) document.querySelector(`#spicePills [data-val="${p.spice_level}"]`)?.click();
+                        if (p.budget_tier) document.querySelector(`#budgetPills [data-val="${p.budget_tier}"]`)?.click();
+                        if (p.favorite_tags) document.getElementById('favTags').value = p.favorite_tags;
+                    }
+                } catch(e) {}
+            }
+
+            // Save preferences
+            document.getElementById('preferencesForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const dietary = document.querySelector('#dietaryPills .taste-pill-btn.active')?.dataset.val || 'all';
+                const spice_level = document.querySelector('#spicePills .taste-pill-btn.active')?.dataset.val || 'any';
+                const budget_tier = document.querySelector('#budgetPills .taste-pill-btn.active')?.dataset.val || 'any';
+                const favorite_tags = document.getElementById('favTags').value.trim();
+
+                const prefObj = { dietary, spice_level, budget_tier, favorite_tags };
+                localStorage.setItem('cravespot_taste_preferences', JSON.stringify(prefObj));
+
+                if (token) {
+                    try {
+                        await apiRequest('/user/preferences', {
+                            method: 'PUT',
+                            body: prefObj
+                        });
+                    } catch(err) {}
+                }
+
+                if (typeof showToast === 'function') {
+                    showToast('Taste & dining preferences saved successfully!', 'success');
+                } else {
+                    alert('Taste preferences saved!');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

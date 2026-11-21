@@ -107,6 +107,40 @@ const fallbackHomeRestaurants = [
     { restaurant_id: 8, name: "Barbeque Nation", cuisine: "BBQ & Multi-Cuisine", rating: 4.5, address: "Sector 5, Panchkula", latitude: 30.6931, longitude: 76.8524, is_veg: 0, offer: "Flat ₹150 OFF", price_for_two: 800 }
 ];
 
+function getRestaurantCoverImage(r, index = 0) {
+    if (r.image_url && String(r.image_url).startsWith('http')) return r.image_url;
+    if (r.cover_image && String(r.cover_image).startsWith('http')) return r.cover_image;
+
+    const name = (r.name || '').toLowerCase();
+    const cuisine = (r.cuisine || '').toLowerCase();
+    const spotType = (r.spot_type || '').toLowerCase();
+
+    if (name.includes('kulcha')) return 'https://images.unsplash.com/photo-1626074353765-517a681e40be?auto=format&fit=crop&w=800&q=80';
+    if (name.includes('golgapp') || name.includes('chaat')) return 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80';
+    if (name.includes('roll') || name.includes('shawarma')) return 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?auto=format&fit=crop&w=800&q=80';
+    if (name.includes('tea') || name.includes('chai')) return 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=80';
+    if (name.includes('momo')) return 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=80';
+    if (name.includes('maggi') || name.includes('stuc')) return 'https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=80';
+    if (name.includes('burger') || name.includes('hub')) return 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80';
+    if (name.includes('pizza') || cuisine.includes('pizza')) return 'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80';
+    if (name.includes('barbeque') || name.includes('bbq') || cuisine.includes('bbq')) return 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80';
+    if (name.includes('sweet') || name.includes('bakery') || spotType === 'bakery_sweets') return 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80';
+    if (name.includes('cafe') || name.includes('bistro') || spotType === 'cafe_tea') return 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80';
+    if (name.includes('dhaba') || name.includes('punjab') || name.includes('katani') || spotType === 'dhaba') return 'https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=80';
+    if (name.includes('wok') || name.includes('chinese') || cuisine.includes('chinese') || cuisine.includes('asian')) return 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80';
+    if (name.includes('biryani') || cuisine.includes('biryani')) return 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80';
+    if (cuisine.includes('north indian') || cuisine.includes('mughlai') || cuisine.includes('tadka')) return 'https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?auto=format&fit=crop&w=800&q=80';
+    if (spotType === 'street_food') return 'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80';
+
+    const defaults = [
+        'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
+        'https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80'
+    ];
+    return defaults[index % defaults.length];
+}
+
 function renderHomeRestaurantCards(grid, places, loc) {
     if (!grid) return;
 
@@ -156,7 +190,7 @@ function renderHomeRestaurantCards(grid, places, loc) {
             ? `<span class="cs-diet-dot veg" title="Pure Veg"></span>`
             : `<span class="cs-diet-dot non-veg" title="Non-Veg & Multi-Cuisine"></span>`;
 
-        const imgUrl = r.image_url || r.cover_image || `https://images.unsplash.com/photo-${['1517248135467-4c7edcad34c4', '1552566626-52f8b828add9', '1559339352-11d035aa65de', '1515003197210-e0cd71810b5f', '1555396273-367ea4eb4db5'][i % 5]}?auto=format&fit=crop&w=800&q=80`;
+        const imgUrl = getRestaurantCoverImage(r, i);
         const offerText = r.offer || (i % 2 === 0 ? '20% OFF up to ₹100' : 'Free Delivery');
         const rating = r.rating ? Number(r.rating).toFixed(1) : '4.4';
         const priceForTwo = r.price_for_two ? `₹${r.price_for_two} for two` : '₹350 for two';
