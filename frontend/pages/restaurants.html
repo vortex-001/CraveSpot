@@ -173,215 +173,124 @@
 
 
 
-    <!-- ================= MODE TABS ================= -->
+    <!-- ================= RESTAURANT DISCOVERY HUB ================= -->
 
-    <section class="container">
+    <section class="container restaurant-hub-section">
 
-        <div class="food-mode">
+        <div class="restaurant-discovery-hub">
 
-            <button
-                class="mode-btn active"
-                data-mode="delivery"
-            >
-                <svg class="delivery-icon"
-     xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 64 64"
-     width="32"
-     height="32"
-     fill="none"
-     stroke="currentColor"
-     stroke-width="2.5"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     aria-hidden="true">
+            <!-- MODE SWITCH (DELIVERY / DINING OUT) -->
+            <div class="food-mode-wrapper">
+                <div class="food-mode">
+                    <button class="mode-btn active" data-mode="delivery">
+                        <svg class="delivery-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="15" cy="48" r="7"/>
+                            <circle cx="49" cy="48" r="7"/>
+                            <path d="M15 41 L22 34 L35 34 L43 43 L49 43"/>
+                            <path d="M22 34 L19 25 L27 25"/>
+                            <path d="M36 8 H55 V25 H36 Z"/>
+                        </svg>
+                        <span>Delivery</span>
+                    </button>
 
-    <!-- Wheels -->
-    <circle cx="15" cy="48" r="7"/>
-    <circle cx="49" cy="48" r="7"/>
-    <circle cx="15" cy="48" r="2"/>
-    <circle cx="49" cy="48" r="2"/>
+                    <button class="mode-btn" data-mode="dining">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" aria-hidden="true"><path d="M18 2v6a3 3 0 0 1-3 3 3 3 0 0 1-3-3V2"/><path d="M15 2v18"/><path d="M4 2v6a3 3 0 0 0 3 3h2a3 3 0 0 0 3-3V2"/><path d="M7 11v9"/></svg>
+                        <span>Dining Out</span>
+                    </button>
+                </div>
+            </div>
 
-    <!-- Scooter body -->
-    <path d="M15 41 L22 34 L35 34 L43 43 L49 43"/>
-    <path d="M22 34 L19 25 L27 25"/>
-    <path d="M35 34 L39 25"/>
+            <!-- FILTERS ROW -->
+            <div class="filter-row">
+                <button type="button" id="nearbyRestaurantsBtn" class="filter-btn btn-pill-nearby">
+                    <span class="nearby-pulse-dot"></span>
+                    <span>Nearby</span>
+                </button>
+                <span id="nearbyStatus" aria-live="polite" style="font-size:13px;color:#777"></span>
 
-    <!-- Seat -->
-    <path d="M25 29 L36 29"/>
-    <path d="M28 25 L38 25"/>
+                <button class="filter-btn btn-pill-filters" data-filter="all">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                    <span>Filters</span>
+                </button>
 
-    <!-- Handlebar -->
-    <path d="M19 25 L16 19 L11 19"/>
-    <path d="M16 19 L19 15"/>
+                <div id="filterPanel" class="filter-panel" style="display: none;">
+                    <label>
+                        <input type="checkbox" id="ratingFilter">
+                        Rating 4.0+
+                    </label>
 
-    <!-- Front mudguard -->
-    <path d="M8 44 Q15 37 22 44"/>
+                    <label>
+                        <input type="checkbox" id="vegFilter">
+                        Pure Veg
+                    </label>
 
-    <!-- Delivery box -->
-    <path d="M36 8 H55 V25 H36 Z"/>
-    <path d="M36 13 H55"/>
-    <path d="M42 8 V5 H49 V8"/>
+                    <label>
+                        <input type="checkbox" id="offersFilter">
+                        Offers Available
+                    </label>
 
-    <!-- Connection to delivery box -->
-    <path d="M39 25 L35 32"/>
+                    <button type="button" id="applyFilters">Apply Filters</button>
+                    <button type="button" id="clearFilters">Clear Filters</button>
+                </div>
 
-    <!-- Headlight -->
-    <circle cx="20" cy="27" r="2"/>
+                <button class="filter-btn btn-pill-rating" data-filter="rating">
+                    <svg class="star-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+                        <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z"/>
+                    </svg>
+                    <span>Rating 4.0+</span>
+                </button>
 
-</svg> Delivery
-            </button>
+                <button class="filter-btn btn-pill-offers" data-filter="offers">
+                    <span class="offer-tag-icon">🏷️</span>
+                    <span>Offers</span>
+                </button>
 
-            <button
-                class="mode-btn"
-                data-mode="dining"
-            >
-                Dining Out
-            </button>
+                <button class="filter-btn btn-pill-veg" data-filter="veg">
+                    <svg class="salad-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 11C7 11 5 7 7 4c3 0 5 2 5 5"/>
+                        <path d="M12 11c0-5 3-7 6-6 1 3-1 6-6 6"/>
+                        <path d="M3 12h18l-2 6a3 3 0 0 1-3 2H8a3 3 0 0 1-3-2l-2-6z"/>
+                    </svg>
+                    <span>Pure Veg</span>
+                </button>
 
-        </div>
+                <button class="filter-btn btn-pill-fast" data-filter="fast">
+                    <span>⚡ Fast Food</span>
+                </button>
 
+                <button class="filter-btn btn-pill-street" data-filter="street">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="M18 6 6 18"/><path d="m10 4 2 2"/><path d="m14 8 2 2"/><path d="m6 12 2 2"/></svg>
+                    <span>Street Food</span>
+                </button>
 
-        <!-- ================= FILTERS ================= -->
+                <button class="filter-btn btn-pill-dhaba" data-filter="dhaba">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="M4 11h16a1 1 0 0 1 1 1 7 7 0 0 1-7 7h-2a7 7 0 0 1-7-7 1 1 0 0 1 1-1Z"/><path d="M6 19v2"/><path d="M18 19v2"/></svg>
+                    <span>Dhabas</span>
+                </button>
 
-        <div class="filter-row">
-<button type="button" id="nearbyRestaurantsBtn" class="filter-btn">Nearby</button>
-<span id="nearbyStatus" aria-live="polite" style="font-size:13px;color:#777"></span>
+                <select id="sortRestaurants" class="sort-select">
+                    <option value="distance">Nearest Distance</option>
+                    <option value="recommended">Recommended</option>
+                    <option value="rating">Rating: High to Low</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                </select>
+            </div>
 
+            <!-- DISTANCE RANGE FILTER RIBBON -->
+            <div class="distance-range-ribbon" id="restaurantDistanceRibbon" role="group" aria-label="Filter by distance range">
+                <span class="distance-ribbon-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="M20 10C20 15 12 22 12 22S4 15 4 10A8 8 0 1 1 20 10Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                    Max Distance:
+                </span>
+                <button type="button" class="dist-pill-btn active" data-radius="all">All Distances</button>
+                <button type="button" class="dist-pill-btn" data-radius="3">Under 3 km</button>
+                <button type="button" class="dist-pill-btn" data-radius="5">Under 5 km</button>
+                <button type="button" class="dist-pill-btn" data-radius="10">Under 10 km</button>
+                <button type="button" class="dist-pill-btn" data-radius="20">Under 20 km</button>
+                <span id="activeDistanceSummary" class="distance-summary-badge">Showing all nearby</span>
+            </div>
 
-            <button
-                class="filter-btn"
-                data-filter="all"
-            >
-                Filters
-            </button>
-<div id="filterPanel" class="filter-panel" style="display: none;">
-    <label>
-        <input type="checkbox" id="ratingFilter">
-        Rating 4.0+
-    </label>
-
-    <label>
-        <input type="checkbox" id="vegFilter">
-        Pure Veg
-    </label>
-
-    <label>
-        <input type="checkbox" id="offersFilter">
-        Offers Available
-    </label>
-
-    <button type="button" id="applyFilters">Apply Filters</button>
-    <button type="button" id="clearFilters">Clear Filters</button>
-</div>
-
-<button
-    class="filter-btn"
-    data-filter="rating"
->
-    <svg class="star-icon"
-     xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 24 24"
-     width="20"
-     height="20"
-     fill="currentColor"
-     aria-hidden="true">
-    <path d="M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5-5.8-3.1-5.8 3.1 1.1-6.5-4.7-4.6 6.5-.9L12 2.5z"/>
-</svg> Rating 4.0+
-</button>
-
-<button
-    class="filter-btn"
-    data-filter="offers"
->
-    Offers
-</button>
-
-<button
-    class="filter-btn"
-    data-filter="veg"
->
-    <svg class="salad-icon"
-     xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 24 24"
-     width="24"
-     height="24"
-     fill="none"
-     stroke="currentColor"
-     stroke-width="1.7"
-     stroke-linecap="round"
-     stroke-linejoin="round"
-     aria-hidden="true">
-    <!-- Salad leaves -->
-    <path d="M12 11C7 11 5 7 7 4c3 0 5 2 5 5"/>
-    <path d="M12 11c0-5 3-7 6-6 1 3-1 6-6 6"/>
-    <path d="M12 10C9 6 11 3 14 2c2 3 1 6-2 8"/>
-    <!-- Bowl -->
-    <path d="M3 12h18l-2 6a3 3 0 0 1-3 2H8a3 3 0 0 1-3-2l-2-6z"/>
-    <path d="M8 23h8"/>
-</svg> Pure Veg
-</button>
-
-<button
-    class="filter-btn"
-    data-filter="fast"
->
-    Fast Food
-</button>
-
-<button
-    class="filter-btn"
-    data-filter="street"
->
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="vertical-align:middle; margin-right:4px;" aria-hidden="true"><path d="M18 6 6 18"/><path d="m10 4 2 2"/><path d="m14 8 2 2"/><path d="m6 12 2 2"/></svg>Street Food
-</button>
-
-<button
-    class="filter-btn"
-    data-filter="dhaba"
->
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18" style="vertical-align:middle; margin-right:4px;" aria-hidden="true"><path d="M4 11h16a1 1 0 0 1 1 1 7 7 0 0 1-7 7h-2a7 7 0 0 1-7-7 1 1 0 0 1 1-1Z"/><path d="M6 19v2"/><path d="M18 19v2"/></svg>Dhabas
-</button>
-
-<select
-
-
-                id="sortRestaurants"
-                class="sort-select"
-            >
-
-                <option value="distance">Nearest Distance</option>
-                <option value="recommended">
-                    Recommended
-                </option>
-
-                <option value="rating">
-                    Rating: High to Low
-                </option>
-
-                <option value="price-low">
-                    Price: Low to High
-                </option>
-
-                <option value="price-high">
-                    Price: High to Low
-                </option>
-
-            </select>
-
-        </div>
-
-        <!-- ================= DISTANCE RANGE FILTER RIBBON ================= -->
-        <div class="distance-range-ribbon" id="restaurantDistanceRibbon" role="group" aria-label="Filter by distance range">
-            <span class="distance-ribbon-title">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" aria-hidden="true"><path d="M20 10C20 15 12 22 12 22S4 15 4 10A8 8 0 1 1 20 10Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-                Max Distance:
-            </span>
-            <button type="button" class="dist-pill-btn active" data-radius="all">All Distances</button>
-            <button type="button" class="dist-pill-btn" data-radius="3">Under 3 km</button>
-            <button type="button" class="dist-pill-btn" data-radius="5">Under 5 km</button>
-            <button type="button" class="dist-pill-btn" data-radius="10">Under 10 km</button>
-            <button type="button" class="dist-pill-btn" data-radius="20">Under 20 km</button>
-            <span id="activeDistanceSummary" class="distance-summary-badge">Showing all nearby</span>
         </div>
 
     </section>

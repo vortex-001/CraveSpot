@@ -3440,3 +3440,639 @@ button:active,
     align-items: center;
     gap: 3px;
 }
+
+/* ==========================================================================
+   VIBRANT FOOD-TECH DISCOVERY HUBS & NAVBAR ALIGNMENT
+   ========================================================================== */
+
+/* 1. Navbar Alignment & Spacing */
+.navbar {
+    height: 78px !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid #ECEFF2 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
+}
+
+.nav-container {
+    max-width: 1360px !important;
+    height: 100% !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 20px !important;
+    padding: 0 32px !important;
+}
+
+.nav-container .logo {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    flex-shrink: 0 !important;
+}
+
+.nav-container .location-wrapper {
+    flex-shrink: 0 !important;
+}
+
+.nav-container .nav-search {
+    flex: 1 !important;
+    max-width: 360px !important;
+    min-width: 200px !important;
+    height: 44px !important;
+    background: #F8FAFC !important;
+    border: 1.5px solid #E2E8F0 !important;
+    border-radius: 9999px !important;
+    padding: 0 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    transition: all 0.2s ease !important;
+}
+
+.nav-container .nav-search:focus-within {
+    background: #FFFFFF !important;
+    border-color: #FF5200 !important;
+    box-shadow: 0 0 0 3px rgba(255, 82, 0, 0.12) !important;
+}
+
+.nav-container nav {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-shrink: 0 !important;
+}
+
+.nav-container nav a {
+    color: #4B5563 !important;
+    font-size: 14.5px !important;
+    font-weight: 600 !important;
+    padding: 8px 14px !important;
+    border-radius: 9999px !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    white-space: nowrap !important;
+}
+
+.nav-container nav a:hover {
+    color: #FF5200 !important;
+    background: #FFF7ED !important;
+}
+
+.nav-container nav a.active {
+    color: #FFFFFF !important;
+    background: #FF5200 !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 12px rgba(255, 82, 0, 0.25) !important;
+}
+
+.nav-container .auth-buttons,
+.nav-container .user-nav-dropdown {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    flex-shrink: 0 !important;
+}
+
+/* 2. Unified Discovery Hub Cards for Dishes & Restaurants */
+.dish-hub-section,
+.restaurant-hub-section {
+    padding-top: 24px;
+    padding-bottom: 8px;
+}
+
+.dish-discovery-hub,
+.restaurant-discovery-hub {
+    background: #FFFFFF;
+    border: 1.5px solid #F1F5F9;
+    border-radius: 20px;
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.04);
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dish-discovery-hub::before,
+.restaurant-discovery-hub::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #FF5200, #E23744, #F59E0B);
+}
+
+.dish-hub-row {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.hub-header-title {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+}
+
+.hub-kicker {
+    font-size: 11px;
+    font-weight: 800;
+    color: #FF5200;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.hub-header-title h2 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #111827;
+}
+
+/* 3. Distinct Colorful Category Pills */
+.dish-categories {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 4px 0 8px;
+    scrollbar-width: none;
+}
+
+.dish-categories::-webkit-scrollbar {
+    display: none;
+}
+
+.dish-category {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    padding: 10px 18px !important;
+    border-radius: 9999px !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    border: 1.5px solid #E2E8F0 !important;
+    background: #FFFFFF !important;
+    color: #374151 !important;
+}
+
+.dish-category:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Specific Category Color Themes */
+.dish-category.cat-biryani {
+    border-color: #FDE68A !important;
+    background: #FFFBEB !important;
+    color: #92400E !important;
+}
+.dish-category.cat-biryani:hover,
+.dish-category.cat-biryani.active {
+    background: linear-gradient(135deg, #F59E0B, #D97706) !important;
+    border-color: #D97706 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 6px 18px rgba(217, 119, 6, 0.3) !important;
+}
+
+.dish-category.cat-pizza {
+    border-color: #FED7AA !important;
+    background: #FFF7ED !important;
+    color: #C2410C !important;
+}
+.dish-category.cat-pizza:hover,
+.dish-category.cat-pizza.active {
+    background: linear-gradient(135deg, #EA580C, #C2410C) !important;
+    border-color: #C2410C !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 6px 18px rgba(234, 88, 12, 0.3) !important;
+}
+
+.dish-category.cat-burger {
+    border-color: #FECDD3 !important;
+    background: #FFF1F2 !important;
+    color: #BE123C !important;
+}
+.dish-category.cat-burger:hover,
+.dish-category.cat-burger.active {
+    background: linear-gradient(135deg, #E11D48, #9F1239) !important;
+    border-color: #BE123C !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 6px 18px rgba(225, 29, 72, 0.3) !important;
+}
+
+.dish-category.cat-chinese {
+    border-color: #FECACA !important;
+    background: #FEF2F2 !important;
+    color: #B91C1C !important;
+}
+.dish-category.cat-chinese:hover,
+.dish-category.cat-chinese.active {
+    background: linear-gradient(135deg, #DC2626, #991B1B) !important;
+    border-color: #B91C1C !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 6px 18px rgba(220, 38, 38, 0.3) !important;
+}
+
+.dish-category.cat-north-indian {
+    border-color: #FFEDD5 !important;
+    background: #FFF7ED !important;
+    color: #9A3412 !important;
+}
+.dish-category.cat-north-indian:hover,
+.dish-category.cat-north-indian.active {
+    background: linear-gradient(135deg, #F97316, #C2410C) !important;
+    border-color: #EA580C !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 6px 18px rgba(249, 115, 22, 0.3) !important;
+}
+
+.dish-category.cat-dessert {
+    border-color: #FBCFE8 !important;
+    background: #FDF2F8 !important;
+    color: #9D174D !important;
+}
+.dish-category.cat-dessert:hover,
+.dish-category.cat-dessert.active {
+    background: linear-gradient(135deg, #DB2777, #9D174D) !important;
+    border-color: #DB2777 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 6px 18px rgba(219, 39, 119, 0.3) !important;
+}
+
+.dish-category.active:not([class*="cat-"]) {
+    background: #111827 !important;
+    border-color: #111827 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 6px 16px rgba(17, 24, 39, 0.25) !important;
+}
+
+/* 4. Craving Mood Ribbon Visual Styling */
+.craving-mood-block {
+    background: #FAFAFA;
+    border: 1px solid #EDEDED;
+    border-radius: 14px;
+    padding: 12px 18px;
+}
+
+.craving-mood-ribbon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.craving-ribbon-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 800;
+    color: #FF5200;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    margin-right: 6px;
+}
+
+.craving-chip {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 7px 15px !important;
+    border-radius: 9999px !important;
+    font-size: 12.5px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Craving Chips Individual Theme */
+.craving-chip.chip-spicy {
+    background: #FFF1F2 !important;
+    border: 1.5px solid #FECDD3 !important;
+    color: #BE123C !important;
+}
+.craving-chip.chip-spicy:hover,
+.craving-chip.chip-spicy.active {
+    background: linear-gradient(135deg, #E11D48, #9F1239) !important;
+    border-color: #BE123C !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(225, 29, 72, 0.35) !important;
+}
+
+.craving-chip.chip-cheesy {
+    background: #FFFBEB !important;
+    border: 1.5px solid #FDE68A !important;
+    color: #B45309 !important;
+}
+.craving-chip.chip-cheesy:hover,
+.craving-chip.chip-cheesy.active {
+    background: linear-gradient(135deg, #F59E0B, #B45309) !important;
+    border-color: #B45309 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35) !important;
+}
+
+.craving-chip.chip-crispy {
+    background: #FEFCE8 !important;
+    border: 1.5px solid #FEF08A !important;
+    color: #A16207 !important;
+}
+.craving-chip.chip-crispy:hover,
+.craving-chip.chip-crispy.active {
+    background: linear-gradient(135deg, #EAB308, #A16207) !important;
+    border-color: #A16207 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(234, 179, 8, 0.35) !important;
+}
+
+.craving-chip.chip-comfort {
+    background: #ECFDF5 !important;
+    border: 1.5px solid #A7F3D0 !important;
+    color: #047857 !important;
+}
+.craving-chip.chip-comfort:hover,
+.craving-chip.chip-comfort.active {
+    background: linear-gradient(135deg, #10B981, #047857) !important;
+    border-color: #047857 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35) !important;
+}
+
+.craving-chip.chip-sweet {
+    background: #FDF2F8 !important;
+    border: 1.5px solid #FBCFE8 !important;
+    color: #BE185D !important;
+}
+.craving-chip.chip-sweet:hover,
+.craving-chip.chip-sweet.active {
+    background: linear-gradient(135deg, #EC4899, #BE185D) !important;
+    border-color: #BE185D !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(236, 72, 153, 0.35) !important;
+}
+
+.craving-chip.chip-budget {
+    background: #F0FDF4 !important;
+    border: 1.5px solid #BBF7D0 !important;
+    color: #15803D !important;
+}
+.craving-chip.chip-budget:hover,
+.craving-chip.chip-budget.active {
+    background: linear-gradient(135deg, #22C55E, #15803D) !important;
+    border-color: #15803D !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(34, 197, 94, 0.35) !important;
+}
+
+.craving-chip.chip-all {
+    background: #FFFFFF !important;
+    border: 1.5px solid #D1D5DB !important;
+    color: #374151 !important;
+}
+.craving-chip.chip-all.active {
+    background: #111827 !important;
+    border-color: #111827 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 12px rgba(17, 24, 39, 0.25) !important;
+}
+
+/* 5. Dishes Controls & Dropdowns Row */
+.dish-controls-row .dish-filter-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.dish-filter {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 8px 16px !important;
+    border-radius: 9999px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    background: #FFFFFF !important;
+    border: 1.5px solid #E5E7EB !important;
+    color: #374151 !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.filter-veg-btn {
+    border-color: #A7F3D0 !important;
+    background: #ECFDF5 !important;
+    color: #065F46 !important;
+}
+.filter-veg-btn.active {
+    background: #059669 !important;
+    border-color: #059669 !important;
+    color: #FFFFFF !important;
+}
+
+.filter-rating-btn {
+    border-color: #FDE68A !important;
+    background: #FFFBEB !important;
+    color: #92400E !important;
+}
+.filter-rating-btn.active {
+    background: #D97706 !important;
+    border-color: #D97706 !important;
+    color: #FFFFFF !important;
+}
+
+.dish-sort {
+    background: #FFFFFF !important;
+    border: 1.5px solid #E5E7EB !important;
+    border-radius: 9999px !important;
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #374151 !important;
+    cursor: pointer !important;
+    outline: none !important;
+    transition: all 0.2s ease !important;
+}
+
+.dish-sort:focus,
+.dish-sort:hover {
+    border-color: #FF5200 !important;
+}
+
+/* 6. Restaurants Discovery Hub Styling */
+.food-mode-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.food-mode {
+    display: inline-flex;
+    background: #F3F4F6;
+    border-radius: 9999px;
+    padding: 4px;
+    gap: 4px;
+}
+
+.mode-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 20px !important;
+    border-radius: 9999px !important;
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    border: none !important;
+    background: transparent !important;
+    color: #4B5563 !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.mode-btn:hover {
+    color: #111827 !important;
+}
+
+.mode-btn.active {
+    background: linear-gradient(135deg, #FF5200, #E23744) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(226, 55, 68, 0.3) !important;
+}
+
+.mode-btn.active svg {
+    color: #FFFFFF !important;
+}
+
+/* Restaurant Quick Filter Pills */
+.filter-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.filter-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 8px 16px !important;
+    border-radius: 9999px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    background: #FFFFFF !important;
+    border: 1.5px solid #E5E7EB !important;
+    color: #374151 !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.filter-btn:hover {
+    transform: translateY(-1px) !important;
+}
+
+.btn-pill-nearby {
+    background: #EFF6FF !important;
+    border-color: #BFDBFE !important;
+    color: #1D4ED8 !important;
+}
+.btn-pill-nearby.active {
+    background: #2563EB !important;
+    border-color: #2563EB !important;
+    color: #FFFFFF !important;
+}
+
+.btn-pill-rating {
+    background: #FFFBEB !important;
+    border-color: #FDE68A !important;
+    color: #92400E !important;
+}
+.btn-pill-rating.active {
+    background: #D97706 !important;
+    border-color: #D97706 !important;
+    color: #FFFFFF !important;
+}
+
+.btn-pill-offers {
+    background: #FEF2F2 !important;
+    border-color: #FECACA !important;
+    color: #DC2626 !important;
+}
+.btn-pill-offers.active {
+    background: #DC2626 !important;
+    border-color: #DC2626 !important;
+    color: #FFFFFF !important;
+}
+
+.btn-pill-veg {
+    background: #ECFDF5 !important;
+    border-color: #A7F3D0 !important;
+    color: #065F46 !important;
+}
+.btn-pill-veg.active {
+    background: #059669 !important;
+    border-color: #059669 !important;
+    color: #FFFFFF !important;
+}
+
+.btn-pill-fast {
+    background: #FFF1F2 !important;
+    border-color: #FECDD3 !important;
+    color: #BE123C !important;
+}
+.btn-pill-fast.active {
+    background: #E11D48 !important;
+    border-color: #E11D48 !important;
+    color: #FFFFFF !important;
+}
+
+.btn-pill-street {
+    background: #FFF7ED !important;
+    border-color: #FED7AA !important;
+    color: #C2410C !important;
+}
+.btn-pill-street.active {
+    background: #EA580C !important;
+    border-color: #EA580C !important;
+    color: #FFFFFF !important;
+}
+
+.btn-pill-dhaba {
+    background: #FEF3C7 !important;
+    border-color: #FDE68A !important;
+    color: #92400E !important;
+}
+.btn-pill-dhaba.active {
+    background: #B45309 !important;
+    border-color: #B45309 !important;
+    color: #FFFFFF !important;
+}
+
+.sort-select {
+    margin-left: auto;
+    background: #FFFFFF !important;
+    border: 1.5px solid #E5E7EB !important;
+    border-radius: 9999px !important;
+    padding: 8px 16px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #374151 !important;
+    cursor: pointer !important;
+    outline: none !important;
+}
+
+.sort-select:hover,
+.sort-select:focus {
+    border-color: #FF5200 !important;
+}
