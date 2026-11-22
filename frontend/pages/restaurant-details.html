@@ -1,556 +1,466 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Restaurant Details | CraveSpot</title>
 
-    <link rel="stylesheet" href="../css/style.css?v=2.9.0">
-    <link rel="stylesheet" href="../css/details.css?v=2.9.0">
-    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg?v=2.9.0">
+    <link rel="stylesheet" href="../css/style.css?v=3.1.0">
+    <link rel="stylesheet" href="../css/details.css?v=3.1.0">
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg?v=3.1.0">
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
+    <!-- ================= NAVBAR ================= -->
 
-<header class="navbar">
-    <div class="nav-container">
+    <header class="navbar">
+        <div class="nav-container">
 
-        <!-- Logo -->
-        <a href="../index.html" class="logo">
-            <span class="logo-icon"><img src="../assets/icons/logo.svg?v=2.6.0" alt="CraveSpot Logo" width="34" height="34"></span>
-            <span>Crave<span>Spot</span></span>
-        </a>
+            <!-- Logo -->
+            <a href="../index.html" class="logo">
+                <span class="logo-icon"><img src="../assets/icons/logo.svg?v=2.6.0" alt="CraveSpot Logo" width="34"
+                        height="34"></span>
+                <span>Crave<span>Spot</span></span>
+            </a>
 
-        <!-- Location -->
-        <div class="location">
-            <svg class="real-location-icon"
-     viewBox="0 0 24 24"
-     fill="none"
-     xmlns="http://www.w3.org/2000/svg"
-     aria-hidden="true">
-    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
-          stroke="currentColor"
-          stroke-width="1.8"/>
-    <circle cx="12" cy="10" r="2.5"
-            stroke="currentColor"
-            stroke-width="1.8"/>
-</svg> Chandigarh
+            <!-- Location -->
+            <div class="location">
+                <svg class="real-location-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true">
+                    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" stroke="currentColor" stroke-width="1.8" />
+                    <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.8" />
+                </svg> Chandigarh
+            </div>
+
+            <!-- Search -->
+            <div class="nav-search">
+                <input type="text" id="searchInput" placeholder="Search restaurant or dish...">
+                <button type="button" class="nav-search-btn" onclick="searchRestaurant()" aria-label="Search"
+                    style="background:transparent;border:none;outline:none;padding:0 6px;margin:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;color:#94a3b8;box-shadow:none;border-radius:0;">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true" style="width:18px;height:18px;stroke:currentColor;">
+                        <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="2" />
+                        <path d="m16 16 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Navigation links -->
+            <nav class="nav-links">
+                <a href="../index.html">Home</a>
+                <a href="restaurants.html">Restaurants</a>
+                <a href="dishes.html">Dishes</a>
+                <a href="categories.html">Categories</a>
+                <a href="favorites.html" class="saved-nav-link">Saved</a>
+            </nav>
+
+            <!-- Authentication buttons -->
+            <div class="auth-buttons">
+                <a href="login.html" class="login-btn">Login</a>
+                <a href="register.html" class="signup-btn">Sign Up</a>
+            </div>
+
         </div>
-
-        <!-- Search -->
-        <div class="nav-search">
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Search restaurant or dish..."
-            >
-            <button type="button" class="nav-search-btn" onclick="searchRestaurant()" aria-label="Search" style="background:transparent;border:none;outline:none;padding:0 6px;margin:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;color:#94a3b8;box-shadow:none;border-radius:0;">
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:18px;height:18px;stroke:currentColor;">
-                    <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="2"/>
-                    <path d="m16 16 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </button>
-        </div>
-
-        <!-- Navigation links -->
-        <nav class="nav-links">
-            <a href="../index.html">Home</a>
-            <a href="restaurants.html">Restaurants</a>
-            <a href="dishes.html">Dishes</a>
-            <a href="categories.html">Categories</a>
-    <a href="favorites.html" class="saved-nav-link">Saved</a>
-        </nav>
-
-        <!-- Authentication buttons -->
-        <div class="auth-buttons">
-            <a href="login.html" class="login-btn">Login</a>
-            <a href="register.html" class="signup-btn">Sign Up</a>
-        </div>
-
-    </div>
-</header>
+    </header>
 
 
-<!-- ================= RESTAURANT HERO ================= -->
+    <!-- ================= RESTAURANT HERO ================= -->
 
-<section class="restaurant-hero">
+    <section class="restaurant-hero">
 
-    <div class="restaurant-cover">
+        <div class="restaurant-cover">
 
-        <div class="cover-overlay">
+            <div class="cover-overlay">
 
-            <div class="restaurant-info">
+                <div class="restaurant-info">
 
-                <div class="restaurant-title-row">
+                    <div class="restaurant-title-row">
 
-                    <h1 id="restaurantName">
-                        Restaurant Name
-                    </h1>
+                        <h1 id="restaurantName">
+                            Restaurant Name
+                        </h1>
 
-                  <button
-    class="details-favorite"
-    id="favoriteBtn"
-    onclick="toggleFavorite()"
-    aria-label="Add to favorites"
->
-    <svg class="favorite-icon"
-         viewBox="0 0 24 24"
-         fill="none"
-         xmlns="http://www.w3.org/2000/svg"
-         aria-hidden="true">
-        <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
-              stroke="currentColor"
-              stroke-width="1.8"
-              stroke-linecap="round"
-              stroke-linejoin="round"/>
-    </svg>
-</button>
+                        <button class="details-favorite" id="favoriteBtn" onclick="toggleFavorite()"
+                            aria-label="Add to favorites">
+                            <svg class="favorite-icon" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path
+                                    d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z"
+                                    stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
 
-                </div>
+                    </div>
 
-                <p id="restaurantCuisine">
-                    North Indian • Mughlai • Biryani
-                </p>
+                    <p id="restaurantCuisine">
+                        North Indian • Mughlai • Biryani
+                    </p>
 
-                <p id="restaurantLocation">
-                    <svg class="real-location-icon"
-     viewBox="0 0 24 24"
-     fill="none"
-     xmlns="http://www.w3.org/2000/svg"
-     aria-hidden="true">
-    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
-          stroke="currentColor"
-          stroke-width="1.8"/>
-    <circle cx="12" cy="10" r="2.5"
-            stroke="currentColor"
-            stroke-width="1.8"/>
-</svg> Chandigarh
-                </p>
+                    <p id="restaurantLocation">
+                        <svg class="real-location-icon" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" stroke="currentColor"
+                                stroke-width="1.8" />
+                            <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.8" />
+                        </svg> Chandigarh
+                    </p>
 
-                <div class="restaurant-meta">
+                    <div class="restaurant-meta">
 
-                    <span class="rating">
-                        ★ <span id="restaurantRating">4.5</span>
-                    </span>
+                        <span class="rating">
+                            ★ <span id="restaurantRating">4.5</span>
+                        </span>
 
-                    <span>
-                        ₹<span id="restaurantPrice">350</span>
-                        for two
-                    </span>
+                        <span>
+                            ₹<span id="restaurantPrice">350</span>
+                            for two
+                        </span>
 
-                    <span>
-                        Delivery time: <span id="restaurantTime">30</span> min
-                    </span>
+                        <span>
+                            Delivery time: <span id="restaurantTime">30</span> min
+                        </span>
 
-                </div>
+                    </div>
 
-                <div
-                    class="restaurant-offer-badge offer"
-                    id="restaurantOffer"
-                >
-                    20% OFF on selected items
+                    <div class="restaurant-hero-offer" id="restaurantOffer" style="display:inline-flex; align-items:center; gap:6px; margin-top:14px; padding:6px 14px; background:#FFFFFF; color:#E23744; border-radius:9999px; font-size:13px; font-weight:700; box-shadow:0 2px 8px rgba(0,0,0,0.12); border:1.5px solid rgba(226,55,68,0.25); width:fit-content; position:static !important;">
+                        20% OFF on selected items
+                    </div>
+
                 </div>
 
             </div>
 
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- ================= PAGE CONTENT ================= -->
+    <!-- ================= PAGE CONTENT ================= -->
 
-<main class="details-container">
+    <main class="details-container">
 
-    <!-- TABS -->
+        <!-- TABS -->
 
-    <div class="details-tabs">
+        <div class="details-tabs">
 
-        <button
-            class="tab-btn active"
-            onclick="showSection('menu', this)"
-        >
-            Menu
-        </button>
+            <button class="tab-btn active" onclick="showSection('menu', this)">
+                Menu
+            </button>
 
-        <button
-            class="tab-btn"
-            onclick="showSection('overview', this)"
-        >
-            Overview
-        </button>
+            <button class="tab-btn" onclick="showSection('overview', this)">
+                Overview
+            </button>
 
-        <button
-            class="tab-btn"
-            onclick="showSection('reviews', this)"
-        >
-            Reviews
-        </button>
+            <button class="tab-btn" onclick="showSection('reviews', this)">
+                Reviews
+            </button>
 
-    </div>
+        </div>
 
 
-    <!-- ================= MENU ================= -->
+        <!-- ================= MENU ================= -->
 
-    <section
-        id="menuSection"
-        class="details-section"
-    >
+        <section id="menuSection" class="details-section">
 
-        <div class="section-heading">
+            <div class="section-heading">
+
+                <div>
+                    <h2>Menu</h2>
+
+                    <p>
+                        Explore popular dishes from this restaurant.
+                    </p>
+                </div>
+
+                <span id="dishCount">
+                    0 dishes
+                </span>
+
+            </div>
+
+            <div id="menuGrid" class="menu-grid">
+                <!-- Menu generated by JavaScript -->
+            </div>
+
+        </section>
+
+
+        <!-- ================= OVERVIEW ================= -->
+
+        <section id="overviewSection" class="details-section hidden">
+
+            <h2>About the Restaurant</h2>
+
+            <div class="overview-card">
+
+                <p id="overviewText">
+                    Welcome to CraveSpot restaurant.
+                </p>
+
+                <div class="overview-details">
+
+                    <div>
+                        <strong><svg class="cuisine-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M4 3v7m-2-7v4a2 2 0 0 0 4 0V3m-2 7v11M15 3c-3 3-3 7-2 9h3v9M15 3v9" />
+                            </svg> Cuisine</strong>
+                        <span id="overviewCuisine">
+                            -
+                        </span>
+                    </div>
+
+                    <div>
+                        <strong><svg class="real-location-icon" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z" stroke="currentColor"
+                                    stroke-width="1.8" />
+                                <circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.8" />
+                            </svg> Location</strong>
+                        <span id="overviewLocation">
+                            -
+                        </span>
+                    </div>
+
+                    <div>
+                        <strong>Average Cost</strong>
+                        <span id="overviewPrice">
+                            -
+                        </span>
+                    </div>
+
+                    <div>
+                        <strong>Delivery</strong>
+                        <span id="overviewTime">
+                            -
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= REVIEWS ================= -->
+
+        <section id="reviews" class="details-section">
+
+            <div class="reviews-header">
+
+                <div>
+                    <h2>Customer Reviews</h2>
+                    <p>See what other food lovers have to say.</p>
+                </div>
+
+                <button class="write-review-btn" onclick="openReviewForm()">
+                    Write a Review
+                </button>
+
+            </div>
+
+
+            <!-- Rating Summary -->
+
+            <div class="rating-summary">
+
+                <div class="overall-rating">
+
+                    <div id="overallRating" class="big-rating">
+                        4.5
+                    </div>
+
+                    <div class="stars">
+                        ★★★★★
+                    </div>
+
+                    <p>
+                        Based on customer reviews
+                    </p>
+
+                </div>
+
+
+                <!-- Rating Breakdown -->
+
+                <div class="rating-breakdown">
+
+                    <div class="rating-row">
+                        <span>5 ★</span>
+
+                        <div class="rating-bar">
+                            <div id="rating5" class="rating-fill"></div>
+                        </div>
+
+                        <span id="rating5Count">0</span>
+                    </div>
+
+
+                    <div class="rating-row">
+                        <span>4 ★</span>
+
+                        <div class="rating-bar">
+                            <div id="rating4" class="rating-fill"></div>
+                        </div>
+
+                        <span id="rating4Count">0</span>
+                    </div>
+
+
+                    <div class="rating-row">
+                        <span>3 ★</span>
+
+                        <div class="rating-bar">
+                            <div id="rating3" class="rating-fill"></div>
+                        </div>
+
+                        <span id="rating3Count">0</span>
+                    </div>
+
+
+                    <div class="rating-row">
+                        <span>2 ★</span>
+
+                        <div class="rating-bar">
+                            <div id="rating2" class="rating-fill"></div>
+                        </div>
+
+                        <span id="rating2Count">0</span>
+                    </div>
+
+
+                    <div class="rating-row">
+                        <span>1 ★</span>
+
+                        <div class="rating-bar">
+                            <div id="rating1" class="rating-fill"></div>
+                        </div>
+
+                        <span id="rating1Count">0</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Write Review Form -->
+
+            <div id="reviewForm" class="review-form" style="display: none;">
+
+                <h3>Write Your Review</h3>
+
+                <label>
+                    Your Name
+                </label>
+
+                <input type="text" id="reviewerName" placeholder="Enter your name">
+
+
+                <label>
+                    Rating
+                </label>
+
+                <div id="starRating" class="star-selector">
+
+                    <button onclick="selectRating(1)">★</button>
+                    <button onclick="selectRating(2)">★</button>
+                    <button onclick="selectRating(3)">★</button>
+                    <button onclick="selectRating(4)">★</button>
+                    <button onclick="selectRating(5)">★</button>
+
+                </div>
+
+
+                <label>
+                    Your Review
+                </label>
+
+                <textarea id="reviewText" rows="4" placeholder="Tell others about your experience..."></textarea>
+
+
+                <div class="review-form-actions">
+
+                    <button class="cancel-review-btn" onclick="closeReviewForm()">
+                        Cancel
+                    </button>
+
+                    <button class="submit-review-btn" onclick="submitReview()">
+                        Submit Review
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Reviews -->
+
+            <div id="reviewsContainer">
+                <!-- Reviews generated by JavaScript -->
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-content">
 
             <div>
-                <h2>Menu</h2>
+                <h3>CraveSpot</h3>
 
                 <p>
-                    Explore popular dishes from this restaurant.
+                    Discover local food and amazing restaurants.
                 </p>
             </div>
 
-            <span id="dishCount">
-                0 dishes
-            </span>
+            <div>
+                <h4>Explore</h4>
 
-        </div>
+                <a href="restaurants.html">
+                    Restaurants
+                </a>
 
-        <div
-            id="menuGrid"
-            class="menu-grid"
-        >
-            <!-- Menu generated by JavaScript -->
-        </div>
+                <a href="dishes.html">
+                    Dishes
+                </a>
 
-    </section>
+                <a href="categories.html">
+                    Categories
+                </a>
+            </div>
 
+            <div>
+                <h4>About & Legal</h4>
 
-    <!-- ================= OVERVIEW ================= -->
-
-    <section
-        id="overviewSection"
-        class="details-section hidden"
-    >
-
-        <h2>About the Restaurant</h2>
-
-        <div class="overview-card">
-
-            <p id="overviewText">
-                Welcome to CraveSpot restaurant.
-            </p>
-
-            <div class="overview-details">
-
-                <div>
-                    <strong><svg class="cuisine-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 3v7m-2-7v4a2 2 0 0 0 4 0V3m-2 7v11M15 3c-3 3-3 7-2 9h3v9M15 3v9"/></svg> Cuisine</strong>
-                    <span id="overviewCuisine">
-                        -
-                    </span>
-                </div>
-
-                <div>
-                    <strong><svg class="real-location-icon"
-     viewBox="0 0 24 24"
-     fill="none"
-     xmlns="http://www.w3.org/2000/svg"
-     aria-hidden="true">
-    <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
-          stroke="currentColor"
-          stroke-width="1.8"/>
-    <circle cx="12" cy="10" r="2.5"
-            stroke="currentColor"
-            stroke-width="1.8"/>
-</svg> Location</strong>
-                    <span id="overviewLocation">
-                        -
-                    </span>
-                </div>
-
-                <div>
-                    <strong>Average Cost</strong>
-                    <span id="overviewPrice">
-                        -
-                    </span>
-                </div>
-
-                <div>
-                    <strong>Delivery</strong>
-                    <span id="overviewTime">
-                        -
-                    </span>
-                </div>
-
+                <a href="about.html">About CraveSpot</a>
+                <a href="contact.html">Contact & Partner</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
             </div>
 
         </div>
 
-    </section>
+        <p class="copyright">
+            © 2026 CraveSpot — The Ultimate Food Finder & DBMS Project
+        </p>
 
+    </footer>
 
-    <!-- ================= REVIEWS ================= -->
 
-    <section
-    id="reviews"
-    class="details-section"
->
-
-    <div class="reviews-header">
-
-        <div>
-            <h2>Customer Reviews</h2>
-            <p>See what other food lovers have to say.</p>
-        </div>
-
-        <button
-            class="write-review-btn"
-            onclick="openReviewForm()"
-        >
-            Write a Review
-        </button>
-
-    </div>
-
-
-    <!-- Rating Summary -->
-
-    <div class="rating-summary">
-
-        <div class="overall-rating">
-
-            <div
-                id="overallRating"
-                class="big-rating"
-            >
-                4.5
-            </div>
-
-            <div class="stars">
-                ★★★★★
-            </div>
-
-            <p>
-                Based on customer reviews
-            </p>
-
-        </div>
-
-
-        <!-- Rating Breakdown -->
-
-        <div class="rating-breakdown">
-
-            <div class="rating-row">
-                <span>5 ★</span>
-
-                <div class="rating-bar">
-                    <div
-                        id="rating5"
-                        class="rating-fill"
-                    ></div>
-                </div>
-
-                <span id="rating5Count">0</span>
-            </div>
-
-
-            <div class="rating-row">
-                <span>4 ★</span>
-
-                <div class="rating-bar">
-                    <div
-                        id="rating4"
-                        class="rating-fill"
-                    ></div>
-                </div>
-
-                <span id="rating4Count">0</span>
-            </div>
-
-
-            <div class="rating-row">
-                <span>3 ★</span>
-
-                <div class="rating-bar">
-                    <div
-                        id="rating3"
-                        class="rating-fill"
-                    ></div>
-                </div>
-
-                <span id="rating3Count">0</span>
-            </div>
-
-
-            <div class="rating-row">
-                <span>2 ★</span>
-
-                <div class="rating-bar">
-                    <div
-                        id="rating2"
-                        class="rating-fill"
-                    ></div>
-                </div>
-
-                <span id="rating2Count">0</span>
-            </div>
-
-
-            <div class="rating-row">
-                <span>1 ★</span>
-
-                <div class="rating-bar">
-                    <div
-                        id="rating1"
-                        class="rating-fill"
-                    ></div>
-                </div>
-
-                <span id="rating1Count">0</span>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- Write Review Form -->
-
-    <div
-        id="reviewForm"
-        class="review-form"
-        style="display: none;"
-    >
-
-        <h3>Write Your Review</h3>
-
-        <label>
-            Your Name
-        </label>
-
-        <input
-            type="text"
-            id="reviewerName"
-            placeholder="Enter your name"
-        >
-
-
-        <label>
-            Rating
-        </label>
-
-        <div
-            id="starRating"
-            class="star-selector"
-        >
-
-            <button onclick="selectRating(1)">★</button>
-            <button onclick="selectRating(2)">★</button>
-            <button onclick="selectRating(3)">★</button>
-            <button onclick="selectRating(4)">★</button>
-            <button onclick="selectRating(5)">★</button>
-
-        </div>
-
-
-        <label>
-            Your Review
-        </label>
-
-        <textarea
-            id="reviewText"
-            rows="4"
-            placeholder="Tell others about your experience..."
-        ></textarea>
-
-
-        <div class="review-form-actions">
-
-            <button
-                class="cancel-review-btn"
-                onclick="closeReviewForm()"
-            >
-                Cancel
-            </button>
-
-            <button
-                class="submit-review-btn"
-                onclick="submitReview()"
-            >
-                Submit Review
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <!-- Reviews -->
-
-    <div id="reviewsContainer">
-        <!-- Reviews generated by JavaScript -->
-    </div>
-
-</section>
-
-</main>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-    <div class="footer-content">
-
-        <div>
-            <h3>CraveSpot</h3>
-
-            <p>
-                Discover local food and amazing restaurants.
-            </p>
-        </div>
-
-        <div>
-            <h4>Explore</h4>
-
-            <a href="restaurants.html">
-                Restaurants
-            </a>
-
-            <a href="dishes.html">
-                Dishes
-            </a>
-
-            <a href="categories.html">
-                Categories
-            </a>
-        </div>
-
-        <div>
-            <h4>About & Legal</h4>
-
-            <a href="about.html">About CraveSpot</a>
-            <a href="contact.html">Contact & Partner</a>
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="terms.html">Terms of Service</a>
-        </div>
-
-    </div>
-
-    <p class="copyright">
-        © 2026 CraveSpot — The Ultimate Food Finder & DBMS Project
-    </p>
-
-</footer>
-
-
-<script src="../js/api.js?v=2.9.0"></script>
-<script src="../js/app.js?v=2.9.0"></script>
-<script src="../js/details.js?v=2.9.0"></script>
+    <script src="../js/api.js?v=3.1.0"></script>
+    <script src="../js/app.js?v=3.1.0"></script>
+    <script src="../js/details.js?v=3.1.0"></script>
 
 </body>
+
 </html>

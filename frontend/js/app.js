@@ -370,7 +370,7 @@ function initSurpriseMe() {
 
                     cardContent.innerHTML = `
                         <div class="surprise-badge">🎲 CraveSpot Surprise</div>
-                        <img src="${item.image_url || 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600'}" alt="${item.name}" class="surprise-img" />
+                        <img src="${item.image_url || 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600'}" alt="${item.name}" class="surprise-img" />
                         <div class="surprise-details">
                             <h3 class="surprise-title">${item.name}</h3>
                             <p class="surprise-restaurant">By <strong>${item.restaurant_name || 'Top Local Vendor'}</strong></p>

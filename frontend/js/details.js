@@ -194,20 +194,26 @@ function displayRestaurant() {
 ========================================== */
 
 function resolveDishImage(dishName = "", category = "", existingUrl = "") {
-    if (existingUrl && typeof existingUrl === "string" && existingUrl.startsWith("http") && !existingUrl.includes("photo-1504674900247-0877df9cc836")) {
-        return existingUrl;
-    }
-
     const text = (dishName + " " + category).toLowerCase();
 
-    // 1. Rolls, Wraps & Shawarmas
+    // 1. Rolls, Wraps & Shawarmas - ALWAYS match authentic roll photo
     if (text.includes("roll") || text.includes("kathi") || text.includes("wrap") || text.includes("shawarma")) {
         return "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85";
     }
 
-    // 2. Kulchas & Chole Thalis
+    // 2. Kulchas & Chole Thalis - ALWAYS match authentic kulcha photo
     if (text.includes("kulcha") || text.includes("chhole") || text.includes("chole") || text.includes("bhatur")) {
         return "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // Reject generic placeholders and mismatched thali/steak images
+    const isBadImage = !existingUrl || typeof existingUrl !== "string" || !existingUrl.startsWith("http") ||
+        existingUrl.includes("photo-1504674900247-0877df9cc836") ||
+        existingUrl.includes("photo-1555396273-367ea4eb4db5") ||
+        (existingUrl.includes("photo-1626777552726-4a6b54c97e46") && !text.includes("thali") && !text.includes("naan") && !text.includes("roti") && !text.includes("paratha"));
+
+    if (!isBadImage) {
+        return existingUrl;
     }
 
     // 3. Butter Chicken & Makhani Chicken

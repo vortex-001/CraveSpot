@@ -135,14 +135,13 @@
 }
 
 #restaurantOffer,
-.restaurant-offer-badge,
-.restaurant-info .offer,
-.offer {
+.restaurant-hero-offer,
+.restaurant-offer-badge {
     position: static !important;
     display: inline-flex !important;
     align-items: center;
     gap: 6px;
-    margin-top: 16px;
+    margin-top: 14px;
     padding: 7px 16px;
     background: #FFFFFF !important;
     color: #E23744 !important;

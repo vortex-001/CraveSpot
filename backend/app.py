@@ -2933,7 +2933,10 @@ def get_restaurant(restaurant_id):
         return jsonify({"success": True, "restaurant": serialize_row(restaurant)}), 200
 
     except mysql.connector.Error:
-        app.logger.exception("Failed to fetch restaurant details")
+        app.logger.exception("Failed to fetch restaurant details from DB, checking fallback")
+        fallback_r = next((r for r in CURATED_FALLBACK_RESTAURANTS if r.get("restaurant_id") == restaurant_id), None)
+        if fallback_r:
+            return jsonify({"success": True, "restaurant": fallback_r}), 200
         return jsonify({"success": False, "message": "Unable to fetch restaurant details"}), 500
 
     finally:
@@ -2961,8 +2964,15 @@ def get_restaurant_menu(restaurant_id):
             (restaurant_id,)
         )
         menu_items = serialize_rows(cursor.fetchall())
-        if not menu_items:
-            menu_items = get_restaurant_real_menu(restaurant_id)
+        real_menu = get_restaurant_real_menu(restaurant_id)
+        if not menu_items or len(menu_items) < len(real_menu):
+            menu_items = real_menu
+        else:
+            for item in menu_items:
+                n_lower = (item.get("name") or "").lower()
+                if any(k in n_lower for k in ("roll", "kathi", "wrap", "shawarma")):
+                    item["image_url"] = "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+                    item["image"] = item["image_url"]
         return jsonify(menu_items), 200
 
     except mysql.connector.Error:
