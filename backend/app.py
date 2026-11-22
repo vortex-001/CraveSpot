@@ -563,7 +563,7 @@ CURATED_FALLBACK_DISHES = [
     {"item_id": 8, "restaurant_id": 8, "name": "Smoky Grilled Chicken", "description": "Juicy charcoal grilled chicken wings with barbecue glaze", "price": 390, "rating": 4.7, "is_veg": 0, "category": "Barbecue", "image_url": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=85"},
     {"item_id": 9, "restaurant_id": 13, "name": "Amritsari Stuffed Kulcha Thali", "description": "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney", "price": 140, "rating": 4.9, "is_veg": 1, "category": "North Indian", "image_url": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85"},
     {"item_id": 10, "restaurant_id": 14, "name": "Dahi Papdi Chaat & Golgappe", "description": "Crispy papdi with sweetened yogurt, tangy saunth, and crispy golgappe", "price": 90, "rating": 4.8, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"},
-    {"item_id": 11, "restaurant_id": 12, "name": "Special Paneer Kathi Roll", "description": "Flaky paratha loaded with spiced paneer, onions and mint chutney", "price": 150, "rating": 4.6, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 11, "restaurant_id": 12, "name": "Special Paneer Kathi Roll", "description": "Flaky paratha loaded with spiced paneer, onions and mint chutney", "price": 150, "rating": 4.6, "is_veg": 1, "category": "Street Food", "image_url": "/assets/images/dishes/kathi-roll.jpg", "image": "/assets/images/dishes/kathi-roll.jpg"},
     {"item_id": 12, "restaurant_id": 15, "name": "Kadak Masala Chai & Bun Maska", "description": "Steaming hot ginger cardamom chai served with soft toasted bun and butter", "price": 70, "rating": 4.7, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"}
 ]
 
@@ -834,7 +834,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 90,
             "rating": 4.5,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/chocolate-shake.jpg"
         }
     ],
     "3": [
@@ -946,7 +946,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 160,
             "rating": 4.5,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/kathi-roll.jpg"
         },
         {
             "item_id": 311,
@@ -1583,7 +1583,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 220,
             "rating": 4.7,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/kathi-roll.jpg"
         },
         {
             "item_id": 808,
@@ -1807,7 +1807,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 180,
             "rating": 4.6,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/kathi-roll.jpg"
         },
         {
             "item_id": 1008,
@@ -1818,7 +1818,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 140,
             "rating": 4.7,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/chocolate-shake.jpg"
         },
         {
             "item_id": 1009,
@@ -1829,7 +1829,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 130,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/chocolate-shake.jpg"
         },
         {
             "item_id": 1010,
@@ -1965,7 +1965,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 150,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/kathi-roll.jpg"
         },
         {
             "item_id": 1202,
@@ -1976,7 +1976,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 160,
             "rating": 4.7,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/kathi-roll.jpg"
         },
         {
             "item_id": 1203,
@@ -1987,7 +1987,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 180,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/kathi-roll.jpg"
         },
         {
             "item_id": 1204,
@@ -1998,7 +1998,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 140,
             "rating": 4.7,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/kathi-roll.jpg"
         },
         {
             "item_id": 1205,
@@ -2009,7 +2009,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 110,
             "rating": 4.5,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/kathi-roll.jpg"
         },
         {
             "item_id": 1206,
@@ -2020,7 +2020,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 140,
             "rating": 4.6,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/kathi-roll.jpg"
         },
         {
             "item_id": 1207,
@@ -2031,7 +2031,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 170,
             "rating": 4.8,
             "is_veg": 0,
-            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/kathi-roll.jpg"
         },
         {
             "item_id": 1208,
@@ -2042,7 +2042,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 180,
             "rating": 4.8,
             "is_veg": 0,
-            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/kathi-roll.jpg"
         },
         {
             "item_id": 1209,
@@ -2053,7 +2053,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 210,
             "rating": 4.9,
             "is_veg": 0,
-            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/kathi-roll.jpg"
         },
         {
             "item_id": 1210,
@@ -2064,7 +2064,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 190,
             "rating": 4.7,
             "is_veg": 0,
-            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/kathi-roll.jpg"
         },
         {
             "item_id": 1211,
@@ -2075,7 +2075,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 230,
             "rating": 4.9,
             "is_veg": 0,
-            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/kathi-roll.jpg"
         },
         {
             "item_id": 1212,
@@ -2097,7 +2097,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 80,
             "rating": 4.6,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/chocolate-shake.jpg"
         },
         {
             "item_id": 1214,
@@ -2951,25 +2951,70 @@ def sanitize_dish_item(item):
     if not isinstance(item, dict):
         return item
     n_lower = ((item.get("name") or "") + " " + (item.get("category") or "")).lower()
+
     if any(k in n_lower for k in ("roll", "kathi", "wrap", "shawarma")):
-        item["image_url"] = "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+        item["image_url"] = "/assets/images/dishes/kathi-roll.jpg"
     elif any(k in n_lower for k in ("shake", "thickshake", "cold coffee", "frappe", "smoothie")):
         if "strawberry" in n_lower or "berry" in n_lower or "fruit" in n_lower:
-            item["image_url"] = "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=800&q=85"
+            item["image_url"] = "/assets/images/dishes/strawberry-shake.jpg"
         else:
-            item["image_url"] = "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=85"
+            item["image_url"] = "/assets/images/dishes/chocolate-shake.jpg"
     elif "gulab jamun" in n_lower or "jamun" in n_lower:
-        item["image_url"] = "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
+        item["image_url"] = "/assets/images/dishes/gulab-jamun.jpg"
     elif "jalebi" in n_lower or "rabri" in n_lower:
-        item["image_url"] = "https://images.unsplash.com/photo-1760263216784-a4ca9a841ff5?auto=format&fit=crop&w=800&q=85"
-    elif "rasgulla" in n_lower or "rasmalai" in n_lower:
-        item["image_url"] = "https://images.unsplash.com/photo-1714799263412-2e0c1f875959?auto=format&fit=crop&w=800&q=85"
-    elif "halwa" in n_lower or "kesari" in n_lower or "phirni" in n_lower or "shahi tukda" in n_lower:
-        item["image_url"] = "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
+        item["image_url"] = "/assets/images/dishes/jalebi.jpg"
+    elif "rasgulla" in n_lower:
+        item["image_url"] = "/assets/images/dishes/rasgulla.jpg"
+    elif "rasmalai" in n_lower:
+        item["image_url"] = "/assets/images/dishes/rasmalai.jpg"
+    elif any(k in n_lower for k in ("halwa", "kesari", "phirni", "shahi tukda")):
+        item["image_url"] = "/assets/images/dishes/gulab-jamun.jpg"
     elif "brownie" in n_lower or "fudge" in n_lower:
-        item["image_url"] = "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=85"
-    elif "cheesecake" in n_lower or "cake" in n_lower or "pastry" in n_lower:
-        item["image_url"] = "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=85"
+        item["image_url"] = "/assets/images/dishes/chocolate-brownie.jpg"
+    elif any(k in n_lower for k in ("cheesecake", "cake", "pastry")):
+        item["image_url"] = "/assets/images/dishes/pastry-cake.jpg"
+    elif any(k in n_lower for k in ("paneer butter", "shahi paneer", "kadhai paneer", "kadai paneer", "matar paneer")):
+        item["image_url"] = "/assets/images/dishes/paneer-butter-masala.jpg"
+    elif "biryani" in n_lower or "pulao" in n_lower:
+        if "chicken" in n_lower or "mutton" in n_lower or "gosht" in n_lower:
+            item["image_url"] = "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=85"
+        else:
+            item["image_url"] = "/assets/images/dishes/veg-biryani.jpg"
+    elif "tandoori chicken" in n_lower or "tandoori murgh" in n_lower:
+        item["image_url"] = "/assets/images/dishes/tandoori-chicken.jpg"
+    elif "dosa" in n_lower:
+        item["image_url"] = "/assets/images/dishes/masala-dosa.jpg"
+    elif any(k in n_lower for k in ("pasta", "arrabbiata", "alfredo", "penne")):
+        item["image_url"] = "https://images.unsplash.com/photo-1621996346565-e3d5d6281699?auto=format&fit=crop&w=800&q=85"
+    elif "butter chicken" in n_lower or "murgh makhani" in n_lower:
+        item["image_url"] = "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=85"
+    elif any(k in n_lower for k in ("dal makhani", "makhani dal", "bukhara", "black lentil")):
+        item["image_url"] = "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85"
+    elif any(k in n_lower for k in ("kulcha", "chole", "chhole", "bhatur")):
+        item["image_url"] = "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85"
+    elif "pizza" in n_lower or "margherita" in n_lower:
+        if "paneer" in n_lower or "peri" in n_lower or "spic" in n_lower:
+            item["image_url"] = "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=800&q=85"
+        else:
+            item["image_url"] = "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85"
+    elif "burger" in n_lower:
+        if "smash" in n_lower or "cheeseburger" in n_lower:
+            item["image_url"] = "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=85"
+        else:
+            item["image_url"] = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=85"
+    elif any(k in n_lower for k in ("momo", "dimsum", "dumpling")):
+        item["image_url"] = "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=800&q=85"
+    elif any(k in n_lower for k in ("golgapp", "pani puri", "chaat", "tikki", "papdi")):
+        item["image_url"] = "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"
+    elif any(k in n_lower for k in ("chai", "tea", "bun maska")):
+        item["image_url"] = "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"
+    elif "maggi" in n_lower:
+        item["image_url"] = "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=85"
+    elif "fries" in n_lower:
+        item["image_url"] = "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=85"
+    elif any(k in n_lower for k in ("noodle", "hakka", "chowmein", "schezwan")):
+        item["image_url"] = "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=85"
+
     if "image_url" in item:
         item["image"] = item["image_url"]
     elif "image" in item:
@@ -3126,7 +3171,9 @@ def get_single_dish(item_id):
         if not dish:
             return jsonify({"success": False, "message": f"Dish {item_id} not found"}), 404
 
-        return jsonify(serialize_row(dish)), 200
+        serialized = serialize_row(dish)
+        sanitize_dish_item(serialized)
+        return jsonify(serialized), 200
 
     except mysql.connector.Error:
         app.logger.exception("Failed to fetch dish")
@@ -3139,6 +3186,7 @@ def get_single_dish(item_id):
                 dish_copy["restaurant_address"] = rest["address"]
                 dish_copy["restaurant_rating"] = rest["rating"]
                 dish_copy["restaurant_phone"] = rest.get("phone", "")
+            sanitize_dish_item(dish_copy)
             return jsonify(dish_copy), 200
         return jsonify({"success": False, "message": f"Dish {item_id} not found"}), 404
 

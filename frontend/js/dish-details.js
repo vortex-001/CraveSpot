@@ -84,7 +84,7 @@ const dishData = {
         location: "Sector 35, Chandigarh",
 
         image:
-    "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=900&q=85",
+    "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=900&q=85",
         description:
             "Soft steamed dumplings filled with seasoned vegetables and served with spicy chutney.",
 
@@ -172,7 +172,7 @@ const dishData = {
         location: "Chandigarh",
 
        image:
-    "https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=900&q=85",
+    "../assets/images/dishes/chocolate-brownie.jpg",
         description:
             "Rich and fudgy chocolate brownie with a soft centre and deep chocolate flavor.",
 
@@ -220,7 +220,7 @@ const dishData = {
         restaurant: "Rolls Mania",
         restaurantSlug: "rolls-mania",
         location: "Phase 7, Mohali",
-        image: "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=900&q=85",
+        image: "../assets/images/dishes/kathi-roll.jpg",
         description: "Char-grilled paneer cubes wrapped in layered flaky paratha with mint chutney and onions.",
         longDescription: "Smoky tandoori paneer cubes wrapped in a freshly roasted, flaky laccha paratha with crunchy julienned red onions, tangy chaat masala, and house special mint mayo."
     },
@@ -252,7 +252,7 @@ const dishData = {
         restaurantSlug: "rolls-mania",
         restaurantId: 12,
         location: "Khanpur Chowk, Kharar",
-        image: "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=900&q=85",
+        image: "../assets/images/dishes/kathi-roll.jpg",
         description: "Flaky paratha loaded with spiced paneer, fresh onions and mint chutney.",
         longDescription: "Signature flaky, golden laccha paratha freshly rolled on tawa, stuffed with charred spicy paneer cubes, crunchy sliced red onions, fresh coriander, and zesty green mint chutney."
     },
@@ -364,7 +364,7 @@ const dishData = {
         restaurantSlug: "spice-garden",
         restaurantId: 1,
         location: "Sector 17, Chandigarh",
-        image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=900&q=85",
+        image: "../assets/images/dishes/paneer-butter-masala.jpg",
         description: "Creamy tomato gravy with soft paneer.",
         longDescription: "Fresh malai cottage cheese cubes gently tossed in a velvety, buttery tomato and cashew gravy, aromatized with dried fenugreek leaves and garam masala."
     },
@@ -380,7 +380,7 @@ const dishData = {
         restaurantSlug: "pizza-corner",
         restaurantId: 2,
         location: "Sector 22, Chandigarh",
-        image: "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=900&q=85",
+        image: "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=900&q=85",
         description: "Pizza topped with vegetables and cheese.",
         longDescription: "Crispy crust layered with herb-infused Italian tomato sauce, layered with mozzarella cheese, capsicum, sweet corn, black olives, red onions and diced mushrooms."
     },
@@ -396,7 +396,7 @@ const dishData = {
         restaurantSlug: "spice-garden",
         restaurantId: 1,
         location: "Sector 17, Chandigarh",
-        image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=900&q=85",
+        image: "../assets/images/dishes/veg-biryani.jpg",
         description: "Rice cooked with vegetables and aromatic spices.",
         longDescription: "Fragrant long-grain basmati rice layered with garden-fresh beans, carrots, peas and paneer, slow-cooked in handi with saffron and whole spices."
     },
@@ -428,7 +428,7 @@ const dishData = {
         restaurantSlug: "spice-garden",
         restaurantId: 1,
         location: "Sector 17, Chandigarh",
-        image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=900&q=85",
+        image: "../assets/images/dishes/tandoori-chicken.jpg",
         description: "Chicken marinated with traditional spices.",
         longDescription: "Juicy chicken roasted to perfection in clay tandoor after overnight marination in spiced curd, mustard oil, Kashmiri red chilli and kasuri methi."
     },
@@ -510,122 +510,137 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
 
     // 1. Rolls & Wraps - ALWAYS match authentic roll photo
     if (text.includes("roll") || text.includes("kathi") || text.includes("wrap") || text.includes("shawarma")) {
-        return "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=900&q=85";
+        return "../assets/images/dishes/kathi-roll.jpg";
     }
 
     // 2. Shakes, Thickshakes, Smoothies & Cold Coffee - ALWAYS match authentic tall glass shake photo
     if (text.includes("shake") || text.includes("thickshake") || text.includes("smoothie") || text.includes("cold coffee") || text.includes("frappe")) {
         if (text.includes("strawberry") || text.includes("berry") || text.includes("fruit")) {
-            return "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=900&q=85";
+            return "../assets/images/dishes/strawberry-shake.jpg";
         }
-        return "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=900&q=85";
+        return "../assets/images/dishes/chocolate-shake.jpg";
     }
 
     // 3. Indian Sweets: Gulab Jamun, Jalebi, Rasgulla, Halwa, Phirni
     if (text.includes("gulab jamun") || text.includes("jamun")) {
-        return "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=900&q=85";
+        return "../assets/images/dishes/gulab-jamun.jpg";
     }
     if (text.includes("jalebi") || text.includes("rabri")) {
-        return "https://images.unsplash.com/photo-1760263216784-a4ca9a841ff5?auto=format&fit=crop&w=900&q=85";
+        return "../assets/images/dishes/jalebi.jpg";
     }
-    if (text.includes("rasgulla") || text.includes("rasmalai")) {
-        return "https://images.unsplash.com/photo-1714799263412-2e0c1f875959?auto=format&fit=crop&w=900&q=85";
+    if (text.includes("rasgulla")) {
+        return "../assets/images/dishes/rasgulla.jpg";
     }
-    if (text.includes("halwa") || text.includes("kesari") || text.includes("phirni") || text.includes("shahi tukda") || text.includes("mithai") || text.includes("falooda")) {
-        return "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=900&q=85";
+    if (text.includes("rasmalai")) {
+        return "../assets/images/dishes/rasmalai.jpg";
+    }
+    if (text.includes("halwa") || text.includes("kesari") || text.includes("phirni") || text.includes("shahi tukda")) {
+        return "../assets/images/dishes/gulab-jamun.jpg";
+    }
+    if (text.includes("brownie") || text.includes("fudge")) {
+        return "../assets/images/dishes/chocolate-brownie.jpg";
+    }
+    if (text.includes("cake") || text.includes("pastry") || text.includes("cheesecake")) {
+        return "../assets/images/dishes/pastry-cake.jpg";
     }
 
-    // 4. Kulchas & Chole Thalis - ALWAYS match authentic kulcha photo
+    // 4. Paneer Curries
+    if (text.includes("paneer butter") || text.includes("shahi paneer") || text.includes("kadai paneer") || text.includes("kadhai paneer") || text.includes("matar paneer")) {
+        return "../assets/images/dishes/paneer-butter-masala.jpg";
+    }
+
+    // 5. Biryani & Pulao
+    if (text.includes("biryani") || text.includes("pulao")) {
+        if (text.includes("chicken") || text.includes("mutton") || text.includes("gosht")) {
+            return "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=900&q=85";
+        }
+        return "../assets/images/dishes/veg-biryani.jpg";
+    }
+
+    // 6. Tandoori Chicken
+    if (text.includes("tandoori chicken") || text.includes("tandoori murgh") || (text.includes("tandoori") && text.includes("chicken"))) {
+        return "../assets/images/dishes/tandoori-chicken.jpg";
+    }
+
+    // 7. Dosa & South Indian
+    if (text.includes("dosa") || text.includes("uttapam") || text.includes("idli")) {
+        return "../assets/images/dishes/masala-dosa.jpg";
+    }
+
+    // 8. Kulchas & Chole Thalis - ALWAYS match authentic kulcha photo
     if (text.includes("kulcha") || text.includes("chhole") || text.includes("chole") || text.includes("bhatur")) {
         return "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=85";
     }
 
-    // Reject generic placeholders and mismatched thali/steak/mojito/bad roll images
-    const isBadImage = !existingUrl || typeof existingUrl !== "string" || !existingUrl.startsWith("http") ||
-        existingUrl.includes("photo-1504674900247-0877df9cc836") ||
-        existingUrl.includes("photo-1555396273-367ea4eb4db5") ||
-        existingUrl.includes("photo-1627308595229-7830a5c91f9f") ||
-        existingUrl.includes("photo-1544145945-f90425340c7e") ||
-        existingUrl.includes("photo-1551183053-bf91a1d81141") ||
-        (existingUrl.includes("photo-1626777552726-4a6b54c97e46") && !text.includes("thali") && !text.includes("naan") && !text.includes("roti") && !text.includes("paratha"));
-
-    if (!isBadImage) {
-        return existingUrl;
-    }
-
-    // 5. Butter Chicken
+    // 9. Butter Chicken
     if (text.includes("butter chicken") || text.includes("makhani chicken") || text.includes("murgh makhani")) {
         return "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 6. Dal Makhani & Lentils
+    // 10. Dal Makhani & Lentils
     if (text.includes("dal makhani") || text.includes("makhani dal") || text.includes("bukhara") || text.includes("black lentil") || text.includes("daal")) {
         return "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 7. Paneer Dishes & Curries
-    if (text.includes("paneer")) {
-        if (text.includes("pizza")) {
+    // 11. Pizzas
+    if (text.includes("pizza") || text.includes("margherita") || text.includes("mozzarella")) {
+        if (text.includes("peri") || text.includes("paneer") || text.includes("spic")) {
             return "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=900&q=85";
         }
-        return "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=900&q=85";
-    }
-
-    // 8. Pizzas
-    if (text.includes("pizza") || text.includes("margherita") || text.includes("mozzarella")) {
         return "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 9. Biryani
-    if (text.includes("biryani") || text.includes("pulao")) {
-        return "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=900&q=85";
-    }
-
-    // 10. Burgers
-    if (text.includes("burger") || text.includes("cheeseburger") || text.includes("zinger")) {
+    // 12. Burgers
+    if (text.includes("burger") || text.includes("cheeseburger") || text.includes("zinger") || text.includes("smash")) {
+        if (text.includes("smash")) {
+            return "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=85";
+        }
         return "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 11. Momos & Dim Sum
+    // 13. Momos & Dim Sum
     if (text.includes("momo") || text.includes("dimsum") || text.includes("dumpling")) {
         return "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 12. Noodles & Chinese
-    if (text.includes("noodle") || text.includes("hakka") || text.includes("chowmein") || text.includes("manchurian") || text.includes("chinese")) {
-        return "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=900&q=85";
+    // 14. Noodles & Chinese
+    if (text.includes("noodle") || text.includes("hakka") || text.includes("chowmein") || text.includes("schezwan") || text.includes("manchurian") || text.includes("chinese")) {
+        return "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 13. Chaat & Golgappe
+    // 15. Chaat & Golgappe
     if (text.includes("chaat") || text.includes("golgapp") || text.includes("pani puri") || text.includes("tikki") || text.includes("papdi")) {
         return "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 14. Chai & Tea & Bun Maska
+    // 16. Chai & Tea & Bun Maska
     if (text.includes("chai") || text.includes("tea") || text.includes("bun maska")) {
         return "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 15. Desserts & Sweets & Brownies
-    if (text.includes("brownie") || text.includes("fudge")) {
-        return "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=85";
-    }
-    if (text.includes("cake") || text.includes("pastry") || text.includes("cheesecake")) {
-        return "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85";
-    }
-    if (text.includes("dessert") || text.includes("sweet") || text.includes("jamun") || text.includes("halwa")) {
-        return "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=900&q=85";
-    }
-    if (text.includes("ice cream") || text.includes("sundae")) {
-        return "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=900&q=85";
+    // 17. Maggi
+    if (text.includes("maggi")) {
+        return "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 16. Thalis & Platters
-    if (text.includes("thali") || text.includes("platter")) {
-        return "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=900&q=85";
+    // 18. Fries
+    if (text.includes("fries")) {
+        return "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=900&q=85";
     }
 
-    // Default vibrant food image
+    // 19. Pasta
+    if (text.includes("pasta") || text.includes("arrabbiata") || text.includes("alfredo") || text.includes("penne")) {
+        return "https://images.unsplash.com/photo-1621996346565-e3d5d6281699?auto=format&fit=crop&w=900&q=85";
+    }
+
+    // Check if existingUrl is valid and not bad
+    if (existingUrl && typeof existingUrl === "string" && !existingUrl.includes("photo-1504674900247-0877df9cc836") && !existingUrl.includes("photo-1555396273-367ea4eb4db5") && !existingUrl.includes("photo-1529006557810-274b9b2fc783") && !existingUrl.includes("photo-1544145945-f90425340c7e") && !existingUrl.includes("photo-1551183053-bf91a1d81141")) {
+        if (existingUrl.startsWith("/assets/images/dishes/")) {
+            return "../assets/images/dishes/" + existingUrl.split("/").pop();
+        }
+        return existingUrl;
+    }
+
     return "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=85";
 }
 
