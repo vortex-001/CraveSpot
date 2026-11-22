@@ -351,6 +351,150 @@ const dishData = {
         image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85",
         description: "Crispy puris filled with potato mash, served with spicy mint, tangy hing, and sweet tamarind pani.",
         longDescription: "Golden crisp suji puris filled with spicy potato-chana masala, served alongside 3 chilled flavors of flavored water: Teekha Pudina, Khatta Meetha Sonth, and Hing Jeera."
+    },
+
+    "paneer-butter-masala": {
+        name: "Paneer Butter Masala",
+        category: "North Indian",
+        cuisine: "North Indian",
+        price: 220,
+        rating: 4.8,
+        reviews: "150+ reviews",
+        restaurant: "Spice Garden",
+        restaurantSlug: "spice-garden",
+        restaurantId: 1,
+        location: "Sector 17, Chandigarh",
+        image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=900&q=85",
+        description: "Creamy tomato gravy with soft paneer.",
+        longDescription: "Fresh malai cottage cheese cubes gently tossed in a velvety, buttery tomato and cashew gravy, aromatized with dried fenugreek leaves and garam masala."
+    },
+
+    "garden-veg-pizza": {
+        name: "Garden Veg Pizza",
+        category: "Pizza",
+        cuisine: "Italian",
+        price: 250,
+        rating: 4.6,
+        reviews: "110+ reviews",
+        restaurant: "Pizza Corner",
+        restaurantSlug: "pizza-corner",
+        restaurantId: 2,
+        location: "Sector 22, Chandigarh",
+        image: "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=900&q=85",
+        description: "Pizza topped with vegetables and cheese.",
+        longDescription: "Crispy crust layered with herb-infused Italian tomato sauce, layered with mozzarella cheese, capsicum, sweet corn, black olives, red onions and diced mushrooms."
+    },
+
+    "vegetable-biryani": {
+        name: "Vegetable Biryani",
+        category: "Biryani",
+        cuisine: "North Indian",
+        price: 180,
+        rating: 4.7,
+        reviews: "135+ reviews",
+        restaurant: "Spice Garden",
+        restaurantSlug: "spice-garden",
+        restaurantId: 1,
+        location: "Sector 17, Chandigarh",
+        image: "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=900&q=85",
+        description: "Rice cooked with vegetables and aromatic spices.",
+        longDescription: "Fragrant long-grain basmati rice layered with garden-fresh beans, carrots, peas and paneer, slow-cooked in handi with saffron and whole spices."
+    },
+
+    "chicken-curry": {
+        name: "Chicken Curry",
+        category: "North Indian",
+        cuisine: "Punjabi",
+        price: 280,
+        rating: 4.7,
+        reviews: "160+ reviews",
+        restaurant: "Katani Dhaba",
+        restaurantSlug: "katani-dhaba",
+        restaurantId: 6,
+        location: "Phase 3B2, Mohali",
+        image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=900&q=85",
+        description: "Classic chicken curry with Indian spices.",
+        longDescription: "Tender bone-in chicken pieces simmered in an aromatic onion, ginger, garlic and tomato masala curry, garnished with fresh cilantro and ginger juliennes."
+    },
+
+    "tandoori-chicken": {
+        name: "Tandoori Chicken",
+        category: "North Indian",
+        cuisine: "Mughlai",
+        price: 320,
+        rating: 4.8,
+        reviews: "190+ reviews",
+        restaurant: "Spice Garden",
+        restaurantSlug: "spice-garden",
+        restaurantId: 1,
+        location: "Sector 17, Chandigarh",
+        image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=900&q=85",
+        description: "Chicken marinated with traditional spices.",
+        longDescription: "Juicy chicken roasted to perfection in clay tandoor after overnight marination in spiced curd, mustard oil, Kashmiri red chilli and kasuri methi."
+    },
+
+    "crispy-chicken": {
+        name: "Crispy Chicken",
+        category: "Fast Food",
+        cuisine: "American Fast Food",
+        price: 240,
+        rating: 4.5,
+        reviews: "95+ reviews",
+        restaurant: "Burger House",
+        restaurantSlug: "burger-house",
+        restaurantId: 4,
+        location: "Sector 8, Chandigarh",
+        image: "https://images.unsplash.com/photo-1562967916-eb82221dfb92?auto=format&fit=crop&w=900&q=85",
+        description: "Crispy, seasoned chicken bites.",
+        longDescription: "Deep-fried golden crunch chicken tenders dusted with special peri-peri herb rub, served alongside homemade garlic aioli and sweet chilli dip."
+    },
+
+    "fresh-buddha-bowl": {
+        name: "Fresh Buddha Bowl",
+        category: "Healthy & Salads",
+        cuisine: "Continental & Vegan",
+        price: 190,
+        rating: 4.6,
+        reviews: "80+ reviews",
+        restaurant: "Urban Cafe & Bistro",
+        restaurantSlug: "urban-cafe",
+        restaurantId: 9,
+        location: "Sector 70, Mohali",
+        image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=85",
+        description: "Fresh vegetables, greens and grains.",
+        longDescription: "Nutritious power bowl featuring organic quinoa, chickpeas, roasted sweet potatoes, fresh avocado slices, cherry tomatoes, and tahini lemon dressing."
+    },
+
+    "fresh-veggie-salad": {
+        name: "Fresh Veggie Salad",
+        category: "Healthy & Salads",
+        cuisine: "Continental & Vegan",
+        price: 160,
+        rating: 4.5,
+        reviews: "70+ reviews",
+        restaurant: "Urban Cafe & Bistro",
+        restaurantSlug: "urban-cafe",
+        restaurantId: 9,
+        location: "Sector 70, Mohali",
+        image: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85",
+        description: "A fresh mix of vegetables and greens.",
+        longDescription: "Crisp romaine lettuce, cucumber, bell peppers, purple cabbage, and pomegranate pearls tossed in light extra virgin olive oil vinaigrette."
+    },
+
+    "healthy-grain-bowl": {
+        name: "Healthy Grain Bowl",
+        category: "Healthy & Salads",
+        cuisine: "Continental & Vegan",
+        price: 200,
+        rating: 4.7,
+        reviews: "85+ reviews",
+        restaurant: "Urban Cafe & Bistro",
+        restaurantSlug: "urban-cafe",
+        restaurantId: 9,
+        location: "Sector 70, Mohali",
+        image: "https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?auto=format&fit=crop&w=900&q=85",
+        description: "A plant-based bowl with grains and vegetables.",
+        longDescription: "Wholesome blend of brown rice, edamame, steamed broccoli, grilled tofu, and toasted pumpkin seeds with a ginger soy glaze."
     }
 
 };

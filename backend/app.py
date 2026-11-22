@@ -741,17 +741,14 @@ def live_nearby_restaurants():
             if len(in_radius_restaurants) >= 8:
                 break
 
-    # 2. Fetch Live Google Places / OSM Overpass restaurants when local DB has few spots in radius
-    if len(in_radius_restaurants) < 6:
-        live_external = fetch_live_restaurants(lat, lng, radius_km=radius_km, limit=15)
-        for ext_r in live_external:
-            dist = ext_r.get("distance_km", 2.0)
-            ext_r["delivery_time_mins"] = max(15, min(65, int(15 + dist * 3.5)))
+    # 2. Fetch Live Google Places / OSM Overpass restaurants
+    live_external = fetch_live_restaurants(lat, lng, radius_km=radius_km, limit=15)
+    for ext_r in live_external:
+        dist = ext_r.get("distance_km", 2.0)
+        ext_r["delivery_time_mins"] = max(15, min(65, int(15 + dist * 3.5)))
 
-        # Filter external restaurants strictly to the requested radius
-        filtered_external = [r for r in live_external if r.get("distance_km", 999) <= radius_km]
-    else:
-        filtered_external = []
+    # Filter external restaurants strictly to the requested radius
+    filtered_external = [r for r in live_external if r.get("distance_km", 999) <= radius_km]
 
     # Combine and sort by distance
     all_nearby = in_radius_restaurants + filtered_external
@@ -1471,7 +1468,7 @@ def register():
             }
         }), 201
 
-    except Exception as db_err:
+    except mysql.connector.Error as db_err:
         if conn:
             try:
                 conn.rollback()
@@ -1604,7 +1601,7 @@ def login():
             }
         }), 200
 
-    except Exception as db_err:
+    except mysql.connector.Error as db_err:
         app.logger.warning(f"Login DB offline fallback: {db_err}")
         # In-memory authentication fallback
         if email in FALLBACK_USERS:

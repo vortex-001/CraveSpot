@@ -9,10 +9,24 @@ const API_BASE = "http://127.0.0.1:5000/api";
 let currentRestaurant = null;
 const sampleRestaurant = {
     restaurant_id: 1,
-    name: "Spice Garden",    cuisine: "North Indian \u2022 Mughlai \u2022 Biryani",
-    address: "Chandigarh",
-    rating: 4.5
+    name: "Spice Garden",
+    cuisine: "North Indian • Mughlai • Biryani",
+    address: "Sector 17, Chandigarh",
+    rating: 4.5,
+    price_for_two: 450,
+    delivery_time_mins: 30,
+    offer: "20% OFF"
 };
+
+const sampleDishes = [
+    { item_id: 101, name: "Butter Chicken", category: "Main Course", price: 380, rating: 4.8, is_veg: 0, description: "Tender chicken cooked in rich makhani gravy with cream and butter." },
+    { item_id: 102, name: "Dal Makhani", category: "Main Course", price: 260, rating: 4.7, is_veg: 1, description: "Slow-cooked black lentils with cream, tomatoes and butter." },
+    { item_id: 103, name: "Fiery Paneer Pizza", category: "Pizzas", price: 320, rating: 4.6, is_veg: 1, description: "Spicy marinated paneer with capsicum, oregano and mozzarella." },
+    { item_id: 104, name: "Classic Margherita Pizza", category: "Pizzas", price: 280, rating: 4.7, is_veg: 1, description: "Fresh tomato basil sauce with premium melted mozzarella." },
+    { item_id: 105, name: "Special Paneer Kathi Roll", category: "Rolls", price: 150, rating: 4.7, is_veg: 1, description: "Flaky paratha loaded with spiced paneer, onions and mint chutney." },
+    { item_id: 106, name: "Amritsari Stuffed Kulcha Thali", category: "Thalis", price: 140, rating: 4.8, is_veg: 1, description: "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney." }
+];
+
 let selectedRating = 0;
 
 
@@ -89,21 +103,21 @@ function displayRestaurant() {
         r.rating || "N/A";
 
 
-    /*
-       Your database currently doesn't have
-       price/time/offer columns.
-    */
+    const priceEl = document.getElementById("restaurantPrice");
+    if (priceEl) {
+        priceEl.textContent = r.price_for_two ? `${r.price_for_two}` : "350";
+    }
 
-    document.getElementById("restaurantPrice").textContent =
-        "See menu";
+    const timeEl = document.getElementById("restaurantTime");
+    if (timeEl) {
+        timeEl.textContent = r.delivery_time_mins ? `${r.delivery_time_mins}` : "30";
+    }
 
-
-    document.getElementById("restaurantTime").textContent =
-        "Not available";
-
-
-    document.getElementById("restaurantOffer").textContent =
-        "Available";
+    const offerEl = document.getElementById("restaurantOffer");
+    if (offerEl) {
+        const offerText = r.offer || "20% OFF on selected items";
+        offerEl.textContent = offerText.includes("OFF") && !offerText.includes("selected") ? `${offerText} on selected items` : offerText;
+    }
 
 
     /*

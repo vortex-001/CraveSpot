@@ -466,11 +466,83 @@ function initImageFallbacks() {
 }
 
 // ---------------------------------------------------------------------
-// 6. Application Initializer
+// 6. Interactive Quick Dish Cards (Homepage)
+// ---------------------------------------------------------------------
+function initQuickDishCards() {
+    const restaurantMap = {
+        "paneer-butter-masala": { restaurant: "Spice Garden", location: "Sector 17, Chandigarh", rating: 4.8 },
+        "garden-veg-pizza": { restaurant: "Pizza Corner", location: "Sector 22, Chandigarh", rating: 4.6 },
+        "vegetable-biryani": { restaurant: "Spice Garden", location: "Sector 17, Chandigarh", rating: 4.7 },
+        "chicken-curry": { restaurant: "Katani Dhaba", location: "Phase 3B2, Mohali", rating: 4.7 },
+        "tandoori-chicken": { restaurant: "Spice Garden", location: "Sector 17, Chandigarh", rating: 4.8 },
+        "crispy-chicken": { restaurant: "Burger House", location: "Sector 8, Chandigarh", rating: 4.5 },
+        "fresh-buddha-bowl": { restaurant: "Urban Cafe & Bistro", location: "Sector 70, Mohali", rating: 4.6 },
+        "fresh-veggie-salad": { restaurant: "Urban Cafe & Bistro", location: "Sector 70, Mohali", rating: 4.5 },
+        "healthy-grain-bowl": { restaurant: "Urban Cafe & Bistro", location: "Sector 70, Mohali", rating: 4.7 }
+    };
+
+    document.querySelectorAll('.quick-dish-card').forEach(card => {
+        card.style.cursor = 'pointer';
+
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('.quick-favorite')) return;
+
+            const name = card.querySelector('h3')?.textContent.trim() || 'Dish';
+            const price = card.querySelector('strong')?.textContent.replace(/[^0-9]/g, '') || '200';
+            const img = card.querySelector('img')?.getAttribute('src') || '';
+            const desc = card.querySelector('p')?.textContent.trim() || '';
+            const diet = card.dataset.diet || 'veg';
+            const category = diet === 'veg' ? 'Vegetarian' : (diet === 'non-veg' ? 'Non-Vegetarian' : 'Vegan');
+            const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+            const meta = restaurantMap[slug] || { restaurant: "Popular Local Kitchen", location: "Chandigarh Tricity", rating: 4.7 };
+            const isPages = window.location.pathname.includes('/pages/');
+            const targetBase = isPages ? 'dish-details.html' : 'pages/dish-details.html';
+
+            const url = `${targetBase}?dish=${encodeURIComponent(slug)}&name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}&category=${encodeURIComponent(category)}&description=${encodeURIComponent(desc)}&image=${encodeURIComponent(img)}&restaurant=${encodeURIComponent(meta.restaurant)}&restaurantLocation=${encodeURIComponent(meta.location)}&rating=${encodeURIComponent(meta.rating)}`;
+
+            window.location.href = url;
+        });
+    });
+
+    // Favorite button toggle on quick cards
+    document.querySelectorAll('.quick-dish-card .quick-favorite').forEach(btn => {
+        const card = btn.closest('.quick-dish-card');
+        const name = card?.querySelector('h3')?.textContent.trim() || '';
+        const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        const favs = JSON.parse(localStorage.getItem('CraveSpot_favorite_dishes') || '[]');
+        if (favs.includes(slug)) {
+            btn.textContent = '♥';
+            btn.style.color = '#E23744';
+            btn.classList.add('active');
+        }
+
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            let currentFavs = JSON.parse(localStorage.getItem('CraveSpot_favorite_dishes') || '[]');
+            if (currentFavs.includes(slug)) {
+                currentFavs = currentFavs.filter(s => s !== slug);
+                btn.textContent = '♡';
+                btn.style.color = '';
+                btn.classList.remove('active');
+            } else {
+                currentFavs.push(slug);
+                btn.textContent = '♥';
+                btn.style.color = '#E23744';
+                btn.classList.add('active');
+            }
+            localStorage.setItem('CraveSpot_favorite_dishes', JSON.stringify(currentFavs));
+        });
+    });
+}
+
+// ---------------------------------------------------------------------
+// 7. Application Initializer
 // ---------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     initLocationSystem();
     initHomeLiveSection();
+    initQuickDishCards();
     initSurpriseMe();
     syncAuthState();
     initImageFallbacks();
