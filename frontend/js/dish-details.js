@@ -220,7 +220,7 @@ const dishData = {
         restaurant: "Rolls Mania",
         restaurantSlug: "rolls-mania",
         location: "Phase 7, Mohali",
-        image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=900&q=85",
+        image: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=900&q=85",
         description: "Char-grilled paneer cubes wrapped in layered flaky paratha with mint chutney and onions.",
         longDescription: "Smoky tandoori paneer cubes wrapped in a freshly roasted, flaky laccha paratha with crunchy julienned red onions, tangy chaat masala, and house special mint mayo."
     },
@@ -252,7 +252,7 @@ const dishData = {
         restaurantSlug: "rolls-mania",
         restaurantId: 12,
         location: "Khanpur Chowk, Kharar",
-        image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=900&q=85",
+        image: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=900&q=85",
         description: "Flaky paratha loaded with spiced paneer, fresh onions and mint chutney.",
         longDescription: "Signature flaky, golden laccha paratha freshly rolled on tawa, stuffed with charred spicy paneer cubes, crunchy sliced red onions, fresh coriander, and zesty green mint chutney."
     },
@@ -514,7 +514,7 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
 
     // 1. Rolls & Wraps
     if (text.includes("roll") || text.includes("kathi") || text.includes("wrap") || text.includes("shawarma")) {
-        return "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=900&q=85";
+        return "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=900&q=85";
     }
 
     // 2. Kulchas & Chole Thalis
@@ -576,12 +576,17 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
     }
 
     // 13. Desserts & Sweets & Brownies
-    if (text.includes("brownie") || text.includes("dessert") || text.includes("cake") || text.includes("ice cream") || text.includes("sweet")) {
+    if (text.includes("brownie") || text.includes("dessert") || text.includes("cake") || text.includes("ice cream") || text.includes("sweet") || text.includes("jamun") || text.includes("halwa")) {
         return "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=85";
     }
 
+    // 14. Thalis & Platters
+    if (text.includes("thali") || text.includes("platter")) {
+        return "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=900&q=85";
+    }
+
     // Default vibrant food image
-    return "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=85";
+    return "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=85";
 }
 
 

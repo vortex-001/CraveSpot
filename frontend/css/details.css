@@ -1082,6 +1082,27 @@ body {
     box-sizing: border-box;
 }
 
+.navbar .nav-search button,
+.nav-search-btn {
+    background: transparent !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    padding: 0 4px !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #94A3B8 !important;
+    border-radius: 0 !important;
+}
+
+.navbar .nav-search button:hover,
+.nav-search-btn:hover {
+    color: #FF5200 !important;
+}
+
 
 /* ==========================================
    NAVIGATION LINKS
@@ -1265,44 +1286,50 @@ body {
     display: none;
 }
 .menu-category-btn {
-    padding: 8px 18px;
-    border-radius: 9999px;
-    border: 1.5px solid #E5E7EB;
-    background: #FFFFFF;
-    color: #4B5563;
-    font-size: 13.5px;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    user-select: none;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    outline: none !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
+    padding: 8px 18px !important;
+    border-radius: 9999px !important;
+    border: 1.5px solid #E5E7EB !important;
+    background: #FFFFFF !important;
+    color: #4B5563 !important;
+    font-size: 13.5px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+    user-select: none !important;
+    text-decoration: none !important;
 }
 .menu-category-btn:hover {
-    border-color: #D1D5DB;
-    background: #F9FAFB;
-    color: #111827;
-    transform: translateY(-1px);
+    border-color: #D1D5DB !important;
+    background: #F9FAFB !important;
+    color: #111827 !important;
+    transform: translateY(-1px) !important;
 }
 .menu-category-btn.active {
-    background: #111827;
-    border-color: #111827;
-    color: #FFFFFF;
-    box-shadow: 0 4px 14px rgba(17, 24, 39, 0.22);
+    background: #FF5200 !important;
+    border-color: #FF5200 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(255, 82, 0, 0.28) !important;
 }
 .cat-pill-count {
-    font-size: 11.5px;
-    background: rgba(0, 0, 0, 0.08);
-    color: inherit;
-    padding: 1px 7px;
-    border-radius: 12px;
-    font-weight: 700;
+    font-size: 11.5px !important;
+    background: rgba(0, 0, 0, 0.08) !important;
+    color: inherit !important;
+    padding: 2px 7px !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
 }
 .menu-category-btn.active .cat-pill-count {
-    background: rgba(255, 255, 255, 0.25);
-    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.28) !important;
+    color: #FFFFFF !important;
 }
 
 /* Dietary Badge Indicator (Veg green circle / Non-veg red triangle) */

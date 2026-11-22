@@ -7,9 +7,9 @@
 
     <title>Restaurant Details | CraveSpot</title>
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/details.css">
-    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg?v=2.6.0">
+    <link rel="stylesheet" href="../css/style.css?v=2.9.0">
+    <link rel="stylesheet" href="../css/details.css?v=2.9.0">
+    <link rel="icon" type="image/svg+xml" href="../assets/icons/favicon.svg?v=2.9.0">
 </head>
 
 <body>
@@ -48,12 +48,12 @@
                 id="searchInput"
                 placeholder="Search restaurant or dish..."
             >
-            <button onclick="searchRestaurant()" aria-label="Search">
-    <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="2"/>
-        <path d="m16 16 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-</button>
+            <button type="button" class="nav-search-btn" onclick="searchRestaurant()" aria-label="Search" style="background:transparent;border:none;outline:none;padding:0 6px;margin:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;color:#94a3b8;box-shadow:none;border-radius:0;">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:18px;height:18px;stroke:currentColor;">
+                    <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="2"/>
+                    <path d="m16 16 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
         </div>
 
         <!-- Navigation links -->
@@ -548,9 +548,9 @@
 </footer>
 
 
-<script src="../js/api.js?v=2.7.0"></script>
-<script src="../js/app.js?v=2.7.0"></script>
-<script src="../js/details.js?v=2.7.0"></script>
+<script src="../js/api.js?v=2.9.0"></script>
+<script src="../js/app.js?v=2.9.0"></script>
+<script src="../js/details.js?v=2.9.0"></script>
 
 </body>
 </html>

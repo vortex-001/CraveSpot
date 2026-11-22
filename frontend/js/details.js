@@ -19,12 +19,14 @@ const sampleRestaurant = {
 };
 
 const sampleDishes = [
-    { item_id: 101, name: "Butter Chicken", category: "Main Course", price: 380, rating: 4.8, is_veg: 0, description: "Tender chicken cooked in rich makhani gravy with cream and butter." },
-    { item_id: 102, name: "Dal Makhani", category: "Main Course", price: 260, rating: 4.7, is_veg: 1, description: "Slow-cooked black lentils with cream, tomatoes and butter." },
-    { item_id: 103, name: "Fiery Paneer Pizza", category: "Pizzas", price: 320, rating: 4.6, is_veg: 1, description: "Spicy marinated paneer with capsicum, oregano and mozzarella." },
-    { item_id: 104, name: "Classic Margherita Pizza", category: "Pizzas", price: 280, rating: 4.7, is_veg: 1, description: "Fresh tomato basil sauce with premium melted mozzarella." },
-    { item_id: 105, name: "Special Paneer Kathi Roll", category: "Rolls", price: 150, rating: 4.7, is_veg: 1, description: "Flaky paratha loaded with spiced paneer, onions and mint chutney." },
-    { item_id: 106, name: "Amritsari Stuffed Kulcha Thali", category: "Thalis", price: 140, rating: 4.8, is_veg: 1, description: "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney." }
+    { item_id: 101, name: "Butter Chicken", category: "Main Course", price: 380, rating: 4.8, is_veg: 0, image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=85", description: "Tender chicken cooked in rich makhani gravy with cream and butter." },
+    { item_id: 102, name: "Dal Makhani", category: "Main Course", price: 260, rating: 4.7, is_veg: 1, image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85", description: "Slow-cooked black lentils with cream, tomatoes and butter." },
+    { item_id: 103, name: "Fiery Paneer Pizza", category: "Pizzas", price: 320, rating: 4.6, is_veg: 1, image: "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=800&q=85", description: "Spicy marinated paneer with capsicum, oregano and mozzarella." },
+    { item_id: 104, name: "Classic Margherita Pizza", category: "Pizzas", price: 280, rating: 4.7, is_veg: 1, image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85", description: "Fresh tomato basil sauce with premium melted mozzarella." },
+    { item_id: 105, name: "Special Paneer Kathi Roll", category: "Rolls", price: 150, rating: 4.7, is_veg: 1, image: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85", description: "Flaky paratha loaded with spiced paneer, onions and mint chutney." },
+    { item_id: 106, name: "Amritsari Stuffed Kulcha Thali", category: "Thalis", price: 140, rating: 4.8, is_veg: 1, image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85", description: "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney." },
+    { item_id: 107, name: "Kadak Masala Chai & Bun Maska", category: "Street Bites", price: 70, rating: 4.8, is_veg: 1, image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85", description: "Steaming hot ginger cardamom chai served with soft toasted bun and butter." },
+    { item_id: 108, name: "Special Double Cheese Maggi", category: "Street Bites", price: 90, rating: 4.7, is_veg: 1, image: "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=85", description: "2-minute noodles cooked with buttery veggies, oregano herbs and shredded mozzarella." }
 ];
 
 let selectedRating = 0;
@@ -103,14 +105,18 @@ function displayRestaurant() {
         r.rating || "N/A";
 
 
+    /*
+       Your database currently doesn't have
+       price/time/offer columns.
+    */
     const priceEl = document.getElementById("restaurantPrice");
     if (priceEl) {
-        priceEl.textContent = r.price_for_two ? `${r.price_for_two}` : "350";
+        priceEl.textContent = r.price_for_two ? `₹${r.price_for_two} for two` : "₹350 for two";
     }
 
     const timeEl = document.getElementById("restaurantTime");
     if (timeEl) {
-        timeEl.textContent = r.delivery_time_mins ? `${r.delivery_time_mins}` : "30";
+        timeEl.textContent = r.delivery_time_mins ? `${r.delivery_time_mins} mins` : "25-30 mins";
     }
 
     const offerEl = document.getElementById("restaurantOffer");
@@ -196,7 +202,7 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
 
     // 1. Rolls, Wraps & Shawarmas
     if (text.includes("roll") || text.includes("kathi") || text.includes("wrap") || text.includes("shawarma")) {
-        return "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=85";
+        return "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85";
     }
 
     // 2. Kulchas & Chole Thalis
@@ -303,10 +309,10 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
         return "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=800&q=85";
     }
     if (text.includes("thali")) {
-        return "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85";
+        return "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=85";
     }
 
-    return "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=85";
+    return "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=85";
 }
 
 
@@ -532,7 +538,7 @@ function showSection(section, button) {
         document.getElementById("overviewSection");
 
     const reviews =
-    document.getElementById("reviews");
+        document.getElementById("reviews");
 
     if (menu) {
         menu.classList.add("hidden");
