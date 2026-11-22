@@ -563,7 +563,7 @@ CURATED_FALLBACK_DISHES = [
     {"item_id": 8, "restaurant_id": 8, "name": "Smoky Grilled Chicken", "description": "Juicy charcoal grilled chicken wings with barbecue glaze", "price": 390, "rating": 4.7, "is_veg": 0, "category": "Barbecue", "image_url": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=85"},
     {"item_id": 9, "restaurant_id": 13, "name": "Amritsari Stuffed Kulcha Thali", "description": "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney", "price": 140, "rating": 4.9, "is_veg": 1, "category": "North Indian", "image_url": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85"},
     {"item_id": 10, "restaurant_id": 14, "name": "Dahi Papdi Chaat & Golgappe", "description": "Crispy papdi with sweetened yogurt, tangy saunth, and crispy golgappe", "price": 90, "rating": 4.8, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"},
-    {"item_id": 11, "restaurant_id": 12, "name": "Special Paneer Kathi Roll", "description": "Flaky paratha loaded with spiced paneer, onions and mint chutney", "price": 150, "rating": 4.6, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 11, "restaurant_id": 12, "name": "Special Paneer Kathi Roll", "description": "Flaky paratha loaded with spiced paneer, onions and mint chutney", "price": 150, "rating": 4.6, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"},
     {"item_id": 12, "restaurant_id": 15, "name": "Kadak Masala Chai & Bun Maska", "description": "Steaming hot ginger cardamom chai served with soft toasted bun and butter", "price": 70, "rating": 4.7, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"}
 ]
 
@@ -700,7 +700,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 90,
             "rating": 4.9,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
         }
     ],
     "2": [
@@ -946,7 +946,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 160,
             "rating": 4.5,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 311,
@@ -1080,7 +1080,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 160,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 411,
@@ -1091,7 +1091,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 150,
             "rating": 4.7,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 412,
@@ -1102,7 +1102,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 130,
             "rating": 4.6,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=85"
         }
     ],
     "5": [
@@ -1181,7 +1181,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 90,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 508,
@@ -1192,7 +1192,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 120,
             "rating": 4.9,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1714799263412-2e0c1f875959?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 509,
@@ -1203,7 +1203,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 130,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 510,
@@ -1236,7 +1236,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 150,
             "rating": 4.7,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=85"
         }
     ],
     "6": [
@@ -1392,7 +1392,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 60,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
         }
     ],
     "7": [
@@ -1493,7 +1493,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 120,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 710,
@@ -1504,7 +1504,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 90,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
         }
     ],
     "8": [
@@ -1583,7 +1583,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 220,
             "rating": 4.7,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 808,
@@ -1728,7 +1728,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 80,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
         }
     ],
     "10": [
@@ -1807,7 +1807,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 180,
             "rating": 4.6,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 1008,
@@ -1952,7 +1952,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 120,
             "rating": 4.9,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1760263216784-a4ca9a841ff5?auto=format&fit=crop&w=800&q=85"
         }
     ],
     "12": [
@@ -1965,7 +1965,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 150,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 1202,
@@ -1976,7 +1976,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 160,
             "rating": 4.7,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 1203,
@@ -1987,7 +1987,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 180,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 1204,
@@ -1998,7 +1998,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 140,
             "rating": 4.7,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 1205,
@@ -2009,7 +2009,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 110,
             "rating": 4.5,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 1206,
@@ -2020,7 +2020,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 140,
             "rating": 4.6,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 1207,
@@ -2031,7 +2031,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 170,
             "rating": 4.8,
             "is_veg": 0,
-            "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 1208,
@@ -2042,7 +2042,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 180,
             "rating": 4.8,
             "is_veg": 0,
-            "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 1209,
@@ -2053,7 +2053,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 210,
             "rating": 4.9,
             "is_veg": 0,
-            "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 1210,
@@ -2064,7 +2064,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 190,
             "rating": 4.7,
             "is_veg": 0,
-            "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 1211,
@@ -2075,7 +2075,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 230,
             "rating": 4.9,
             "is_veg": 0,
-            "image_url": "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 1212,
@@ -2108,7 +2108,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 110,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=85"
         }
     ],
     "13": [
@@ -2231,7 +2231,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 60,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=85"
+            "image_url": "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
         },
         {
             "item_id": 1312,
@@ -2946,6 +2946,37 @@ def get_restaurant(restaurant_id):
             conn.close()
 
 
+def sanitize_dish_item(item):
+    """Ensure authentic matched photography for rolls, shakes, sweets and dishes."""
+    if not isinstance(item, dict):
+        return item
+    n_lower = ((item.get("name") or "") + " " + (item.get("category") or "")).lower()
+    if any(k in n_lower for k in ("roll", "kathi", "wrap", "shawarma")):
+        item["image_url"] = "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85"
+    elif any(k in n_lower for k in ("shake", "thickshake", "cold coffee", "frappe", "smoothie")):
+        if "strawberry" in n_lower or "berry" in n_lower or "fruit" in n_lower:
+            item["image_url"] = "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=800&q=85"
+        else:
+            item["image_url"] = "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=85"
+    elif "gulab jamun" in n_lower or "jamun" in n_lower:
+        item["image_url"] = "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
+    elif "jalebi" in n_lower or "rabri" in n_lower:
+        item["image_url"] = "https://images.unsplash.com/photo-1760263216784-a4ca9a841ff5?auto=format&fit=crop&w=800&q=85"
+    elif "rasgulla" in n_lower or "rasmalai" in n_lower:
+        item["image_url"] = "https://images.unsplash.com/photo-1714799263412-2e0c1f875959?auto=format&fit=crop&w=800&q=85"
+    elif "halwa" in n_lower or "kesari" in n_lower or "phirni" in n_lower or "shahi tukda" in n_lower:
+        item["image_url"] = "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
+    elif "brownie" in n_lower or "fudge" in n_lower:
+        item["image_url"] = "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=85"
+    elif "cheesecake" in n_lower or "cake" in n_lower or "pastry" in n_lower:
+        item["image_url"] = "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=85"
+    if "image_url" in item:
+        item["image"] = item["image_url"]
+    elif "image" in item:
+        item["image_url"] = item["image"]
+    return item
+
+
 @app.route("/api/restaurants/<int:restaurant_id>/menu", methods=["GET"])
 def get_restaurant_menu(restaurant_id):
     """Fetch all menu dishes for a specific restaurant."""
@@ -2967,17 +2998,16 @@ def get_restaurant_menu(restaurant_id):
         real_menu = get_restaurant_real_menu(restaurant_id)
         if not menu_items or len(menu_items) < len(real_menu):
             menu_items = real_menu
-        else:
-            for item in menu_items:
-                n_lower = (item.get("name") or "").lower()
-                if any(k in n_lower for k in ("roll", "kathi", "wrap", "shawarma")):
-                    item["image_url"] = "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85"
-                    item["image"] = item["image_url"]
+
+        for item in menu_items:
+            sanitize_dish_item(item)
         return jsonify(menu_items), 200
 
     except mysql.connector.Error:
         app.logger.exception("Failed to fetch restaurant menu")
         fallback = get_restaurant_real_menu(restaurant_id)
+        for item in fallback:
+            sanitize_dish_item(item)
         return jsonify(fallback), 200
 
     finally:
@@ -3039,6 +3069,8 @@ def get_menu_items():
 
         cursor.execute(query, tuple(params))
         items = serialize_rows(cursor.fetchall())
+        for item in items:
+            sanitize_dish_item(item)
         return jsonify(items), 200
 
     except mysql.connector.Error:
@@ -3057,6 +3089,8 @@ def get_menu_items():
             items = [i for i in items if i.get("price", 0) <= max_price]
         if min_rating is not None:
             items = [i for i in items if i.get("rating", 0) >= min_rating]
+        for item in items:
+            sanitize_dish_item(item)
         return jsonify(items), 200
 
     finally:

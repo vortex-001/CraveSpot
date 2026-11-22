@@ -23,7 +23,7 @@ const sampleDishes = [
     { item_id: 102, name: "Dal Makhani", category: "Main Course", price: 260, rating: 4.7, is_veg: 1, image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85", description: "Slow-cooked black lentils with cream, tomatoes and butter." },
     { item_id: 103, name: "Fiery Paneer Pizza", category: "Pizzas", price: 320, rating: 4.6, is_veg: 1, image: "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=800&q=85", description: "Spicy marinated paneer with capsicum, oregano and mozzarella." },
     { item_id: 104, name: "Classic Margherita Pizza", category: "Pizzas", price: 280, rating: 4.7, is_veg: 1, image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85", description: "Fresh tomato basil sauce with premium melted mozzarella." },
-    { item_id: 105, name: "Special Paneer Kathi Roll", category: "Rolls", price: 150, rating: 4.7, is_veg: 1, image: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85", description: "Flaky paratha loaded with spiced paneer, onions and mint chutney." },
+    { item_id: 105, name: "Special Paneer Kathi Roll", category: "Rolls", price: 150, rating: 4.7, is_veg: 1, image: "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85", description: "Flaky paratha loaded with spiced paneer, onions and mint chutney." },
     { item_id: 106, name: "Amritsari Stuffed Kulcha Thali", category: "Thalis", price: 140, rating: 4.8, is_veg: 1, image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85", description: "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney." },
     { item_id: 107, name: "Kadak Masala Chai & Bun Maska", category: "Street Bites", price: 70, rating: 4.8, is_veg: 1, image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85", description: "Steaming hot ginger cardamom chai served with soft toasted bun and butter." },
     { item_id: 108, name: "Special Double Cheese Maggi", category: "Street Bites", price: 90, rating: 4.7, is_veg: 1, image: "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=85", description: "2-minute noodles cooked with buttery veggies, oregano herbs and shredded mozzarella." }
@@ -198,18 +198,43 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
 
     // 1. Rolls, Wraps & Shawarmas - ALWAYS match authentic roll photo
     if (text.includes("roll") || text.includes("kathi") || text.includes("wrap") || text.includes("shawarma")) {
-        return "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=800&q=85";
+        return "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=85";
     }
 
-    // 2. Kulchas & Chole Thalis - ALWAYS match authentic kulcha photo
+    // 2. Shakes, Thickshakes, Smoothies & Cold Coffee - ALWAYS match authentic tall glass shake photo
+    if (text.includes("shake") || text.includes("thickshake") || text.includes("smoothie") || text.includes("cold coffee") || text.includes("frappe")) {
+        if (text.includes("strawberry") || text.includes("berry") || text.includes("fruit")) {
+            return "https://images.unsplash.com/photo-1579954115545-a95591f28bfc?auto=format&fit=crop&w=800&q=85";
+        }
+        return "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 3. Indian Sweets: Gulab Jamun, Jalebi, Rasgulla, Halwa, Phirni
+    if (text.includes("gulab jamun") || text.includes("jamun")) {
+        return "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85";
+    }
+    if (text.includes("jalebi") || text.includes("rabri")) {
+        return "https://images.unsplash.com/photo-1760263216784-a4ca9a841ff5?auto=format&fit=crop&w=800&q=85";
+    }
+    if (text.includes("rasgulla") || text.includes("rasmalai")) {
+        return "https://images.unsplash.com/photo-1714799263412-2e0c1f875959?auto=format&fit=crop&w=800&q=85";
+    }
+    if (text.includes("halwa") || text.includes("kesari") || text.includes("phirni") || text.includes("shahi tukda") || text.includes("mithai") || text.includes("falooda")) {
+        return "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 4. Kulchas & Chole Thalis - ALWAYS match authentic kulcha photo
     if (text.includes("kulcha") || text.includes("chhole") || text.includes("chole") || text.includes("bhatur")) {
         return "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85";
     }
 
-    // Reject generic placeholders and mismatched thali/steak images
+    // Reject generic placeholders and mismatched thali/steak/mojito/bad roll images
     const isBadImage = !existingUrl || typeof existingUrl !== "string" || !existingUrl.startsWith("http") ||
         existingUrl.includes("photo-1504674900247-0877df9cc836") ||
         existingUrl.includes("photo-1555396273-367ea4eb4db5") ||
+        existingUrl.includes("photo-1627308595229-7830a5c91f9f") ||
+        existingUrl.includes("photo-1544145945-f90425340c7e") ||
+        existingUrl.includes("photo-1551183053-bf91a1d81141") ||
         (existingUrl.includes("photo-1626777552726-4a6b54c97e46") && !text.includes("thali") && !text.includes("naan") && !text.includes("roti") && !text.includes("paratha"));
 
     if (!isBadImage) {
@@ -298,7 +323,7 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
         return "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=85";
     }
     if (text.includes("jamun") || text.includes("kesar") || text.includes("mithai") || text.includes("falooda")) {
-        return "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=85";
+        return "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85";
     }
 
     // 15. Chai & Hot Drinks
@@ -308,8 +333,8 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
     if (text.includes("maggi")) {
         return "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=85";
     }
-    if (text.includes("shake") || text.includes("thickshake")) {
-        return "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=85";
+    if (text.includes("shake") || text.includes("thickshake") || text.includes("smoothie") || text.includes("cold coffee")) {
+        return "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=85";
     }
     if (text.includes("dosa") || text.includes("south indian")) {
         return "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=800&q=85";
