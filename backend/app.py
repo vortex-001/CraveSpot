@@ -553,19 +553,121 @@ CURATED_FALLBACK_CATEGORIES = [
 ]
 
 CURATED_FALLBACK_DISHES = [
-    {"item_id": 1, "restaurant_id": 1, "name": "Butter Chicken", "description": "Tender chicken cooked in rich makhani gravy", "price": 380, "rating": 4.8, "is_veg": 0, "category": "North Indian", "image": "butter_chicken.jpg"},
-    {"item_id": 2, "restaurant_id": 1, "name": "Dal Makhani", "description": "Slow-cooked black lentils with cream and butter", "price": 260, "rating": 4.7, "is_veg": 1, "category": "North Indian", "image": "dal_makhani.jpg"},
-    {"item_id": 3, "restaurant_id": 2, "name": "Fiery Paneer Pizza", "description": "Spicy marinated paneer with capsicum and mozzarella", "price": 320, "rating": 4.5, "is_veg": 1, "category": "Pizza", "image": "paneer_pizza.jpg"},
-    {"item_id": 4, "restaurant_id": 2, "name": "Classic Margherita Pizza", "description": "Fresh tomato basil sauce with premium mozzarella", "price": 280, "rating": 4.4, "is_veg": 1, "category": "Pizza", "image": "margherita.jpg"},
-    {"item_id": 5, "restaurant_id": 3, "name": "Chicken Hakka Noodles", "description": "Wok-tossed noodles with chicken and fresh vegetables", "price": 240, "rating": 4.6, "is_veg": 0, "category": "Chinese", "image": "noodles.jpg"},
-    {"item_id": 6, "restaurant_id": 3, "name": "Veg Manchurian Dry", "description": "Crispy vegetable balls tossed in ginger garlic soy glaze", "price": 220, "rating": 4.5, "is_veg": 1, "category": "Chinese", "image": "manchurian.jpg"},
-    {"item_id": 7, "restaurant_id": 4, "name": "Hyderabadi Dum Biryani", "description": "Aromatic basmati rice cooked with saffron and spices", "price": 350, "rating": 4.8, "is_veg": 0, "category": "Biryani", "image": "biryani.jpg"},
-    {"item_id": 8, "restaurant_id": 5, "name": "Smoky Grilled Chicken", "description": "Juicy charcoal grilled chicken wings with barbecue glaze", "price": 390, "rating": 4.7, "is_veg": 0, "category": "Barbecue", "image": "wings.jpg"},
-    {"item_id": 9, "restaurant_id": 13, "name": "Amritsari Stuffed Kulcha Thali", "description": "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney", "price": 140, "rating": 4.9, "is_veg": 1, "category": "North Indian", "image": "kulcha.jpg"},
-    {"item_id": 10, "restaurant_id": 14, "name": "Dahi Papdi Chaat & Golgappe", "description": "Crispy papdi with sweetened yogurt, tangy saunth, and crispy golgappe", "price": 90, "rating": 4.8, "is_veg": 1, "category": "Street Food", "image": "chaat.jpg"},
-    {"item_id": 11, "restaurant_id": 12, "name": "Special Paneer Kathi Roll", "description": "Flaky paratha loaded with spiced paneer, onions and mint chutney", "price": 150, "rating": 4.6, "is_veg": 1, "category": "Street Food", "image": "roll.jpg"},
-    {"item_id": 12, "restaurant_id": 15, "name": "Kadak Masala Chai & Bun Maska", "description": "Steaming hot ginger cardamom chai served with soft toasted bun and butter", "price": 70, "rating": 4.7, "is_veg": 1, "category": "Street Food", "image": "chai.jpg"}
+    {"item_id": 1, "restaurant_id": 1, "name": "Butter Chicken", "description": "Tender chicken cooked in rich makhani gravy", "price": 380, "rating": 4.8, "is_veg": 0, "category": "North Indian", "image_url": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 2, "restaurant_id": 1, "name": "Dal Makhani", "description": "Slow-cooked black lentils with cream and butter", "price": 260, "rating": 4.7, "is_veg": 1, "category": "North Indian", "image_url": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 3, "restaurant_id": 2, "name": "Fiery Paneer Pizza", "description": "Spicy marinated paneer with capsicum and mozzarella", "price": 320, "rating": 4.5, "is_veg": 1, "category": "Pizza", "image_url": "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 4, "restaurant_id": 2, "name": "Classic Margherita Pizza", "description": "Fresh tomato basil sauce with premium mozzarella", "price": 280, "rating": 4.4, "is_veg": 1, "category": "Pizza", "image_url": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 5, "restaurant_id": 3, "name": "Chicken Hakka Noodles", "description": "Wok-tossed noodles with chicken and fresh vegetables", "price": 240, "rating": 4.6, "is_veg": 0, "category": "Chinese", "image_url": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 6, "restaurant_id": 3, "name": "Veg Manchurian Dry", "description": "Crispy vegetable balls tossed in ginger garlic soy glaze", "price": 220, "rating": 4.5, "is_veg": 1, "category": "Chinese", "image_url": "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 7, "restaurant_id": 1, "name": "Hyderabadi Dum Biryani", "description": "Aromatic basmati rice cooked with saffron and spices", "price": 350, "rating": 4.8, "is_veg": 0, "category": "Biryani", "image_url": "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 8, "restaurant_id": 8, "name": "Smoky Grilled Chicken", "description": "Juicy charcoal grilled chicken wings with barbecue glaze", "price": 390, "rating": 4.7, "is_veg": 0, "category": "Barbecue", "image_url": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 9, "restaurant_id": 13, "name": "Amritsari Stuffed Kulcha Thali", "description": "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney", "price": 140, "rating": 4.9, "is_veg": 1, "category": "North Indian", "image_url": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 10, "restaurant_id": 14, "name": "Dahi Papdi Chaat & Golgappe", "description": "Crispy papdi with sweetened yogurt, tangy saunth, and crispy golgappe", "price": 90, "rating": 4.8, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 11, "restaurant_id": 12, "name": "Special Paneer Kathi Roll", "description": "Flaky paratha loaded with spiced paneer, onions and mint chutney", "price": 150, "rating": 4.6, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 12, "restaurant_id": 15, "name": "Kadak Masala Chai & Bun Maska", "description": "Steaming hot ginger cardamom chai served with soft toasted bun and butter", "price": 70, "rating": 4.7, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"}
 ]
+
+# Real, categorized, high-resolution menus mapped to exact restaurants
+REAL_RESTAURANT_MENUS = {
+    1: [
+        {"item_id": 101, "restaurant_id": 1, "name": "Butter Chicken", "category": "Main Course", "description": "Tender tandoori chicken simmered in rich velvety butter tomato makhani gravy", "price": 380, "rating": 4.9, "is_veg": 0, "image_url": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 102, "restaurant_id": 1, "name": "Dal Makhani", "category": "Main Course", "description": "Slow-cooked black lentils simmered overnight with white butter and fresh cream", "price": 260, "rating": 4.8, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 103, "restaurant_id": 1, "name": "Paneer Butter Masala", "category": "Main Course", "description": "Melt-in-mouth cottage cheese cubes in aromatic tomato cashew gravy", "price": 270, "rating": 4.7, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 104, "restaurant_id": 1, "name": "Paneer Tikka Angara", "category": "Tandoori Starters", "description": "Smoky char-grilled cottage cheese cubes with bell peppers and roasted spices", "price": 240, "rating": 4.7, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 105, "restaurant_id": 1, "name": "Tandoori Murgh Half", "category": "Tandoori Starters", "description": "Traditional roasted chicken marinated in mustard oil, yogurt and Kashmiri chillies", "price": 290, "rating": 4.8, "is_veg": 0, "image_url": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 106, "restaurant_id": 1, "name": "Hyderabadi Dum Biryani", "category": "Biryani & Rice", "description": "Fragrant aged basmati slow-dum cooked with tender spiced chicken, mint and saffron", "price": 350, "rating": 4.8, "is_veg": 0, "image_url": "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 107, "restaurant_id": 1, "name": "Garlic Butter Naan", "category": "Breads", "description": "Fluffy tandoor-baked leavened bread brushed with garlic butter and fresh coriander", "price": 65, "rating": 4.7, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=85"}
+    ],
+    2: [
+        {"item_id": 201, "restaurant_id": 2, "name": "Classic Margherita Pizza", "category": "Classic Pizzas", "description": "Fresh tomato basil sauce, stone-baked crispy crust, and premium melted mozzarella", "price": 280, "rating": 4.6, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 202, "restaurant_id": 2, "name": "Fiery Paneer Pizza", "category": "Specialty Pizzas", "description": "Spicy marinated paneer, red paprika, capsicum, and hot peri-peri drizzle", "price": 320, "rating": 4.7, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 203, "restaurant_id": 2, "name": "Farmhouse Veggie Supreme", "category": "Specialty Pizzas", "description": "Loaded with crisp mushrooms, bell peppers, golden sweet corn, and black olives", "price": 340, "rating": 4.5, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 204, "restaurant_id": 2, "name": "Chicken Pepperoni Feast", "category": "Non-Veg Pizzas", "description": "Generously topped with savory chicken pepperoni slices and melted mozzarella pull", "price": 380, "rating": 4.8, "is_veg": 0, "image_url": "https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 205, "restaurant_id": 2, "name": "Four-Cheese Stuffed Garlic Bread", "category": "Sides & Bread", "description": "Golden toasted garlic bread packed with molten cheddar, mozzarella, and herbs", "price": 160, "rating": 4.7, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1619895092538-128341789043?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 206, "restaurant_id": 2, "name": "Creamy Penne Alfredo", "category": "Pasta", "description": "Al dente penne pasta tossed in rich parmesan cream sauce with mushrooms", "price": 240, "rating": 4.6, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=85"}
+    ],
+    3: [
+        {"item_id": 301, "restaurant_id": 3, "name": "Steamed Veg Momos (8 pcs)", "category": "Momos & Dimsum", "description": "Thin translucent dumplings packed with finely minced cabbage, carrots, and spicy red dip", "price": 120, "rating": 4.7, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 302, "restaurant_id": 3, "name": "Kurkure Fried Chicken Momos", "category": "Momos & Dimsum", "description": "Extra crunchy crumb-coated fried momos served hot with garlic mayonnaise", "price": 160, "rating": 4.8, "is_veg": 0, "image_url": "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 303, "restaurant_id": 3, "name": "Chilli Garlic Noodles", "category": "Noodles & Rice", "description": "Wok-tossed noodles with crushed toasted garlic, red chillies, and Asian greens", "price": 190, "rating": 4.6, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 304, "restaurant_id": 3, "name": "Chicken Hakka Noodles", "category": "Noodles & Rice", "description": "Classic wok-fried noodles tossed with shredded chicken, eggs, and scallions", "price": 240, "rating": 4.7, "is_veg": 0, "image_url": "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 305, "restaurant_id": 3, "name": "Crispy Chilli Paneer Dry", "category": "Wok Starters", "description": "Wok-seared crispy cottage cheese tossed with bell peppers and spring onions in soy glaze", "price": 240, "rating": 4.6, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 306, "restaurant_id": 3, "name": "Veg Manchurian Gravy", "category": "Main Gravies", "description": "Crispy vegetable balls simmered in dark, savory ginger-garlic soy gravy", "price": 210, "rating": 4.5, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=800&q=85"}
+    ],
+    4: [
+        {"item_id": 401, "restaurant_id": 4, "name": "Crispy Zinger Chicken Burger", "category": "Gourmet Burgers", "description": "Crunchy golden fried chicken breast, crisp ice lettuce, melted cheddar, and chipotle mayo", "price": 180, "rating": 4.8, "is_veg": 0, "image_url": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 402, "restaurant_id": 4, "name": "Double Smash Cheeseburger", "category": "Gourmet Burgers", "description": "Two seared beef/chicken smash patties, double yellow cheddar, and caramelized onions", "price": 220, "rating": 4.8, "is_veg": 0, "image_url": "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 403, "restaurant_id": 4, "name": "Crispy Veg Herb Burger", "category": "Gourmet Burgers", "description": "Crisp spiced potato-pea patty, cheese slice, fresh tomato, and mint mayonnaise", "price": 120, "rating": 4.5, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 404, "restaurant_id": 4, "name": "Loaded Cheesy Peri-Peri Fries", "category": "Fries & Sides", "description": "Golden crisp fries dusted with fiery peri-peri spice and drenched in warm cheddar sauce", "price": 150, "rating": 4.7, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 405, "restaurant_id": 4, "name": "Smoky Barbecue Wings (6 pcs)", "category": "Fries & Sides", "description": "Crispy fried chicken wings tossed in rich smoky barbecue glaze with sesame seeds", "price": 220, "rating": 4.6, "is_veg": 0, "image_url": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 406, "restaurant_id": 4, "name": "Belgian Chocolate Thickshake", "category": "Shakes & Drinks", "description": "Heavy chocolate ice cream thickshake topped with dark chocolate curls", "price": 160, "rating": 4.8, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=85"}
+    ],
+    5: [
+        {"item_id": 501, "restaurant_id": 5, "name": "Hot Chocolate Fudge Brownie", "category": "Brownies & Sundaes", "description": "Warm fudgy dark chocolate brownie with molten chocolate center and vanilla ice cream", "price": 140, "rating": 4.9, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 502, "restaurant_id": 5, "name": "Nutella Walnut Brownie", "category": "Brownies & Sundaes", "description": "Dense baked chocolate brownie layered with rich Nutella and roasted walnuts", "price": 170, "rating": 4.8, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 503, "restaurant_id": 5, "name": "Red Velvet Cheesecake Slice", "category": "Cakes & Pastries", "description": "Velvety sponge layered with rich baked New York cream cheese frosting", "price": 180, "rating": 4.8, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 504, "restaurant_id": 5, "name": "Royal Kesar Gulab Jamun (2 pcs)", "category": "Traditional Sweets", "description": "Warm soft milk dumplings steeped in fragrant saffron and cardamom sugar syrup", "price": 90, "rating": 4.8, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=85"}
+    ],
+    6: [
+        {"item_id": 601, "restaurant_id": 6, "name": "Special Katani Royal Thali", "category": "Special Thalis", "description": "Dal Makhani, Shahi Paneer, Mix Veg, Jeera Rice, 2 Butter Naan, Raita, and Gulab Jamun", "price": 280, "rating": 4.9, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 602, "restaurant_id": 6, "name": "Dal Makhani Handi", "category": "Dhaba Curries", "description": "Overnight slow-cooked black lentils with generous white butter and dairy cream", "price": 210, "rating": 4.8, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 603, "restaurant_id": 6, "name": "Shahi Paneer Desi Ghee", "category": "Dhaba Curries", "description": "Cottage cheese simmered in thick cashew onion gravy prepared in pure desi ghee", "price": 230, "rating": 4.7, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 604, "restaurant_id": 6, "name": "Amritsari Aloo Pyaaz Paratha", "category": "Tandoori Breads", "description": "Crispy clay-oven baked paratha stuffed with spiced potatoes, onions and butter", "price": 90, "rating": 4.7, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 605, "restaurant_id": 6, "name": "Patiala Malai Lassi", "category": "Beverages", "description": "Thick churned sweet curd lassi served in traditional earthenware kulhad", "price": 70, "rating": 4.9, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"}
+    ],
+    12: [
+        {"item_id": 1201, "restaurant_id": 12, "name": "Special Paneer Kathi Roll", "category": "Veg Kathi Rolls", "description": "Flaky layered paratha packed with char-grilled spiced paneer, onions, and mint chutney", "price": 150, "rating": 4.8, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 1202, "restaurant_id": 12, "name": "Smoky Chicken Tikka Roll", "category": "Non-Veg Kathi Rolls", "description": "Succulent tandoori chicken cubes with sliced red onions and zesty green chutney", "price": 170, "rating": 4.8, "is_veg": 0, "image_url": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 1203, "restaurant_id": 12, "name": "Double Egg Double Chicken Roll", "category": "Non-Veg Kathi Rolls", "description": "Golden fried egg coated paratha packed with roasted juicy chicken tikka", "price": 190, "rating": 4.9, "is_veg": 0, "image_url": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 1204, "restaurant_id": 12, "name": "Cheesy Corn & Jalapeno Roll", "category": "Veg Kathi Rolls", "description": "Melted cheese, sweet corn, and spicy jalapeño relish rolled in crisp paratha", "price": 140, "rating": 4.6, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 1205, "restaurant_id": 12, "name": "Peri-Peri Masala Fries", "category": "Sides & Drinks", "description": "Crispy golden potato fries tossed in tangy peri-peri spice blend", "price": 90, "rating": 4.5, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=85"}
+    ],
+    13: [
+        {"item_id": 1301, "restaurant_id": 13, "name": "Amritsari Stuffed Kulcha Thali", "category": "Tandoori Kulchas", "description": "Crispy tandoori kulcha with spicy chhole, fresh white butter, and tangy imli pyaaz chutney", "price": 140, "rating": 4.9, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 1302, "restaurant_id": 13, "name": "Special Paneer Stuffed Kulcha", "category": "Tandoori Kulchas", "description": "Flaky layered kulcha loaded with spiced cottage cheese and roasted in clay tandoor", "price": 160, "rating": 4.9, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 1303, "restaurant_id": 13, "name": "Chur-Chur Kulcha Platter", "category": "Tandoori Kulchas", "description": "Crushed extra crispy kulcha served with dark spicy Amritsari chhole and boondi raita", "price": 170, "rating": 4.8, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 1304, "restaurant_id": 13, "name": "Patiala Sweet Kesari Lassi", "category": "Beverages", "description": "Thick churned saffron yogurt lassi topped with malai layer and crushed nuts", "price": 80, "rating": 4.9, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"}
+    ],
+    14: [
+        {"item_id": 1401, "restaurant_id": 14, "name": "Crispy Golgappe (6 pcs) with 3 Waters", "category": "Golgappe & Pani Puri", "description": "Crunchy semolina puris with potato-chickpea mash, served with spicy mint, tangy tamarind and hing water", "price": 80, "rating": 4.9, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 1402, "restaurant_id": 14, "name": "Dahi Papdi Chaat Royal", "category": "Specialty Chaat", "description": "Crispy wafers topped with chilled sweet curd, boiled potatoes, tamarind and sev", "price": 90, "rating": 4.8, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 1403, "restaurant_id": 14, "name": "Kurkure Aloo Tikki with Chole", "category": "Specialty Chaat", "description": "Golden crisp potato patties drenched in piping hot chole gravy, chutneys and sliced radish", "price": 100, "rating": 4.7, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 1404, "restaurant_id": 14, "name": "Amul Butter Pav Bhaji", "category": "Street Food", "description": "Slow-mashed spiced vegetable gravy loaded with Amul butter, served with 2 toasted pavs", "price": 120, "rating": 4.8, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"}
+    ],
+    15: [
+        {"item_id": 1501, "restaurant_id": 15, "name": "Kadak Masala Chai & Bun Maska", "category": "Kulhad Chai", "description": "Steaming hot ginger cardamom chai served with soft toasted bun and creamy butter", "price": 70, "rating": 4.8, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 1502, "restaurant_id": 15, "name": "Special Double Cheese Maggi", "category": "Street Bites", "description": "2-minute noodles cooked with buttery veggies, oregano herbs and shredded mozzarella", "price": 90, "rating": 4.7, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=85"},
+        {"item_id": 1503, "restaurant_id": 15, "name": "Crispy Punjabi Samosa (2 pcs)", "category": "Street Bites", "description": "Golden flaky pastry stuffed with spiced potato and pea filling, served with saunth chutney", "price": 50, "rating": 4.8, "is_veg": 1, "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"}
+    ]
+}
+
+def get_restaurant_real_menu(restaurant_id, restaurant_name=None, cuisine=None):
+    if restaurant_id in REAL_RESTAURANT_MENUS:
+        return REAL_RESTAURANT_MENUS[restaurant_id]
+    r_info = next((r for r in CURATED_FALLBACK_RESTAURANTS if r.get("restaurant_id") == restaurant_id), None)
+    name = (restaurant_name or (r_info.get("name") if r_info else "")).lower()
+    c = (cuisine or (r_info.get("cuisine") if r_info else "")).lower()
+    spot_type = (r_info.get("spot_type") if r_info else "").lower()
+
+    if "pizza" in name or "pizza" in c or "italian" in c:
+        return REAL_RESTAURANT_MENUS[2]
+    if "burger" in name or "burger" in c or "fast food" in c:
+        return REAL_RESTAURANT_MENUS[4]
+    if "momo" in name or "chinese" in c or "asian" in c or "noodle" in name or "wok" in name:
+        return REAL_RESTAURANT_MENUS[3]
+    if "roll" in name or "shawarma" in name or "kathi" in name:
+        return REAL_RESTAURANT_MENUS[12]
+    if "kulcha" in name:
+        return REAL_RESTAURANT_MENUS[13]
+    if "dhaba" in name or "dhaba" in spot_type or "punjabi" in c:
+        return REAL_RESTAURANT_MENUS[6]
+    if "chaat" in name or "golgapp" in name or spot_type == "street_food":
+        return REAL_RESTAURANT_MENUS[14]
+    if "dessert" in c or "sweet" in name or "bakery" in c:
+        return REAL_RESTAURANT_MENUS[5]
+    if "chai" in name or "tea" in name or "cafe" in name:
+        return REAL_RESTAURANT_MENUS[15]
+    return REAL_RESTAURANT_MENUS[1]
 
 
 @app.route("/api/restaurants/live-nearby", methods=["GET"])
@@ -639,14 +741,17 @@ def live_nearby_restaurants():
             if len(in_radius_restaurants) >= 8:
                 break
 
-    # 2. Fetch Live Google Places / OSM Overpass restaurants
-    live_external = fetch_live_restaurants(lat, lng, radius_km=radius_km, limit=15)
-    for ext_r in live_external:
-        dist = ext_r.get("distance_km", 2.0)
-        ext_r["delivery_time_mins"] = max(15, min(65, int(15 + dist * 3.5)))
+    # 2. Fetch Live Google Places / OSM Overpass restaurants when local DB has few spots in radius
+    if len(in_radius_restaurants) < 6:
+        live_external = fetch_live_restaurants(lat, lng, radius_km=radius_km, limit=15)
+        for ext_r in live_external:
+            dist = ext_r.get("distance_km", 2.0)
+            ext_r["delivery_time_mins"] = max(15, min(65, int(15 + dist * 3.5)))
 
-    # Filter external restaurants strictly to the requested radius
-    filtered_external = [r for r in live_external if r.get("distance_km", 999) <= radius_km]
+        # Filter external restaurants strictly to the requested radius
+        filtered_external = [r for r in live_external if r.get("distance_km", 999) <= radius_km]
+    else:
+        filtered_external = []
 
     # Combine and sort by distance
     all_nearby = in_radius_restaurants + filtered_external
@@ -961,13 +1066,13 @@ def get_restaurant_menu(restaurant_id):
             (restaurant_id,)
         )
         menu_items = serialize_rows(cursor.fetchall())
+        if not menu_items:
+            menu_items = get_restaurant_real_menu(restaurant_id)
         return jsonify(menu_items), 200
 
     except mysql.connector.Error:
         app.logger.exception("Failed to fetch restaurant menu")
-        fallback = [d for d in CURATED_FALLBACK_DISHES if d.get("restaurant_id") == restaurant_id]
-        if not fallback:
-            fallback = CURATED_FALLBACK_DISHES[:4]
+        fallback = get_restaurant_real_menu(restaurant_id)
         return jsonify(fallback), 200
 
     finally:
@@ -1366,7 +1471,7 @@ def register():
             }
         }), 201
 
-    except mysql.connector.Error as db_err:
+    except Exception as db_err:
         if conn:
             try:
                 conn.rollback()
@@ -1499,7 +1604,7 @@ def login():
             }
         }), 200
 
-    except mysql.connector.Error as db_err:
+    except Exception as db_err:
         app.logger.warning(f"Login DB offline fallback: {db_err}")
         # In-memory authentication fallback
         if email in FALLBACK_USERS:

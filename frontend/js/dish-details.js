@@ -234,13 +234,211 @@ const dishData = {
         reviews: "165+ reviews",
         restaurant: "Katani Dhaba",
         restaurantSlug: "katani-dhaba",
+        restaurantId: 6,
         location: "Phase 3B2, Mohali",
         image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85",
         description: "Slow-cooked black lentils simmered overnight with fresh white butter and rich cream.",
         longDescription: "Traditional Punjabi black urad dal simmered with tomatoes, ginger, and garlic over gentle tandoor coals for over 12 hours, finished with generous dollops of churned white butter and fresh cream."
+    },
+
+    "special-paneer-kathi-roll": {
+        name: "Special Paneer Kathi Roll",
+        category: "Street Food",
+        cuisine: "North Indian / Street Food",
+        price: 150,
+        rating: 4.7,
+        reviews: "140+ reviews",
+        restaurant: "Rolls Mania & Fast Bites",
+        restaurantSlug: "rolls-mania",
+        restaurantId: 12,
+        location: "Khanpur Chowk, Kharar",
+        image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=900&q=85",
+        description: "Flaky paratha loaded with spiced paneer, fresh onions and mint chutney.",
+        longDescription: "Signature flaky, golden laccha paratha freshly rolled on tawa, stuffed with charred spicy paneer cubes, crunchy sliced red onions, fresh coriander, and zesty green mint chutney."
+    },
+
+    "amritsari-stuffed-kulcha-thali": {
+        name: "Amritsari Stuffed Kulcha Thali",
+        category: "North Indian",
+        cuisine: "Punjabi",
+        price: 140,
+        rating: 4.8,
+        reviews: "195+ reviews",
+        restaurant: "Amritsari Kulcha Junction",
+        restaurantSlug: "amritsari-kulcha-junction",
+        restaurantId: 13,
+        location: "Landran Road, Kharar",
+        image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=85",
+        description: "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney.",
+        longDescription: "Crispy multi-layered tandoori kulcha stuffed with spiced potato and onion, crushed by hand and slathered with melted country butter. Served with spicy Amritsari chhole and imli-pyaz chutney."
+    },
+
+    "fiery-paneer-pizza": {
+        name: "Fiery Paneer Pizza",
+        category: "Pizza",
+        cuisine: "Italian / Fusion",
+        price: 320,
+        rating: 4.6,
+        reviews: "115+ reviews",
+        restaurant: "Pizza Corner",
+        restaurantSlug: "pizza-corner",
+        restaurantId: 2,
+        location: "Sector 22, Chandigarh",
+        image: "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=900&q=85",
+        description: "Spicy marinated paneer with capsicum and mozzarella.",
+        longDescription: "Hand-stretched sourdough crust layered with spicy arrabbiata sauce, chunks of peri-peri marinated cottage cheese, crunchy green capsicum, and premium stringy mozzarella."
+    },
+
+    "classic-margherita-pizza": {
+        name: "Classic Margherita Pizza",
+        category: "Pizza",
+        cuisine: "Italian",
+        price: 280,
+        rating: 4.7,
+        reviews: "135+ reviews",
+        restaurant: "Pizza Corner",
+        restaurantSlug: "pizza-corner",
+        restaurantId: 2,
+        location: "Sector 22, Chandigarh",
+        image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85",
+        description: "Fresh tomato basil sauce with premium mozzarella.",
+        longDescription: "The Italian classic crafted with San Marzano style tomato puree, fresh torn sweet basil leaves, virgin olive oil drizzle, and golden melted whole-milk mozzarella cheese."
+    },
+
+    "dal-makhani": {
+        name: "Dal Makhani",
+        category: "North Indian",
+        cuisine: "Punjabi",
+        price: 260,
+        rating: 4.7,
+        reviews: "185+ reviews",
+        restaurant: "Katani Dhaba",
+        restaurantSlug: "katani-dhaba",
+        restaurantId: 6,
+        location: "Phase 3B2, Mohali",
+        image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85",
+        description: "Slow-cooked black lentils with cream and butter.",
+        longDescription: "Black urad dal slow-cooked on slow coals for over 16 hours, enriched with ginger, garlic, rich farm butter, and silky fresh cream for unbeatable comfort and richness."
+    },
+
+    "kadak-masala-chai-and-bun-maska": {
+        name: "Kadak Masala Chai & Bun Maska",
+        category: "Street Food",
+        cuisine: "Indian Cafe & Street Food",
+        price: 80,
+        rating: 4.8,
+        reviews: "220+ reviews",
+        restaurant: "Giani Tea Stall & Bun Maska",
+        restaurantSlug: "giani-tea-stall",
+        restaurantId: 15,
+        location: "Landran Road, Kharar",
+        image: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=900&q=85",
+        description: "Ginger and cardamom infused milk tea served with toasted butter bun.",
+        longDescription: "Freshly brewed clay-pot tapri style masala chai infused with crushed green cardamom, ginger, and cloves, paired with warm fluffy toasted pav filled with Amul butter."
+    },
+
+    "crispy-golgappe-6-pcs-with-3-waters": {
+        name: "Crispy Golgappe (6 pcs) with 3 Waters",
+        category: "Street Food",
+        cuisine: "Street Food & Chaat",
+        price: 60,
+        rating: 4.7,
+        reviews: "175+ reviews",
+        restaurant: "Chaat Chaska & Golgappa Corner",
+        restaurantSlug: "chaat-chaska",
+        restaurantId: 14,
+        location: "Main Market, Kharar",
+        image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85",
+        description: "Crispy puris filled with potato mash, served with spicy mint, tangy hing, and sweet tamarind pani.",
+        longDescription: "Golden crisp suji puris filled with spicy potato-chana masala, served alongside 3 chilled flavors of flavored water: Teekha Pudina, Khatta Meetha Sonth, and Hing Jeera."
     }
 
 };
+
+/* ==========================================
+   AUTHENTIC FOOD IMAGE RESOLVER
+   Ensures every dish has its true matching photo
+   and prevents generic placeholder fallback
+========================================== */
+
+function resolveDishImage(dishName = "", category = "", existingUrl = "") {
+    if (existingUrl && typeof existingUrl === "string" && existingUrl.startsWith("http") && !existingUrl.includes("photo-1504674900247-0877df9cc836")) {
+        return existingUrl;
+    }
+
+    const text = (dishName + " " + category).toLowerCase();
+
+    // 1. Rolls & Wraps
+    if (text.includes("roll") || text.includes("kathi") || text.includes("wrap") || text.includes("shawarma")) {
+        return "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=900&q=85";
+    }
+
+    // 2. Kulchas & Chole Thalis
+    if (text.includes("kulcha") || text.includes("chhole") || text.includes("chole") || text.includes("bhatur")) {
+        return "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=85";
+    }
+
+    // 3. Butter Chicken
+    if (text.includes("butter chicken") || text.includes("makhani chicken") || text.includes("murgh makhani")) {
+        return "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=900&q=85";
+    }
+
+    // 4. Dal Makhani & Lentils
+    if (text.includes("dal makhani") || text.includes("makhani dal") || text.includes("bukhara") || text.includes("black lentil") || text.includes("daal")) {
+        return "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85";
+    }
+
+    // 5. Paneer Dishes & Curries
+    if (text.includes("paneer")) {
+        if (text.includes("pizza")) {
+            return "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=900&q=85";
+        }
+        return "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=900&q=85";
+    }
+
+    // 6. Pizzas
+    if (text.includes("pizza") || text.includes("margherita") || text.includes("mozzarella")) {
+        return "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85";
+    }
+
+    // 7. Biryani
+    if (text.includes("biryani") || text.includes("pulao")) {
+        return "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=900&q=85";
+    }
+
+    // 8. Burgers
+    if (text.includes("burger") || text.includes("cheeseburger") || text.includes("zinger")) {
+        return "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=85";
+    }
+
+    // 9. Momos & Dim Sum
+    if (text.includes("momo") || text.includes("dimsum") || text.includes("dumpling")) {
+        return "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=900&q=85";
+    }
+
+    // 10. Noodles & Chinese
+    if (text.includes("noodle") || text.includes("hakka") || text.includes("chowmein") || text.includes("manchurian") || text.includes("chinese")) {
+        return "https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=900&q=85";
+    }
+
+    // 11. Chaat & Golgappe
+    if (text.includes("chaat") || text.includes("golgapp") || text.includes("pani puri") || text.includes("tikki") || text.includes("papdi")) {
+        return "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85";
+    }
+
+    // 12. Chai & Tea & Bun Maska
+    if (text.includes("chai") || text.includes("tea") || text.includes("bun maska")) {
+        return "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=900&q=85";
+    }
+
+    // 13. Desserts & Sweets & Brownies
+    if (text.includes("brownie") || text.includes("dessert") || text.includes("cake") || text.includes("ice cream") || text.includes("sweet")) {
+        return "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=85";
+    }
+
+    // Default vibrant food image
+    return "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=85";
+}
 
 
 /* ==========================================
@@ -255,6 +453,7 @@ const urlParams =
 const dishSlug =
     urlParams.get("dish");
 
+let currentDish = null;
 
 /* ==========================================
    LOAD DISH
@@ -275,103 +474,138 @@ function loadDish() {
 
     const queryDishName = urlParams.get("name");
 
-    const dish = dishData[dishKey] || (queryDishName ? {
+    let dish = dishKey ? { ...dishData[dishKey] } : (queryDishName ? {
         name: queryDishName,
         category: urlParams.get("category") || "Menu Item",
-        description: urlParams.get("description") || "Enjoy this dish at CraveSpot.",
-        longDescription: urlParams.get("description") || "Explore this menu item on CraveSpot.",
-        price: Number(urlParams.get("price") || 0),
-        rating: 0,
-        reviews: "No reviews yet",
-        image: urlParams.get("image") || "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=85",
-        restaurant: "Restaurant",
+        cuisine: urlParams.get("category") || "Multi-Cuisine",
+        description: urlParams.get("description") || "Delicious authentic recipe prepared with fresh ingredients.",
+        longDescription: urlParams.get("description") || "Explore this signature delicacy on CraveSpot.",
+        price: Number(urlParams.get("price") || 160),
+        rating: 4.7,
+        reviews: "120+ reviews",
+        image: urlParams.get("image") || "",
+        restaurant: urlParams.get("restaurant") || "Popular Eatery",
         restaurantSlug: "",
-        location: ""
+        restaurantId: urlParams.get("restaurantId") || "",
+        location: urlParams.get("restaurantLocation") || "Chandigarh Tricity"
     } : null);
 
-    if (dish && urlParams.get("image")) {
-        dish.image = urlParams.get("image");
+    if (!dish && dishSlug) {
+        // Fallback for slugs not pre-registered in dishData
+        const humanName = dishSlug.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+        dish = {
+            name: humanName,
+            category: "Specialty",
+            cuisine: "North Indian & Fast Food",
+            description: "Signature freshly prepared local delicacy on CraveSpot.",
+            longDescription: "Enjoy this chef special prepared with authentic herbs and traditional recipe.",
+            price: 150,
+            rating: 4.6,
+            reviews: "85+ reviews",
+            image: "",
+            restaurant: "Popular Local Kitchen",
+            restaurantSlug: "",
+            restaurantId: "",
+            location: "Chandigarh Tricity"
+        };
     }
 
-
     if (!dish) {
-
-        document.getElementById("dishName").textContent =
-            "Dish Not Found";
-
-        document.getElementById("dishDescription").textContent =
-            "Sorry, this dish could not be found.";
-
+        document.getElementById("dishName").textContent = "Dish Not Found";
+        document.getElementById("dishDescription").textContent = "Sorry, this dish could not be found.";
         return;
     }
 
+    // Dynamic enhancements from URL query parameters
+    if (urlParams.get("restaurant") && urlParams.get("restaurant") !== "Restaurant") {
+        dish.restaurant = urlParams.get("restaurant");
+    }
+    if (urlParams.get("restaurantId")) {
+        dish.restaurantId = urlParams.get("restaurantId");
+    }
+    if (urlParams.get("restaurantLocation")) {
+        dish.location = urlParams.get("restaurantLocation");
+    }
+    if (urlParams.get("rating") && Number(urlParams.get("rating")) > 0) {
+        dish.rating = Number(urlParams.get("rating"));
+    }
+    if (urlParams.get("price") && Number(urlParams.get("price")) > 0) {
+        dish.price = Number(urlParams.get("price"));
+    }
+    if (urlParams.get("category")) {
+        dish.category = urlParams.get("category");
+    }
+
+    // Ensure authentic, delicious food photography (prevents steak/generic fallback)
+    dish.image = resolveDishImage(dish.name, dish.category, urlParams.get("image") || dish.image);
+
+    // Save active dish reference
+    currentDish = dish;
 
     /* Image */
-
-    document.getElementById("dishImage").src =
-        dish.image;
-
-    document.getElementById("dishImage").alt =
-        dish.name;
-
+    const dishImgEl = document.getElementById("dishImage");
+    if (dishImgEl) {
+        dishImgEl.src = dish.image;
+        dishImgEl.alt = dish.name;
+    }
 
     /* Name */
+    const dishNameEl = document.getElementById("dishName");
+    if (dishNameEl) dishNameEl.textContent = dish.name;
 
-    document.getElementById("dishName").textContent =
-        dish.name;
-
-
-    document.getElementById("breadcrumbDish").textContent =
-        dish.name;
-
+    const breadcrumbEl = document.getElementById("breadcrumbDish");
+    if (breadcrumbEl) breadcrumbEl.textContent = dish.name;
 
     /* Category */
+    const categoryEl = document.getElementById("dishCategory");
+    if (categoryEl) categoryEl.textContent = dish.category;
 
-    document.getElementById("dishCategory").textContent =
-        dish.category;
+    /* Rating */
+    const ratingVal = Number(dish.rating) || 4.7;
+    const dishRatingEl = document.getElementById("dishRating");
+    if (dishRatingEl) {
+        dishRatingEl.textContent = "\u2605 " + ratingVal.toFixed(1);
+    }
 
-/* Rating */
+    const dishReviewsEl = document.getElementById("dishReviews");
+    if (dishReviewsEl) {
+        dishReviewsEl.textContent = dish.reviews || "120+ reviews";
+    }
 
-const rating = Number(dish.rating) || 0;
+    /* Price */
+    const formattedPrice = "\u20B9" + Number(dish.price || 0);
+    const dishPriceEl = document.getElementById("dishPrice");
+    if (dishPriceEl) dishPriceEl.textContent = formattedPrice;
 
-document.getElementById("dishRating").textContent = Number(dish.rating) > 0 ? "\u2605 " + Number(dish.rating).toFixed(1) : "\u2605 New";
+    const dishPriceInfoEl = document.getElementById("dishPriceInfo");
+    if (dishPriceInfoEl) dishPriceInfoEl.textContent = formattedPrice;
 
-document.getElementById("dishReviews").textContent =
-    dish.reviews || "No reviews yet";
-/* Price */
-
-const formattedPrice = "\u20B9" + Number(dish.price || 0);
-
-document.getElementById("dishPrice").textContent = formattedPrice;
-
-document.getElementById("dishPriceInfo").textContent = formattedPrice;
     /* Description */
+    const descEl = document.getElementById("dishDescription");
+    if (descEl) descEl.textContent = dish.description;
 
-    document.getElementById("dishDescription").textContent =
-        dish.description;
-
-    document.getElementById("longDescription").textContent =
-        dish.longDescription;
-
+    const longDescEl = document.getElementById("longDescription");
+    if (longDescEl) longDescEl.textContent = dish.longDescription;
 
     /* Cuisine */
+    const cuisineEl = document.getElementById("dishCuisine");
+    if (cuisineEl) cuisineEl.textContent = dish.cuisine || dish.category;
 
-    document.getElementById("dishCuisine").textContent =
-        dish.cuisine;
-
-
-    document.getElementById("dishRatingInfo").textContent =
-        dish.rating + " / 5";
-
+    const ratingInfoEl = document.getElementById("dishRatingInfo");
+    if (ratingInfoEl) {
+        ratingInfoEl.textContent = ratingVal.toFixed(1) + " / 5";
+    }
 
     /* Restaurant */
+    const restNameEl = document.getElementById("restaurantName");
+    if (restNameEl) {
+        restNameEl.textContent = (dish.restaurant && dish.restaurant !== "Restaurant") ? dish.restaurant : "Popular Eatery";
+    }
 
-    document.getElementById("restaurantName").textContent =
-        dish.restaurant;
-
-    document.getElementById("restaurantLocation").textContent =
-        dish.location;
-
+    const restLocEl = document.getElementById("restaurantLocation");
+    if (restLocEl) {
+        restLocEl.textContent = dish.location || "Chandigarh Tricity";
+    }
 }
 
 
@@ -471,22 +705,25 @@ function loadFavoriteState() {
 ========================================== */
 
 function viewRestaurant() {
-
-    const dish =
-        dishData[dishSlug];
-
-
-    if (!dish) {
+    const restId = urlParams.get("restaurantId") || (currentDish && currentDish.restaurantId);
+    if (restId) {
+        window.location.href = `restaurant-details.html?id=${encodeURIComponent(restId)}`;
         return;
     }
 
+    const restName = urlParams.get("restaurant") || (currentDish && currentDish.restaurant) || "";
+    if (restName && restName !== "Restaurant" && restName !== "Popular Eatery") {
+        window.location.href = `restaurant-details.html?vendor=${encodeURIComponent(restName)}`;
+        return;
+    }
 
-    window.location.href =
-        "restaurant-details.html?vendor=" +
-        encodeURIComponent(
-            dish.restaurantSlug
-        );
+    const dish = dishData[dishSlug] || currentDish;
+    if (dish && dish.restaurantSlug) {
+        window.location.href = `restaurant-details.html?vendor=${encodeURIComponent(dish.restaurantSlug)}`;
+        return;
+    }
 
+    window.location.href = "restaurants.html";
 }
 
 

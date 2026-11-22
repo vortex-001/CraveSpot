@@ -262,7 +262,7 @@ async function loadHomeLiveRestaurants() {
         let places = [];
         if (typeof apiRequest === 'function') {
             try {
-                const res = await apiRequest(`/restaurants/live-nearby?lat=${loc.lat}&lng=${loc.lng}&radius=${currentHomeRadius}`, { timeout: 1500 });
+                const res = await apiRequest(`/restaurants/live-nearby?lat=${loc.lat}&lng=${loc.lng}&radius=${currentHomeRadius}`, { timeout: 4000 });
                 if (res?.restaurants && res.restaurants.length > 0) {
                     places = res.restaurants;
                 }
@@ -272,7 +272,7 @@ async function loadHomeLiveRestaurants() {
 
             if (!places.length) {
                 try {
-                    const allRest = await apiRequest('/restaurants', { timeout: 1200 });
+                    const allRest = await apiRequest('/restaurants', { timeout: 3000 });
                     if (Array.isArray(allRest) && allRest.length > 0) {
                         places = allRest.map(r => {
                             const item = { ...r };
@@ -370,7 +370,7 @@ function initSurpriseMe() {
 
                     cardContent.innerHTML = `
                         <div class="surprise-badge">🎲 CraveSpot Surprise</div>
-                        <img src="${item.image_url || 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600'}" alt="${item.name}" class="surprise-img" />
+                        <img src="${item.image_url || 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600'}" alt="${item.name}" class="surprise-img" />
                         <div class="surprise-details">
                             <h3 class="surprise-title">${item.name}</h3>
                             <p class="surprise-restaurant">By <strong>${item.restaurant_name || 'Top Local Vendor'}</strong></p>

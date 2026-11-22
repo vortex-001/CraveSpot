@@ -154,14 +154,17 @@ if (registerForm) {
                     setTimeout(function () {
                         window.location.href = data.token ? "../index.html" : "login.html";
                     }, 1200);
+                } else if (response.status === 409 || (data.message && data.message.toLowerCase().includes("already registered"))) {
+                    showMessage(
+                        `An account with ${email} already exists. <a href="login.html" style="color: #b91c1c; font-weight: 700; text-decoration: underline;">Click here to Log In &rarr;</a>`,
+                        "#b91c1c"
+                    );
                 } else {
-
                     showMessage(
                         data.message ||
-                        "Unable to create account.",
+                        "Unable to create account. Please try again.",
                         "red"
                     );
-
                 }
 
 
@@ -208,8 +211,11 @@ function showMessage(message, color) {
         return;
     }
 
-    registerMessage.textContent =
-        message;
+    if (message.includes("<a ") || message.includes("<span")) {
+        registerMessage.innerHTML = message;
+    } else {
+        registerMessage.textContent = message;
+    }
 
     registerMessage.style.color =
         color;

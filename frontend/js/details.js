@@ -168,8 +168,140 @@ function displayRestaurant() {
 
 
 /* ==========================================
-   LOAD MENU FROM MYSQL
+   AUTHENTIC FOOD IMAGE RESOLVER
+   Ensures every dish has its true matching photo
+   and prevents generic placeholder fallback
 ========================================== */
+
+function resolveDishImage(dishName = "", category = "", existingUrl = "") {
+    if (existingUrl && typeof existingUrl === "string" && existingUrl.startsWith("http") && !existingUrl.includes("photo-1504674900247-0877df9cc836")) {
+        return existingUrl;
+    }
+
+    const text = (dishName + " " + category).toLowerCase();
+
+    // 1. Rolls, Wraps & Shawarmas
+    if (text.includes("roll") || text.includes("kathi") || text.includes("wrap") || text.includes("shawarma")) {
+        return "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 2. Kulchas & Chole Thalis
+    if (text.includes("kulcha") || text.includes("chhole") || text.includes("chole") || text.includes("bhatur")) {
+        return "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 3. Butter Chicken & Makhani Chicken
+    if (text.includes("butter chicken") || text.includes("makhani chicken") || text.includes("murgh makhani")) {
+        return "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 4. Dal Makhani & Lentils
+    if (text.includes("dal makhani") || text.includes("makhani dal") || text.includes("bukhara") || text.includes("black lentil") || text.includes("daal")) {
+        return "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 5. Paneer Curries
+    if (text.includes("paneer butter") || text.includes("shahi paneer") || text.includes("kadai paneer") || text.includes("matar paneer")) {
+        return "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 6. Pizzas
+    if (text.includes("pizza") || text.includes("margherita") || text.includes("mozzarella")) {
+        if (text.includes("peri") || text.includes("paneer") || text.includes("spic")) {
+            return "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=800&q=85";
+        }
+        if (text.includes("pepperoni") || text.includes("chicken")) {
+            return "https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=800&q=85";
+        }
+        return "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 7. Garlic Bread & Sides
+    if (text.includes("garlic bread") || text.includes("breadsticks")) {
+        return "https://images.unsplash.com/photo-1619895092538-128341789043?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 8. Biryani & Pulao
+    if (text.includes("biryani") || text.includes("pulao") || text.includes("dum rice")) {
+        return "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 9. Burgers
+    if (text.includes("burger") || text.includes("cheeseburger") || text.includes("smash") || text.includes("zinger")) {
+        return text.includes("smash")
+            ? "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=85"
+            : "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 10. Fries & Wings
+    if (text.includes("fries") || text.includes("peri-peri fries")) {
+        return "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=85";
+    }
+    if (text.includes("wing") || text.includes("barbecue") || text.includes("bbq") || text.includes("grilled chicken")) {
+        return "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 11. Momos & Dim Sum
+    if (text.includes("momo") || text.includes("dimsum") || text.includes("dumpling")) {
+        return text.includes("fried") || text.includes("kurkure")
+            ? "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=800&q=85"
+            : "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 12. Noodles & Manchurian
+    if (text.includes("noodle") || text.includes("hakka") || text.includes("chowmein") || text.includes("schezwan")) {
+        return "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=85";
+    }
+    if (text.includes("manchurian")) {
+        return "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=800&q=85";
+    }
+    if (text.includes("chilli paneer")) {
+        return "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 13. Golgappe, Chaat & Street Food
+    if (text.includes("golgapp") || text.includes("pani puri") || text.includes("chaat") || text.includes("papdi") || text.includes("tikki") || text.includes("pav bhaji")) {
+        return "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 14. Desserts, Brownies & Sweets
+    if (text.includes("brownie") || text.includes("fudge")) {
+        return "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=85";
+    }
+    if (text.includes("cake") || text.includes("pastry") || text.includes("cheesecake")) {
+        return "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=85";
+    }
+    if (text.includes("jamun") || text.includes("kesar") || text.includes("mithai") || text.includes("falooda")) {
+        return "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=85";
+    }
+
+    // 15. Chai & Hot Drinks
+    if (text.includes("chai") || text.includes("tea") || text.includes("bun maska")) {
+        return "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85";
+    }
+    if (text.includes("maggi")) {
+        return "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=85";
+    }
+    if (text.includes("shake") || text.includes("thickshake")) {
+        return "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&q=85";
+    }
+    if (text.includes("dosa") || text.includes("south indian")) {
+        return "https://images.unsplash.com/photo-1668236543090-82eba5ee5976?auto=format&fit=crop&w=800&q=85";
+    }
+    if (text.includes("thali")) {
+        return "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85";
+    }
+
+    return "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=85";
+}
+
+
+/* ==========================================
+   LOAD MENU FROM MYSQL / RESTAURANT ENGINE
+========================================== */
+
+let activeMenuCategory = "all";
+let allLoadedDishes = [];
 
 async function loadMenu() {
     const menuGrid = document.getElementById("menuGrid");
@@ -179,104 +311,155 @@ async function loadMenu() {
 
     menuGrid.innerHTML = "<p>Loading menu...</p>";
 
-    // Sample dishes for frontend testing
-    const sampleDishes = [
-        {
-            name: "Paneer Butter Masala",
-            category: "North Indian",
-            description: "Creamy tomato gravy with soft paneer.",
-            price: 249,
-            image_url: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7"
-        },
-        {
-            name: "Veg Biryani",
-            category: "Rice",
-            description: "Fragrant basmati rice with aromatic spices.",
-            price: 199,
-            image_url: "https://images.unsplash.com/photo-1589302168068-964664d93dc0"
-        },
-        {
-            name: "Margherita Pizza",
-            category: "Italian",
-            description: "Classic pizza with cheese and tomato.",
-            price: 229,
-            image_url: "https://images.unsplash.com/photo-1579751626657-72bc17010498"
-        },
-        {
-            name: "Crispy Veg Burger",
-            category: "Fast Food",
-            description: "A crispy vegetable patty with fresh toppings.",
-            price: 149,
-            image_url: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd"
-        },
-        {
-            name: "Chocolate Brownie",
-            category: "Desserts",
-            description: "A rich chocolate treat.",
-            price: 99,
-            image_url: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c"
-        },
-        {
-            name: "Masala Dosa",
-            category: "South Indian",
-            description: "Crispy dosa served with potato filling.",
-            price: 129,
-            image_url: "https://images.unsplash.com/photo-1668236543090-82eba5ee5976"
+    try {
+        allLoadedDishes = await apiRequest(
+            `/restaurants/${currentRestaurant.restaurant_id}/menu`
+        );
+
+        if (!Array.isArray(allLoadedDishes) || allLoadedDishes.length === 0) {
+            allLoadedDishes = sampleDishes;
         }
-    ];
-
-    let dishes = [];
-
-   try {
-    dishes = await apiRequest(
-        `/restaurants/${currentRestaurant.restaurant_id}/menu`
-    );
-
-    // Use sample dishes if the backend returns an empty menu
-    if (!Array.isArray(dishes) || dishes.length === 0) {
-        dishes = sampleDishes;
+    } catch (error) {
+        console.warn("Using sample menu data:", error);
+        allLoadedDishes = sampleDishes;
     }
-} catch (error) {
-    console.warn("Using sample menu data:", error);
-    dishes = sampleDishes;
+
+    renderMenuCategoryTabs(allLoadedDishes);
+    renderFilteredMenuCards();
 }
+
+function renderMenuCategoryTabs(dishes) {
+    let tabsContainer = document.getElementById("menuCategoryTabs");
+    if (!tabsContainer) {
+        tabsContainer = document.createElement("div");
+        tabsContainer.id = "menuCategoryTabs";
+        tabsContainer.className = "menu-category-tabs";
+        const menuSection = document.getElementById("menuSection");
+        const menuGrid = document.getElementById("menuGrid");
+        if (menuSection && menuGrid) {
+            menuSection.insertBefore(tabsContainer, menuGrid);
+        }
+    }
+
+    if (!tabsContainer) return;
+
+    // Collect unique categories with counts
+    const categoryMap = { "all": dishes.length };
+    dishes.forEach(d => {
+        const cat = d.category || "General";
+        categoryMap[cat] = (categoryMap[cat] || 0) + 1;
+    });
+
+    const categories = Object.keys(categoryMap);
+
+    tabsContainer.innerHTML = "";
+    categories.forEach(cat => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `menu-category-btn ${activeMenuCategory === cat ? "active" : ""}`;
+        btn.dataset.category = cat;
+
+        const label = cat === "all" ? "All Dishes" : cat;
+        btn.innerHTML = `<span>${label}</span> <span class="cat-pill-count">${categoryMap[cat]}</span>`;
+
+        btn.addEventListener("click", () => {
+            activeMenuCategory = cat;
+            document.querySelectorAll(".menu-category-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            renderFilteredMenuCards();
+        });
+
+        tabsContainer.appendChild(btn);
+    });
+}
+
+function renderFilteredMenuCards() {
+    const menuGrid = document.getElementById("menuGrid");
+    const dishCount = document.getElementById("dishCount");
+    if (!menuGrid) return;
 
     menuGrid.innerHTML = "";
 
-    dishes.forEach(dish => {
+    const filtered = allLoadedDishes.filter(dish => {
+        if (activeMenuCategory === "all") return true;
+        return (dish.category || "General").toLowerCase() === activeMenuCategory.toLowerCase();
+    });
+
+    if (dishCount) {
+        dishCount.textContent = `${filtered.length} of ${allLoadedDishes.length} dishes`;
+    }
+
+    if (filtered.length === 0) {
+        menuGrid.innerHTML = `<p style="grid-column: 1 / -1; text-align: center; color: #777; padding: 30px;">No dishes in this category.</p>`;
+        return;
+    }
+
+    filtered.forEach(dish => {
         const card = document.createElement("div");
         card.className = "menu-card";
 
-        const image = dish.image_url ||
-            "https://images.unsplash.com/photo-1504674900247-0877df9cc836";
+        const resolvedImage = resolveDishImage(dish.name, dish.category, dish.image_url || dish.image);
+        const isVeg = dish.is_veg === 1 || dish.is_veg === true || dish.is_veg === "true" || dish.is_veg === "1";
 
         const imageElement = document.createElement("img");
-        imageElement.src = image;
+        imageElement.src = resolvedImage;
         imageElement.alt = dish.name || "Food dish";
         imageElement.className = "menu-image";
+        imageElement.loading = "lazy";
 
         const info = document.createElement("div");
         info.className = "menu-info";
 
+        const headerRow = document.createElement("div");
+        headerRow.className = "menu-card-header";
+        headerRow.style.display = "flex";
+        headerRow.style.alignItems = "center";
+        headerRow.style.gap = "8px";
+        headerRow.style.marginBottom = "4px";
+
+        // Veg / Non-Veg Indicator Dot
+        const dietBadge = document.createElement("span");
+        dietBadge.className = `diet-badge ${isVeg ? "veg" : "non-veg"}`;
+        dietBadge.title = isVeg ? "Pure Veg" : "Non-Veg";
+        dietBadge.innerHTML = `<span class="diet-dot"></span>`;
+
         const name = document.createElement("h3");
+        name.style.margin = "0";
         name.textContent = dish.name || "Food Item";
 
-        const category = document.createElement("p");
-        category.textContent = dish.category || "";
+        headerRow.append(dietBadge, name);
+
+        const category = document.createElement("span");
+        category.className = "menu-category-tag";
+        category.textContent = dish.category || "Specialty";
 
         const description = document.createElement("p");
-        description.textContent = dish.description || "";
+        description.textContent = dish.description || "Authentic freshly prepared specialty dish.";
 
-        const price = document.createElement("p");
+        const priceRow = document.createElement("div");
+        priceRow.className = "menu-price-row";
+        priceRow.style.display = "flex";
+        priceRow.style.alignItems = "center";
+        priceRow.style.justifyContent = "space-between";
+        priceRow.style.marginTop = "auto";
+
+        const price = document.createElement("span");
         price.className = "menu-price";
         price.textContent = "\u20B9" + Number(dish.price || 0).toFixed(2);
 
-        info.append(name, category, description, price);
+        const ratingVal = Number(dish.rating || 4.6).toFixed(1);
+        const rating = document.createElement("span");
+        rating.className = "menu-rating-chip";
+        rating.innerHTML = `<span style="color:#F59E0B;">\u2605</span> ${ratingVal}`;
+
+        priceRow.append(price, rating);
+
+        info.append(headerRow, category, description, priceRow);
 
         const favorite = document.createElement("button");
         favorite.className = "dish-favorite";
         favorite.type = "button";
-
+        favorite.setAttribute("aria-label", `Save ${dish.name} to favorites`);
         favorite.innerHTML = `
             <svg class="favorite-icon"
                  viewBox="0 0 24 24"
@@ -291,7 +474,8 @@ async function loadMenu() {
             </svg>
         `;
 
-        favorite.addEventListener("click", function () {
+        favorite.addEventListener("click", function (e) {
+            e.stopPropagation();
             toggleDishFavorite(this);
         });
 
@@ -308,16 +492,17 @@ async function loadMenu() {
                 .replace(/[^a-z0-9]+/g, "-")
                 .replace(/^-+|-+$/g, "");
 
-            if (dishSlug) {
-                window.location.href = `dish-details.html?dish=${encodeURIComponent(dishSlug)}&name=${encodeURIComponent(dish.name || "")}&category=${encodeURIComponent(dish.category || "")}&description=${encodeURIComponent(dish.description || "")}&price=${encodeURIComponent(dish.price || 0)}&image=${encodeURIComponent(dish.image_url || "")}&restaurantId=${encodeURIComponent(currentRestaurant.restaurant_id || "")}`;
-            }
+            const restName = currentRestaurant ? currentRestaurant.name : "Restaurant";
+            const restId = currentRestaurant ? currentRestaurant.restaurant_id : "";
+            const restLoc = currentRestaurant ? (currentRestaurant.address || "Chandigarh") : "Chandigarh";
+
+            const url = `dish-details.html?dish=${encodeURIComponent(dishSlug)}&name=${encodeURIComponent(dish.name || "")}&category=${encodeURIComponent(dish.category || "")}&description=${encodeURIComponent(dish.description || "")}&price=${encodeURIComponent(dish.price || 0)}&rating=${encodeURIComponent(dish.rating || 4.6)}&image=${encodeURIComponent(resolvedImage)}&restaurant=${encodeURIComponent(restName)}&restaurantId=${encodeURIComponent(restId)}&restaurantLocation=${encodeURIComponent(restLoc)}`;
+
+            window.location.href = url;
         });
+
         menuGrid.appendChild(card);
     });
-
-    if (dishCount) {
-        dishCount.textContent = `${dishes.length} dishes`;
-    }
 }
 
 /* ==========================================
