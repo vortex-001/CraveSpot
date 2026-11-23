@@ -796,7 +796,344 @@ const dishData = {
         image: "https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?auto=format&fit=crop&w=900&q=85",
         description: "A plant-based bowl with grains and vegetables.",
         longDescription: "Wholesome blend of brown rice, edamame, steamed broccoli, grilled tofu, and toasted pumpkin seeds with a ginger soy glaze."
+    },
+
+    "amul-butter-pav-bhaji": {
+        name: "Amul Butter Pav Bhaji",
+        category: "Street Food",
+        cuisine: "Mumbai Street Food",
+        price: 120,
+        rating: 4.8,
+        reviews: "320+ reviews",
+        restaurant: "Chaat Chaska",
+        restaurantSlug: "chaat-chaska",
+        restaurantId: 14,
+        location: "Sector 34, Chandigarh",
+        image: "../assets/images/dishes/pav-bhaji.jpg",
+        description: "Slow-mashed spiced vegetable gravy loaded with Amul butter, served with 2 toasted pavs.",
+        longDescription: "Authentic Mumbai style bhaji simmered with ripe tomatoes, potatoes, green peas and special pav bhaji spices, finished with a generous slab of golden Amul butter and served with soft, toasted butter pavs and diced onions."
+    },
+
+    "cheese-amul-pav-bhaji": {
+        name: "Cheese Amul Pav Bhaji",
+        category: "Street Food",
+        cuisine: "Mumbai Street Food",
+        price: 150,
+        rating: 4.8,
+        reviews: "210+ reviews",
+        restaurant: "Chaat Chaska",
+        restaurantSlug: "chaat-chaska",
+        restaurantId: 14,
+        location: "Sector 34, Chandigarh",
+        image: "../assets/images/dishes/pav-bhaji.jpg",
+        description: "Classic buttery bhaji blanketed with grated cheddar cheese and 2 butter toasted pavs.",
+        longDescription: "Our signature rich vegetable bhaji topped with a thick blanket of freshly grated cheddar cheese and melted Amul butter, accompanied by toasted golden pavs."
+    },
+
+    "virgin-mint-mojito-cooler": {
+        name: "Virgin Mint Mojito Cooler",
+        category: "Beverages",
+        cuisine: "Beverages & Coolers",
+        price: 110,
+        rating: 4.7,
+        reviews: "185+ reviews",
+        restaurant: "Urban Tadka",
+        restaurantSlug: "urban-tadka",
+        restaurantId: 1,
+        location: "Sector 17, Chandigarh",
+        image: "../assets/images/dishes/mojito.jpg",
+        description: "Chilled sparkling cooler with muddled mint leaves, fresh lime juice and cane sweetness.",
+        longDescription: "Refreshing handcrafted mocktail made with freshly crushed garden mint, tangy lime wedges, chilled sparkling soda, and pure cane sugar over cracked ice."
+    },
+
+    "adrak-elaichi-kulhad-chai": {
+        name: "Adrak Elaichi Kulhad Chai",
+        category: "Street Food",
+        cuisine: "Chai & Street Bites",
+        price: 40,
+        rating: 4.9,
+        reviews: "450+ reviews",
+        restaurant: "Chai & Snacks Hub",
+        restaurantSlug: "chai-and-snacks-hub",
+        restaurantId: 15,
+        location: "Sector 15, Chandigarh",
+        image: "../assets/images/dishes/masala-chai.jpg",
+        description: "Slow-brewed strong Assam tea infused with fresh ginger and fragrant green cardamom in kulhad.",
+        longDescription: "Piping hot traditional Indian tea simmered patiently with hand-crushed fiery ginger and aromatic green cardamom pods, served in an earthy clay kulhad."
+    },
+
+    "warm-bun-maska-with-amul-butter": {
+        name: "Warm Bun Maska with Amul Butter",
+        category: "Street Food",
+        cuisine: "Bakery & Cafe",
+        price: 50,
+        rating: 4.7,
+        reviews: "290+ reviews",
+        restaurant: "Chai & Snacks Hub",
+        restaurantSlug: "chai-and-snacks-hub",
+        restaurantId: 15,
+        location: "Sector 15, Chandigarh",
+        image: "../assets/images/dishes/bun-maska.jpg",
+        description: "Soft fresh bakery bun generously slathered with salted Amul butter, toasted warm.",
+        longDescription: "Pillowy soft Irani-style bakery bun sliced and packed with generous layers of salted Amul butter, served warm for dipping in hot kadak masala chai."
+    },
+
+    "paneer-stuffed-bread-pakora": {
+        name: "Paneer Stuffed Bread Pakora",
+        category: "Street Food",
+        cuisine: "North Indian Street Food",
+        price: 60,
+        rating: 4.7,
+        reviews: "230+ reviews",
+        restaurant: "Chai & Snacks Hub",
+        restaurantSlug: "chai-and-snacks-hub",
+        restaurantId: 15,
+        location: "Sector 15, Chandigarh",
+        image: "../assets/images/dishes/bread-pakoda.jpg",
+        description: "Besan-battered golden fried bread sandwich with spiced cottage cheese slab inside.",
+        longDescription: "Crispy golden fried bread fritter coated in seasoned gram flour batter, encasing a thick slab of fresh malai paneer and zesty mint coriander chutney."
+    },
+
+    "thick-malai-lassi-in-clay-cup": {
+        name: "Thick Malai Lassi in Clay Cup",
+        category: "Beverages",
+        cuisine: "Punjabi Traditional",
+        price: 70,
+        rating: 4.9,
+        reviews: "380+ reviews",
+        restaurant: "Chai & Snacks Hub",
+        restaurantSlug: "chai-and-snacks-hub",
+        restaurantId: 15,
+        location: "Sector 15, Chandigarh",
+        image: "../assets/images/dishes/punjabi-lassi.jpg",
+        description: "Creamy churned sweet yogurt topped with thick malai and crushed pistachios.",
+        longDescription: "Rich and creamy sweet yogurt traditionally churned with wooden madhani, served ice-cold in a clay cup crowned with a thick layer of fresh malai, saffron, and pistachios."
+    },
+
+    "bakery-suji-rusk-and-cookies": {
+        name: "Bakery Suji Rusk & Cookies",
+        category: "Street Food",
+        cuisine: "Bakery & Bakes",
+        price: 40,
+        rating: 4.6,
+        reviews: "150+ reviews",
+        restaurant: "Chai & Snacks Hub",
+        restaurantSlug: "chai-and-snacks-hub",
+        restaurantId: 15,
+        location: "Sector 15, Chandigarh",
+        image: "../assets/images/dishes/rusk-cookies.jpg",
+        description: "Crunchy oven-toasted cardamom suji rusks and butter cookies perfect for chai dipping.",
+        longDescription: "Authentic double-baked crispy semolina rusks and delicate sweet butter cookies, made with fresh cream and cardamom, tailored for dipping into hot chai."
+    },
+
+    "tangy-mumbai-bhel-puri": {
+        name: "Tangy Mumbai Bhel Puri",
+        category: "Street Food",
+        cuisine: "Mumbai Chaat",
+        price: 80,
+        rating: 4.7,
+        reviews: "275+ reviews",
+        restaurant: "Chaat Chaska",
+        restaurantSlug: "chaat-chaska",
+        restaurantId: 14,
+        location: "Sector 34, Chandigarh",
+        image: "../assets/images/dishes/bhel-puri.jpg",
+        description: "Puffed rice tossed with peanuts, sev, diced onions, tomatoes and spicy tamarind chutney.",
+        longDescription: "Crisp puffed rice, roasted peanuts, crunchy papdi, and golden gram flour sev mixed fresh with finely diced onions, tomatoes, fresh coriander, green chillies, and tangy tamarind saunth."
+    },
+
+    "dahi-bhalla-papdi-gujiya": {
+        name: "Dahi Bhalla Papdi Gujiya",
+        category: "Street Food",
+        cuisine: "Delhi Chaat",
+        price: 95,
+        rating: 4.8,
+        reviews: "340+ reviews",
+        restaurant: "Chaat Chaska",
+        restaurantSlug: "chaat-chaska",
+        restaurantId: 14,
+        location: "Sector 34, Chandigarh",
+        image: "../assets/images/dishes/dahi-bhalla.jpg",
+        description: "Melt-in-mouth lentil dumplings soaked in creamy sweet yogurt with roasted cumin and saunth.",
+        longDescription: "Soft melt-in-mouth urad dal dumplings soaked in chilled whipped sweetened curd, crowned with crispy papdi, sweet tamarind chutney, spicy mint glaze, and roasted cumin powder."
+    },
+
+    "desi-shikanji-masala-soda": {
+        name: "Desi Shikanji Masala Soda",
+        category: "Beverages",
+        cuisine: "Traditional Coolers",
+        price: 60,
+        rating: 4.7,
+        reviews: "195+ reviews",
+        restaurant: "Chaat Chaska",
+        restaurantSlug: "chaat-chaska",
+        restaurantId: 14,
+        location: "Sector 34, Chandigarh",
+        image: "../assets/images/dishes/shikanji.jpg",
+        description: "Chilled fizzing lemon soda with roasted jeera, rock salt, mint and lemon juice.",
+        longDescription: "Sparkling street-style refreshing cooler made with freshly squeezed lemon juice, crushed roasted cumin, black rock salt, mint, and soda water."
+    },
+
+    "special-double-cheese-maggi": {
+        name: "Special Double Cheese Maggi",
+        category: "Street Food",
+        cuisine: "Street Bites",
+        price: 90,
+        rating: 4.7,
+        reviews: "260+ reviews",
+        restaurant: "Chai & Snacks Hub",
+        restaurantSlug: "chai-and-snacks-hub",
+        restaurantId: 15,
+        location: "Sector 15, Chandigarh",
+        image: "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=900&q=85",
+        description: "2-minute noodles cooked with buttery veggies, oregano herbs and shredded mozzarella.",
+        longDescription: "Classic spicy instant noodles prepared with butter, sautéed green peas, sweet corn, bell peppers, oregano seasoning, and melted double mozzarella cheese."
+    },
+
+    "kadhai-paneer-special": {
+        name: "Kadhai Paneer Special",
+        category: "North Indian",
+        cuisine: "Punjabi Dhaba",
+        price: 280,
+        rating: 4.7,
+        reviews: "190+ reviews",
+        restaurant: "Katani Dhaba",
+        restaurantSlug: "katani-dhaba",
+        restaurantId: 6,
+        location: "Phase 3B2, Mohali",
+        image: "../assets/images/dishes/paneer-butter-masala.jpg",
+        description: "Fresh cottage cheese cooked with freshly ground kadhai masala, bell peppers and onion.",
+        longDescription: "Succulent paneer cubes tossed with chunky capsicum, onions, and slow-simmered in rich tomato gravy flavored with freshly pounded coriander seeds and Kashmiri red chillies."
+    },
+
+    "desi-ghee-jalebi-with-rabri": {
+        name: "Desi Ghee Jalebi with Rabri",
+        category: "Dessert",
+        cuisine: "Traditional Sweets",
+        price: 120,
+        rating: 4.9,
+        reviews: "310+ reviews",
+        restaurant: "Sweet Treats & Cravings",
+        restaurantSlug: "sweet-treats",
+        restaurantId: 5,
+        location: "Sector 35, Chandigarh",
+        image: "../assets/images/dishes/jalebi.jpg",
+        description: "Spiral golden crisp jalebis fried in pure desi ghee, served with thick chilled malai rabri.",
+        longDescription: "Hot and crunchy fermented spiral jalebis fried in pure desi ghee, dunked in saffron syrup, served alongside rich, creamy slow-simmered malai rabri."
+    },
+
+    "kesar-pista-rasmalai": {
+        name: "Kesar Pista Rasmalai",
+        category: "Dessert",
+        cuisine: "Bengali Sweets",
+        price: 110,
+        rating: 4.9,
+        reviews: "280+ reviews",
+        restaurant: "Sweet Treats & Cravings",
+        restaurantSlug: "sweet-treats",
+        restaurantId: 5,
+        location: "Sector 35, Chandigarh",
+        image: "../assets/images/dishes/rasmalai.jpg",
+        description: "Spongy cottage cheese patties steeped in chilled saffron cardamom milk with chopped pistachios.",
+        longDescription: "Delicate and airy poached chenna patties soaked in chilled, rich condensed milk infused with Kashmiri saffron, green cardamom, and garnished with roasted pistachios."
+    },
+
+    "kolkata-sweet-spongy-rasgulla": {
+        name: "Kolkata Sweet Spongy Rasgulla",
+        category: "Dessert",
+        cuisine: "Bengali Sweets",
+        price: 90,
+        rating: 4.8,
+        reviews: "220+ reviews",
+        restaurant: "Sweet Treats & Cravings",
+        restaurantSlug: "sweet-treats",
+        restaurantId: 5,
+        location: "Sector 35, Chandigarh",
+        image: "../assets/images/dishes/rasgulla.jpg",
+        description: "Pillowy soft spongy chenna dumplings soaked in light rose and cardamom flavored sugar syrup.",
+        longDescription: "Traditional soft and melt-in-mouth cottage cheese balls cooked in light sugar syrup delicately infused with rose water and cardamom."
+    },
+
+    "fresh-strawberry-shake": {
+        name: "Fresh Strawberry Shake",
+        category: "Dessert",
+        cuisine: "Shakes & Beverages",
+        price: 130,
+        rating: 4.7,
+        reviews: "165+ reviews",
+        restaurant: "Sweet Treats & Cravings",
+        restaurantSlug: "sweet-treats",
+        restaurantId: 5,
+        location: "Sector 35, Chandigarh",
+        image: "../assets/images/dishes/strawberry-shake.jpg",
+        description: "Thick creamy shake blended with real strawberries, sweet cream and vanilla ice cream.",
+        longDescription: "Velvety pink thickshake blended with succulent fresh strawberries, chilled whole milk, rich cream, and premium French vanilla bean gelato."
+    },
+
+    "kurkure-fried-chicken-momos": {
+        name: "Kurkure Fried Chicken Momos",
+        category: "Chinese",
+        cuisine: "Tibetan & Fusion",
+        price: 160,
+        rating: 4.8,
+        reviews: "245+ reviews",
+        restaurant: "Wok Express",
+        restaurantSlug: "wok-express",
+        restaurantId: 3,
+        location: "Sector 35, Chandigarh",
+        image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=900&q=85",
+        description: "Extra crunchy crumb-coated fried momos served piping hot with fiery garlic mayonnaise.",
+        longDescription: "Crispy coated seasoned fried momos with a crunchy exterior and juicy minced chicken interior, served with fiery chili-garlic dipping sauce and creamy mayo."
+    },
+
+    "four-cheese-garlic-bread": {
+        name: "Four-Cheese Garlic Bread",
+        category: "Pizza",
+        cuisine: "Italian",
+        price: 160,
+        rating: 4.8,
+        reviews: "215+ reviews",
+        restaurant: "Pizza Corner",
+        restaurantSlug: "pizza-corner",
+        restaurantId: 2,
+        location: "Sector 34, Chandigarh",
+        image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=900&q=85",
+        description: "Artisan toasted baguette smothered in roasted garlic butter, topped with 4 melted cheeses.",
+        longDescription: "Freshly baked artisan baguette loaded with herb-infused roasted garlic butter and topped with a bubbly blend of mozzarella, cheddar, gouda, and parmesan."
+    },
+
+    "creamy-penne-alfredo-pasta": {
+        name: "Creamy Penne Alfredo Pasta",
+        category: "Pizza",
+        cuisine: "Italian",
+        price: 240,
+        rating: 4.6,
+        reviews: "175+ reviews",
+        restaurant: "Pizza Corner",
+        restaurantSlug: "pizza-corner",
+        restaurantId: 2,
+        location: "Sector 34, Chandigarh",
+        image: "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=900&q=85",
+        description: "Al dente penne pasta tossed in rich parmesan garlic white cream sauce with herbs.",
+        longDescription: "Classic Italian comfort food featuring tender penne pasta simmered in rich creamy butter, heavy cream, garlic, fresh basil, and grated aged parmesan."
+    },
+
+    "smoky-grilled-chicken-wings": {
+        name: "Smoky Grilled Chicken Wings",
+        category: "Burger",
+        cuisine: "American Barbecue",
+        price: 290,
+        rating: 4.7,
+        reviews: "210+ reviews",
+        restaurant: "Burger House",
+        restaurantSlug: "burger-house",
+        restaurantId: 4,
+        location: "Phase 7, Mohali",
+        image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=900&q=85",
+        description: "Juicy charcoal grilled chicken wings coated in sticky smoky barbecue glaze.",
+        longDescription: "Tender chicken wings slow-smoked over hickory embers, tossed in rich sweet and tangy barbecue glaze, served with creamy blue cheese dip."
     }
+
 
 };
 
@@ -942,25 +1279,59 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
         return "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 21. Chaat & Golgappe
+    // 21. Pav Bhaji
+    if (text.includes("pav bhaji") || text.includes("pav bhaaji") || text.includes("bhaji pav")) {
+        return "../assets/images/dishes/pav-bhaji.jpg";
+    }
+
+    // 22. Chaat, Golgappe, Bhel Puri & Dahi Bhalla
+    if (text.includes("bhel puri") || text.includes("bhelpuri") || text.includes("sev puri")) {
+        return "../assets/images/dishes/bhel-puri.jpg";
+    }
+    if (text.includes("dahi bhalla") || text.includes("dahi papdi") || text.includes("dahi vada") || text.includes("dahi puri") || text.includes("raj kachori") || text.includes("gujiya")) {
+        return "../assets/images/dishes/dahi-bhalla.jpg";
+    }
     if (text.includes("golgapp") || text.includes("pani puri") || text.includes("puchka")) {
         return "../assets/images/dishes/golgappe.jpg";
     }
     if (text.includes("chaat") || text.includes("tikki") || text.includes("papdi")) {
-        return "../assets/images/dishes/golgappe.jpg";
+        return "../assets/images/dishes/dahi-bhalla.jpg";
     }
 
-    // 22. Chai & Tea & Bun Maska
-    if (text.includes("chai") || text.includes("tea") || text.includes("bun maska")) {
-        return "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=900&q=85";
+    // 23. Chai, Bun Maska, Pakoda & Bakery
+    if (text.includes("bun maska") && text.includes("chai")) {
+        return "../assets/images/dishes/chai-bun-maska.jpg";
+    }
+    if (text.includes("bun maska") || (text.includes("bun") && text.includes("butter"))) {
+        return "../assets/images/dishes/bun-maska.jpg";
+    }
+    if (text.includes("bread pakoda") || text.includes("bread pakora") || text.includes("pakoda") || text.includes("pakora")) {
+        return "../assets/images/dishes/bread-pakoda.jpg";
+    }
+    if (text.includes("chai") || text.includes("tea") || text.includes("kulhad")) {
+        return "../assets/images/dishes/masala-chai.jpg";
+    }
+    if (text.includes("rusk") || text.includes("cookie") || text.includes("cookies") || text.includes("biscuit")) {
+        return "../assets/images/dishes/rusk-cookies.jpg";
     }
 
-    // 23. Maggi
+    // 24. Lassi, Shikanji & Mojito Coolers
+    if (text.includes("lassi") || text.includes("chaas") || text.includes("buttermilk")) {
+        return "../assets/images/dishes/punjabi-lassi.jpg";
+    }
+    if (text.includes("shikanji") || text.includes("nimbu paani") || text.includes("masala soda") || text.includes("lemon soda")) {
+        return "../assets/images/dishes/shikanji.jpg";
+    }
+    if (text.includes("mojito") || text.includes("mint cooler") || text.includes("virgin mojito")) {
+        return "../assets/images/dishes/mojito.jpg";
+    }
+
+    // 25. Maggi
     if (text.includes("maggi")) {
         return "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 24. Pasta
+    // 26. Pasta
     if (text.includes("pasta") || text.includes("arrabbiata") || text.includes("alfredo") || text.includes("penne")) {
         return "https://images.unsplash.com/photo-1621996346565-e3d5d6281699?auto=format&fit=crop&w=900&q=85";
     }

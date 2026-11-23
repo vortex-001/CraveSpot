@@ -329,25 +329,59 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
         return "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=85";
     }
 
-    // 21. Chaat & Golgappe
+    // 21. Pav Bhaji
+    if (text.includes("pav bhaji") || text.includes("pav bhaaji") || text.includes("bhaji pav")) {
+        return "../assets/images/dishes/pav-bhaji.jpg";
+    }
+
+    // 22. Chaat, Golgappe, Bhel Puri & Dahi Bhalla
+    if (text.includes("bhel puri") || text.includes("bhelpuri") || text.includes("sev puri")) {
+        return "../assets/images/dishes/bhel-puri.jpg";
+    }
+    if (text.includes("dahi bhalla") || text.includes("dahi papdi") || text.includes("dahi vada") || text.includes("dahi puri") || text.includes("raj kachori") || text.includes("gujiya")) {
+        return "../assets/images/dishes/dahi-bhalla.jpg";
+    }
     if (text.includes("golgapp") || text.includes("pani puri") || text.includes("puchka")) {
         return "../assets/images/dishes/golgappe.jpg";
     }
-    if (text.includes("chaat") || text.includes("papdi") || text.includes("tikki") || text.includes("pav bhaji")) {
-        return "../assets/images/dishes/golgappe.jpg";
+    if (text.includes("chaat") || text.includes("tikki") || text.includes("papdi")) {
+        return "../assets/images/dishes/dahi-bhalla.jpg";
     }
 
-    // 22. Chai & Bun Maska
-    if (text.includes("chai") || text.includes("tea") || text.includes("bun maska")) {
-        return "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85";
+    // 23. Chai, Bun Maska, Pakoda & Bakery
+    if (text.includes("bun maska") && text.includes("chai")) {
+        return "../assets/images/dishes/chai-bun-maska.jpg";
+    }
+    if (text.includes("bun maska") || (text.includes("bun") && text.includes("butter"))) {
+        return "../assets/images/dishes/bun-maska.jpg";
+    }
+    if (text.includes("bread pakoda") || text.includes("bread pakora") || text.includes("pakoda") || text.includes("pakora")) {
+        return "../assets/images/dishes/bread-pakoda.jpg";
+    }
+    if (text.includes("chai") || text.includes("tea") || text.includes("kulhad")) {
+        return "../assets/images/dishes/masala-chai.jpg";
+    }
+    if (text.includes("rusk") || text.includes("cookie") || text.includes("cookies") || text.includes("biscuit")) {
+        return "../assets/images/dishes/rusk-cookies.jpg";
     }
 
-    // 23. Maggi
+    // 24. Lassi, Shikanji & Mojito Coolers
+    if (text.includes("lassi") || text.includes("chaas") || text.includes("buttermilk")) {
+        return "../assets/images/dishes/punjabi-lassi.jpg";
+    }
+    if (text.includes("shikanji") || text.includes("nimbu paani") || text.includes("masala soda") || text.includes("lemon soda")) {
+        return "../assets/images/dishes/shikanji.jpg";
+    }
+    if (text.includes("mojito") || text.includes("mint cooler") || text.includes("virgin mojito")) {
+        return "../assets/images/dishes/mojito.jpg";
+    }
+
+    // 25. Maggi
     if (text.includes("maggi")) {
         return "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=85";
     }
 
-    // 24. Pasta
+    // 26. Pasta
     if (text.includes("pasta") || text.includes("arrabbiata") || text.includes("alfredo") || text.includes("penne")) {
         return "https://images.unsplash.com/photo-1621996346565-e3d5d6281699?auto=format&fit=crop&w=800&q=85";
     }

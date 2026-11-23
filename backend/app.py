@@ -564,7 +564,7 @@ CURATED_FALLBACK_DISHES = [
     {"item_id": 9, "restaurant_id": 13, "name": "Amritsari Stuffed Kulcha Thali", "description": "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney", "price": 140, "rating": 4.9, "is_veg": 1, "category": "North Indian", "image_url": "/assets/images/dishes/amritsari-naan.jpg", "image": "/assets/images/dishes/amritsari-naan.jpg"},
     {"item_id": 10, "restaurant_id": 14, "name": "Dahi Papdi Chaat & Golgappe", "description": "Crispy papdi with sweetened yogurt, tangy saunth, and crispy golgappe", "price": 90, "rating": 4.8, "is_veg": 1, "category": "Street Food", "image_url": "/assets/images/dishes/golgappe.jpg", "image": "/assets/images/dishes/golgappe.jpg"},
     {"item_id": 11, "restaurant_id": 12, "name": "Special Paneer Kathi Roll", "description": "Flaky paratha loaded with spiced paneer, onions and mint chutney", "price": 150, "rating": 4.6, "is_veg": 1, "category": "Street Food", "image_url": "/assets/images/dishes/kathi-roll.jpg", "image": "/assets/images/dishes/kathi-roll.jpg"},
-    {"item_id": 12, "restaurant_id": 15, "name": "Kadak Masala Chai & Bun Maska", "description": "Steaming hot ginger cardamom chai served with soft toasted bun and butter", "price": 70, "rating": 4.7, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 12, "restaurant_id": 15, "name": "Kadak Masala Chai & Bun Maska", "description": "Steaming hot ginger cardamom chai served with soft toasted bun and butter", "price": 70, "rating": 4.7, "is_veg": 1, "category": "Street Food", "image_url": "/assets/images/dishes/chai-bun-maska.jpg", "image": "/assets/images/dishes/chai-bun-maska.jpg"},
     {"item_id": 13, "restaurant_id": 4, "name": "Loaded Fries", "description": "Crispy golden french fries loaded with melted cheese and sauces", "price": 180, "rating": 4.5, "is_veg": 1, "category": "Fast Food", "image_url": "/assets/images/dishes/loaded-fries.jpg", "image": "/assets/images/dishes/loaded-fries.jpg"},
     {"item_id": 14, "restaurant_id": 5, "name": "Desi Ghee Moong Dal Halwa", "description": "Rich golden slow-roasted moong dal sweet in pure desi ghee with pistachios", "price": 130, "rating": 4.9, "is_veg": 1, "category": "Dessert", "image_url": "/assets/images/dishes/moong-dal-halwa.jpg", "image": "/assets/images/dishes/moong-dal-halwa.jpg"},
     {"item_id": 15, "restaurant_id": 5, "name": "Belgian Waffle with Chocolate", "description": "Golden crisp Belgian grid waffle served warm with chocolate drizzle and berries", "price": 160, "rating": 4.7, "is_veg": 1, "category": "Dessert", "image_url": "/assets/images/dishes/waffle.jpg", "image": "/assets/images/dishes/waffle.jpg"},
@@ -2262,7 +2262,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 80,
             "rating": 4.9,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/golgappe.jpg"
         },
         {
             "item_id": 1402,
@@ -2273,7 +2273,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 80,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/golgappe.jpg"
         },
         {
             "item_id": 1403,
@@ -2284,7 +2284,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 100,
             "rating": 4.9,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/dahi-bhalla.jpg"
         },
         {
             "item_id": 1404,
@@ -2295,7 +2295,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 90,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/dahi-bhalla.jpg"
         },
         {
             "item_id": 1405,
@@ -2328,7 +2328,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 95,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/dahi-bhalla.jpg"
         },
         {
             "item_id": 1408,
@@ -2350,7 +2350,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 80,
             "rating": 4.6,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/bhel-puri.jpg"
         },
         {
             "item_id": 1410,
@@ -2361,7 +2361,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 120,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/pav-bhaji.jpg"
         },
         {
             "item_id": 1411,
@@ -2372,7 +2372,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 150,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/pav-bhaji.jpg"
         },
         {
             "item_id": 1412,
@@ -2383,7 +2383,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 60,
             "rating": 4.7,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/shikanji.jpg"
         }
     ],
     "15": [
@@ -2396,7 +2396,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 70,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/chai-bun-maska.jpg"
         },
         {
             "item_id": 1502,
@@ -2407,7 +2407,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 40,
             "rating": 4.9,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/masala-chai.jpg"
         },
         {
             "item_id": 1503,
@@ -2418,7 +2418,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 60,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/masala-chai.jpg"
         },
         {
             "item_id": 1504,
@@ -2429,7 +2429,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 50,
             "rating": 4.7,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/bun-maska.jpg"
         },
         {
             "item_id": 1505,
@@ -2440,7 +2440,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 60,
             "rating": 4.7,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/bun-maska.jpg"
         },
         {
             "item_id": 1506,
@@ -2495,7 +2495,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 60,
             "rating": 4.7,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/bread-pakoda.jpg"
         },
         {
             "item_id": 1511,
@@ -2506,7 +2506,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 40,
             "rating": 4.6,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/bread-pakoda.jpg"
         },
         {
             "item_id": 1512,
@@ -2528,7 +2528,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 40,
             "rating": 4.6,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/rusk-cookies.jpg"
         },
         {
             "item_id": 1514,
@@ -2539,7 +2539,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 70,
             "rating": 4.9,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/punjabi-lassi.jpg"
         }
     ]
 }
@@ -3025,10 +3025,32 @@ def sanitize_dish_item(item):
             item["image_url"] = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=85"
     elif any(k in n_lower for k in ("momo", "dimsum", "dumpling")):
         item["image_url"] = "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=800&q=85"
-    elif any(k in n_lower for k in ("golgapp", "pani puri", "chaat", "tikki", "papdi", "puchka")):
+    elif any(k in n_lower for k in ("pav bhaji", "pav bhaaji", "bhaji pav")):
+        item["image_url"] = "/assets/images/dishes/pav-bhaji.jpg"
+    elif "bun maska" in n_lower and "chai" in n_lower:
+        item["image_url"] = "/assets/images/dishes/chai-bun-maska.jpg"
+    elif "bun maska" in n_lower or ("bun" in n_lower and "butter" in n_lower):
+        item["image_url"] = "/assets/images/dishes/bun-maska.jpg"
+    elif any(k in n_lower for k in ("chai", "tea", "kulhad")):
+        item["image_url"] = "/assets/images/dishes/masala-chai.jpg"
+    elif any(k in n_lower for k in ("bread pakoda", "bread pakora", "pakora", "pakoda")):
+        item["image_url"] = "/assets/images/dishes/bread-pakoda.jpg"
+    elif any(k in n_lower for k in ("lassi", "chaas", "buttermilk")):
+        item["image_url"] = "/assets/images/dishes/punjabi-lassi.jpg"
+    elif any(k in n_lower for k in ("rusk", "cookie", "cookies", "biscuit")):
+        item["image_url"] = "/assets/images/dishes/rusk-cookies.jpg"
+    elif any(k in n_lower for k in ("bhel puri", "bhelpuri", "sev puri")):
+        item["image_url"] = "/assets/images/dishes/bhel-puri.jpg"
+    elif any(k in n_lower for k in ("dahi bhalla", "dahi papdi", "dahi vada", "dahi puri", "raj kachori", "gujiya")):
+        item["image_url"] = "/assets/images/dishes/dahi-bhalla.jpg"
+    elif any(k in n_lower for k in ("shikanji", "nimbu paani", "masala soda", "lemon soda")):
+        item["image_url"] = "/assets/images/dishes/shikanji.jpg"
+    elif any(k in n_lower for k in ("mojito", "mint cooler", "virgin mojito")):
+        item["image_url"] = "/assets/images/dishes/mojito.jpg"
+    elif any(k in n_lower for k in ("golgapp", "pani puri", "puchka")):
         item["image_url"] = "/assets/images/dishes/golgappe.jpg"
-    elif any(k in n_lower for k in ("chai", "tea", "bun maska")):
-        item["image_url"] = "/assets/images/dishes/chai.jpg" if os.path.exists("frontend/assets/images/dishes/chai.jpg") else "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"
+    elif any(k in n_lower for k in ("chaat", "tikki", "papdi")):
+        item["image_url"] = "/assets/images/dishes/dahi-bhalla.jpg"
     elif "maggi" in n_lower:
         item["image_url"] = "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=85"
     elif any(k in n_lower for k in ("noodle", "hakka", "chowmein", "schezwan")):

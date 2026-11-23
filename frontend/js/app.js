@@ -466,6 +466,41 @@ function initImageFallbacks() {
 }
 
 // ---------------------------------------------------------------------
+// 6b. Quick Food Filters (All Dishes, Veg, Non-Veg, Vegan)
+// ---------------------------------------------------------------------
+function initFoodFilters() {
+    const filterButtons = document.querySelectorAll('.food-filter');
+    const cards = document.querySelectorAll('.quick-dish-card');
+    const countEl = document.getElementById('quickDishCount');
+    if (!filterButtons.length || !cards.length) return;
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterButtons.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-pressed', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-pressed', 'true');
+
+            const filterValue = (btn.dataset.filter || 'all').toLowerCase();
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const diet = (card.dataset.diet || '').toLowerCase();
+                const isMatch = filterValue === 'all' || diet === filterValue;
+                card.style.display = isMatch ? '' : 'none';
+                if (isMatch) visibleCount++;
+            });
+
+            if (countEl) {
+                countEl.textContent = `${visibleCount} dish${visibleCount === 1 ? '' : 'es'}`;
+            }
+        });
+    });
+}
+
+// ---------------------------------------------------------------------
 // 6. Interactive Quick Dish Cards (Homepage)
 // ---------------------------------------------------------------------
 function initQuickDishCards() {
@@ -543,6 +578,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initLocationSystem();
     initHomeLiveSection();
     initQuickDishCards();
+    initFoodFilters();
     initSurpriseMe();
     syncAuthState();
     initImageFallbacks();

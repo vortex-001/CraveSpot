@@ -201,7 +201,8 @@ function handleDishSearch(value) {
 
     const categoryAliases = {
         "all": "all",
-        "street food": "burger",
+        "street food": "street food",
+        "street-food": "street food",
         "fast food": "burger",
         "popular": "all",
         "burger": "burger",
@@ -521,7 +522,9 @@ if (categoryFromURL) {
 
     const categoryAliases = {
         "burgers": "burger",
-        "desserts": "dessert"
+        "desserts": "dessert",
+        "street-food": "street food",
+        "street food": "street food"
     };
 
     const targetCategory = categoryAliases[normalized] || normalized;
