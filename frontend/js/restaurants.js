@@ -722,14 +722,14 @@ function filterRestaurants() {
         const hasOffer = card.dataset.offer === "true";
 
         const cravingKeywords = {
-            "cheesy": ["cheese", "pizza", "burger", "fast food", "italian"],
-            "spicy": ["spic", "punjabi", "dhaba", "north indian", "chinese", "biryani"],
-            "sweet": ["dessert", "bakery", "sweet", "cake"],
-            "crispy": ["burger", "fast food", "street food", "dosa"],
-            "comfort": ["dhaba", "north indian", "punjabi", "thali"],
-            "refreshing": ["shake", "cafe", "beverage"],
-            "late-night": ["dhaba", "fast food"],
-            "affordable": ["dhaba", "street food"]
+            "cheesy": ["chees", "pizza", "burger", "fast food", "italian", "fries", "pasta", "paneer"],
+            "spicy": ["spic", "punjabi", "dhaba", "north indian", "chinese", "biryani", "tikka", "curry"],
+            "sweet": ["dessert", "bakery", "sweet", "cake", "shake", "ice cream", "waffle", "halwa", "pastry"],
+            "crispy": ["burger", "fast food", "street food", "dosa", "fries", "kulcha", "naan", "golgapp", "momo"],
+            "comfort": ["dhaba", "north indian", "punjabi", "thali", "dal", "curry", "roti", "chai"],
+            "refreshing": ["shake", "cafe", "beverage", "tea", "coffee", "juice", "soda"],
+            "late-night": ["dhaba", "fast food", "burger", "pizza", "street food", "maggi"],
+            "affordable": ["dhaba", "street food", "roll", "chaat", "tea", "fast food"]
         };
         const queryCravingMatches = cravingKeywords[query] || [];
         const matchesCraving = queryCravingMatches.some(kw => name.includes(kw) || cuisine.includes(kw));
@@ -763,13 +763,14 @@ function filterRestaurants() {
         }
 
         const restaurant = restaurants.find(
-            item => String(item.restaurant_id) === String(card.dataset.id)
+            item => (card.dataset.id && String(item.restaurant_id) === String(card.dataset.id)) ||
+                    (card.dataset.name && (item.name || "").toLowerCase().trim() === (card.dataset.name || "").toLowerCase().trim())
         );
 
-        const hasCoordinates = card.dataset.latitude !== "" && card.dataset.longitude !== "";
+        const hasCoordinates = Boolean(card.dataset.latitude && card.dataset.longitude && card.dataset.latitude !== "" && card.dataset.longitude !== "");
         const matchesCity = nearbyActive && hasCoordinates
             ? true
-            : (restaurant ? matchesSelectedCity(restaurant) : false);
+            : (restaurant ? matchesSelectedCity(restaurant) : (card.querySelector(".location") ? matchesSelectedCity({ address: card.querySelector(".location").textContent }) : true));
 
         // Compute distance from user location or GPS coordinates
         const curLoc = (typeof getUserLocation === "function") ? getUserLocation() : { lat: 30.7333, lng: 76.7794 };

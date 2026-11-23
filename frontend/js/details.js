@@ -299,8 +299,8 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
     }
 
     // 16. Dal Makhani & Lentils
-    if (text.includes("dal makhani") || text.includes("makhani dal") || text.includes("bukhara") || text.includes("black lentil") || text.includes("daal")) {
-        return "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85";
+    if (text.includes("dal makhani") || text.includes("makhani dal") || text.includes("bukhara") || text.includes("black lentil") || text.includes("daal") || text.includes("dal handi")) {
+        return "../assets/images/dishes/dal-makhani.jpg";
     }
 
     // 17. Pizzas
@@ -330,8 +330,11 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
     }
 
     // 21. Chaat & Golgappe
-    if (text.includes("golgapp") || text.includes("pani puri") || text.includes("chaat") || text.includes("papdi") || text.includes("tikki") || text.includes("pav bhaji")) {
-        return "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85";
+    if (text.includes("golgapp") || text.includes("pani puri") || text.includes("puchka")) {
+        return "../assets/images/dishes/golgappe.jpg";
+    }
+    if (text.includes("chaat") || text.includes("papdi") || text.includes("tikki") || text.includes("pav bhaji")) {
+        return "../assets/images/dishes/golgappe.jpg";
     }
 
     // 22. Chai & Bun Maska

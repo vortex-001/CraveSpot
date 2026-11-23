@@ -301,7 +301,7 @@ const dishData = {
         restaurant: "Kulcha Junction",
         restaurantSlug: "kulcha-junction",
         location: "Sector 22, Chandigarh",
-        image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=85",
+        image: "../assets/images/dishes/amritsari-naan.jpg",
         description: "Flaky layered tandoor-baked kulcha with spiced Amritsari chole and butter.",
         longDescription: "Authentic Amritsari stuffed kulcha made with spiced potato and paneer stuffing, roasted in a clay tandoor until golden and crispy, served with slow-cooked dark chole and spicy tamarind onion relish."
     },
@@ -316,9 +316,199 @@ const dishData = {
         restaurant: "Chaat Chaska",
         restaurantSlug: "chaat-chaska",
         location: "Sector 34, Chandigarh",
-        image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85",
+        image: "../assets/images/dishes/golgappe.jpg",
         description: "Crunchy semolina puris with spicy mint water, potato-chickpea mash and sweet tamarind.",
         longDescription: "Crispy hollow puri balls filled with mashed potatoes, black chickpeas, sweet date-tamarind chutney, and dipped into ice-cold spicy mint-coriander water for an explosion of flavors."
+    },
+
+    "amritsari-kulcha-and-chole": {
+        name: "Amritsari Kulcha & Chole",
+        category: "North Indian",
+        cuisine: "Punjabi",
+        price: 140,
+        rating: 4.8,
+        reviews: "140+ reviews",
+        restaurant: "Kulcha Junction",
+        restaurantSlug: "kulcha-junction",
+        location: "Sector 22, Chandigarh",
+        image: "../assets/images/dishes/amritsari-naan.jpg",
+        description: "Flaky layered tandoor-baked kulcha with spiced Amritsari chole and butter.",
+        longDescription: "Authentic Amritsari stuffed kulcha made with spiced potato and paneer stuffing, roasted in a clay tandoor until golden and crispy, served with slow-cooked dark chole and spicy tamarind onion relish."
+    },
+
+    "crispy-golgappe-pani-puri": {
+        name: "Crispy Golgappe (Pani Puri)",
+        category: "Street Food",
+        cuisine: "Street Food",
+        price: 80,
+        rating: 4.9,
+        reviews: "210+ reviews",
+        restaurant: "Chaat Chaska",
+        restaurantSlug: "chaat-chaska",
+        location: "Sector 34, Chandigarh",
+        image: "../assets/images/dishes/golgappe.jpg",
+        description: "Crunchy semolina puris with spicy mint water, potato-chickpea mash and sweet tamarind.",
+        longDescription: "Crispy hollow puri balls filled with mashed potatoes, black chickpeas, sweet date-tamarind chutney, and dipped into ice-cold spicy mint-coriander water for an explosion of flavors."
+    },
+
+    "vegetable-dum-biryani": {
+        name: "Vegetable Dum Biryani",
+        category: "Biryani",
+        cuisine: "North Indian & Mughlai",
+        price: 180,
+        rating: 4.6,
+        reviews: "115+ reviews",
+        restaurant: "Spice Garden",
+        restaurantSlug: "spice-garden",
+        restaurantId: 1,
+        location: "Sector 17, Chandigarh",
+        image: "../assets/images/dishes/veg-biryani.jpg",
+        description: "Fragrant basmati rice layered with garden vegetables, saffron and whole spices in a sealed handi.",
+        longDescription: "Authentic dum-cooked biryani made with aged basmati rice, farm fresh carrots, beans, green peas, and spiced paneer cubes, infused with saffron milk, ghee and rose water."
+    },
+
+    "tandoori-roasted-chicken": {
+        name: "Tandoori Roasted Chicken",
+        category: "North Indian",
+        cuisine: "Tandoori & Mughlai",
+        price: 260,
+        rating: 4.8,
+        reviews: "170+ reviews",
+        restaurant: "Urban Tadka",
+        restaurantSlug: "urban-tadka",
+        restaurantId: 1,
+        location: "Sector 17, Chandigarh",
+        image: "../assets/images/dishes/tandoori-chicken.jpg",
+        description: "Tender chicken marinated in spiced hung curd and roasted in clay tandoor.",
+        longDescription: "Tender whole cuts of chicken marinated overnight in Kashmiri red chili, mustard oil, hung curd, ginger garlic and dry fenugreek, roasted over smoking tandoor coals."
+    },
+
+    "crispy-masala-dosa": {
+        name: "Crispy Masala Dosa",
+        category: "South Indian",
+        cuisine: "South Indian",
+        price: 110,
+        rating: 4.7,
+        reviews: "145+ reviews",
+        restaurant: "Amritsari Junction",
+        restaurantSlug: "amritsari-junction",
+        restaurantId: 4,
+        location: "Sector 22, Chandigarh",
+        image: "../assets/images/dishes/masala-dosa.jpg",
+        description: "Crispy fermented rice and lentil crepe stuffed with spiced mustard potato filling.",
+        longDescription: "Golden, razor-crisp crepe made from traditionally fermented batter, filled with flavorful mashed potato masala tempered with mustard seeds and curry leaves. Served with coconut chutney and hot sambar."
+    },
+
+    "hot-gulab-jamun-2-pcs": {
+        name: "Hot Gulab Jamun (2 pcs)",
+        category: "Dessert",
+        cuisine: "Traditional Sweets",
+        price: 70,
+        rating: 4.9,
+        reviews: "230+ reviews",
+        restaurant: "Sweet Treats & Cravings",
+        restaurantSlug: "sweet-treats",
+        restaurantId: 5,
+        location: "Sector 35, Chandigarh",
+        image: "../assets/images/dishes/gulab-jamun.jpg",
+        description: "Soft mawa dumplings fried golden and soaked in green cardamom rose sugar syrup.",
+        longDescription: "Authentic Khoya Gulab Jamuns handcrafted and fried in pure desi ghee, soaked in slow-simmered green cardamom and rosewater syrup, served piping hot."
+    },
+
+    "belgian-chocolate-thickshake": {
+        name: "Belgian Chocolate Thickshake",
+        category: "Dessert",
+        cuisine: "Beverages & Shakes",
+        price: 160,
+        rating: 4.8,
+        reviews: "185+ reviews",
+        restaurant: "Sweet Treats & Cravings",
+        restaurantSlug: "sweet-treats",
+        restaurantId: 5,
+        location: "Sector 35, Chandigarh",
+        image: "../assets/images/dishes/chocolate-shake.jpg",
+        description: "Rich blended shake crafted with Belgian dark chocolate, dairy cream and chocolate curls.",
+        longDescription: "Extra thick and creamy milkshake blended with authentic Belgian cocoa, premium vanilla cream, chocolate ganache drizzle, and topped with shaved dark chocolate curls."
+    },
+
+    "belgian-waffle-with-chocolate": {
+        name: "Belgian Waffle with Chocolate",
+        category: "Dessert",
+        cuisine: "Dessert & Bakery",
+        price: 150,
+        rating: 4.7,
+        reviews: "155+ reviews",
+        restaurant: "Sweet Treats & Cravings",
+        restaurantSlug: "sweet-treats",
+        restaurantId: 5,
+        location: "Sector 35, Chandigarh",
+        image: "../assets/images/dishes/waffle.jpg",
+        description: "Crisp golden Belgian grid waffle smothered in melted chocolate sauce.",
+        longDescription: "Freshly pressed crispy Belgian waffle with light fluffy interior, drenched with rich melted milk and dark chocolate sauce, dusted with powdered sugar."
+    },
+
+    "smoky-chicken-tikka-roll": {
+        name: "Smoky Chicken Tikka Roll",
+        category: "Street Food",
+        cuisine: "North Indian / Rolls",
+        price: 170,
+        rating: 4.8,
+        reviews: "160+ reviews",
+        restaurant: "Rolls Mania & Fast Bites",
+        restaurantSlug: "rolls-mania",
+        restaurantId: 12,
+        location: "Khanpur Chowk, Kharar",
+        image: "../assets/images/dishes/kathi-roll.jpg",
+        description: "Succulent tandoori chicken cubes with sliced red onions and zesty green chutney in flaky paratha.",
+        longDescription: "Juicy charred chicken tikka pieces wrapped in hot crispy layered paratha with slivered red onions, lemon juice, chaat masala, and fresh mint coriander chutney."
+    },
+
+    "double-egg-double-chicken-roll": {
+        name: "Double Egg Double Chicken Roll",
+        category: "Street Food",
+        cuisine: "North Indian / Rolls",
+        price: 190,
+        rating: 4.8,
+        reviews: "175+ reviews",
+        restaurant: "Rolls Mania & Fast Bites",
+        restaurantSlug: "rolls-mania",
+        restaurantId: 12,
+        location: "Khanpur Chowk, Kharar",
+        image: "../assets/images/dishes/kathi-roll.jpg",
+        description: "Golden fried egg coated paratha packed with roasted juicy chicken tikka.",
+        longDescription: "Flaky paratha coated with two beaten eggs on the tawa, rolled around a generous double portion of smoky chicken tikka, crunchy onions, and tangy sauce."
+    },
+
+    "cheesy-corn-and-jalapeno-roll": {
+        name: "Cheesy Corn & Jalapeno Roll",
+        category: "Street Food",
+        cuisine: "Fusion / Rolls",
+        price: 140,
+        rating: 4.6,
+        reviews: "125+ reviews",
+        restaurant: "Rolls Mania & Fast Bites",
+        restaurantSlug: "rolls-mania",
+        restaurantId: 12,
+        location: "Khanpur Chowk, Kharar",
+        image: "../assets/images/dishes/kathi-roll.jpg",
+        description: "Melted cheese, sweet corn, and spicy jalapeno relish rolled in crisp paratha.",
+        longDescription: "Crisp flaky wrap loaded with melted mozzarella and cheddar cheese, sweet golden corn kernels, sliced pickled jalapenos, and a dash of oregano seasoning."
+    },
+
+    "peri-peri-masala-fries": {
+        name: "Peri-Peri Masala Fries",
+        category: "Fast Food",
+        cuisine: "Fast Food",
+        price: 90,
+        rating: 4.5,
+        reviews: "110+ reviews",
+        restaurant: "Rolls Mania & Fast Bites",
+        restaurantSlug: "rolls-mania",
+        restaurantId: 12,
+        location: "Khanpur Chowk, Kharar",
+        image: "../assets/images/dishes/loaded-fries.jpg",
+        description: "Crispy golden potato fries tossed in tangy peri-peri spice blend.",
+        longDescription: "Thin-cut golden potato fries double fried for maximum crunch, tossed generously in spicy African bird's eye chili peri-peri spice rub, served with garlic dip."
     },
 
     "paneer-tikka-kathi-roll": {
@@ -347,7 +537,7 @@ const dishData = {
         restaurantSlug: "katani-dhaba",
         restaurantId: 6,
         location: "Phase 3B2, Mohali",
-        image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85",
+        image: "../assets/images/dishes/dal-makhani.jpg",
         description: "Slow-cooked black lentils simmered overnight with fresh white butter and rich cream.",
         longDescription: "Traditional Punjabi black urad dal simmered with tomatoes, ginger, and garlic over gentle tandoor coals for over 12 hours, finished with generous dollops of churned white butter and fresh cream."
     },
@@ -379,7 +569,7 @@ const dishData = {
         restaurantSlug: "amritsari-kulcha-junction",
         restaurantId: 13,
         location: "Landran Road, Kharar",
-        image: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=85",
+        image: "../assets/images/dishes/amritsari-naan.jpg",
         description: "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney.",
         longDescription: "Crispy multi-layered tandoori kulcha stuffed with spiced potato and onion, crushed by hand and slathered with melted country butter. Served with spicy Amritsari chhole and imli-pyaz chutney."
     },
@@ -427,7 +617,7 @@ const dishData = {
         restaurantSlug: "katani-dhaba",
         restaurantId: 6,
         location: "Phase 3B2, Mohali",
-        image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85",
+        image: "../assets/images/dishes/dal-makhani.jpg",
         description: "Slow-cooked black lentils with cream and butter.",
         longDescription: "Black urad dal slow-cooked on slow coals for over 16 hours, enriched with ginger, garlic, rich farm butter, and silky fresh cream for unbeatable comfort and richness."
     },
@@ -459,7 +649,7 @@ const dishData = {
         restaurantSlug: "chaat-chaska",
         restaurantId: 14,
         location: "Main Market, Kharar",
-        image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85",
+        image: "../assets/images/dishes/golgappe.jpg",
         description: "Crispy puris filled with potato mash, served with spicy mint, tangy hing, and sweet tamarind pani.",
         longDescription: "Golden crisp suji puris filled with spicy potato-chana masala, served alongside 3 chilled flavors of flavored water: Teekha Pudina, Khatta Meetha Sonth, and Hing Jeera."
     },
@@ -722,8 +912,8 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
     }
 
     // 16. Dal Makhani & Lentils
-    if (text.includes("dal makhani") || text.includes("makhani dal") || text.includes("bukhara") || text.includes("black lentil") || text.includes("daal")) {
-        return "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85";
+    if (text.includes("dal makhani") || text.includes("makhani dal") || text.includes("bukhara") || text.includes("black lentil") || text.includes("daal") || text.includes("dal handi")) {
+        return "../assets/images/dishes/dal-makhani.jpg";
     }
 
     // 17. Pizzas
@@ -753,8 +943,11 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
     }
 
     // 21. Chaat & Golgappe
-    if (text.includes("chaat") || text.includes("golgapp") || text.includes("pani puri") || text.includes("tikki") || text.includes("papdi")) {
-        return "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85";
+    if (text.includes("golgapp") || text.includes("pani puri") || text.includes("puchka")) {
+        return "../assets/images/dishes/golgappe.jpg";
+    }
+    if (text.includes("chaat") || text.includes("tikki") || text.includes("papdi")) {
+        return "../assets/images/dishes/golgappe.jpg";
     }
 
     // 22. Chai & Tea & Bun Maska

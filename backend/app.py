@@ -554,7 +554,7 @@ CURATED_FALLBACK_CATEGORIES = [
 
 CURATED_FALLBACK_DISHES = [
     {"item_id": 1, "restaurant_id": 1, "name": "Butter Chicken", "description": "Tender chicken cooked in rich makhani gravy", "price": 380, "rating": 4.8, "is_veg": 0, "category": "North Indian", "image_url": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=85"},
-    {"item_id": 2, "restaurant_id": 1, "name": "Dal Makhani", "description": "Slow-cooked black lentils with cream and butter", "price": 260, "rating": 4.7, "is_veg": 1, "category": "North Indian", "image_url": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 2, "restaurant_id": 1, "name": "Dal Makhani", "description": "Slow-cooked black lentils with cream and butter", "price": 260, "rating": 4.7, "is_veg": 1, "category": "North Indian", "image_url": "/assets/images/dishes/dal-makhani.jpg", "image": "/assets/images/dishes/dal-makhani.jpg"},
     {"item_id": 3, "restaurant_id": 2, "name": "Fiery Paneer Pizza", "description": "Spicy marinated paneer with capsicum and mozzarella", "price": 320, "rating": 4.5, "is_veg": 1, "category": "Pizza", "image_url": "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=800&q=85"},
     {"item_id": 4, "restaurant_id": 2, "name": "Classic Margherita Pizza", "description": "Fresh tomato basil sauce with premium mozzarella", "price": 280, "rating": 4.4, "is_veg": 1, "category": "Pizza", "image_url": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85"},
     {"item_id": 5, "restaurant_id": 3, "name": "Chicken Hakka Noodles", "description": "Wok-tossed noodles with chicken and fresh vegetables", "price": 240, "rating": 4.6, "is_veg": 0, "category": "Chinese", "image_url": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=85"},
@@ -562,7 +562,7 @@ CURATED_FALLBACK_DISHES = [
     {"item_id": 7, "restaurant_id": 1, "name": "Hyderabadi Dum Biryani", "description": "Aromatic basmati rice cooked with saffron and spices", "price": 350, "rating": 4.8, "is_veg": 0, "category": "Biryani", "image_url": "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=85"},
     {"item_id": 8, "restaurant_id": 8, "name": "Smoky Grilled Chicken", "description": "Juicy charcoal grilled chicken wings with barbecue glaze", "price": 390, "rating": 4.7, "is_veg": 0, "category": "Barbecue", "image_url": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=85"},
     {"item_id": 9, "restaurant_id": 13, "name": "Amritsari Stuffed Kulcha Thali", "description": "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney", "price": 140, "rating": 4.9, "is_veg": 1, "category": "North Indian", "image_url": "/assets/images/dishes/amritsari-naan.jpg", "image": "/assets/images/dishes/amritsari-naan.jpg"},
-    {"item_id": 10, "restaurant_id": 14, "name": "Dahi Papdi Chaat & Golgappe", "description": "Crispy papdi with sweetened yogurt, tangy saunth, and crispy golgappe", "price": 90, "rating": 4.8, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 10, "restaurant_id": 14, "name": "Dahi Papdi Chaat & Golgappe", "description": "Crispy papdi with sweetened yogurt, tangy saunth, and crispy golgappe", "price": 90, "rating": 4.8, "is_veg": 1, "category": "Street Food", "image_url": "/assets/images/dishes/golgappe.jpg", "image": "/assets/images/dishes/golgappe.jpg"},
     {"item_id": 11, "restaurant_id": 12, "name": "Special Paneer Kathi Roll", "description": "Flaky paratha loaded with spiced paneer, onions and mint chutney", "price": 150, "rating": 4.6, "is_veg": 1, "category": "Street Food", "image_url": "/assets/images/dishes/kathi-roll.jpg", "image": "/assets/images/dishes/kathi-roll.jpg"},
     {"item_id": 12, "restaurant_id": 15, "name": "Kadak Masala Chai & Bun Maska", "description": "Steaming hot ginger cardamom chai served with soft toasted bun and butter", "price": 70, "rating": 4.7, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"},
     {"item_id": 13, "restaurant_id": 4, "name": "Loaded Fries", "description": "Crispy golden french fries loaded with melted cheese and sauces", "price": 180, "rating": 4.5, "is_veg": 1, "category": "Fast Food", "image_url": "/assets/images/dishes/loaded-fries.jpg", "image": "/assets/images/dishes/loaded-fries.jpg"},
@@ -597,7 +597,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 260,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/dal-makhani.jpg"
         },
         {
             "item_id": 103,
@@ -635,7 +635,7 @@ REAL_RESTAURANT_MENUS = {
         {
             "item_id": 106,
             "restaurant_id": 1,
-            "name": "Tandoori Murgh Half",
+            "name": "Tandoori Chicken (Half)",
             "category": "Tandoori Starters",
             "description": "Traditional roasted chicken marinated in mustard oil, yogurt and Kashmiri chillies",
             "price": 290,
@@ -1267,7 +1267,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 210,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/dal-makhani.jpg"
         },
         {
             "item_id": 603,
@@ -1529,7 +1529,7 @@ REAL_RESTAURANT_MENUS = {
         {
             "item_id": 802,
             "restaurant_id": 8,
-            "name": "Tandoori Murgh Full",
+            "name": "Tandoori Chicken (Full)",
             "category": "Barbecue & Grills",
             "description": "Whole chicken marinated in yogurt, roasted cumin and degi mirch, charcoal charred",
             "price": 460,
@@ -1854,7 +1854,7 @@ REAL_RESTAURANT_MENUS = {
         {
             "item_id": 1101,
             "restaurant_id": 11,
-            "name": "Special Tandoori Murgh (Full)",
+            "name": "Special Tandoori Chicken (Full)",
             "category": "Tandoori Starters",
             "description": "Whole spring chicken marinated overnight in roasted spices and hung curd, clay-roasted",
             "price": 440,
@@ -1865,7 +1865,7 @@ REAL_RESTAURANT_MENUS = {
         {
             "item_id": 1102,
             "restaurant_id": 11,
-            "name": "Murgh Malai Tikka (6 pcs)",
+            "name": "Chicken Malai Tikka (6 pcs)",
             "category": "Tandoori Starters",
             "description": "Boneless chicken thighs marinated in cream, cashew paste, cardamom and grilled juicy",
             "price": 320,
@@ -3011,8 +3011,8 @@ def sanitize_dish_item(item):
         item["image_url"] = "https://images.unsplash.com/photo-1621996346565-e3d5d6281699?auto=format&fit=crop&w=800&q=85"
     elif "butter chicken" in n_lower or "murgh makhani" in n_lower:
         item["image_url"] = "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=85"
-    elif any(k in n_lower for k in ("dal makhani", "makhani dal", "bukhara", "black lentil")):
-        item["image_url"] = "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85"
+    elif any(k in n_lower for k in ("dal makhani", "makhani dal", "bukhara", "black lentil", "dal handi")):
+        item["image_url"] = "/assets/images/dishes/dal-makhani.jpg"
     elif "pizza" in n_lower or "margherita" in n_lower:
         if "paneer" in n_lower or "peri" in n_lower or "spic" in n_lower:
             item["image_url"] = "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=800&q=85"
@@ -3025,8 +3025,8 @@ def sanitize_dish_item(item):
             item["image_url"] = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=85"
     elif any(k in n_lower for k in ("momo", "dimsum", "dumpling")):
         item["image_url"] = "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=800&q=85"
-    elif any(k in n_lower for k in ("golgapp", "pani puri", "chaat", "tikki", "papdi")):
-        item["image_url"] = "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"
+    elif any(k in n_lower for k in ("golgapp", "pani puri", "chaat", "tikki", "papdi", "puchka")):
+        item["image_url"] = "/assets/images/dishes/golgappe.jpg"
     elif any(k in n_lower for k in ("chai", "tea", "bun maska")):
         item["image_url"] = "/assets/images/dishes/chai.jpg" if os.path.exists("frontend/assets/images/dishes/chai.jpg") else "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"
     elif "maggi" in n_lower:
