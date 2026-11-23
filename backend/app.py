@@ -561,10 +561,17 @@ CURATED_FALLBACK_DISHES = [
     {"item_id": 6, "restaurant_id": 3, "name": "Veg Manchurian Dry", "description": "Crispy vegetable balls tossed in ginger garlic soy glaze", "price": 220, "rating": 4.5, "is_veg": 1, "category": "Chinese", "image_url": "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=800&q=85"},
     {"item_id": 7, "restaurant_id": 1, "name": "Hyderabadi Dum Biryani", "description": "Aromatic basmati rice cooked with saffron and spices", "price": 350, "rating": 4.8, "is_veg": 0, "category": "Biryani", "image_url": "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=85"},
     {"item_id": 8, "restaurant_id": 8, "name": "Smoky Grilled Chicken", "description": "Juicy charcoal grilled chicken wings with barbecue glaze", "price": 390, "rating": 4.7, "is_veg": 0, "category": "Barbecue", "image_url": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=800&q=85"},
-    {"item_id": 9, "restaurant_id": 13, "name": "Amritsari Stuffed Kulcha Thali", "description": "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney", "price": 140, "rating": 4.9, "is_veg": 1, "category": "North Indian", "image_url": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 9, "restaurant_id": 13, "name": "Amritsari Stuffed Kulcha Thali", "description": "Crispy tandoori kulcha with spicy chhole, butter and tangy chutney", "price": 140, "rating": 4.9, "is_veg": 1, "category": "North Indian", "image_url": "/assets/images/dishes/amritsari-naan.jpg", "image": "/assets/images/dishes/amritsari-naan.jpg"},
     {"item_id": 10, "restaurant_id": 14, "name": "Dahi Papdi Chaat & Golgappe", "description": "Crispy papdi with sweetened yogurt, tangy saunth, and crispy golgappe", "price": 90, "rating": 4.8, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"},
     {"item_id": 11, "restaurant_id": 12, "name": "Special Paneer Kathi Roll", "description": "Flaky paratha loaded with spiced paneer, onions and mint chutney", "price": 150, "rating": 4.6, "is_veg": 1, "category": "Street Food", "image_url": "/assets/images/dishes/kathi-roll.jpg", "image": "/assets/images/dishes/kathi-roll.jpg"},
-    {"item_id": 12, "restaurant_id": 15, "name": "Kadak Masala Chai & Bun Maska", "description": "Steaming hot ginger cardamom chai served with soft toasted bun and butter", "price": 70, "rating": 4.7, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"}
+    {"item_id": 12, "restaurant_id": 15, "name": "Kadak Masala Chai & Bun Maska", "description": "Steaming hot ginger cardamom chai served with soft toasted bun and butter", "price": 70, "rating": 4.7, "is_veg": 1, "category": "Street Food", "image_url": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85", "image": "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"},
+    {"item_id": 13, "restaurant_id": 4, "name": "Loaded Fries", "description": "Crispy golden french fries loaded with melted cheese and sauces", "price": 180, "rating": 4.5, "is_veg": 1, "category": "Fast Food", "image_url": "/assets/images/dishes/loaded-fries.jpg", "image": "/assets/images/dishes/loaded-fries.jpg"},
+    {"item_id": 14, "restaurant_id": 5, "name": "Desi Ghee Moong Dal Halwa", "description": "Rich golden slow-roasted moong dal sweet in pure desi ghee with pistachios", "price": 130, "rating": 4.9, "is_veg": 1, "category": "Dessert", "image_url": "/assets/images/dishes/moong-dal-halwa.jpg", "image": "/assets/images/dishes/moong-dal-halwa.jpg"},
+    {"item_id": 15, "restaurant_id": 5, "name": "Belgian Waffle with Chocolate", "description": "Golden crisp Belgian grid waffle served warm with chocolate drizzle and berries", "price": 160, "rating": 4.7, "is_veg": 1, "category": "Dessert", "image_url": "/assets/images/dishes/waffle.jpg", "image": "/assets/images/dishes/waffle.jpg"},
+    {"item_id": 16, "restaurant_id": 7, "name": "Royal Shahi Tukda", "description": "Ghee-crisped bread triangles steeped in saffron cardamom syrup and smothered in thick rabri", "price": 140, "rating": 4.8, "is_veg": 1, "category": "Dessert", "image_url": "/assets/images/dishes/shahi-tukda.jpg", "image": "/assets/images/dishes/shahi-tukda.jpg"},
+    {"item_id": 17, "restaurant_id": 7, "name": "Matka Kesar Phirni", "description": "Chilled slow-cooked ground rice pudding flavored with Kashmiri saffron in earthen clay pot", "price": 110, "rating": 4.9, "is_veg": 1, "category": "Dessert", "image_url": "/assets/images/dishes/matka-kesar-phirni.jpg", "image": "/assets/images/dishes/matka-kesar-phirni.jpg"},
+    {"item_id": 18, "restaurant_id": 5, "name": "Dark Truffle Chocolate Cake Slice", "description": "Layers of moist Dutch chocolate sponge infused with rich silky dark chocolate ganache truffle", "price": 170, "rating": 4.8, "is_veg": 1, "category": "Dessert", "image_url": "/assets/images/dishes/chocolate-cake.jpg", "image": "/assets/images/dishes/chocolate-cake.jpg"},
+    {"item_id": 19, "restaurant_id": 5, "name": "Red Velvet Cheesecake Slice", "description": "Crimson red velvet sponge layered with smooth baked Philadelphia cream cheese frosting", "price": 190, "rating": 4.8, "is_veg": 1, "category": "Dessert", "image_url": "/assets/images/dishes/red-velvet-cake.jpg", "image": "/assets/images/dishes/red-velvet-cake.jpg"}
 ]
 
 # Real, categorized, high-resolution menus mapped to exact restaurants
@@ -1148,7 +1155,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 180,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/red-velvet-cake.jpg"
         },
         {
             "item_id": 505,
@@ -1159,7 +1166,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 160,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/chocolate-cake.jpg"
         },
         {
             "item_id": 506,
@@ -1170,7 +1177,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 190,
             "rating": 4.7,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/cheesecake.jpg"
         },
         {
             "item_id": 507,
@@ -1203,7 +1210,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 130,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/moong-dal-halwa.jpg"
         },
         {
             "item_id": 510,
@@ -1214,7 +1221,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 150,
             "rating": 4.6,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/waffle.jpg"
         },
         {
             "item_id": 511,
@@ -1225,7 +1232,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 180,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/waffle.jpg"
         },
         {
             "item_id": 512,
@@ -1493,7 +1500,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 120,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/shahi-tukda.jpg"
         },
         {
             "item_id": 710,
@@ -1504,7 +1511,7 @@ REAL_RESTAURANT_MENUS = {
             "price": 90,
             "rating": 4.8,
             "is_veg": 1,
-            "image_url": "https://images.unsplash.com/photo-1666190092159-3171cf0fbb12?auto=format&fit=crop&w=800&q=85"
+            "image_url": "/assets/images/dishes/matka-kesar-phirni.jpg"
         }
     ],
     "8": [
@@ -2954,11 +2961,21 @@ def sanitize_dish_item(item):
 
     if any(k in n_lower for k in ("roll", "kathi", "wrap", "shawarma")):
         item["image_url"] = "/assets/images/dishes/kathi-roll.jpg"
+    elif any(k in n_lower for k in ("fries", "french fries", "peri-peri", "loaded fries")):
+        item["image_url"] = "/assets/images/dishes/loaded-fries.jpg"
     elif any(k in n_lower for k in ("shake", "thickshake", "cold coffee", "frappe", "smoothie")):
         if "strawberry" in n_lower or "berry" in n_lower or "fruit" in n_lower:
             item["image_url"] = "/assets/images/dishes/strawberry-shake.jpg"
         else:
             item["image_url"] = "/assets/images/dishes/chocolate-shake.jpg"
+    elif any(k in n_lower for k in ("waffle", "waffles", "crepe")):
+        item["image_url"] = "/assets/images/dishes/waffle.jpg"
+    elif any(k in n_lower for k in ("halwa", "moong dal", "kesari")):
+        item["image_url"] = "/assets/images/dishes/moong-dal-halwa.jpg"
+    elif any(k in n_lower for k in ("shahi tukda", "shahi tukra", "tukda", "tukra")):
+        item["image_url"] = "/assets/images/dishes/shahi-tukda.jpg"
+    elif any(k in n_lower for k in ("phirni", "firni", "kheer")):
+        item["image_url"] = "/assets/images/dishes/matka-kesar-phirni.jpg"
     elif "gulab jamun" in n_lower or "jamun" in n_lower:
         item["image_url"] = "/assets/images/dishes/gulab-jamun.jpg"
     elif "jalebi" in n_lower or "rabri" in n_lower:
@@ -2967,12 +2984,18 @@ def sanitize_dish_item(item):
         item["image_url"] = "/assets/images/dishes/rasgulla.jpg"
     elif "rasmalai" in n_lower:
         item["image_url"] = "/assets/images/dishes/rasmalai.jpg"
-    elif any(k in n_lower for k in ("halwa", "kesari", "phirni", "shahi tukda")):
-        item["image_url"] = "/assets/images/dishes/gulab-jamun.jpg"
+    elif "red velvet" in n_lower:
+        item["image_url"] = "/assets/images/dishes/red-velvet-cake.jpg"
+    elif "cheesecake" in n_lower:
+        item["image_url"] = "/assets/images/dishes/cheesecake.jpg"
+    elif "truffle" in n_lower or ("chocolate" in n_lower and "cake" in n_lower) or "fudge cake" in n_lower or "choco lava" in n_lower:
+        item["image_url"] = "/assets/images/dishes/chocolate-cake.jpg"
     elif "brownie" in n_lower or "fudge" in n_lower:
         item["image_url"] = "/assets/images/dishes/chocolate-brownie.jpg"
-    elif any(k in n_lower for k in ("cheesecake", "cake", "pastry")):
+    elif any(k in n_lower for k in ("cake", "pastry")):
         item["image_url"] = "/assets/images/dishes/pastry-cake.jpg"
+    elif any(k in n_lower for k in ("naan", "kulcha", "chole", "chhole", "bhatur")):
+        item["image_url"] = "/assets/images/dishes/amritsari-naan.jpg"
     elif any(k in n_lower for k in ("paneer butter", "shahi paneer", "kadhai paneer", "kadai paneer", "matar paneer")):
         item["image_url"] = "/assets/images/dishes/paneer-butter-masala.jpg"
     elif "biryani" in n_lower or "pulao" in n_lower:
@@ -2990,8 +3013,6 @@ def sanitize_dish_item(item):
         item["image_url"] = "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=85"
     elif any(k in n_lower for k in ("dal makhani", "makhani dal", "bukhara", "black lentil")):
         item["image_url"] = "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85"
-    elif any(k in n_lower for k in ("kulcha", "chole", "chhole", "bhatur")):
-        item["image_url"] = "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85"
     elif "pizza" in n_lower or "margherita" in n_lower:
         if "paneer" in n_lower or "peri" in n_lower or "spic" in n_lower:
             item["image_url"] = "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=800&q=85"
@@ -3007,11 +3028,9 @@ def sanitize_dish_item(item):
     elif any(k in n_lower for k in ("golgapp", "pani puri", "chaat", "tikki", "papdi")):
         item["image_url"] = "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85"
     elif any(k in n_lower for k in ("chai", "tea", "bun maska")):
-        item["image_url"] = "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"
+        item["image_url"] = "/assets/images/dishes/chai.jpg" if os.path.exists("frontend/assets/images/dishes/chai.jpg") else "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85"
     elif "maggi" in n_lower:
         item["image_url"] = "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=85"
-    elif "fries" in n_lower:
-        item["image_url"] = "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=85"
     elif any(k in n_lower for k in ("noodle", "hakka", "chowmein", "schezwan")):
         item["image_url"] = "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=85"
 

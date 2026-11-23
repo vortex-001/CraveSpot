@@ -721,8 +721,21 @@ function filterRestaurants() {
         const isVeg = card.dataset.veg === "true";
         const hasOffer = card.dataset.offer === "true";
 
-        const matchesSearch =
-            name.includes(query) || cuisine.includes(query) || (card.querySelector(".location")?.textContent || "").toLowerCase().includes(query);
+        const cravingKeywords = {
+            "cheesy": ["cheese", "pizza", "burger", "fast food", "italian"],
+            "spicy": ["spic", "punjabi", "dhaba", "north indian", "chinese", "biryani"],
+            "sweet": ["dessert", "bakery", "sweet", "cake"],
+            "crispy": ["burger", "fast food", "street food", "dosa"],
+            "comfort": ["dhaba", "north indian", "punjabi", "thali"],
+            "refreshing": ["shake", "cafe", "beverage"],
+            "late-night": ["dhaba", "fast food"],
+            "affordable": ["dhaba", "street food"]
+        };
+        const queryCravingMatches = cravingKeywords[query] || [];
+        const matchesCraving = queryCravingMatches.some(kw => name.includes(kw) || cuisine.includes(kw));
+
+        const matchesSearch = !query ||
+            name.includes(query) || cuisine.includes(query) || (card.querySelector(".location")?.textContent || "").toLowerCase().includes(query) || matchesCraving;
 
         const matchesRating =
             !ratingFilter || !ratingFilter.checked || rating >= 4.0;

@@ -201,7 +201,12 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
         return "../assets/images/dishes/kathi-roll.jpg";
     }
 
-    // 2. Shakes & Cold Coffee
+    // 2. Fries & Loaded Fries - ALWAYS before burger so fries never display as burger!
+    if (text.includes("fries") || text.includes("french fries") || text.includes("peri-peri") || text.includes("loaded fries")) {
+        return "../assets/images/dishes/loaded-fries.jpg";
+    }
+
+    // 3. Shakes & Cold Coffee
     if (text.includes("shake") || text.includes("thickshake") || text.includes("smoothie") || text.includes("cold coffee") || text.includes("frappe")) {
         if (text.includes("strawberry") || text.includes("berry") || text.includes("fruit")) {
             return "../assets/images/dishes/strawberry-shake.jpg";
@@ -209,7 +214,27 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
         return "../assets/images/dishes/chocolate-shake.jpg";
     }
 
-    // 3. Indian Sweets
+    // 4. Waffles & Crepes
+    if (text.includes("waffle") || text.includes("waffles") || text.includes("crepe")) {
+        return "../assets/images/dishes/waffle.jpg";
+    }
+
+    // 5. Traditional Halwa
+    if (text.includes("halwa") || text.includes("moong dal") || text.includes("kesari")) {
+        return "../assets/images/dishes/moong-dal-halwa.jpg";
+    }
+
+    // 6. Shahi Tukda / Tukra
+    if (text.includes("shahi tukda") || text.includes("shahi tukra") || text.includes("tukda") || text.includes("tukra")) {
+        return "../assets/images/dishes/shahi-tukda.jpg";
+    }
+
+    // 7. Matka Phirni & Kheer
+    if (text.includes("phirni") || text.includes("firni") || text.includes("kheer")) {
+        return "../assets/images/dishes/matka-kesar-phirni.jpg";
+    }
+
+    // 8. Other Indian Sweets: Gulab Jamun, Jalebi, Rasgulla, Rasmalai
     if (text.includes("gulab jamun") || text.includes("jamun")) {
         return "../assets/images/dishes/gulab-jamun.jpg";
     }
@@ -222,22 +247,35 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
     if (text.includes("rasmalai")) {
         return "../assets/images/dishes/rasmalai.jpg";
     }
-    if (text.includes("halwa") || text.includes("kesari") || text.includes("phirni") || text.includes("shahi tukda")) {
-        return "../assets/images/dishes/gulab-jamun.jpg";
+
+    // 9. Cakes & Pastries
+    if (text.includes("red velvet")) {
+        return "../assets/images/dishes/red-velvet-cake.jpg";
+    }
+    if (text.includes("cheesecake")) {
+        return "../assets/images/dishes/cheesecake.jpg";
+    }
+    if (text.includes("truffle") || (text.includes("chocolate") && text.includes("cake")) || text.includes("fudge cake") || text.includes("choco lava")) {
+        return "../assets/images/dishes/chocolate-cake.jpg";
     }
     if (text.includes("brownie") || text.includes("fudge")) {
         return "../assets/images/dishes/chocolate-brownie.jpg";
     }
-    if (text.includes("cake") || text.includes("pastry") || text.includes("cheesecake")) {
+    if (text.includes("cake") || text.includes("pastry")) {
         return "../assets/images/dishes/pastry-cake.jpg";
     }
 
-    // 4. Paneer Curries
+    // 10. Amritsari Naan & Kulcha Thalis
+    if (text.includes("naan") || text.includes("kulcha") || text.includes("chhole") || text.includes("chole") || text.includes("bhatur")) {
+        return "../assets/images/dishes/amritsari-naan.jpg";
+    }
+
+    // 11. Paneer Curries
     if (text.includes("paneer butter") || text.includes("shahi paneer") || text.includes("kadai paneer") || text.includes("kadhai paneer") || text.includes("matar paneer")) {
         return "../assets/images/dishes/paneer-butter-masala.jpg";
     }
 
-    // 5. Biryani & Pulao
+    // 12. Biryani & Pulao
     if (text.includes("biryani") || text.includes("pulao")) {
         if (text.includes("chicken") || text.includes("mutton") || text.includes("gosht")) {
             return "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=800&q=85";
@@ -245,32 +283,27 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
         return "../assets/images/dishes/veg-biryani.jpg";
     }
 
-    // 6. Tandoori Chicken
+    // 13. Tandoori Chicken
     if (text.includes("tandoori chicken") || text.includes("tandoori murgh") || (text.includes("tandoori") && text.includes("chicken"))) {
         return "../assets/images/dishes/tandoori-chicken.jpg";
     }
 
-    // 7. Dosa & South Indian
+    // 14. Dosa & South Indian
     if (text.includes("dosa") || text.includes("uttapam") || text.includes("idli")) {
         return "../assets/images/dishes/masala-dosa.jpg";
     }
 
-    // 8. Kulcha & Chole
-    if (text.includes("kulcha") || text.includes("chhole") || text.includes("chole") || text.includes("bhatur")) {
-        return "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=800&q=85";
-    }
-
-    // 9. Butter Chicken
+    // 15. Butter Chicken
     if (text.includes("butter chicken") || text.includes("makhani chicken") || text.includes("murgh makhani")) {
         return "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=85";
     }
 
-    // 10. Dal Makhani & Lentils
+    // 16. Dal Makhani & Lentils
     if (text.includes("dal makhani") || text.includes("makhani dal") || text.includes("bukhara") || text.includes("black lentil") || text.includes("daal")) {
         return "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=800&q=85";
     }
 
-    // 11. Pizzas
+    // 17. Pizzas
     if (text.includes("pizza") || text.includes("margherita") || text.includes("mozzarella")) {
         if (text.includes("peri") || text.includes("paneer") || text.includes("spic")) {
             return "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=800&q=85";
@@ -278,7 +311,7 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
         return "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=800&q=85";
     }
 
-    // 12. Burgers
+    // 18. Burgers (strictly checked after fries!)
     if (text.includes("burger") || text.includes("cheeseburger") || text.includes("zinger") || text.includes("smash")) {
         if (text.includes("smash")) {
             return "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=85";
@@ -286,37 +319,32 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
         return "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=85";
     }
 
-    // 13. Momos & Dim Sum
+    // 19. Momos & Dim Sum
     if (text.includes("momo") || text.includes("dimsum") || text.includes("dumpling")) {
         return "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=800&q=85";
     }
 
-    // 14. Noodles & Chinese
+    // 20. Noodles & Chinese
     if (text.includes("noodle") || text.includes("hakka") || text.includes("chowmein") || text.includes("schezwan") || text.includes("manchurian")) {
         return "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=85";
     }
 
-    // 15. Chaat & Golgappe
+    // 21. Chaat & Golgappe
     if (text.includes("golgapp") || text.includes("pani puri") || text.includes("chaat") || text.includes("papdi") || text.includes("tikki") || text.includes("pav bhaji")) {
         return "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=85";
     }
 
-    // 16. Chai & Bun Maska
+    // 22. Chai & Bun Maska
     if (text.includes("chai") || text.includes("tea") || text.includes("bun maska")) {
         return "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=800&q=85";
     }
 
-    // 17. Maggi
+    // 23. Maggi
     if (text.includes("maggi")) {
         return "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=800&q=85";
     }
 
-    // 18. Fries
-    if (text.includes("fries")) {
-        return "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=85";
-    }
-
-    // 19. Pasta
+    // 24. Pasta
     if (text.includes("pasta") || text.includes("arrabbiata") || text.includes("alfredo") || text.includes("penne")) {
         return "https://images.unsplash.com/photo-1621996346565-e3d5d6281699?auto=format&fit=crop&w=800&q=85";
     }

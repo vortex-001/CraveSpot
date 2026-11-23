@@ -107,15 +107,15 @@ function filterDishes() {
         if (selectedCraving === "spicy") {
             matchesCraving = cravingAttr.includes("spicy") || name.includes("chilli") || name.includes("biryani") || name.includes("tikka") || name.includes("curry") || name.includes("spic");
         } else if (selectedCraving === "cheesy") {
-            matchesCraving = cravingAttr.includes("cheesy") || name.includes("cheese") || name.includes("pizza") || name.includes("fries") || name.includes("paneer");
+            matchesCraving = cravingAttr.includes("cheesy") || name.includes("cheese") || name.includes("pizza") || name.includes("fries") || name.includes("paneer") || category.includes("pizza") || category.includes("burger");
         } else if (selectedCraving === "crispy") {
-            matchesCraving = cravingAttr.includes("crispy") || name.includes("burger") || name.includes("fries") || name.includes("crisp") || name.includes("kulcha") || name.includes("crunch");
+            matchesCraving = cravingAttr.includes("crispy") || name.includes("burger") || name.includes("fries") || name.includes("crisp") || name.includes("kulcha") || name.includes("naan") || name.includes("crunch") || name.includes("waffle") || name.includes("dosa") || name.includes("golgappe");
         } else if (selectedCraving === "comfort") {
-            matchesCraving = cravingAttr.includes("comfort") || name.includes("dal") || name.includes("butter") || name.includes("noodles") || name.includes("momos") || name.includes("kulcha");
+            matchesCraving = cravingAttr.includes("comfort") || name.includes("dal") || name.includes("butter") || name.includes("noodles") || name.includes("momos") || name.includes("kulcha") || name.includes("naan") || name.includes("halwa") || name.includes("phirni") || name.includes("tukda");
         } else if (selectedCraving === "sweet") {
-            matchesCraving = cravingAttr.includes("sweet") || category.includes("dessert") || name.includes("brownie") || name.includes("jamun") || name.includes("sweet");
+            matchesCraving = cravingAttr.includes("sweet") || category.includes("dessert") || name.includes("brownie") || name.includes("jamun") || name.includes("sweet") || name.includes("halwa") || name.includes("waffle") || name.includes("phirni") || name.includes("tukda") || name.includes("cake") || name.includes("pastry") || name.includes("cheesecake") || name.includes("shake") || name.includes("jalebi") || name.includes("rasgulla") || name.includes("rasmalai");
         } else if (selectedCraving === "budget") {
-            matchesCraving = price < 150;
+            matchesCraving = cravingAttr.includes("budget") || price <= 160;
         }
 
         const restaurantName = (card.dataset.restaurant || card.querySelector(".dish-price-row span")?.textContent || "").toLowerCase();
@@ -552,7 +552,11 @@ if (initialDishQuery) {
 // ================= CRAVING MOOD CHIPS =================
 const cravingChips = document.querySelectorAll(".craving-chip");
 cravingChips.forEach(chip => {
-    chip.addEventListener("click", function() {
+    chip.addEventListener("click", function(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
         cravingChips.forEach(c => c.classList.remove("active"));
         this.classList.add("active");
         selectedCraving = this.dataset.craving || "all";

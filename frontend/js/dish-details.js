@@ -117,7 +117,7 @@ const dishData = {
 
     "loaded-fries": {
         name: "Loaded Fries",
-        category: "Burger",
+        category: "Fast Food",
         cuisine: "Fast Food",
         price: 180,
         rating: 4.3,
@@ -127,13 +127,124 @@ const dishData = {
         restaurantSlug: "the-food-factory",
         location: "Phase 7, Mohali",
 
-        image:
-    "https://images.unsplash.com/photo-1573080496219-bb080dd4f4c2?auto=format&fit=crop&w=900&q=85",
+        image: "../assets/images/dishes/loaded-fries.jpg",
         description:
-            "Crispy fries loaded with delicious toppings and creamy sauces.",
+            "Crispy golden fries loaded with delicious melted cheese, tangy herbs and creamy sauces.",
 
         longDescription:
-            "Loaded Fries are crispy golden fries topped with flavorful sauces and delicious toppings. They make a great snack or side dish."
+            "Loaded Fries are crispy golden hand-cut fries piled high with spiced melted cheese, tangy jalapeno relish, and savory secret house sauces. The ultimate crispy snack!"
+    },
+
+    "amritsari-naan": {
+        name: "Amritsari Stuffed Naan Thali",
+        category: "North Indian",
+        cuisine: "Punjabi Tandoor",
+        price: 150,
+        rating: 4.8,
+        reviews: "180+ reviews",
+        restaurant: "Amritsari Kulcha Junction",
+        restaurantSlug: "kulcha-junction",
+        restaurantId: 13,
+        location: "Sector 22, Chandigarh",
+        image: "../assets/images/dishes/amritsari-naan.jpg",
+        description: "Crispy tandoori stuffed naan brushed with desi ghee, served with spicy Amritsari chhole and raita.",
+        longDescription: "Authentic clay-oven tandoori Amritsari naan stuffed with seasoned spiced potatoes, onions and paneer, served hot with slow-simmered dark pindi chhole, pickled onions and tangy mint chutney."
+    },
+
+    "desi-ghee-moong-dal-halwa": {
+        name: "Desi Ghee Moong Dal Halwa",
+        category: "Dessert",
+        cuisine: "Traditional Sweets",
+        price: 130,
+        rating: 4.9,
+        reviews: "210+ reviews",
+        restaurant: "Sweet Treats & Cravings",
+        restaurantSlug: "sweet-treats",
+        restaurantId: 5,
+        location: "Sector 35, Chandigarh",
+        image: "../assets/images/dishes/moong-dal-halwa.jpg",
+        description: "Rich golden moong dal halwa slow-roasted in pure desi ghee, garnished with almonds and pistachios.",
+        longDescription: "Slow-cooked golden yellow moong dal halwa roasted patiently in pure desi ghee, simmered with whole milk, saffron, green cardamom, and generously topped with slivered cashews, almonds and pistachios."
+    },
+
+    "belgian-waffle": {
+        name: "Belgian Waffle with Maple & Chocolate",
+        category: "Dessert",
+        cuisine: "Bakery & Desserts",
+        price: 160,
+        rating: 4.7,
+        reviews: "145+ reviews",
+        restaurant: "Sweet Treats & Cravings",
+        restaurantSlug: "sweet-treats",
+        restaurantId: 5,
+        location: "Sector 35, Chandigarh",
+        image: "../assets/images/dishes/waffle.jpg",
+        description: "Freshly baked crisp golden grid waffle served warm with rich chocolate drizzle and fresh berries.",
+        longDescription: "Deep pocketed crisp Belgian waffle baked to golden perfection, finished with warm chocolate drizzle, pure maple syrup, whipped cream, and fresh orchard berries."
+    },
+
+    "royal-shahi-tukda": {
+        name: "Royal Shahi Tukda",
+        category: "Dessert",
+        cuisine: "Mughlai Sweets",
+        price: 140,
+        rating: 4.8,
+        reviews: "165+ reviews",
+        restaurant: "Urban Tadka",
+        restaurantSlug: "urban-tadka",
+        restaurantId: 7,
+        location: "Sector 26, Chandigarh",
+        image: "../assets/images/dishes/shahi-tukda.jpg",
+        description: "Ghee-crisped bread triangles steeped in saffron cardamom syrup and smothered in thick rabri.",
+        longDescription: "The royal Awadhi dessert made of golden fried bread steeped in rose and cardamom infused sugar syrup, topped with thick condensed kesar rabri, silver vark and toasted dry fruit flakes."
+    },
+
+    "matka-kesar-phirni": {
+        name: "Matka Kesar Phirni",
+        category: "Dessert",
+        cuisine: "Traditional Sweets",
+        price: 110,
+        rating: 4.9,
+        reviews: "190+ reviews",
+        restaurant: "Urban Tadka",
+        restaurantSlug: "urban-tadka",
+        restaurantId: 7,
+        location: "Sector 26, Chandigarh",
+        image: "../assets/images/dishes/matka-kesar-phirni.jpg",
+        description: "Chilled slow-cooked ground rice pudding flavored with Kashmiri saffron, served in an authentic earthen shikora.",
+        longDescription: "Creamy rice pudding slow-simmered with reduced milk, fragrant Kashmiri saffron, crushed green cardamom, chilled to perfection in natural clay shikoras (matkas) for an earthy aroma."
+    },
+
+    "dark-truffle-chocolate-cake": {
+        name: "Dark Truffle Chocolate Cake Slice",
+        category: "Dessert",
+        cuisine: "Bakery & Cakes",
+        price: 170,
+        rating: 4.8,
+        reviews: "230+ reviews",
+        restaurant: "Sweet Treats & Cravings",
+        restaurantSlug: "sweet-treats",
+        restaurantId: 5,
+        location: "Sector 35, Chandigarh",
+        image: "../assets/images/dishes/chocolate-cake.jpg",
+        description: "Layers of moist Dutch chocolate sponge infused with rich silky dark chocolate ganache truffle.",
+        longDescription: "Decadent layered dark chocolate cake layered with Belgian cocoa sponge, infused with velvety 60% dark chocolate ganache, and dusted with cocoa shavings."
+    },
+
+    "red-velvet-cake": {
+        name: "Red Velvet Cheesecake Slice",
+        category: "Dessert",
+        cuisine: "Bakery & Cakes",
+        price: 190,
+        rating: 4.8,
+        reviews: "175+ reviews",
+        restaurant: "Sweet Treats & Cravings",
+        restaurantSlug: "sweet-treats",
+        restaurantId: 5,
+        location: "Sector 35, Chandigarh",
+        image: "../assets/images/dishes/red-velvet-cake.jpg",
+        description: "Crimson red velvet sponge layered with smooth baked Philadelphia cream cheese frosting.",
+        longDescription: "Rich and vibrant red velvet cake layered with silky whipped cream cheese frosting, hint of vanilla bean and light cocoa undertones."
     },
 
 
@@ -513,7 +624,12 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
         return "../assets/images/dishes/kathi-roll.jpg";
     }
 
-    // 2. Shakes, Thickshakes, Smoothies & Cold Coffee - ALWAYS match authentic tall glass shake photo
+    // 2. Fries & Loaded Fries - ALWAYS before burger so fries never display as burger!
+    if (text.includes("fries") || text.includes("french fries") || text.includes("peri-peri") || text.includes("loaded fries")) {
+        return "../assets/images/dishes/loaded-fries.jpg";
+    }
+
+    // 3. Shakes, Thickshakes, Smoothies & Cold Coffee - ALWAYS match authentic tall glass shake photo
     if (text.includes("shake") || text.includes("thickshake") || text.includes("smoothie") || text.includes("cold coffee") || text.includes("frappe")) {
         if (text.includes("strawberry") || text.includes("berry") || text.includes("fruit")) {
             return "../assets/images/dishes/strawberry-shake.jpg";
@@ -521,7 +637,27 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
         return "../assets/images/dishes/chocolate-shake.jpg";
     }
 
-    // 3. Indian Sweets: Gulab Jamun, Jalebi, Rasgulla, Halwa, Phirni
+    // 4. Waffles & Crepes
+    if (text.includes("waffle") || text.includes("waffles") || text.includes("crepe")) {
+        return "../assets/images/dishes/waffle.jpg";
+    }
+
+    // 5. Traditional Halwa
+    if (text.includes("halwa") || text.includes("moong dal") || text.includes("kesari")) {
+        return "../assets/images/dishes/moong-dal-halwa.jpg";
+    }
+
+    // 6. Shahi Tukda / Tukra
+    if (text.includes("shahi tukda") || text.includes("shahi tukra") || text.includes("tukda") || text.includes("tukra")) {
+        return "../assets/images/dishes/shahi-tukda.jpg";
+    }
+
+    // 7. Matka Phirni & Kheer
+    if (text.includes("phirni") || text.includes("firni") || text.includes("kheer")) {
+        return "../assets/images/dishes/matka-kesar-phirni.jpg";
+    }
+
+    // 8. Other Indian Sweets: Gulab Jamun, Jalebi, Rasgulla, Rasmalai
     if (text.includes("gulab jamun") || text.includes("jamun")) {
         return "../assets/images/dishes/gulab-jamun.jpg";
     }
@@ -534,22 +670,35 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
     if (text.includes("rasmalai")) {
         return "../assets/images/dishes/rasmalai.jpg";
     }
-    if (text.includes("halwa") || text.includes("kesari") || text.includes("phirni") || text.includes("shahi tukda")) {
-        return "../assets/images/dishes/gulab-jamun.jpg";
+
+    // 9. Cakes & Pastries - Match specific requested cake flavours!
+    if (text.includes("red velvet")) {
+        return "../assets/images/dishes/red-velvet-cake.jpg";
+    }
+    if (text.includes("cheesecake")) {
+        return "../assets/images/dishes/cheesecake.jpg";
+    }
+    if (text.includes("truffle") || (text.includes("chocolate") && text.includes("cake")) || text.includes("fudge cake") || text.includes("choco lava")) {
+        return "../assets/images/dishes/chocolate-cake.jpg";
     }
     if (text.includes("brownie") || text.includes("fudge")) {
         return "../assets/images/dishes/chocolate-brownie.jpg";
     }
-    if (text.includes("cake") || text.includes("pastry") || text.includes("cheesecake")) {
+    if (text.includes("cake") || text.includes("pastry")) {
         return "../assets/images/dishes/pastry-cake.jpg";
     }
 
-    // 4. Paneer Curries
+    // 10. Amritsari Naan & Kulcha Thalis
+    if (text.includes("naan") || text.includes("kulcha") || text.includes("chhole") || text.includes("chole") || text.includes("bhatur")) {
+        return "../assets/images/dishes/amritsari-naan.jpg";
+    }
+
+    // 11. Paneer Curries
     if (text.includes("paneer butter") || text.includes("shahi paneer") || text.includes("kadai paneer") || text.includes("kadhai paneer") || text.includes("matar paneer")) {
         return "../assets/images/dishes/paneer-butter-masala.jpg";
     }
 
-    // 5. Biryani & Pulao
+    // 12. Biryani & Pulao
     if (text.includes("biryani") || text.includes("pulao")) {
         if (text.includes("chicken") || text.includes("mutton") || text.includes("gosht")) {
             return "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?auto=format&fit=crop&w=900&q=85";
@@ -557,32 +706,27 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
         return "../assets/images/dishes/veg-biryani.jpg";
     }
 
-    // 6. Tandoori Chicken
+    // 13. Tandoori Chicken
     if (text.includes("tandoori chicken") || text.includes("tandoori murgh") || (text.includes("tandoori") && text.includes("chicken"))) {
         return "../assets/images/dishes/tandoori-chicken.jpg";
     }
 
-    // 7. Dosa & South Indian
+    // 14. Dosa & South Indian
     if (text.includes("dosa") || text.includes("uttapam") || text.includes("idli")) {
         return "../assets/images/dishes/masala-dosa.jpg";
     }
 
-    // 8. Kulchas & Chole Thalis - ALWAYS match authentic kulcha photo
-    if (text.includes("kulcha") || text.includes("chhole") || text.includes("chole") || text.includes("bhatur")) {
-        return "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=900&q=85";
-    }
-
-    // 9. Butter Chicken
+    // 15. Butter Chicken
     if (text.includes("butter chicken") || text.includes("makhani chicken") || text.includes("murgh makhani")) {
         return "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 10. Dal Makhani & Lentils
+    // 16. Dal Makhani & Lentils
     if (text.includes("dal makhani") || text.includes("makhani dal") || text.includes("bukhara") || text.includes("black lentil") || text.includes("daal")) {
         return "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 11. Pizzas
+    // 17. Pizzas
     if (text.includes("pizza") || text.includes("margherita") || text.includes("mozzarella")) {
         if (text.includes("peri") || text.includes("paneer") || text.includes("spic")) {
             return "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=900&q=85";
@@ -590,7 +734,7 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
         return "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 12. Burgers
+    // 18. Burgers (strictly checked after fries!)
     if (text.includes("burger") || text.includes("cheeseburger") || text.includes("zinger") || text.includes("smash")) {
         if (text.includes("smash")) {
             return "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=85";
@@ -598,37 +742,32 @@ function resolveDishImage(dishName = "", category = "", existingUrl = "") {
         return "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 13. Momos & Dim Sum
+    // 19. Momos & Dim Sum
     if (text.includes("momo") || text.includes("dimsum") || text.includes("dumpling")) {
         return "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 14. Noodles & Chinese
+    // 20. Noodles & Chinese
     if (text.includes("noodle") || text.includes("hakka") || text.includes("chowmein") || text.includes("schezwan") || text.includes("manchurian") || text.includes("chinese")) {
         return "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 15. Chaat & Golgappe
+    // 21. Chaat & Golgappe
     if (text.includes("chaat") || text.includes("golgapp") || text.includes("pani puri") || text.includes("tikki") || text.includes("papdi")) {
         return "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 16. Chai & Tea & Bun Maska
+    // 22. Chai & Tea & Bun Maska
     if (text.includes("chai") || text.includes("tea") || text.includes("bun maska")) {
         return "https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 17. Maggi
+    // 23. Maggi
     if (text.includes("maggi")) {
         return "https://images.unsplash.com/photo-1612927601601-6638404737ce?auto=format&fit=crop&w=900&q=85";
     }
 
-    // 18. Fries
-    if (text.includes("fries")) {
-        return "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=900&q=85";
-    }
-
-    // 19. Pasta
+    // 24. Pasta
     if (text.includes("pasta") || text.includes("arrabbiata") || text.includes("alfredo") || text.includes("penne")) {
         return "https://images.unsplash.com/photo-1621996346565-e3d5d6281699?auto=format&fit=crop&w=900&q=85";
     }

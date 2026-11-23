@@ -547,13 +547,15 @@ document.addEventListener('DOMContentLoaded', () => {
     syncAuthState();
     initImageFallbacks();
 
-    // Quick craving category pill clicks
-    document.querySelectorAll('.craving-chip, .quick-craving-pill').forEach(pill => {
-        pill.addEventListener('click', () => {
-            const craving = pill.dataset.craving || pill.textContent.trim();
-            performCravingSearch(craving);
+    // Quick craving category pill clicks (only on home/index page or pages without custom in-page filtering)
+    if (!window.location.pathname.includes('dishes.html')) {
+        document.querySelectorAll('.craving-chip, .quick-craving-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                const craving = pill.dataset.craving || pill.textContent.trim();
+                performCravingSearch(craving);
+            });
         });
-    });
+    }
 
     window.addEventListener('cravespot:authChanged', syncAuthState);
 });
