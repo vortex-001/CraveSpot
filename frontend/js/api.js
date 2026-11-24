@@ -7,7 +7,9 @@ const CRAVESPOT_API_BASE = window.CRAVESPOT_API_BASE
     || localStorage.getItem("cravespot_api_url")
     || (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1"
         ? "http://127.0.0.1:5000/api"
-        : "/api");
+        : (window.location.hostname.includes("vercel.app") || window.location.hostname.includes("netlify.app")
+            ? "https://cravespot-api.onrender.com/api"
+            : "/api"));
 
 // ---------------------------------------------------------------------
 // 1. Toast Notification Utility
