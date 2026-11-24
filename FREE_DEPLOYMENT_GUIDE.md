@@ -24,7 +24,7 @@ This guide walks you through deploying the complete **CraveSpot** application (M
    - Choose **Connect with: General / Python**.
    - Note down the connection parameters or copy the `DATABASE_URL`:
      ```text
-     mysql://<user>:<password>@<host>:4000/project?ssl-mode=REQUIRED
+     mysql://<user>:<password>@<host>:4000/CraveSpot?ssl-mode=REQUIRED
      ```
 6. **Initialize the Database Schema & Seed Data**:
    On your local terminal, run `init_db.py` pointing to your cloud database:
