@@ -9,6 +9,7 @@
 [![Python Version](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.1%2B%20WSGI-000000?style=for-the-badge&logo=flask&logoColor=white)](https://palletsprojects.com/p/flask/)
 [![MySQL 8.0](https://img.shields.io/badge/MySQL-8.0%20(3NF%20Normalized)-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Live Demo](https://img.shields.io/badge/Live%20Production-cravespot--c81h.onrender.com-22c55e?style=for-the-badge&logo=render&logoColor=white)](https://cravespot-c81h.onrender.com)
 [![Test Suite](https://img.shields.io/badge/Tests-262%20Passed%20(100%25)-22c55e?style=for-the-badge&logo=pytest&logoColor=white)](tests/API_TEST_RESULTS.md)
 [![Deployment](https://img.shields.io/badge/Deployment-Render%20%2B%20Vercel%20%2B%20TiDB-06b6d4?style=for-the-badge&logo=vercel&logoColor=white)](FREE_DEPLOYMENT_GUIDE.md)
 
