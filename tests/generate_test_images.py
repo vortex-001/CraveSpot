@@ -164,4 +164,10 @@ def main():
     )
 
 if __name__ == "__main__":
-    main()
+    try:
+        from tests.capture_website_screenshots import capture_screenshots
+        print("[*] Capturing live website screenshots...")
+        capture_screenshots()
+    except Exception as e:
+        print(f"[*] Headless browser screenshot fallback: {e}. Generating test card summaries...")
+        main()
