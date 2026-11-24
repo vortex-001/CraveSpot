@@ -44,14 +44,18 @@ def init_database():
 
     try:
         # Connect to MySQL server
-        conn = mysql.connector.connect(
-            host=DB_HOST,
-            port=DB_PORT,
-            user=DB_USER,
-            password=DB_PASSWORD,
-            autocommit=True,
-            use_pure=True
-        )
+        conn_params = {
+            "host": DB_HOST,
+            "port": DB_PORT,
+            "user": DB_USER,
+            "password": DB_PASSWORD,
+            "autocommit": True,
+            "use_pure": True
+        }
+        if DB_HOST not in ("localhost", "127.0.0.1"):
+            conn_params["ssl_disabled"] = False
+
+        conn = mysql.connector.connect(**conn_params)
         cursor = conn.cursor()
         print("Connected to MySQL Server successfully!")
 
