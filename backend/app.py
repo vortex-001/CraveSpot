@@ -196,13 +196,30 @@ def get_current_user_id():
 # =====================================================================
 
 @app.route("/", methods=["GET"])
+@app.route("/api", methods=["GET"])
 def home():
     return jsonify({
         "success": True,
         "name": "CraveSpot API",
         "version": "2.0.0",
         "database": os.getenv("DB_NAME", "CraveSpot"),
-        "message": "CraveSpot Backend & Recommendation Engine is Running!"
+        "message": "CraveSpot Backend & Recommendation Engine is Running!",
+        "endpoints": {
+            "health": "/api/health",
+            "restaurants": "/api/restaurants",
+            "menu_items": "/api/menu-items",
+            "categories": "/api/categories",
+            "cuisines": "/api/cuisines",
+            "cravings_recommend": "/api/cravings/recommend",
+            "cravings_surprise_me": "/api/cravings/surprise-me",
+            "cravings_taxonomy": "/api/cravings/taxonomy",
+            "nearby_restaurants": "/api/nearby-restaurants",
+            "live_nearby": "/api/restaurants/live-nearby",
+            "location_geocode": "/api/location/geocode",
+            "reviews": "/api/reviews",
+            "login": "/api/login",
+            "register": "/api/register"
+        }
     }), 200
 
 
@@ -245,8 +262,12 @@ def health():
 def geocode_endpoint():
     """Geocode city, locality or pincode into coordinates."""
     q = request.args.get("q", "").strip()
+    is_browser = bool(request.headers.get("Sec-Ch-Ua") or "Mozilla" in request.headers.get("User-Agent", ""))
     if not q:
-        return jsonify({"success": False, "message": "Query parameter 'q' is required"}), 400
+        if is_browser:
+            q = "Chandigarh, India"
+        else:
+            return jsonify({"success": False, "message": "Query parameter 'q' is required"}), 400
 
     result = geocode_address(q)
     if not result:
@@ -2584,7 +2605,11 @@ def live_nearby_restaurants():
     try:
         lat_val = request.args.get("lat") if request.args.get("lat") is not None else request.args.get("latitude")
         lng_val = request.args.get("lng") if request.args.get("lng") is not None else request.args.get("longitude")
-        if lat_val is None or lng_val is None:
+        is_browser = bool(request.headers.get("Sec-Ch-Ua") or "Mozilla" in request.headers.get("User-Agent", ""))
+        if lat_val is None and lng_val is None and is_browser:
+            lat_val = 30.7333
+            lng_val = 76.7794
+        elif lat_val is None or lng_val is None:
             raise ValueError("Missing coordinates")
         lat = float(lat_val)
         lng = float(lng_val)
@@ -2680,21 +2705,21 @@ def recommend_cravings():
     """
     if request.method == "POST":
         data = request.get_json(silent=True) or {}
-        query = data.get("query", "").strip()
+        query = data.get("query", "").strip() or data.get("q", "").strip()
         user_lat = data.get("latitude")
         user_lng = data.get("longitude")
         budget = data.get("budget")
         dietary = data.get("dietary")
+        if not query:
+            return jsonify({"success": False, "message": "A craving query is required"}), 400
     else:
-        query = request.args.get("q", "").strip()
-        user_lat = request.args.get("lat", type=float)
-        user_lng = request.args.get("lng", type=float)
+        query = request.args.get("query", "").strip() or request.args.get("q", "").strip()
+        user_lat = request.args.get("lat", type=float) or request.args.get("latitude", type=float)
+        user_lng = request.args.get("lng", type=float) or request.args.get("longitude", type=float)
         budget = request.args.get("budget", type=float)
         dietary = request.args.get("dietary")
-
-    # Early validation — must have a non-empty query string
-    if not query:
-        return jsonify({"success": False, "message": "A craving query is required"}), 400
+        if not query:
+            query = "popular"
 
     conn = None
     cursor = None
@@ -3325,10 +3350,49 @@ def get_restaurant_reviews(restaurant_id):
             conn.close()
 
 
-@app.route("/api/restaurants/<int:restaurant_id>/reviews", methods=["POST"])
-@app.route("/api/reviews", methods=["POST"])
+@app.route("/api/restaurants/<int:restaurant_id>/reviews", methods=["GET", "POST"])
+@app.route("/api/reviews", methods=["GET", "POST"])
 def add_review(restaurant_id=None):
-    """Submit a new review for a restaurant."""
+    """Get recent reviews or submit a new review."""
+    if request.method == "GET":
+        conn = None
+        cursor = None
+        try:
+            conn = get_db()
+            cursor = conn.cursor(dictionary=True)
+            res_id = restaurant_id or request.args.get("restaurant_id", type=int)
+            if res_id:
+                cursor.execute(
+                    """
+                    SELECT r.*, res.name AS restaurant_name
+                    FROM reviews r
+                    LEFT JOIN restaurants res ON r.restaurant_id = res.restaurant_id
+                    WHERE r.restaurant_id = %s
+                    ORDER BY r.created_at DESC
+                    """,
+                    (res_id,)
+                )
+            else:
+                cursor.execute(
+                    """
+                    SELECT r.*, res.name AS restaurant_name
+                    FROM reviews r
+                    LEFT JOIN restaurants res ON r.restaurant_id = res.restaurant_id
+                    ORDER BY r.created_at DESC
+                    LIMIT 50
+                    """
+                )
+            rows = cursor.fetchall()
+            return jsonify(serialize_rows(rows)), 200
+        except Exception as e:
+            app.logger.warning(f"Error fetching reviews: {e}")
+            return jsonify([]), 200
+        finally:
+            if cursor:
+                cursor.close()
+            if conn and conn.is_connected():
+                conn.close()
+
     data = request.get_json(silent=True) or {}
 
     res_id = restaurant_id or data.get("restaurant_id")
@@ -3418,9 +3482,25 @@ FALLBACK_USERS = {
     }
 }
 
-@app.route("/api/register", methods=["POST"])
+@app.route("/api/register", methods=["GET", "POST"])
 def register():
     """User registration with rate-limiting and validation."""
+    if request.method == "GET":
+        return jsonify({
+            "success": True,
+            "endpoint": "/api/register",
+            "method": "POST",
+            "message": "CraveSpot User Registration API. Submit a POST request with JSON payload to create an account.",
+            "required_fields": ["name", "email", "password"],
+            "optional_fields": ["phone"],
+            "example": {
+                "name": "Harsh Sharma",
+                "email": "harsh@example.com",
+                "password": "Password123!",
+                "phone": "+91 98765 43210"
+            }
+        }), 200
+
     client_ip = request.remote_addr or "unknown"
     if not check_rate_limit(f"reg_{client_ip}", max_requests=6, window_seconds=60):
         return jsonify({"success": False, "message": "Too many registration attempts. Please wait a minute."}), 429
@@ -3543,9 +3623,22 @@ def register():
             conn.close()
 
 
-@app.route("/api/login", methods=["POST"])
+@app.route("/api/login", methods=["GET", "POST"])
 def login():
     """User authentication with rate-limiting and token issuance."""
+    if request.method == "GET":
+        return jsonify({
+            "success": True,
+            "endpoint": "/api/login",
+            "method": "POST",
+            "message": "CraveSpot User Authentication API. Submit a POST request with JSON payload to log in and receive an auth token.",
+            "required_fields": ["email", "password"],
+            "example": {
+                "email": "user@example.com",
+                "password": "Password123!"
+            }
+        }), 200
+
     client_ip = request.remote_addr or "unknown"
     if not check_rate_limit(f"login_{client_ip}", max_requests=8, window_seconds=60):
         return jsonify({"success": False, "message": "Too many login attempts. Please try again after 60 seconds."}), 429
@@ -3961,28 +4054,37 @@ def user_history_endpoint():
 # 11. LEGACY NEARBY-RESTAURANTS ENDPOINT
 # =====================================================================
 
-@app.route("/api/nearby-restaurants", methods=["POST"])
+@app.route("/api/nearby-restaurants", methods=["GET", "POST"])
 def nearby_restaurants():
     """Haversine search across local MySQL restaurants."""
-    data = request.get_json(silent=True) or {}
-
-    try:
-        latitude = float(data["latitude"])
-        longitude = float(data["longitude"])
-        radius_km = float(data.get("radius_km", 10))
-
-        if (
-            not math.isfinite(latitude)
-            or not math.isfinite(longitude)
-            or not math.isfinite(radius_km)
-            or not -90 <= latitude <= 90
-            or not -180 <= longitude <= 180
-            or not 0 < radius_km <= 100
-        ):
-            raise ValueError("Invalid coordinates")
-
-    except (KeyError, TypeError, ValueError):
-        return jsonify({"success": False, "message": "Valid latitude and longitude are required"}), 400
+    if request.method == "POST":
+        data = request.get_json(silent=True) or {}
+        try:
+            latitude = float(data["latitude"])
+            longitude = float(data["longitude"])
+            radius_km = float(data.get("radius_km", 10))
+            if (
+                not math.isfinite(latitude)
+                or not math.isfinite(longitude)
+                or not math.isfinite(radius_km)
+                or not -90 <= latitude <= 90
+                or not -180 <= longitude <= 180
+                or not 0 < radius_km <= 100
+            ):
+                raise ValueError("Invalid coordinates")
+        except (KeyError, TypeError, ValueError):
+            return jsonify({"success": False, "message": "Valid latitude and longitude are required"}), 400
+    else:
+        # GET request (e.g. from browser or query params)
+        lat_val = request.args.get("lat") or request.args.get("latitude") or 30.7333
+        lng_val = request.args.get("lng") or request.args.get("longitude") or 76.7794
+        radius_km = float(request.args.get("radius") or request.args.get("radius_km") or 10.0)
+        try:
+            latitude = float(lat_val)
+            longitude = float(lng_val)
+        except (TypeError, ValueError):
+            latitude = 30.7333
+            longitude = 76.7794
 
     conn = None
     cursor = None

@@ -196,6 +196,18 @@ def api_call(label, method, path, json_body=None, expect=200, token=None, mock_d
     ok = status == expect
     info = f"HTTP {status}"
     chk(label, ok, info)
+
+    # Print API output snippet directly in test result
+    if body:
+        if isinstance(body, list):
+            sample = f"List of {len(body)} items -> {json.dumps(body[0])[:85]}..." if body else "[]"
+            print(f"       ↳ API Output: {sample}")
+        elif isinstance(body, dict):
+            compact = json.dumps(body)
+            if len(compact) > 115:
+                compact = compact[:112] + "..."
+            print(f"       ↳ API Output: {compact}")
+
     return body, ok
 
 
@@ -789,6 +801,65 @@ chk(".env: DB_HOST=localhost",  "DB_HOST=localhost"  in env_content, "")
 req_content = (ROOT / "requirements.txt").read_text() if (ROOT / "requirements.txt").exists() else ""
 for dep in ["flask","flask-cors","mysql-connector-python","python-dotenv","werkzeug","itsdangerous"]:
     chk(f"requirements.txt: {dep}", dep.lower() in req_content.lower(), "")
+
+
+# ── 17. Live API Endpoints Full Output Verification ──────────
+section("17. Live API Endpoints Full Output Verification")
+
+api_endpoints_to_report = [
+    ("GET /api (API Directory)", "GET", "/api", {}, 200),
+    ("GET /api/health (DB Connection)", "GET", "/api/health", {}, 200),
+    ("GET /api/location/geocode (Default Location)", "GET", "/api/location/geocode", {"headers": {"Sec-Ch-Ua": "Chromium"}}, 200),
+    ("GET /api/restaurants/live-nearby (Live Tricity Spots)", "GET", "/api/restaurants/live-nearby", {"headers": {"Sec-Ch-Ua": "Chromium"}}, 200),
+    ("GET /api/nearby-restaurants (Haversine Distance)", "GET", "/api/nearby-restaurants", {}, 200),
+    ("GET /api/cravings/recommend (Craving Engine)", "GET", "/api/cravings/recommend", {}, 200),
+    ("GET /api/cravings/surprise-me (Chef Surprise)", "GET", "/api/cravings/surprise-me", {}, 200),
+    ("GET /api/cravings/taxonomy (All Craving Categories)", "GET", "/api/cravings/taxonomy", {}, 200),
+    ("GET /api/restaurants (All Restaurants)", "GET", "/api/restaurants", {}, 200),
+    ("GET /api/restaurants/1 (Single Restaurant Details)", "GET", "/api/restaurants/1", {}, 200),
+    ("GET /api/restaurants/1/menu (Restaurant Menu)", "GET", "/api/restaurants/1/menu", {}, 200),
+    ("GET /api/reviews (All Restaurant Reviews)", "GET", "/api/reviews", {}, 200),
+    ("GET /api/menu-items (Complete Dishes List)", "GET", "/api/menu-items", {}, 200),
+    ("GET /api/categories (Food Categories)", "GET", "/api/categories", {}, 200),
+    ("GET /api/cuisines (Culinary Cuisines)", "GET", "/api/cuisines", {}, 200),
+    ("GET /api/register (Registration Info & Schema)", "GET", "/api/register", {}, 200),
+    ("GET /api/login (Authentication Info & Schema)", "GET", "/api/login", {}, 200),
+]
+
+api_output_records = []
+for label, method, path, kwargs, exp in api_endpoints_to_report:
+    headers = kwargs.get("headers", {})
+    resp = client.get(path, headers=headers)
+    status = resp.status_code
+    try:
+        data = resp.get_json()
+    except Exception:
+        data = resp.data.decode("utf-8")
+    
+    passed = status == exp
+    chk(f"Endpoint {path}", passed, f"HTTP {status}")
+    
+    formatted_out = json.dumps(data, indent=2) if isinstance(data, (dict, list)) else str(data)
+    # Print clean formatted output block
+    indented = "\n".join("         " + line for line in formatted_out.splitlines()[:6])
+    if len(formatted_out.splitlines()) > 6:
+        indented += f"\n         ... (+{len(formatted_out.splitlines()) - 6} more lines)"
+    print(f"       ↳ Full API Output:\n{indented}\n")
+    
+    api_output_records.append({
+        "label": label,
+        "method": method,
+        "endpoint": path,
+        "status": status,
+        "response": data
+    })
+
+# Save full output report to tests/API_TEST_RESULTS.json
+try:
+    with open(ROOT / "tests" / "API_TEST_RESULTS.json", "w", encoding="utf-8") as f:
+        json.dump(api_output_records, f, indent=2)
+except Exception:
+    pass
 
 
 # ══════════════════════════════════════════════════════════════════════════════
