@@ -1,7 +1,7 @@
 """
 CraveSpot Production Backend Application
 Framework: Flask + Flask-CORS + MySQL Connector
-Database: project (Configurable via DB_NAME in .env)
+Database: CraveSpot (Configurable via DB_NAME in .env)
 Features:
 - Live Location & Overpass OSM Places Discovery
 - Natural Language Craving-Based Recommendation Engine
@@ -114,7 +114,7 @@ def get_db():
             import urllib.parse
             parsed = urllib.parse.urlparse(db_url)
             port = parsed.port or 3306
-            db_name = parsed.path.lstrip("/").split("?")[0] or os.getenv("DB_NAME", "project")
+            db_name = parsed.path.lstrip("/").split("?")[0] or os.getenv("DB_NAME", "CraveSpot")
             params = {
                 "host": parsed.hostname,
                 "port": port,
@@ -137,7 +137,7 @@ def get_db():
         "port": int(os.getenv("DB_PORT", 3306)),
         "user": os.getenv("DB_USER", "root"),
         "password": os.getenv("DB_PASSWORD", ""),
-        "database": os.getenv("DB_NAME", "project"),
+        "database": os.getenv("DB_NAME", "CraveSpot"),
         "connection_timeout": 8
     }
     if ssl_enabled:
@@ -201,7 +201,7 @@ def home():
         "success": True,
         "name": "CraveSpot API",
         "version": "2.0.0",
-        "database": os.getenv("DB_NAME", "project"),
+        "database": os.getenv("DB_NAME", "CraveSpot"),
         "message": "CraveSpot Backend & Recommendation Engine is Running!"
     }), 200
 
@@ -218,7 +218,7 @@ def health():
 
         return jsonify({
             "success": True,
-            "database": os.getenv("DB_NAME", "project"),
+            "database": os.getenv("DB_NAME", "CraveSpot"),
             "message": "MySQL connected successfully"
         }), 200
 
@@ -4060,7 +4060,7 @@ if __name__ == "__main__":
     debug = os.getenv("DEBUG", "False").lower() in ("true", "1")
 
     print(f" * Starting CraveSpot backend on http://{host}:{port}")
-    print(f" * Target database: {os.getenv('DB_NAME', 'project')}")
+    print(f" * Target database: {os.getenv('DB_NAME', 'CraveSpot')}")
     app.run(
         host=host,
         port=port,

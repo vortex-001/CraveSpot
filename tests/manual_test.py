@@ -27,7 +27,7 @@ os.environ["DB_HOST"]     = "localhost"
 os.environ["DB_PORT"]     = "3306"
 os.environ["DB_USER"]     = "root"
 os.environ["DB_PASSWORD"] = ""
-os.environ["DB_NAME"]     = "project"
+os.environ["DB_NAME"]     = "CraveSpot"
 os.environ["PORT"]        = "5000"
 
 from unittest.mock import MagicMock, patch
@@ -217,14 +217,14 @@ section("1. Core API Endpoints")
 body, _ = api_call("GET / root", "GET", "/", expect=200)
 chk("  → success = True",           body.get("success") is True,          f"success={body.get('success')}")
 chk("  → message contains 'CraveSpot'", "CraveSpot" in body.get("message",""), f"message={body.get('message','')[:60]}")
-chk("  → database = 'project'",     body.get("database") == "project",    f"database={body.get('database')}")
+chk("  → database = 'CraveSpot'",   body.get("database") == "CraveSpot",    f"database={body.get('database')}")
 chk("  → version key present",      "version" in body,                     f"version={body.get('version')}")
 
 # Health check: DB up
 db_ok = make_mock_db(custom_fetchone=(1,))
 body2, _ = api_call("GET /api/health (DB up)", "GET", "/api/health", expect=200, mock_db=db_ok)
 chk("  → success = True",           body2.get("success") is True,         f"success={body2.get('success')}")
-chk("  → database='project'",       body2.get("database") == "project",   f"got={body2.get('database')}")
+chk("  → database='CraveSpot'",     body2.get("database") == "CraveSpot",   f"got={body2.get('database')}")
 
 # Health check: DB down
 import mysql.connector
@@ -765,7 +765,7 @@ if schema_path.exists():
                        "search_history","cuisines"]
     for tbl in required_tables:
         chk(f"Schema: table '{tbl}' present", tbl in schema, "")
-    chk("Schema: DB_NAME=project used",      "project"          in schema, "")
+    chk("Schema: DB_NAME=CraveSpot used",    "CraveSpot"        in schema, "")
     chk("Schema: ON DELETE CASCADE present", "ON DELETE CASCADE" in schema, "")
     chk("Schema: foreign keys defined",      "FOREIGN KEY"       in schema, "")
     chk("Schema: idempotent (IF NOT EXISTS)","IF NOT EXISTS"     in schema, "")
@@ -783,7 +783,7 @@ for fname in [".env", ".env.example", "requirements.txt", "setup.bat",
     chk(f"File exists: {fname}", fpath.exists(), "")
 
 env_content = (ROOT / ".env").read_text() if (ROOT / ".env").exists() else ""
-chk(".env: DB_NAME=project",    "DB_NAME=project"    in env_content, f"env snippet={env_content.strip()[:80]}")
+chk(".env: DB_NAME=CraveSpot",  "DB_NAME=CraveSpot"  in env_content, f"env snippet={env_content.strip()[:80]}")
 chk(".env: DB_HOST=localhost",  "DB_HOST=localhost"  in env_content, "")
 
 req_content = (ROOT / "requirements.txt").read_text() if (ROOT / "requirements.txt").exists() else ""

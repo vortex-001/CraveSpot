@@ -17,7 +17,7 @@ DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = int(os.getenv("DB_PORT", 3306))
 DB_USER = os.getenv("DB_USER", "root")
 DB_PASSWORD = os.getenv("DB_PASSWORD", "")
-DB_NAME = os.getenv("DB_NAME", "project")
+DB_NAME = os.getenv("DB_NAME", "CraveSpot")
 
 
 def init_database():
@@ -39,7 +39,8 @@ def init_database():
             port=DB_PORT,
             user=DB_USER,
             password=DB_PASSWORD,
-            autocommit=True
+            autocommit=True,
+            use_pure=True
         )
         cursor = conn.cursor()
         print("Connected to MySQL Server successfully!")
@@ -50,11 +51,32 @@ def init_database():
 
         print(f"Executing schema script from {schema_file}...")
 
-        # Execute statements in schema.sql
-        for statement in cursor.execute(sql_script, multi=True):
-            if statement.with_rows:
-                statement.fetchall()
+        # Parse and execute statements
+        statements = []
+        current = []
+        for line in sql_script.splitlines():
+            stripped = line.strip()
+            if not stripped or stripped.startswith("--") or stripped.startswith("/*"):
+                continue
+            current.append(line)
+            if stripped.endswith(";"):
+                stmt = "\n".join(current).strip()
+                if stmt:
+                    statements.append(stmt)
+                current = []
+        if current:
+            stmt = "\n".join(current).strip()
+            if stmt:
+                statements.append(stmt)
 
+        executed_count = 0
+        for stmt in statements:
+            s = stmt.strip()
+            if s and s != ";":
+                cursor.execute(s)
+                executed_count += 1
+
+        print(f"Executed {executed_count} SQL statements successfully!")
         print(f"Database '{DB_NAME}' and all tables initialized successfully!")
 
         # Verify tables and rows

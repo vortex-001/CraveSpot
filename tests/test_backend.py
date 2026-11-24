@@ -33,13 +33,13 @@ class CraveSpotBackendTests(unittest.TestCase):
     # =====================================================================
 
     def test_home_route(self):
-        """Test GET / returns 200, confirmation message, and database 'project'."""
+        """Test GET / returns 200, confirmation message, and database 'CraveSpot'."""
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
         data = response.get_json()
         self.assertTrue(data["success"])
         self.assertIn("CraveSpot", data["message"])
-        self.assertEqual(data["database"], "project")
+        self.assertEqual(data["database"], "CraveSpot")
 
     def test_security_headers_present(self):
         """Verify that security headers are injected into HTTP responses."""
@@ -73,7 +73,7 @@ class CraveSpotBackendTests(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             data = response.get_json()
             self.assertTrue(data["success"])
-            self.assertEqual(data["database"], "project")
+            self.assertEqual(data["database"], "CraveSpot")
 
     # =====================================================================
     # 2. Craving Recommendation Engine Tests

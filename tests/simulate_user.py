@@ -3,7 +3,7 @@ os.environ['DB_HOST'] = 'localhost'
 os.environ['DB_PORT'] = '3306'
 os.environ['DB_USER'] = 'root'
 os.environ['DB_PASSWORD'] = ''
-os.environ['DB_NAME'] = 'project'
+os.environ['DB_NAME'] = 'CraveSpot'
 sys.path.insert(0, '.')
 
 from backend.app import app

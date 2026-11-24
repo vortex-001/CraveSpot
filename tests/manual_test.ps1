@@ -76,7 +76,7 @@ Write-Host ""
 Write-Host "--- SECTION 1: Core API Endpoints ---" -ForegroundColor Yellow
 Test-Endpoint "GET / (root status)" GET "$API/" -checkField "success" -checkValue $true
 Test-Endpoint "GET /api/health (DB check)" GET "$API/api/health" -expectStatus 200
-Test-Endpoint "GET / database=project" GET "$API/" -checkField "database" -checkValue "project"
+Test-Endpoint "GET / database=CraveSpot" GET "$API/" -checkField "database" -checkValue "CraveSpot"
 
 # --- SECTION 2: Restaurants ---
 Write-Host ""

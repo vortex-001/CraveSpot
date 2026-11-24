@@ -1,6 +1,6 @@
 -- =====================================================================
 -- CraveSpot Production Database Schema
--- Database Name: project (Default, configurable via .env)
+-- Database Name: CraveSpot (Default, configurable via .env)
 -- Version: 2.0.0
 -- Description: Fully normalized relational schema supporting:
 --   - User accounts, profiles & dietary preferences
@@ -11,11 +11,11 @@
 --   - User favorites, search history & ratings/reviews
 -- =====================================================================
 
-CREATE DATABASE IF NOT EXISTS `project`
+CREATE DATABASE IF NOT EXISTS `CraveSpot`
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
 
-USE `project`;
+USE `CraveSpot`;
 
 -- ---------------------------------------------------------------------
 -- 1. Table: users

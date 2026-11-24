@@ -41,8 +41,8 @@ This guide walks you through deploying the complete **CraveSpot** application (M
        ssl_disabled=False
    )
    cur = conn.cursor()
-   cur.execute('CREATE DATABASE IF NOT EXISTS project;')
-   conn.database = 'project'
+   cur.execute('CREATE DATABASE IF NOT EXISTS CraveSpot;')
+   conn.database = 'CraveSpot'
    with open('init_db.py') as f:
        pass
    print('Database initialized!')
@@ -82,7 +82,7 @@ This guide walks you through deploying the complete **CraveSpot** application (M
    - **Start Command**: `gunicorn backend.app:app`
    - **Instance Type**: `Free`
 5. Click **Advanced** -> **Add Environment Variable**:
-   - `DATABASE_URL`: `mysql://<user>:<password>@<host>:4000/project?ssl-mode=REQUIRED`
+   - `DATABASE_URL`: `mysql://<user>:<password>@<host>:4000/CraveSpot?ssl-mode=REQUIRED`
    - `GOOGLE_PLACES_API_KEY`: `AIzaSyAGPFX_mw504RzD5KIL2-syZsOkkFFWHSo`
    - `CORS_ORIGINS`: `*`
    - `PORT`: `10000`

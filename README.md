@@ -78,8 +78,8 @@ CraveSpot makes **craving-based discovery** the central experience:
 
 ### Database
 - **MySQL Server 8.0+**
-- **Database Name:** `project` (Strictly enforced)
-- **Schema & Seeding:** `database/schema.sql` (13 normalized tables, foreign keys with `CASCADE`, composite indexes, and rich Indian culinary seed data).
+- **Database Name:** `CraveSpot` (Strictly enforced)
+- **Schema & Seeding:** `database/schema.sql` (15 normalized tables, foreign keys with `CASCADE`, composite indexes, and rich Indian culinary seed data).
 
 ---
 
@@ -108,7 +108,7 @@ flowchart TD
     end
 
     subgraph Storage ["MySQL Database (Port 3306)"]
-        DB[(Database: project)]
+        DB[(Database: CraveSpot)]
         T1[(users & user_profiles)]
         T2[(restaurants & locations)]
         T3[(food_items & categories)]
@@ -208,7 +208,7 @@ CraveSpot_Complete/
 
 ## 🗄️ Database Schema & Data Dictionary
 
-Target Database Name: **`project`**
+Target Database Name: **`CraveSpot`**
 
 The database is normalized across **13 relational tables and views**:
 
@@ -251,7 +251,7 @@ This will automatically:
 1. Verify Python is installed and accessible in `PATH`.
 2. Create the Python virtual environment in `.\venv`.
 3. Install all required dependencies from `requirements.txt`.
-4. Create `.env` configured with database name `project`.
+4. Create `.env` configured with database name `CraveSpot`.
 5. Offer to initialize the database immediately.
 
 ---
@@ -265,7 +265,7 @@ DB_HOST=localhost
 DB_PORT=3306
 DB_USER=root
 DB_PASSWORD=your_mysql_password_here
-DB_NAME=project
+DB_NAME=CraveSpot
 
 PORT=5000
 DEBUG=False
@@ -287,7 +287,7 @@ venv\Scripts\python.exe init_db.py
 1. Open MySQL Workbench and connect to your local MySQL instance.
 2. Open `database\schema.sql`.
 3. Click ⚡ **Execute** (Ctrl+Shift+Enter).
-4. Refresh schemas — you will see the database `project` with all 13 tables and rich seed data.
+4. Refresh schemas — you will see the database `CraveSpot` with all 15 tables and rich seed data.
 
 ---
 
@@ -340,7 +340,7 @@ Base URL: `http://127.0.0.1:5000/api`
 ### Core & Health
 | Endpoint | Method | Description |
 |---|---|---|
-| `/` | `GET` | API status, version, and active database confirmation (`"database": "project"`). |
+| `/` | `GET` | API status, version, and active database confirmation (`"database": "CraveSpot"`). |
 | `/api/health` | `GET` | Verifies active MySQL connectivity and returns server timestamp. |
 
 ### Craving Discovery Engine
@@ -399,7 +399,7 @@ For quick testing:
 - **Cause:** The password in `.env` does not match your local MySQL root password.
 - **Fix:** Open `.env`, set `DB_PASSWORD=your_actual_password`, save, and restart `run_backend.bat`.
 
-### 3. Unknown Database 'project' (`Error 1049`)
+### 3. Unknown Database 'CraveSpot' (`Error 1049`)
 - **Cause:** The database has not been created yet.
 - **Fix:** Run `venv\Scripts\python.exe init_db.py` or execute `database\schema.sql` in MySQL Workbench.
 
