@@ -1,105 +1,80 @@
-# CraveSpot — Free Full-Stack Deployment Guide
+# CraveSpot — Cloud Deployment Guide
 
-This guide walks you through deploying the complete **CraveSpot** application (MySQL Database + Python Flask Backend + Modern Frontend) completely for free, with zero monthly bills and no credit card required.
-
----
-
-## Architecture Overview
-
-| Layer | Recommended Free Host | Free Tier Specs | Cost |
-|---|---|---|---|
-| **Database** | **TiDB Cloud Serverless** | 5 GB storage, MySQL 8.0 wire-compatible | **$0 / month** (No credit card) |
-| **Backend API** | **Render.com** Web Service | Python 3, Gunicorn WSGI, Auto-deploy on Git push | **$0 / month** |
-| **Frontend** | **Vercel** or **Netlify** | Global Edge CDN, Free SSL, Custom domain support | **$0 / month** |
+This guide walks you through deploying the complete **CraveSpot** application (MySQL Database + Python Flask Backend + Modern Frontend) to the cloud.
 
 ---
 
-## Step 1: Deploy Free Cloud MySQL Database (TiDB Cloud)
+## Deployment Option 1: Railway (Recommended — All-in-One Dashboard)
 
-1. Go to [https://tidbcloud.com](https://tidbcloud.com) and click **Sign Up** (Sign in with Google or GitHub).
-2. Click **Create Cluster** and select **Serverless** (Free forever, $0).
-3. Choose your closest region (e.g., `AWS / Mumbai` or `AWS / Singapore`).
-4. Set Cluster Name to `cravespot-db` and click **Create**.
-5. Once created, click **Connect**:
-   - Choose **Connect with: General / Python**.
-   - Note down the connection parameters or copy the `DATABASE_URL`:
-     ```text
-     mysql://<user>:<password>@<host>:4000/CraveSpot?ssl-mode=REQUIRED
-     ```
-6. **Initialize the Database Schema & Seed Data**:
-   On your local terminal, run `init_db.py` pointing to your cloud database:
-   ```bash
-   python init_db.py
+On Railway, your **MySQL database**, **Python Flask Backend**, and **Frontend Website** all run in one unified project canvas.
+
+### Step 1: Create a Railway Project & Add MySQL
+1. Go to [https://railway.app](https://railway.app) and log in with your GitHub account.
+2. Click **+ New Project** -> **Provision MySQL**.
+3. Railway instantly creates a dedicated MySQL 8.0 instance.
+4. Click the **MySQL** service box:
+   - Go to the **Variables** tab to view your credentials (`MYSQLHOST`, `MYSQLUSER`, `MYSQLPASSWORD`, `MYSQLDATABASE`, `MYSQL_URL`).
+   - Go to the **Connect** tab to copy the public connection URL.
+
+### Step 2: Initialize Database Schema & Seed Data
+Choose either method:
+
+**Method A: Using Railway Data Tab (In Browser)**:
+- Click the **MySQL** card -> Click the **Data** tab.
+- Copy the contents of `database/schema.sql` and run them directly in the query editor.
+
+**Method B: From your Local Terminal**:
+- Copy the public `MYSQL_URL` from the Connect tab.
+- In PowerShell, run:
+  ```bash
+  $env:MYSQL_URL="<paste-your-railway-mysql-url>"
+  .\venv\Scripts\python.exe init_db.py
+  ```
+  All 15 tables and culinary menus will be created and seeded automatically.
+
+### Step 3: Deploy the CraveSpot Web App
+1. On your Railway project canvas, click **+ New** -> **GitHub Repo**.
+2. Select your repository: **`vortex-001/CraveSpot`**.
+3. Click the new service card:
+   - Go to **Variables**:
+     - Click **+ New Variable** -> **Add Reference** -> select `MySQL` -> `MYSQL_URL` (Railway links them via `${{MySQL.MYSQL_URL}}`).
+     - Add `PORT` = `5000`.
+     - Add `DEBUG` = `False`.
+   - Go to **Settings**:
+     - Under **Networking**, click **Generate Domain**.
+4. Railway assigns you a live public domain (e.g. `https://cravespot-production.up.railway.app`).
+5. Open the domain in your browser to view the live website and discovery map.
+
+---
+
+## Deployment Option 2: Render (Backend) + Vercel (Frontend) + TiDB (Database)
+
+If you prefer using separate specialized cloud platforms:
+
+| Layer | Free Platform | Setup |
+|---|---|---|
+| **Database** | **TiDB Cloud Serverless** | Free MySQL 8.0 cluster (5 GB storage, no credit card) |
+| **Backend API** | **Render.com** | Python 3 Gunicorn WSGI Web Service |
+| **Frontend CDN** | **Vercel** | Global Edge CDN pointing to the `frontend/` directory |
+
+### 1. Database Setup (TiDB Cloud)
+1. Go to [https://tidbcloud.com](https://tidbcloud.com) and create a free Serverless cluster.
+2. Choose region (`AWS / Mumbai` or `AWS / Singapore`).
+3. Under **Connect**, copy your connection string:
+   ```text
+   mysql://<user>:<password>@<host>:4000/CraveSpot?ssl-mode=REQUIRED
    ```
-   Or update `.env` with your cloud database host, port (4000), user, and password, then execute `init_db.py`.
+4. Run `init_db.py` to seed the database.
 
----
+### 2. Backend Setup (Render.com)
+1. Go to [https://render.com](https://render.com) -> **New +** -> **Web Service**.
+2. Connect `vortex-001/CraveSpot`.
+3. Build Command: `pip install -r requirements.txt`.
+4. Start Command: `gunicorn --bind 0.0.0.0:$PORT backend.app:app`.
+5. Environment Variable: `DATABASE_URL` = `<your-tidb-url>`.
 
-## Step 2: Push Your Project to GitHub
-
-1. If you have not already committed all changes:
-   ```bash
-   git add .
-   git commit -m "Prepare CraveSpot for cloud deployment"
-   ```
-2. Push your project to GitHub:
-   ```bash
-   git push origin main
-   ```
-
----
-
-## Step 3: Deploy Backend on Render.com (Free)
-
-1. Sign up or log in to [Render.com](https://render.com) using your GitHub account.
-2. Click **New +** and select **Web Service**.
-3. Choose **Build and deploy from a Git repository** and connect your `vortex-001/CraveSpot` repo.
-4. Configure the Web Service:
-   - **Name**: `cravespot-api`
-   - **Region**: Choose closest to your DB (e.g., Singapore or Frankfurt)
-   - **Runtime**: `Python 3`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn backend.app:app`
-   - **Instance Type**: `Free`
-5. Click **Advanced** -> **Add Environment Variable**:
-   - `DATABASE_URL`: `mysql://<user>:<password>@<host>:4000/CraveSpot?ssl-mode=REQUIRED`
-   - `GOOGLE_PLACES_API_KEY`: `AIzaSyAGPFX_mw504RzD5KIL2-syZsOkkFFWHSo`
-   - `CORS_ORIGINS`: `*`
-   - `PORT`: `10000`
-   - `DEBUG`: `False`
-6. Click **Create Web Service**.
-7. Render will build and deploy your Flask app in approximately 2 minutes.
-   Your API URL will be ready at:
-   `https://cravespot-api.onrender.com`
-
----
-
-## Step 4: Deploy Frontend on Vercel or Netlify (Free)
-
-### Option A: Deploy on Vercel (Fastest & Simplest)
-1. Go to [https://vercel.com](https://vercel.com) and log in with GitHub.
-2. Click **Add New Project** and select your `vortex-001/CraveSpot` repository.
-3. In project settings:
-   - **Root Directory**: Click edit and select `frontend`.
-   - **Build Settings**: Framework Preset: **Other** (Static HTML/JS).
-4. In **Environment Variables**, add:
-   - `CRAVESPOT_API_BASE`: `https://cravespot-api.onrender.com/api`
-5. Click **Deploy**.
-6. In seconds, Vercel gives you your live production URL:
-   `https://cravespot.vercel.app`
-
-### Option B: Deploy on Netlify
-1. Go to [https://netlify.com](https://netlify.com) and log in with GitHub.
-2. Click **Add new site** -> **Import an existing project**.
-3. Select your `vortex-001/CraveSpot` repository.
-4. Set **Base directory** to `frontend`.
-5. Set **Publish directory** to `frontend`.
-6. Click **Deploy site**.
-
----
-
-## Step 5: Verify Live Setup
-
-1. Open your live frontend URL (e.g., `https://cravespot.vercel.app`).
-2. Search for dishes, filter by veg/non-veg, change location to Mohali or Chandigarh.
-3. The frontend will communicate seamlessly with your Render backend and TiDB cloud database with live Google Places discovery.
+### 3. Frontend Setup (Vercel)
+1. Go to [https://vercel.com](https://vercel.com) -> **Add New Project**.
+2. Select `vortex-001/CraveSpot`.
+3. Set **Root Directory** to `frontend`.
+4. Click **Deploy**. Live in 15 seconds at `https://cravespot.vercel.app`.

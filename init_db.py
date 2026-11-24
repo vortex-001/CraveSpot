@@ -13,11 +13,21 @@ from dotenv import load_dotenv
 ROOT_DIR = Path(__file__).resolve().parent
 load_dotenv(dotenv_path=ROOT_DIR / ".env", override=True)
 
-DB_HOST = os.getenv("DB_HOST", "localhost")
-DB_PORT = int(os.getenv("DB_PORT", 3306))
-DB_USER = os.getenv("DB_USER", "root")
-DB_PASSWORD = os.getenv("DB_PASSWORD", "")
-DB_NAME = os.getenv("DB_NAME", "CraveSpot")
+db_url = os.getenv("DATABASE_URL") or os.getenv("MYSQL_URL")
+if db_url:
+    import urllib.parse
+    parsed = urllib.parse.urlparse(db_url)
+    DB_HOST = parsed.hostname or "localhost"
+    DB_PORT = parsed.port or 3306
+    DB_USER = parsed.username or "root"
+    DB_PASSWORD = parsed.password or ""
+    DB_NAME = parsed.path.lstrip("/").split("?")[0] or os.getenv("DB_NAME", "CraveSpot")
+else:
+    DB_HOST = os.getenv("DB_HOST", "localhost")
+    DB_PORT = int(os.getenv("DB_PORT", 3306))
+    DB_USER = os.getenv("DB_USER", "root")
+    DB_PASSWORD = os.getenv("DB_PASSWORD", "")
+    DB_NAME = os.getenv("DB_NAME", "CraveSpot")
 
 
 def init_database():
