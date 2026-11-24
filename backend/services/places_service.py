@@ -247,71 +247,78 @@ def fetch_osm_overpass_restaurants(lat, lng, radius_km=5, limit=20):
     out center {limit};
     """
 
-    try:
-        url = "https://overpass-api.de/api/interpreter"
-        data = urllib.parse.urlencode({"data": overpass_query}).encode("utf-8")
-        req = urllib.request.Request(
-            url,
-            data=data,
-            headers={"User-Agent": "CraveSpot-Food-App/2.0"}
-        )
+    overpass_urls = [
+        "https://overpass-api.de/api/interpreter",
+        "https://overpass.kumi.systems/api/interpreter",
+        "https://maps.mail.ru/osm/tools/overpass/api/interpreter"
+    ]
+    data = urllib.parse.urlencode({"data": overpass_query}).encode("utf-8")
 
-        with urllib.request.urlopen(req, timeout=1.5) as response:
-            if response.status == 200:
-                raw_json = json.loads(response.read().decode("utf-8"))
-                elements = raw_json.get("elements", [])
-                restaurants = []
+    for url in overpass_urls:
+        try:
+            req = urllib.request.Request(
+                url,
+                data=data,
+                headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) CraveSpot-Food-App/2.0"}
+            )
 
-                for el in elements:
-                    tags = el.get("tags", {})
-                    name = tags.get("name")
-                    if not name:
-                        continue
+            with urllib.request.urlopen(req, timeout=1.8) as response:
+                if response.status == 200:
+                    raw_json = json.loads(response.read().decode("utf-8"))
+                    elements = raw_json.get("elements", [])
+                    restaurants = []
 
-                    e_lat = el.get("lat") or el.get("center", {}).get("lat")
-                    e_lng = el.get("lon") or el.get("center", {}).get("lon")
-                    if not e_lat or not e_lng:
-                        continue
+                    for el in elements:
+                        tags = el.get("tags", {})
+                        name = tags.get("name")
+                        if not name:
+                            continue
 
-                    cuisine = tags.get("cuisine", "Local Food").replace(";", " • ").title()
-                    amenity = tags.get("amenity", "")
-                    shop = tags.get("shop", "")
-                    spot_type, spot_badge = classify_spot_type(name, cuisine, amenity, shop)
+                        e_lat = el.get("lat") or el.get("center", {}).get("lat")
+                        e_lng = el.get("lon") or el.get("center", {}).get("lon")
+                        if not e_lat or not e_lng:
+                            continue
 
-                    street = tags.get("addr:street", "")
-                    city = tags.get("addr:city", "")
-                    addr = f"{street}, {city}".strip(" ,") or "Nearby, Local Food Spot"
+                        cuisine = tags.get("cuisine", "Local Food").replace(";", " • ").title()
+                        amenity = tags.get("amenity", "")
+                        shop = tags.get("shop", "")
+                        spot_type, spot_badge = classify_spot_type(name, cuisine, amenity, shop)
 
-                    dist = haversine_distance(lat, lng, e_lat, e_lng)
-                    is_veg = 1 if tags.get("diet:vegetarian") == "yes" else 0
+                        street = tags.get("addr:street", "")
+                        city = tags.get("addr:city", "")
+                        addr = f"{street}, {city}".strip(" ,") or "Nearby, Local Food Spot"
 
-                    restaurants.append({
-                        "restaurant_id": f"osm_{el.get('id')}",
-                        "name": name,
-                        "cuisine": cuisine,
-                        "spot_type": spot_type,
-                        "spot_badge": spot_badge,
-                        "address": addr,
-                        "rating": 4.3,
-                        "review_count": 45,
-                        "price_for_two": 180 if spot_type == "street_food" else (280 if spot_type == "dhaba" else 350),
-                        "is_veg": is_veg,
-                        "is_open_now": 1,
-                        "offer": "Live Nearby Vendor",
-                        "latitude": float(e_lat),
-                        "longitude": float(e_lng),
-                        "distance_km": dist,
-                        "cover_image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80",
-                        "image_url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80",
-                        "source": "live_osm"
-                    })
+                        dist = haversine_distance(lat, lng, e_lat, e_lng)
+                        is_veg = 1 if tags.get("diet:vegetarian") == "yes" else 0
 
-                restaurants.sort(key=lambda x: x["distance_km"])
-                _PLACES_CACHE[cache_key] = (restaurants, now)
-                return restaurants[:limit]
+                        restaurants.append({
+                            "restaurant_id": f"osm_{el.get('id')}",
+                            "name": name,
+                            "cuisine": cuisine,
+                            "spot_type": spot_type,
+                            "spot_badge": spot_badge,
+                            "address": addr,
+                            "rating": 4.3,
+                            "review_count": 45,
+                            "price_for_two": 180 if spot_type == "street_food" else (280 if spot_type == "dhaba" else 350),
+                            "is_veg": is_veg,
+                            "is_open_now": 1,
+                            "offer": "Live Nearby Vendor",
+                            "latitude": float(e_lat),
+                            "longitude": float(e_lng),
+                            "distance_km": dist,
+                            "cover_image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80",
+                            "image_url": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80",
+                            "source": "live_osm"
+                        })
 
-    except Exception as err:
-        logger.warning(f"Overpass API query failed: {err}")
+                    if restaurants:
+                        restaurants.sort(key=lambda x: x["distance_km"])
+                        _PLACES_CACHE[cache_key] = (restaurants, now)
+                        return restaurants[:limit]
+
+        except Exception:
+            continue
 
     return []
 

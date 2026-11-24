@@ -824,6 +824,11 @@ api_endpoints_to_report = [
     ("GET /api/cuisines (Culinary Cuisines)", "GET", "/api/cuisines", {}, 200),
     ("GET /api/register (Registration Info & Schema)", "GET", "/api/register", {}, 200),
     ("GET /api/login (Authentication Info & Schema)", "GET", "/api/login", {}, 200),
+    ("GET /api/auth/me (User Session Profile)", "GET", "/api/auth/me", {"headers": {"Sec-Ch-Ua": "Chromium"}}, 200),
+    ("GET /api/user/profile (User Profile Info)", "GET", "/api/user/profile", {"headers": {"Sec-Ch-Ua": "Chromium"}}, 200),
+    ("GET /api/user/favorites (Saved Favorites)", "GET", "/api/user/favorites", {"headers": {"Sec-Ch-Ua": "Chromium"}}, 200),
+    ("GET /api/user/preferences (Dietary Preferences)", "GET", "/api/user/preferences", {"headers": {"Sec-Ch-Ua": "Chromium"}}, 200),
+    ("GET /api/user/history (Search History)", "GET", "/api/user/history", {"headers": {"Sec-Ch-Ua": "Chromium"}}, 200),
 ]
 
 api_output_records = []

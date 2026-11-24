@@ -273,30 +273,30 @@ This document verifies every API endpoint tested in the CraveSpot backend server
 {
   "success": true,
   "surprise": {
-    "category": "North Indian Curries",
-    "category_id": 5,
+    "category": "Biryani",
+    "category_id": 1,
     "created_at": "2026-11-24T14:27:05",
-    "cuisine_id": 1,
-    "description": "Smoky tandoori chicken shredded and simmered in velvet butter tomato makhani gravy.",
-    "image_url": "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=600&q=80",
+    "cuisine_id": 5,
+    "description": "Fragrant aged basmati rice cooked on slow dum with aromatic spices and saffron.",
+    "image_url": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?auto=format&fit=crop&w=600&q=80",
     "is_available": 1,
     "is_bestseller": 1,
-    "is_veg": 0,
-    "item_id": 15,
-    "name": "Classic Butter Chicken Masala",
-    "price": 320.0,
-    "rating": 4.9,
+    "is_veg": 1,
+    "item_id": 2,
+    "name": "Hyderabadi Veg Dum Biryani",
+    "price": 199.0,
+    "rating": 4.5,
     "restaurant_address": "Sector 17, Chandigarh",
-    "restaurant_id": 7,
-    "restaurant_latitude": 30.74,
-    "restaurant_longitude": 76.77,
-    "restaurant_name": "Urban Tadka",
-    "restaurant_rating": 4.7,
-    "spice_level": "mild",
-    "surprise_message": "\ud83c\udf1f Fresh recommendation: Prepared with perfection by our top-rated vendor!",
-    "tags": "butter chicken,chicken,makhani,creamy,rich,north indian,comfort",
-    "taste_profile": "rich & creamy",
-    "texture": "tender",
+    "restaurant_id": 1,
+    "restaurant_latitude": 30.741482,
+    "restaurant_longitude": 76.768066,
+    "restaurant_name": "Spice Garden",
+    "restaurant_rating": 4.5,
+    "spice_level": "medium",
+    "surprise_message": "\ud83d\udd25 Craving resolved: Treat yourself to this mouthwatering discovery today!",
+    "tags": "biryani,dum,rice,spicy,basmati,hyderabadi,flavorful,aromatic",
+    "taste_profile": "spicy",
+    "texture": "grainy",
     "updated_at": "2026-11-24T14:27:05"
   }
 }
@@ -754,6 +754,110 @@ This document verifies every API endpoint tested in the CraveSpot backend server
     "email",
     "password"
   ],
+  "success": true
+}
+`
+
+---
+
+## User Session Profile
+
+- **Endpoint:** /api/auth/me
+- **HTTP Method:** GET
+- **Status:** HTTP 200 OK
+
+`json
+{
+  "success": true,
+  "user": {
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+    "bio": "Food explorer & street food enthusiast in Chandigarh",
+    "city": "Chandigarh",
+    "default_radius": 10,
+    "email": "demo@cravespot.com",
+    "name": "Harsh Garg",
+    "phone": "+91 9876543210",
+    "role": "user",
+    "user_id": 1
+  }
+}
+`
+
+---
+
+## User Profile Information
+
+- **Endpoint:** /api/user/profile
+- **HTTP Method:** GET
+- **Status:** HTTP 200 OK
+
+`json
+{
+  "success": true,
+  "user": {
+    "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+    "bio": "Food explorer & street food enthusiast in Chandigarh",
+    "city": "Chandigarh",
+    "default_radius": 10,
+    "email": "demo@cravespot.com",
+    "name": "Harsh Garg",
+    "phone": "+91 9876543210",
+    "role": "user",
+    "user_id": 1
+  }
+}
+`
+
+---
+
+## User Saved Favorites
+
+- **Endpoint:** /api/user/favorites
+- **HTTP Method:** GET
+- **Status:** HTTP 200 OK
+
+`json
+{
+  "favorites": [],
+  "success": true
+}
+`
+
+---
+
+## User Dietary Preferences
+
+- **Endpoint:** /api/user/preferences
+- **HTTP Method:** GET
+- **Status:** HTTP 200 OK
+
+`json
+{
+  "preferences": {
+    "budget_tier": "moderate",
+    "created_at": "2026-11-24T14:27:05",
+    "dietary": "all",
+    "favorite_tags": "pizza,biryani,momos,paneer,spicy",
+    "pref_id": 1,
+    "spice_level": "medium",
+    "updated_at": "2026-11-24T14:27:05",
+    "user_id": 1
+  },
+  "success": true
+}
+`
+
+---
+
+## User Search History
+
+- **Endpoint:** /api/user/history
+- **HTTP Method:** GET
+- **Status:** HTTP 200 OK
+
+`json
+{
+  "history": [],
   "success": true
 }
 `
