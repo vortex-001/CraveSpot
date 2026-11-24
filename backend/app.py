@@ -178,6 +178,14 @@ def set_security_headers(response):
     return response
 
 
+def is_browser_request():
+    """Detect if request is from an interactive web browser address bar."""
+    ua = request.headers.get("User-Agent", "")
+    accept = request.headers.get("Accept", "")
+    sec_ch = request.headers.get("Sec-Ch-Ua", "")
+    return bool(sec_ch or "Mozilla" in ua or "text/html" in accept)
+
+
 def get_current_user_id():
     """Extract and verify user_id from Authorization Bearer token."""
     auth_header = request.headers.get("Authorization", "")
@@ -199,8 +207,7 @@ def get_current_user_id():
             pass
 
     # Browser navigation support: when opened directly in a browser without token, default to demo user 1
-    is_browser = bool(request.headers.get("Sec-Ch-Ua") or "Mozilla" in request.headers.get("User-Agent", ""))
-    if is_browser and request.method == "GET":
+    if is_browser_request() and request.method == "GET":
         return 1
 
     return None
@@ -212,6 +219,7 @@ def get_current_user_id():
 
 @app.route("/", methods=["GET"])
 @app.route("/api", methods=["GET"])
+@app.route("/api/", methods=["GET"])
 def home():
     return jsonify({
         "success": True,
@@ -255,7 +263,7 @@ def health():
         }), 200
 
     except mysql.connector.Error as err:
-        app.logger.exception("Database health check failed")
+        app.logger.warning(f"Database health check failed: {err}")
         return jsonify({
             "success": False,
             "error_code": getattr(err, "errno", None),
@@ -277,9 +285,8 @@ def health():
 def geocode_endpoint():
     """Geocode city, locality or pincode into coordinates."""
     q = request.args.get("q", "").strip()
-    is_browser = bool(request.headers.get("Sec-Ch-Ua") or "Mozilla" in request.headers.get("User-Agent", ""))
     if not q:
-        if is_browser:
+        if is_browser_request():
             q = "Chandigarh, India"
         else:
             return jsonify({"success": False, "message": "Query parameter 'q' is required"}), 400
@@ -2620,8 +2627,7 @@ def live_nearby_restaurants():
     try:
         lat_val = request.args.get("lat") if request.args.get("lat") is not None else request.args.get("latitude")
         lng_val = request.args.get("lng") if request.args.get("lng") is not None else request.args.get("longitude")
-        is_browser = bool(request.headers.get("Sec-Ch-Ua") or "Mozilla" in request.headers.get("User-Agent", ""))
-        if lat_val is None and lng_val is None and is_browser:
+        if lat_val is None and lng_val is None and is_browser_request():
             lat_val = 30.7333
             lng_val = 76.7794
         elif lat_val is None or lng_val is None:
