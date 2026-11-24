@@ -21,7 +21,7 @@ from decimal import Decimal
 from datetime import datetime, date
 
 import mysql.connector
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
@@ -213,14 +213,46 @@ def get_current_user_id():
     return None
 
 
+# Define frontend directory for full-stack unified serving
+FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+
+
 # =====================================================================
 # 3. ROOT & HEALTH CHECK
 # =====================================================================
 
 @app.route("/", methods=["GET"])
+def home():
+    if is_browser_request() and (FRONTEND_DIR / "index.html").exists():
+        return send_from_directory(FRONTEND_DIR, "index.html")
+    return jsonify({
+        "success": True,
+        "name": "CraveSpot API",
+        "version": "2.0.0",
+        "database": os.getenv("DB_NAME", "CraveSpot"),
+        "message": "CraveSpot Backend & Recommendation Engine is Running!",
+        "endpoints": {
+            "health": "/api/health",
+            "restaurants": "/api/restaurants",
+            "menu_items": "/api/menu-items",
+            "categories": "/api/categories",
+            "cuisines": "/api/cuisines",
+            "cravings_recommend": "/api/cravings/recommend",
+            "cravings_surprise_me": "/api/cravings/surprise-me",
+            "cravings_taxonomy": "/api/cravings/taxonomy",
+            "nearby_restaurants": "/api/nearby-restaurants",
+            "live_nearby": "/api/restaurants/live-nearby",
+            "location_geocode": "/api/location/geocode",
+            "reviews": "/api/reviews",
+            "login": "/api/login",
+            "register": "/api/register"
+        }
+    }), 200
+
+
 @app.route("/api", methods=["GET"])
 @app.route("/api/", methods=["GET"])
-def home():
+def api_info():
     return jsonify({
         "success": True,
         "name": "CraveSpot API",
@@ -4147,6 +4179,36 @@ def nearby_restaurants():
             cursor.close()
         if conn and conn.is_connected():
             conn.close()
+
+
+# =====================================================================
+# 11. STATIC FRONTEND FILE SERVING (Full-Stack Support)
+# =====================================================================
+
+@app.route("/<path:filename>", methods=["GET"])
+def serve_frontend_file(filename):
+    """Serve frontend static files (CSS, JS, images, HTML pages) when deployed as a unified service."""
+    # Never intercept API routes
+    if filename.startswith("api") or filename.startswith("api/"):
+        return jsonify({"success": False, "message": "Endpoint not found"}), 404
+
+    target = FRONTEND_DIR / filename
+    if target.exists() and target.is_file():
+        return send_from_directory(FRONTEND_DIR, filename)
+
+    # Allow clean page URLs like /restaurants or /dishes
+    clean_page = FRONTEND_DIR / "pages" / f"{filename}.html"
+    if clean_page.exists() and clean_page.is_file():
+        return send_from_directory(FRONTEND_DIR / "pages", f"{filename}.html")
+
+    # Direct /pages/xxx.html
+    if filename.startswith("pages/") and target.exists() and target.is_file():
+        return send_from_directory(FRONTEND_DIR, filename)
+
+    if (FRONTEND_DIR / "pages" / "404.html").exists() and is_browser_request():
+        return send_from_directory(FRONTEND_DIR / "pages", "404.html"), 404
+
+    return jsonify({"success": False, "message": "Resource not found"}), 404
 
 
 # =====================================================================
