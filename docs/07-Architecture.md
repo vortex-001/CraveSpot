@@ -1,111 +1,89 @@
-# Architecture Document
-**Project:** The Ultimate Cheat-Meal & Street Food Finder  
-**Version:** 1.0  
-**Date:** 2026-09-24
+# System Architecture Document
 
-## 1. System Context
+**Project:** CraveSpot — Hyper-Local Restaurant Discovery & Intelligent Craving Recommendation Engine  
+**Version:** 2.0  
+**Date:** November 2026  
+**Status:** APPROVED  
+**Author:** Harsh Garg (System Architect)  
+**Team:** The Confluence  
+
+---
+
+## 1. Architectural Strategy
+
+CraveSpot implements a decoupled 3-tier client-server pattern designed for modularity, academic rigor, and zero-cost cloud scalability:
+- **Tier 1 (Presentation):** Client-rendered static web application running HTML5, CSS3, and ES6+ JavaScript.
+- **Tier 2 (Application):** Python Flask WSGI microservice handling business logic, ranking algorithms, token security, and external API caching.
+- **Tier 3 (Data):** MySQL 8.0 relational database engine with 15 normalized tables, B-tree indexes, cascade foreign keys, and spherical trigonometry queries.
+
+---
+
+## 2. Component Architecture Diagram
+
 ```mermaid
-graph TB
-    U[User]
-    A[Admin]
-    FE[Web Frontend]
-    API[Express REST API]
-    DB[(Relational Database)]
+flowchart TD
+    Browser([Client Browser])
 
-    U --> FE
-    A --> FE
-    FE --> API
-    API --> DB
+    subgraph Tier1 ["Tier 1: Presentation Layer"]
+        Pages["Static HTML Pages"]
+        Styles["CSS3 Responsive Stylesheets"]
+        Controllers["Vanilla JS Controllers (app.js, dishes.js, etc.)"]
+        APIClient["Central API Client (api.js)"]
+    end
+
+    subgraph Tier2 ["Tier 2: Application Layer"]
+        WSGI["Flask WSGI Application (backend/app.py)"]
+        AuthModule["Token Auth and Security Middleware"]
+        CravingModule["NLP Craving Engine (craving_engine.py)"]
+        PlacesModule["OpenStreetMap Service (places_service.py)"]
+    end
+
+    subgraph Tier3 ["Tier 3: Relational Data Layer"]
+        MySQL[("MySQL 8.0 Server (CraveSpot)")]
+        CoreTables[("15 Normalized 3NF Tables")]
+    end
+
+    subgraph ExternalServices ["External Geo Services"]
+        OSM["OpenStreetMap Overpass API"]
+        Nominatim["Nominatim Geocoder"]
+    end
+
+    Browser --> Pages
+    Pages --> Controllers
+    Controllers --> APIClient
+    APIClient -->|REST API Calls / JSON| WSGI
+    WSGI --> AuthModule
+    WSGI --> CravingModule
+    WSGI --> PlacesModule
+    PlacesModule -.->|External Queries| OSM
+    PlacesModule -.->|Geocoding| Nominatim
+    CravingModule -->|Score Calculations| MySQL
+    PlacesModule -->|Local Fallback| MySQL
+    WSGI -->|Parameterized SQL| MySQL
+    MySQL --> CoreTables
 ```
 
-## 2. Component Breakdown
-### Frontend
-- Home/search interface
-- Category browser
-- Vendor listing/details
-- Dish listing/details
-- Review display/form
-- Responsive navigation
+---
 
-### Backend
-- Vendor module
-- Category module
-- Dish module
-- Review module
-- User/authentication module
-- Search/filter module
-- Admin/data-management module
+## 3. Data Flow Pathways
 
-### Database
-- vendors
-- categories
-- dishes
-- users
-- user_reviews
+### 3.1 Craving Recommendation Flow
+1. User enters natural search query on frontend search bar.
+2. `api.js` submits POST request to `/api/cravings/recommend` with query and current coordinates.
+3. `backend/app.py` passes query to `craving_engine.py`.
+4. Engine tokenizes terms, matches taste and texture profiles against database weights, filters by price constraints, and calculates match scores (0-100).
+5. Results are returned as formatted JSON with explanation strings for immediate rendering.
 
-## 3. Data Relationships
-```mermaid
-erDiagram
-    VENDORS ||--o{ DISHES : offers
-    CATEGORIES ||--o{ DISHES : contains
-    USERS ||--o{ USER_REVIEWS : writes
-    DISHES ||--o{ USER_REVIEWS : receives
+### 3.2 Geolocation & Proximity Calculation Flow
+1. Browser requests user geolocation coordinates via HTML5 Geolocation API.
+2. Coordinates are dispatched to `/api/nearby-restaurants`.
+3. In-database Haversine formula calculates spherical distance between user coordinates and `restaurant_locations` coordinates.
+4. Results within the selected radius (1 km - 25 km) are sorted ascending by distance and returned to the client in under 12ms.
 
-    VENDORS {
-        int vendor_id PK
-        string vendor_name
-        string vendor_type
-    }
+---
 
-    CATEGORIES {
-        int category_id PK
-        string category_name
-    }
+## 4. Scalability & Deployment Model
 
-    DISHES {
-        int dish_id PK
-        int vendor_id FK
-        int category_id FK
-        string dish_name
-        decimal price
-        int spice_level
-    }
-
-    USERS {
-        int user_id PK
-        string full_name
-        string email
-    }
-
-    USER_REVIEWS {
-        int review_id PK
-        int user_id FK
-        int dish_id FK
-        int rating
-        string review_text
-    }
-```
-
-## 4. Request Flow
-```mermaid
-sequenceDiagram
-    participant U as User
-    participant FE as Frontend
-    participant API as Express API
-    participant DB as Database
-
-    U->>FE: Search for food
-    FE->>API: GET /api/dishes?search=...
-    API->>DB: Parameterized query
-    DB-->>API: Matching dishes
-    API-->>FE: JSON results
-    FE-->>U: Display results
-```
-
-## 5. Architectural Principles
-- Keep frontend, backend, and database responsibilities separated.
-- Keep SQL/database logic out of UI code.
-- Validate input at the API boundary.
-- Use foreign keys for relational integrity.
-- Use parameterized queries.
-- Keep documentation synchronized with implementation.
+- **Static Frontend Hosting:** Deployed to Vercel or Netlify Edge CDN with global distribution and automated SSL.
+- **Backend API Hosting:** Deployed to Render.com as a containerized Python WSGI service with Gunicorn process workers.
+- **Relational Database Hosting:** Hosted on TiDB Cloud Serverless (MySQL 8.0 compatible) with distributed storage and automatic horizontal scaling.

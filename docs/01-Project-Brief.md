@@ -1,8 +1,18 @@
 # Project Brief
-## The Ultimate Cheat-Meal & Street Food Finder
+## CraveSpot — Hyper-Local Restaurant Discovery & Intelligent Craving Recommendation Engine
 
-The Ultimate Cheat-Meal & Street Food Finder is a database-driven web application that helps users discover local street-food vendors, food trucks, and their signature dishes based on specific cravings and food preferences. Users can search and browse dishes such as spicy wings, late-night waffles, desserts, Indo-Chinese food, and other street-food options while viewing vendor information, categories, prices, ratings, and reviews.
+CraveSpot is a database-driven, 3-tier food discovery platform engineered to connect hunger and immediate cravings directly with local restaurants, dishes, and culinary spots. Unlike conventional restaurant aggregators that prioritize sponsored placements, CraveSpot centers on craving-based discovery—matching users by flavor, texture, mood, budget, and dietary preference, alongside real-time geolocation discovery.
 
-The system will maintain structured data for vendors, dishes, categories, users, and user reviews. It will provide search and filtering features and use SQL relationships, foreign keys, joins, aggregate functions, and GROUP BY queries to identify highly rated dishes and vendors.
+The platform is powered by a normalized 15-table MySQL 8.0 database in strict Third Normal Form (3NF), a Python Flask WSGI backend microservice, and a modern responsive vanilla JavaScript frontend with Leaflet OpenStreetMap integration.
 
-The initial version focuses on food discovery, vendor information, dish categorization, ratings, and reviews. Online payment, food delivery, and logistics are outside the scope of the initial MVP.
+### Core Objectives
+1. Centralize restaurant menus, dish catalogs, and a sensory craving taxonomy into an indexed relational database.
+2. Provide natural language craving recommendations using a multi-factor scoring algorithm.
+3. Calculate real-time walking and driving distances using an in-database spherical Haversine formula.
+4. Enforce enterprise-grade security including parameterized SQL queries, signed bearer sessions, and scrypt password hashing.
+
+### Academic Scope & Constraints
+- Course: CS301 — Relational Database Management Systems (RDBMS)
+- Academic Year: 2026
+- Scope: Restaurant discovery, craving search, category navigation, geolocation proximity, user authentication, wishlists, and automated testing.
+- Out of Scope: Payment gateways, payment processing, delivery rider dispatch, and order fulfillment.

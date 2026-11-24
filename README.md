@@ -1,8 +1,8 @@
-# 🍴 CraveSpot
+# CraveSpot
 
 <div align="center">
 
-### **Hyper-Local Restaurant Discovery & Intelligent Craving Recommendation Engine**
+### Hyper-Local Restaurant Discovery & Intelligent Craving Recommendation Engine
 
 > *"Find what you're craving. Discover where to get it."*
 
@@ -16,7 +16,7 @@
 
 ---
 
-## 📸 Live Application Showcase
+## Live Application Showcase
 
 ### 1. Interactive Food Discovery Map & Geolocation Hub
 Live homepage featuring OpenStreetMap Leaflet integration, real-time GPS coordinate snapping, interactive city switching (Chandigarh, Mohali, Panchkula), and one-click craving mood chips:
@@ -35,7 +35,7 @@ Multi-factor recommendation grid showcasing authentic cuisine photography, diet 
 ---
 
 ### 3. Real-Time Distance Radius Filtering & Proximity Engine
-In-database Haversine spherical distance calculation with an interactive slider (1 km – 25 km), sub-12ms response times, and bounding-box pre-filtering:
+In-database Haversine spherical distance calculation with an interactive slider (1 km - 25 km), sub-12ms response times, and bounding-box pre-filtering:
 <p align="center">
   <img src="tests/test_images/01_distance_range_filtering.png" alt="Distance Range Filtering" width="95%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
 </p>
@@ -43,7 +43,7 @@ In-database Haversine spherical distance calculation with an interactive slider 
 ---
 
 ### 4. User Profile, Dining Preferences & Wishlist
-Personalized user dashboard with custom spice-tolerance slider, dietary restrictions, favorite cuisines, and dual-tab saved favorites (dishes & restaurants):
+Personalized user dashboard with custom spice-tolerance slider, dietary restrictions, favorite cuisines, and dual-tab saved favorites (dishes and restaurants):
 <p align="center">
   <img src="tests/test_images/04_user_profile_dashboard.png" alt="User Profile & Dining Preferences" width="95%" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />
 </p>
@@ -58,7 +58,7 @@ Full end-to-end testing report verifying all 22 REST endpoints, database schema 
 
 ---
 
-## 👥 Team — The Confluence
+## Team — The Confluence
 
 | Member | Role | Responsibilities |
 |---|---|---|
@@ -77,40 +77,40 @@ Full end-to-end testing report verifying all 22 REST endpoints, database schema 
 
 ---
 
-## 📌 Problem Statement & Core Vision
+## Problem Statement & Core Vision
 
 Standard food apps assume you already know which restaurant brand you want to order from. In real life:
-- When hunger hits, people think in **cravings**: *"I want something spicy and crispy under ₹200"*, *"I'm craving late-night cheesy pizza"*, or *"I want homestyle comfort food"*.
+- When hunger hits, people think in **cravings**: *"I want something spicy and crispy under 200"*, *"I'm craving late-night cheesy pizza"*, or *"I want homestyle comfort food"*.
 - Information is fragmented: prices, ratings, vegetarian/non-vegetarian flags, and real physical distances are often hidden behind ads or checkout funnels.
 - Students and food lovers need quick budget filters and authentic local discoveries.
 
-### 💡 The CraveSpot Solution
+### The CraveSpot Solution
 CraveSpot makes **craving-based discovery** the central experience:
 1. **Natural Language Craving Parser:** Understands tastes (*spicy, cheesy, sweet, tangy, creamy*), textures (*crispy, crunchy*), moods (*comfort, late-night*), dietary restrictions (*pure veg, non-veg*), and maximum budgets (*"under 200"*).
-2. **Multi-Factor Recommendation Algorithm:** Calculates a 0–100 matching score for every candidate dish, with human-readable match explanations (e.g., *"Matches spicy craving; Fits under ₹200 budget; High 4.7★ rating"*).
+2. **Multi-Factor Recommendation Algorithm:** Calculates a 0-100 matching score for every candidate dish, with human-readable match explanations (e.g., *"Matches spicy craving; Fits under 200 budget; High 4.7 rating"*).
 3. **Live Geolocation & Real-World Discovery:** Queries OpenStreetMap Overpass API and Nominatim geocoder with live Haversine walking/driving distances and seamless local database fallback.
 4. **Interactive "Surprise Me!" Feature:** Helps indecisive diners by picking a top-rated, crave-worthy dish nearby in one click.
 5. **Full Account, Profile & Dietary Preferences Management:** Persists spice tolerance, dietary choices (veg/non-veg/jain), favorite cuisines, and saved wishlists.
 
 ---
 
-## ✨ Key Features
+## Key Features
 
-- 🧠 **Smart Craving Discovery Engine** — Search dishes by natural phrases like *"spicy momos"*, *"cheesy burger under 250"*, or *"comfort food"*.
-- 🎲 **Surprise Me! Modal** — Instant dish recommendation with one click from any page.
-- 📍 **Live Geolocation & City Selector** — Browser GPS auto-detection, city selection (Chandigarh, Mohali, Panchkula, Ludhiana, Delhi), and reverse geocoding.
-- 🗺️ **Real-World Live Places Integration** — Live Overpass API queries with zero external API key requirements.
-- 🏪 **Comprehensive Restaurant Directory** — Filter by distance, rating, price tier, pure vegetarian status, and cuisine types.
-- 🍽️ **Dish Catalog & Detailed Dish View** — Deep-dive pages showing ingredients, nutritional badges, category tags, vendor information, and simulated reviews.
-- ❤️ **Saved Wishlist / Favorites** — Dual-tab bookmarking for both dishes and restaurants with local storage and backend sync.
-- 👤 **User Profile & Preference Center** — Custom spice tolerance slider, dietary switches, profile information, and recent search history.
-- 🔐 **Secure Token Authentication** — Signed session bearer tokens (`itsdangerous`), password hashing (`Werkzeug scrypt`), and rate limiting.
-- 🛡️ **Cybersecurity Defenses** — Parameterized SQL queries (preventing SQL injection), XSS-safe DOM scripting, and HTTP security headers (`nosniff`, `SAMEORIGIN`, `1; mode=block`).
-- 📄 **Complete Static Suite** — Dedicated About, Contact / Partner, Privacy Policy, Terms of Service, and custom 404 Error pages.
+- **Smart Craving Discovery Engine** — Search dishes by natural phrases like *"spicy momos"*, *"cheesy burger under 250"*, or *"comfort food"*.
+- **Surprise Me! Modal** — Instant dish recommendation with one click from any page.
+- **Live Geolocation & City Selector** — Browser GPS auto-detection, city selection (Chandigarh, Mohali, Panchkula, Ludhiana, Delhi), and reverse geocoding.
+- **Real-World Live Places Integration** — Live Overpass API queries with zero external API key requirements.
+- **Comprehensive Restaurant Directory** — Filter by distance, rating, price tier, pure vegetarian status, and cuisine types.
+- **Dish Catalog & Detailed Dish View** — Deep-dive pages showing ingredients, nutritional badges, category tags, vendor information, and simulated reviews.
+- **Saved Wishlist / Favorites** — Dual-tab bookmarking for both dishes and restaurants with local storage and backend sync.
+- **User Profile & Preference Center** — Custom spice tolerance slider, dietary switches, profile information, and recent search history.
+- **Secure Token Authentication** — Signed session bearer tokens (`itsdangerous`), password hashing (`Werkzeug scrypt`), and rate limiting.
+- **Cybersecurity Defenses** — Parameterized SQL queries (preventing SQL injection), XSS-safe DOM scripting, and HTTP security headers (`nosniff`, `SAMEORIGIN`, `1; mode=block`).
+- **Complete Static Suite** — Dedicated About, Contact / Partner, Privacy Policy, Terms of Service, and custom 404 Error pages.
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 ```
 Frontend:   HTML5 · CSS3 (Flexbox/Grid) · Vanilla JavaScript (ES6+) · Leaflet.js
@@ -122,43 +122,43 @@ Deploy:     Render.com (API) · Vercel / Netlify (Frontend CDN) · TiDB Cloud (S
 
 ---
 
-## 🧩 Architecture Diagram
+## Architecture Diagram
 
 ```mermaid
 flowchart TD
     User([User Browser])
 
     subgraph Client ["Frontend Client (Port 5500)"]
-        HTML["Pages (index, restaurants, dishes, profile, etc.)"]
-        API_JS["api.js (Central HTTP Client & Token Handler)"]
-        APP_JS["app.js (Geolocation, Search, Surprise Me)"]
+        HTML["Pages: Index, Restaurants, Dishes, Profile"]
+        API_JS["api.js: Central HTTP Client and Token Handler"]
+        APP_JS["app.js: Geolocation, Search, Surprise Me"]
     end
 
     subgraph Server ["Backend WSGI Application (Port 5000)"]
-        Flask["Flask App (backend/app.py)"]
-        AuthMiddleware["Auth & Rate Limiter"]
-        CravingEngine["Craving Recommendation Engine (craving_engine.py)"]
-        PlacesService["Live Places & Geocoding Service (places_service.py)"]
+        Flask["Flask Application (backend/app.py)"]
+        AuthMiddleware["Auth & Rate Limiting Middleware"]
+        CravingEngine["Craving Recommendation Engine"]
+        PlacesService["Live Places & Geocoding Service"]
     end
 
-    subgraph External ["External Live Services (Zero API Keys)"]
+    subgraph External ["External Live Services"]
         OSM["OpenStreetMap Overpass API"]
         Nominatim["OSM Nominatim Geocoder"]
     end
 
     subgraph Storage ["MySQL Database (Port 3306)"]
-        DB[(Database: CraveSpot)]
-        T1[(users & user_profiles)]
-        T2[(restaurants & locations)]
-        T3[(food_items & categories)]
-        T4[(cravings & cuisines)]
-        T5[(favorites & reviews)]
+        DB[("Database: CraveSpot")]
+        T1[("users and user_profiles")]
+        T2[("restaurants and locations")]
+        T3[("food_items and categories")]
+        T4[("cravings and cuisines")]
+        T5[("favorites and reviews")]
     end
 
-    User -->|Views / Interacts| HTML
-    HTML -->|Calls| APP_JS
-    APP_JS -->|Requests| API_JS
-    API_JS -->|REST API Calls (Bearer Token)| Flask
+    User -->|Views and Interacts| HTML
+    HTML -->|Triggers| APP_JS
+    APP_JS -->|Calls| API_JS
+    API_JS -->|REST API Calls / Bearer Token| Flask
     Flask --> AuthMiddleware
     Flask --> CravingEngine
     Flask --> PlacesService
@@ -176,32 +176,32 @@ flowchart TD
 
 ---
 
-## 🗄️ Database Schema & Data Dictionary
+## Database Schema & Data Dictionary
 
 Target Database Name: **`CraveSpot`**  
 The database is normalized across **15 relational tables and views** in strict **Third Normal Form (3NF)**:
 
 | Table Name | Primary Key | Foreign Keys | Purpose |
 |---|---|---|---|
-| `users` | `user_id` | — | User accounts, encrypted passwords, roles |
+| `users` | `user_id` | None | User accounts, encrypted passwords, roles |
 | `user_profiles` | `profile_id` | `user_id` -> `users` | User avatars, cities, street addresses, bios |
 | `user_preferences`| `preference_id` | `user_id` -> `users` | Spice tolerance, dietary flags (veg/non-veg), max budgets |
-| `food_categories` | `category_id` | — | Master category catalog (Street Food, Sweets, Pizzas, etc.) |
-| `categories` | `category_id` | — | Backward-compatible view over `food_categories` |
-| `cuisines` | `cuisine_id` | — | Regional cuisine taxonomy (North Indian, Mughlai, Italian, etc.) |
-| `cravings` | `craving_id` | — | Sensory flavor & mood tags (spicy, cheesy, crispy, sweet) |
-| `restaurants` | `restaurant_id` | — | Restaurant directory, ratings, price tiers, opening hours |
+| `food_categories` | `category_id` | None | Master category catalog (Street Food, Sweets, Pizzas, etc.) |
+| `categories` | `category_id` | None | Backward-compatible view over `food_categories` |
+| `cuisines` | `cuisine_id` | None | Regional cuisine taxonomy (North Indian, Mughlai, Italian, etc.) |
+| `cravings` | `craving_id` | None | Sensory flavor and mood tags (spicy, cheesy, crispy, sweet) |
+| `restaurants` | `restaurant_id` | None | Restaurant directory, ratings, price tiers, opening hours |
 | `restaurant_locations` | `location_id` | `restaurant_id` -> `restaurants` | Coordinates (`latitude`, `longitude`), city, area, pincode |
 | `restaurant_cuisines` | `(restaurant_id, cuisine_id)` | Composite PK | Many-to-many junction between restaurants and cuisines |
 | `food_items` | `item_id` | `restaurant_id`, `category_id` | Dish items, authentic images, prices, spice levels |
-| `menu_items` | `item_id` | — | Backward-compatible view mapping `food_items` |
+| `menu_items` | `item_id` | None | Backward-compatible view mapping `food_items` |
 | `dish_cravings` | `(dish_id, craving_id)` | Composite PK | Many-to-many junction linking dishes to cravings with weights |
 | `favorites` | `favorite_id` | `user_id`, `item_id`, `restaurant_id` | User wishlists with cascade deletion |
 | `reviews` | `review_id` | `restaurant_id`, `user_id` | Verified ratings (1-5 stars) and customer feedback |
 
 ---
 
-## 🚀 Quick Start Guide (Local Setup)
+## Quick Start Guide (Local Setup)
 
 ### Prerequisites
 1. **Python 3.10+** (Python 3.10, 3.11, 3.12, 3.13, and 3.14 supported).
@@ -259,7 +259,7 @@ Opens automatically in your browser at: `http://127.0.0.1:5500`
 
 ---
 
-## 🧪 Automated Test Suite (262 Test Cases)
+## Automated Test Suite (262 Test Cases)
 
 CraveSpot features a 100% automated test suite verifying routing, security headers, craving algorithms, spatial queries, and authentication:
 
@@ -282,21 +282,21 @@ venv\Scripts\python.exe tests/manual_test.py
 
 ---
 
-## 🌐 100% Free Cloud Deployment Guide
+## Free Cloud Deployment Guide
 
 CraveSpot is engineered for completely free deployment with zero monthly fees and no credit card required:
 
-| Layer | Free Platform | Deployment Docs |
+| Layer | Free Platform | Deployment Documentation |
 |---|---|---|
 | **Database** | **TiDB Cloud Serverless** | [Free Deployment Guide](FREE_DEPLOYMENT_GUIDE.md#step-1-deploy-free-cloud-mysql-database-tidb-cloud) |
 | **Backend API** | **Render.com** (Python 3 WSGI) | [Free Deployment Guide](FREE_DEPLOYMENT_GUIDE.md#step-3-deploy-backend-on-rendercom-free) |
 | **Frontend CDN** | **Vercel** or **Netlify** | [Free Deployment Guide](FREE_DEPLOYMENT_GUIDE.md#step-4-deploy-frontend-on-vercel-or-netlify-free) |
 
-👉 Read the full walkthrough in **[FREE_DEPLOYMENT_GUIDE.md](FREE_DEPLOYMENT_GUIDE.md)**!
+Read the full walkthrough in **[FREE_DEPLOYMENT_GUIDE.md](FREE_DEPLOYMENT_GUIDE.md)**.
 
 ---
 
-## 📡 REST API Reference
+## REST API Reference
 
 Base URL: `http://127.0.0.1:5000/api`
 
@@ -344,7 +344,7 @@ Base URL: `http://127.0.0.1:5000/api`
 
 ---
 
-## 🧪 Default Test Credentials
+## Default Test Credentials
 
 For evaluation and testing:
 - **Email:** `demo@cravespot.com`
@@ -352,6 +352,6 @@ For evaluation and testing:
 
 ---
 
-## 📜 License
+## License
 
 Created for academic presentation and demonstration by **The Confluence** © 2026 CraveSpot. All rights reserved.

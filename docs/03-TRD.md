@@ -1,169 +1,108 @@
 # Technical Requirements Document (TRD)
-**Project:** The Ultimate Cheat-Meal & Street Food Finder  
-**Version:** 1.0  
-**Date:** 2026-09-24  
-**Status:** DRAFT  
-**BRD Reference:** BRD v1.0
+
+**Project:** CraveSpot — Hyper-Local Restaurant Discovery & Intelligent Craving Recommendation Engine  
+**Version:** 2.0 (Production Release)  
+**Date:** November 2026  
+**Status:** APPROVED  
+**BRD Reference:** BRD v2.0  
+**Team:** The Confluence  
+
+---
 
 ## 1. System Overview
-The system is a responsive web application backed by a relational database. The frontend provides food discovery and review interfaces. The backend exposes REST APIs and validates requests before interacting with the relational database.
 
-## 2. Proposed Architecture
+CraveSpot implements a decoupled 3-tier client-server architecture:
+- **Presentation Tier:** Static single-page application (SPA) built with HTML5, CSS3, and vanilla JavaScript (ES6+), communicating with backend REST endpoints via `fetch()`.
+- **Application Tier:** Python Flask 3.1 WSGI application handling validation, rate limiting, craving scoring, and geolocation logic.
+- **Data Tier:** MySQL 8.0 relational database containing 15 normalized tables adhering to Boyce-Codd and Third Normal Form (3NF).
+
+---
+
+## 2. Architecture Diagram
+
 ```mermaid
-graph TB
-    U[User Browser] --> FE[Frontend<br/>HTML CSS JavaScript]
-    FE --> API[Backend API<br/>Node.js + Express]
-    API --> DB[(Relational Database<br/>MySQL/PostgreSQL)]
-    API --> AUTH[Authentication]
-    API --> ADMIN[Admin/Data Management]
+flowchart TD
+    User([User Browser])
+
+    subgraph Client ["Tier 1: Frontend Client (Port 5500)"]
+        HTML["Pages: Index, Restaurants, Dishes, Profile"]
+        API_JS["api.js: Central HTTP Client and Token Handler"]
+        APP_JS["app.js: Geolocation, Search, Surprise Me"]
+    end
+
+    subgraph Server ["Tier 2: Backend WSGI Application (Port 5000)"]
+        Flask["Flask Application (backend/app.py)"]
+        AuthMiddleware["Auth and Rate Limiting Middleware"]
+        CravingEngine["Craving Recommendation Engine"]
+        PlacesService["Live Places and Geocoding Service"]
+    end
+
+    subgraph External ["External Services"]
+        OSM["OpenStreetMap Overpass API"]
+        Nominatim["OSM Nominatim Geocoder"]
+    end
+
+    subgraph Storage ["Tier 3: MySQL Database (Port 3306)"]
+        DB[("Database: CraveSpot")]
+    end
+
+    User -->|Views and Interacts| HTML
+    HTML -->|Triggers| APP_JS
+    APP_JS -->|Calls| API_JS
+    API_JS -->|REST API Calls / Bearer Token| Flask
+    Flask --> AuthMiddleware
+    Flask --> CravingEngine
+    Flask --> PlacesService
+    PlacesService -.->|Live Query| OSM
+    PlacesService -.->|Geocoding| Nominatim
+    CravingEngine -->|Reads Data| DB
+    PlacesService -->|Local Fallback| DB
+    Flask -->|Parameterized SQL| DB
 ```
 
-## 3. Technology Stack
-| Layer | Technology | Purpose | BRD Link |
+---
+
+## 3. Technology Stack & Runtime Specifications
+
+| Layer | Component | Version | Role |
 |---|---|---|---|
-| Frontend | HTML5, CSS3, JavaScript | Responsive UI | FR-01 to FR-08 |
-| Backend | Node.js + Express | REST API | FR-01 to FR-11 |
-| Database | MySQL 8.x or PostgreSQL 16.x | Relational data storage | FR-03, FR-04, FR-07, FR-10 |
-| API | REST/JSON | Frontend-backend communication | FR-01 to FR-11 |
-| Version Control | Git + GitHub | Collaboration | Maintainability |
-| Testing | API + SQL test cases | Verification | Success Criteria |
+| Frontend | HTML5 / CSS3 / ES6+ | HTML5 / CSS3 / ES6+ | Responsive presentation, DOM manipulation |
+| Frontend | Leaflet.js | 1.9.4 | Interactive food discovery map and pin clustering |
+| Backend | Python | 3.10 to 3.14 | Core server runtime environment |
+| Backend | Flask | 3.1.0+ | WSGI microframework and HTTP routing |
+| Backend | Flask-CORS | 5.0.0+ | Cross-Origin Resource Sharing handling |
+| Backend | Werkzeug | 3.1.0+ | Scrypt password hashing and security utilities |
+| Backend | itsdangerous | 2.2.0+ | Cryptographic token signing for stateless auth |
+| Backend | mysql-connector-python | 9.0.0+ | Connection pooling and dictionary cursors |
+| Database | MySQL Server | 8.0+ | Relational data persistence and spatial indexing |
+| Testing | Pytest & Unittest | 8.0+ | Automated regression testing (262 assertions) |
 
-**Database decision:** The team must select one relational DBMS before implementation and use it consistently.
+---
 
-## 4. Data Model
-### Vendors
-- vendor_id PK
-- vendor_name
-- vendor_type
-- description
-- address
-- contact
-- opening_time
-- closing_time
-- created_at
-- updated_at
+## 4. Database Schema Specifications
 
-### Categories
-- category_id PK
-- category_name
-- description
-- created_at
-- updated_at
+The database schema (`database/schema.sql`) contains 15 tables and views in strict 3NF:
+1. `users` (User credentials, hashed passwords, roles)
+2. `user_profiles` (Avatars, addresses, bios)
+3. `user_preferences` (Dietary choices, spice tolerance, budgets)
+4. `food_categories` (Master categories with icons and images)
+5. `categories` (Compatibility view)
+6. `cuisines` (Regional culinary taxonomy)
+7. `cravings` (Sensory tags: spicy, cheesy, sweet, crispy)
+8. `restaurants` (Partner listings, ratings, price tiers)
+9. `restaurant_locations` (Coordinates, city, area, pincode)
+10. `restaurant_cuisines` (Many-to-many junction)
+11. `food_items` (Dishes, pricing, authentic imagery)
+12. `menu_items` (Compatibility view)
+13. `dish_cravings` (Many-to-many junction with weight scores)
+14. `favorites` (User bookmarks with cascade deletion)
+15. `reviews` (Customer ratings and comments)
 
-### Dishes
-- dish_id PK
-- vendor_id FK
-- category_id FK
-- dish_name
-- description
-- price
-- spice_level
-- availability
-- created_at
-- updated_at
+---
 
-### Users
-- user_id PK
-- full_name
-- email UNIQUE
-- password_hash
-- created_at
-- updated_at
+## 5. Security & Reliability Architecture
 
-### UserReviews
-- review_id PK
-- user_id FK
-- dish_id FK
-- rating CHECK (rating BETWEEN 1 AND 5)
-- review_text
-- review_date
-- created_at
-- updated_at
-
-## 5. Relationships
-- One Vendor can have many Dishes.
-- One Category can contain many Dishes.
-- One User can create many UserReviews.
-- One Dish can have many UserReviews.
-- A UserReview belongs to exactly one User and one Dish.
-
-## 6. API Specifications
-| Endpoint | Method | Auth | Description | BRD Link |
-|---|---|---|---|---|
-| /api/vendors | GET | Optional | List/search vendors | FR-01, FR-05 |
-| /api/vendors/:id | GET | Optional | Vendor details and dishes | FR-02 |
-| /api/categories | GET | Optional | List categories | FR-04 |
-| /api/dishes | GET | Optional | Search/filter dishes | FR-03, FR-05, FR-06 |
-| /api/dishes/:id | GET | Optional | Dish details and reviews | FR-03, FR-08 |
-| /api/reviews | POST | Required | Create review | FR-07 |
-| /api/dishes/:id/reviews | GET | Optional | List dish reviews | FR-08 |
-| /api/ratings/top-vendors | GET | Optional | Aggregated vendor ratings | FR-09, FR-10 |
-
-## 7. SQL Requirements
-The implementation must demonstrate:
-- CREATE DATABASE / schema setup
-- CREATE TABLE
-- Primary keys
-- Foreign keys
-- NOT NULL
-- UNIQUE
-- CHECK
-- INSERT
-- SELECT
-- UPDATE
-- DELETE
-- WHERE
-- LIKE
-- JOIN
-- GROUP BY
-- HAVING
-- ORDER BY
-- COUNT
-- AVG
-- MIN / MAX where useful
-
-Example:
-```sql
-SELECT v.vendor_name, AVG(r.rating) AS average_rating
-FROM vendors v
-JOIN dishes d ON d.vendor_id = v.vendor_id
-JOIN user_reviews r ON r.dish_id = d.dish_id
-GROUP BY v.vendor_id, v.vendor_name
-ORDER BY average_rating DESC;
-```
-
-## 8. Security
-- Hash passwords using an approved password-hashing algorithm.
-- Validate all user input server-side.
-- Use parameterized queries / prepared statements.
-- Do not expose database credentials.
-- Do not log passwords or authentication secrets.
-- Restrict administrative operations to authorized users.
-
-## 9. Testing
-- Database constraint tests
-- CRUD API tests
-- Search/filter tests
-- Foreign-key relationship tests
-- Rating validation tests
-- GROUP BY/aggregate query tests
-- Invalid input tests
-- Basic responsive UI tests
-
-## 10. Traceability Matrix
-| TRD Item | BRD Requirement | Status |
-|---|---|---|
-| Vendor API | FR-01, FR-02 | Planned |
-| Dish API | FR-03 | Planned |
-| Category model | FR-04 | Planned |
-| Search/filter API | FR-05, FR-06 | Planned |
-| Review API | FR-07, FR-08 | Planned |
-| Rating aggregation | FR-09, FR-10 | Planned |
-| Admin/data management | FR-11 | Planned |
-| Foreign keys and constraints | Success Criteria | Planned |
-| SQL JOIN/GROUP BY/aggregates | FR-09, FR-10 | Planned |
-
-## 11. Approval
-BRD Version Referenced: 1.0  
-TRD Reviewer: ____________________  
-Date: ____________________
+1. **SQL Injection Prevention:** Every query uses `cursor.execute(sql, (params,))` with parameterized inputs. Raw string interpolation (`%` or `f"{}"`) is strictly prohibited.
+2. **Session Security:** Bearer tokens are cryptographically signed using an application secret key. Tokens are decoded and verified on every mutating API route.
+3. **HTTP Security Headers:** Every HTTP response includes `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, and `X-XSS-Protection: 1; mode=block`.
+4. **Resilience & Mirror Failover:** External map queries use multi-mirror fallover (`overpass.kumi.systems`, `maps.mail.ru`) with 1.8s timeouts, automatically falling back to local database entries if network drops occur.

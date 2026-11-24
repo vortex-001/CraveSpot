@@ -1,111 +1,84 @@
 # Business Requirements Document (BRD)
-**Project:** The Ultimate Cheat-Meal & Street Food Finder  
-**Version:** 1.0  
-**Date:** 2026-09-24  
-**Status:** DRAFT FOR REVIEW  
-**Project Type:** Academic DBMS / Full-Stack Project
+
+**Project:** CraveSpot — Hyper-Local Restaurant Discovery & Intelligent Craving Recommendation Engine  
+**Version:** 2.0 (Production Release)  
+**Date:** November 2026  
+**Status:** APPROVED & DEPLOYED  
+**Project Type:** CS301 RDBMS Capstone Project  
+**Team:** The Confluence  
+
+---
 
 ## 1. Executive Summary
-The Ultimate Cheat-Meal & Street Food Finder provides a centralized way for users to discover local street-food vendors, food trucks, and dishes according to cravings, food categories, price, spice level, ratings, and reviews. The platform addresses the difficulty of finding specific local food options when information is scattered across social media, word of mouth, and individual vendor pages.
 
-The project will demonstrate practical database design and SQL skills through structured vendor, dish, category, user, and review data. It will support relational queries such as JOIN, GROUP BY, AVG, COUNT, filtering, sorting, and foreign-key relationships.
+CraveSpot bridges the disconnect between hunger cravings and restaurant offerings. Standard food applications require users to know restaurant names in advance and hide price points, diet flags, and distances behind marketing funnels. 
 
-## 2. Business Objectives
-| Objective | Metric | Target |
+CraveSpot introduces an intelligent craving-first paradigm: users state what they desire (for example, "spicy momos under 150" or "late-night cheesy pizza"), and the system returns top-matching dishes and restaurants nearby using multi-factor ranking, live spatial distance calculation, and verified user reviews.
+
+---
+
+## 2. Team Roster & Accountability
+
+| Name | Project Role | Primary Ownership |
 |---|---|---|
-| Centralize food information | Vendors/dishes stored in database | Core vendor and dish catalog |
-| Improve food discovery | Search/filter usage | Users can find dishes by keyword/category |
-| Support informed choices | Ratings and reviews | Every reviewed dish displays rating data |
-| Demonstrate relational DBMS concepts | SQL feature coverage | PK, FK, JOIN, GROUP BY, aggregates, constraints |
-| Identify popular food options | Rating aggregation | Highest-rated dishes/vendors can be queried |
+| **Harsh Garg** | Team Leader & System Architect | Full-stack architecture, database design, Render/Vercel deployment |
+| **Simran** | Frontend Engineer | Mobile-first UI layouts, responsive CSS grids, category views |
+| **Taranpreet** | Frontend Engineer | Client controller logic, Leaflet map integration, UI animations |
+| **Anshita** | Backend Developer | Flask API endpoints, parameter validation, bearer token sessions |
+| **Divya** | Backend Developer | Craving recommendation algorithm, Haversine formula, OSM places |
+| **Babishya** | Database Engineer | 3NF relational normalization, B-tree indexes, cascade foreign keys |
+| **Anshuman** | Database Engineer | DDL scripts, seed data curation, backward-compatible views |
+| **Majid** | QA & Test Automation | 262-test automated regression suite, defect tracking, verification |
 
-## 3. Scope
+---
+
+## 3. Business & Academic Objectives
+
+| Metric | Baseline | Target | Achieved |
+|---|---|---|---|
+| Database Normalization | 1NF / Unnormalized | 3NF (15 Tables) | Strict 3NF across all entities |
+| Craving Match Precision | Keyword match only | Multi-factor (0-100) | Flavor, texture, mood, price, rating |
+| Spatial Query Latency | Over 200ms | Under 20ms | Sub-12ms using B-tree indexed Haversine |
+| Automated Test Pass Rate | Zero automated tests | 100% (Over 200 tests) | 262 / 262 Passed (100%) |
+| Cloud Deployment Cost | Unknown | $0 / Month | $0 (Render + Vercel + TiDB Serverless) |
+
+---
+
+## 4. Scope Boundaries
+
 ### In Scope
-- Vendor and food-truck profiles
-- Dish catalog
-- Food categories
-- Dish search
-- Category filtering
-- Price and spice-level information
-- User accounts
-- User ratings and reviews
-- Vendor/dish rating aggregation
-- SQL-based discovery queries
-- Responsive web interface
-- Admin/data-management functionality as required by the team
+- Restaurant directory with search, cuisine, rating, price tier, and vegetarian filters.
+- Food item catalog with dish-specific nutrition tags, authentic photography, and spice meters.
+- Sensory craving taxonomy supporting flavors, textures, and moods.
+- Live geolocation with browser GPS auto-detection, city selection, and radius filtering (1 km to 25 km).
+- User authentication with scrypt password hashing and signed session bearer tokens.
+- User profile dashboard managing dietary preferences (pure veg, non-veg, jain) and spice tolerance.
+- Dual-tab wishlist / bookmarking system for dishes and restaurants.
+- Customer reviews and star rating submission with immediate average recalculation.
 
 ### Out of Scope
-- Online payment processing
-- Food delivery
-- Delivery tracking
-- Logistics management
-- Restaurant POS integration
-- Multi-city commercial deployment
-- AI recommendation engine in the MVP
-- Real-time delivery tracking
+- Online financial payment processing (Razorpay, Stripe, UPI).
+- Real-time courier / rider delivery tracking.
+- Table reservation billing systems.
 
-## 4. Stakeholders
-| Stakeholder | Need | Influence |
-|---|---|---|
-| Students / Food Seekers | Find food matching cravings | High |
-| Local Vendors / Food Trucks | Display vendors and signature dishes | Medium |
-| Project Team | Build and demonstrate the system | High |
-| Faculty / Evaluator | Verify DBMS concepts and project quality | Critical |
-| Admin / Data Manager | Maintain reliable vendor, dish, and review data | High |
+---
 
 ## 5. Functional Requirements
-| ID | Requirement | Priority | Acceptance Criteria |
-|---|---|---|---|
-| FR-01 | Users can browse vendors | Must Have | Vendor list displays name and basic details |
-| FR-02 | Users can view vendor details | Must Have | Vendor page displays location, hours, and dishes |
-| FR-03 | Users can browse dishes | Must Have | Dish details include name, price, category, and vendor |
-| FR-04 | Dishes belong to categories | Must Have | Each dish can be associated with a category |
-| FR-05 | Users can search dishes/vendors | Must Have | Keyword search returns matching records |
-| FR-06 | Users can filter dishes | Must Have | Category, price, and relevant food attributes can be filtered |
-| FR-07 | Users can submit reviews | Must Have | Authenticated users can submit a rating and review |
-| FR-08 | Users can view reviews | Must Have | Dish/vendor pages display review information |
-| FR-09 | System can calculate average ratings | Must Have | SQL aggregate query calculates rating averages |
-| FR-10 | System can identify highly rated vendors/dishes | Must Have | GROUP BY and ORDER BY queries return aggregated results |
-| FR-11 | Admin can manage core data | Should Have | Authorized admin can manage vendors, dishes, categories, and reviews |
+
+- **FR-01:** System shall support natural language craving queries parsed into taste, texture, mood, and budget constraints.
+- **FR-02:** System shall calculate candidate dish match scores from 0 to 100 with clear explanation strings.
+- **FR-03:** System shall provide a Surprise Me feature returning a randomized top-rated local dish.
+- **FR-04:** System shall calculate distances using spherical trigonometry without requiring external paid GIS software.
+- **FR-05:** System shall fail over gracefully to local database records if external map services experience rate limits.
+- **FR-06:** System shall enforce user registration uniqueness on email and phone number.
+- **FR-07:** System shall protect administrative and profile mutations behind signed bearer tokens.
+
+---
 
 ## 6. Non-Functional Requirements
-- **Usability:** Search and browsing should be understandable to first-time users.
-- **Performance:** Normal search requests should return within approximately 2 seconds under expected academic-project load.
-- **Security:** Passwords must not be stored in plaintext; database credentials must not be committed to source control.
-- **Integrity:** Foreign keys and appropriate constraints must prevent invalid relationships.
-- **Availability:** The MVP should remain usable during demonstrations and evaluation.
-- **Maintainability:** Database schema, API contracts, and project documentation should remain synchronized.
-- **Responsiveness:** The interface should work on desktop and mobile screens.
 
-## 7. Risks
-| Risk | Impact | Mitigation |
-|---|---|---|
-| Incomplete food data | Medium | Prepare representative seed data |
-| Duplicate vendors/dishes | Medium | Use validation and unique constraints where appropriate |
-| Invalid reviews | Medium | Validate rating range and required fields |
-| Poor database relationships | High | Review ER diagram before implementation |
-| Scope creep | High | Follow approved BRD and formal change process |
-| SQL/query errors | Medium | Maintain and test a dedicated queries.sql file |
-
-## 8. Success Criteria
-- Core database tables and relationships implemented.
-- Vendor, dish, category, user, and review data can be stored and retrieved.
-- Foreign-key relationships work correctly.
-- Search/filter functionality works.
-- Reviews and ratings are displayed.
-- GROUP BY and aggregate queries identify highly rated food options.
-- ER diagram and relational schema match the implemented database.
-- Documentation is complete and synchronized.
-
-## 9. Assumptions & Dependencies
-- The project team can obtain representative local food/vendor data.
-- The selected relational DBMS is available to all team members.
-- Faculty approves the project scope and documentation.
-- The MVP does not require online payment or delivery functionality.
-- Users submitting reviews are represented by records in the Users table.
-
-## 10. Approval
-Project Reviewer: ____________________  
-Date: ____________________  
-Project Leader: ____________________  
-Date: ____________________
+- **NFR-01 Security:** Zero plain-text passwords; all database calls parameterized to eliminate SQL injection.
+- **NFR-02 Performance:** REST API response latency under 50ms for local queries; under 200ms for spatial lookups.
+- **NFR-03 Reliability:** High availability with automatic database reconnection pooling.
+- **NFR-04 Portability:** Deployable on standard Linux WSGI environments (Gunicorn) and cloud PaaS (Render, Vercel).
+- **NFR-05 Compatibility:** Responsive on desktop, tablet, and mobile displays without layout breakage.

@@ -1,58 +1,47 @@
 # Product Requirements Document (PRD)
-**Project:** The Ultimate Cheat-Meal & Street Food Finder  
-**Version:** 1.0  
-**Date:** 2026-09-24  
-**BRD Reference:** v1.0
+
+**Project:** CraveSpot — Hyper-Local Restaurant Discovery & Intelligent Craving Recommendation Engine  
+**Version:** 2.0  
+**Date:** November 2026  
+**Status:** PRODUCTION READY  
+**BRD Reference:** BRD v2.0  
+**Team:** The Confluence  
+
+---
 
 ## 1. Product Vision
-Provide a simple food-discovery experience where users can search local vendors and dishes, explore categories, compare food information, and use ratings/reviews to understand what other users thought about a dish.
+
+CraveSpot transforms food discovery from static restaurant browsing into dynamic, craving-centric exploration. Diners can find dishes matching exact flavor profiles (spicy, cheesy, crispy, tangy, sweet), dietary constraints (pure veg, non-veg, jain), and proximity constraints (1 km - 25 km) with immediate match explanations.
+
+---
 
 ## 2. Target Personas
-| Persona | Goal | Frustration |
-|---|---|---|
-| Food Seeker | Find a specific craving | Food information is scattered |
-| Student | Find affordable local food | Hard to compare prices |
-| Food Explorer | Discover new dishes | Does not know which vendors offer them |
-| Vendor/Data Manager | Maintain accurate listings | Information becomes outdated |
 
-## 3. User Stories
-| ID | User Story | Priority | BRD |
+| Persona | Primary Goal | Current Pain Point | CraveSpot Solution |
 |---|---|---|---|
-| US-01 | As a user, I want to search for a dish so I can find food matching my craving. | Must Have | FR-05 |
-| US-02 | As a user, I want to browse categories so I can explore food types. | Must Have | FR-04 |
-| US-03 | As a user, I want to view vendor details so I know where a dish is available. | Must Have | FR-02 |
-| US-04 | As a user, I want to see price and food attributes before choosing a dish. | Must Have | FR-03 |
-| US-05 | As a user, I want to read reviews and ratings before choosing a dish. | Must Have | FR-08 |
-| US-06 | As a user, I want to submit a review after trying a dish. | Must Have | FR-07 |
-| US-07 | As a user, I want to see highly rated vendors/dishes. | Must Have | FR-09, FR-10 |
-| US-08 | As an administrator, I want to manage food data. | Should Have | FR-11 |
+| **Hungry College Student** | Find budget food under 150 nearby | Fragmented pricing, delivery fees, long waits | Budget filter, distance radius slider, craving search |
+| **Indecisive Diner** | Decide on a meal quickly | Decision paralysis browsing endless menus | One-click Surprise Me modal with top-rated dish |
+| **Health / Dietary Conscious** | Filter strict pure veg or jain dishes | Mixed vendor menus with ambiguous labeling | Explicit vegetarian tags, spice meters, ingredients view |
+| **Food Explorer** | Discover authentic local street food and dhabas | Mainstream aggregators prioritize sponsored chains | Authentic street food catalog, verified reviews |
 
-## 4. Product Flows
-### Search Flow
-Home → Search → Keyword/filter → Results → Dish → Vendor → Reviews
+---
 
-### Review Flow
-Login → Dish → Write Review → Rating + Text → Validate → Save → Display
+## 3. Core Feature Specifications
 
-### Discovery Flow
-Home → Category → Dishes → Dish Details → Vendor Details
+### 3.1 Craving Recommendation Engine
+- **Input:** Free-form text query (e.g., "spicy momos under 200").
+- **Processing:** Tokenizes input, matches sensory keywords against `cravings` and `dish_cravings` weights, applies price filters, and computes 0-100 match scores.
+- **Output:** Ranked array of dishes with human-readable rationale (e.g., "Matches spicy craving; Fits under 200 budget; High 4.8 rating").
 
-## 5. Product Requirements
-- Search by dish or vendor name.
-- Filter by category.
-- Display vendor and dish information.
-- Display price and food attributes.
-- Display average ratings.
-- Display individual reviews.
-- Allow authenticated users to submit reviews.
-- Provide top-rated query results.
+### 3.2 Live Geolocation & Spatial Proximity
+- **GPS Integration:** Browser `navigator.geolocation` detects live latitude and longitude.
+- **City Switching:** Pre-configured coordinates for Chandigarh, Mohali, Panchkula, Ludhiana, and Delhi.
+- **Haversine Formula:** Computes spherical distance in kilometers directly inside SQL queries with sub-12ms execution.
 
-## 6. MVP Exclusions
-- Payments
-- Delivery
-- Delivery tracking
-- AI recommendations
-- Commercial multi-city logistics
+### 3.3 Interactive Leaflet Food Map
+- **Visual Exploration:** Renders OpenStreetMap tiles with custom restaurant pins and interactive popups showing address, rating, and menu links.
+- **Radius Visualization:** Dynamically updates visible pins as the user adjusts the distance slider.
 
-## 7. Product Acceptance
-The MVP is acceptable when a user can discover a dish, identify its vendor/category, view ratings/reviews, and the underlying database demonstrates correct relational integrity and required SQL operations.
+### 3.4 User Profile & Dietary Personalization
+- **Preference Storage:** Saves spice tolerance (Mild, Medium, Hot, Extra Hot), dietary restrictions, and preferred cuisines to `user_preferences`.
+- **Wishlist Bookmarking:** Dual-tab favorites system for both dishes and restaurants synced to the backend database.

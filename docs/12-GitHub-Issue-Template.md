@@ -1,46 +1,29 @@
 # GitHub Issue Template
-## Task Title
-<!-- Use a clear title, preferably [DB], [BE], [FE], [QA], or [DOC] -->
 
-## Layer
-- [ ] [DB]
-- [ ] [BE]
-- [ ] [FE]
-- [ ] [QA]
-- [ ] [DOC]
+## Issue Title
+<!-- Format: [DB / BE / FE / QA / DOC] Concise summary of task or defect -->
+
+## Domain Layer
+- [ ] [DB] Database Schema, Normalization or Queries
+- [ ] [BE] Backend Flask API, Authentication or Algorithms
+- [ ] [FE] Frontend UI, CSS Styling or JavaScript Controllers
+- [ ] [QA] Automated Testing, Pytest Suite or Bug Reproduction
+- [ ] [DOC] Documentation, Architecture or Deployment
+
+## Team Member Assigned
+<!-- Name of owner: Harsh Garg, Simran, Taranpreet, Anshita, Divya, Babishya, Anshuman, Majid -->
 
 ## Description
-<!-- Clearly describe the work. -->
+<!-- Detailed description of the feature or defect -->
 
-## BRD Reference
-<!-- Example: BRD FR-05 -->
+## Expected Behavior
+<!-- What should happen -->
 
-- BRD Requirement: 
+## Verification Steps
+1. Step 1
+2. Step 2
+3. Step 3
 
-## TRD Reference
-<!-- Example: TRD Section 7 -->
-
-- TRD Section:
-
-## Acceptance Criteria
-- [ ] 
-- [ ] 
-- [ ] 
-
-## Testing
-- [ ] Unit/API test
-- [ ] SQL/database test
-- [ ] UI test
-- [ ] Not applicable (explain below)
-
-## Documentation Impact
-- [ ] No documentation change
-- [ ] BRD
-- [ ] TRD
-- [ ] PRD
-- [ ] Architecture
-- [ ] Rules
-- [ ] Design
-- [ ] Memory
-
-## Notes
+## Related Documentation
+- BRD Reference: docs/02-BRD.md
+- TRD Reference: docs/03-TRD.md

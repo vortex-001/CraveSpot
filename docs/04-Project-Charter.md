@@ -1,57 +1,39 @@
 # Project Charter
-**Project:** The Ultimate Cheat-Meal & Street Food Finder  
-**Version:** 1.0  
-**Date:** 2026-09-24  
-**Status:** ACTIVE / DRAFT FOR APPROVAL
+
+**Project Name:** CraveSpot — Hyper-Local Restaurant Discovery & Intelligent Craving Recommendation Engine  
+**Version:** 2.0  
+**Date:** November 2026  
+**Status:** APPROVED & SIGNED OFF  
+**Academic Body:** Department of Computer Science & Engineering  
+**Course:** CS301 — Relational Database Management Systems  
+
+---
 
 ## 1. Project Mission
-Build a database-driven food discovery platform that helps users find local street-food vendors, food trucks, and dishes based on categories, cravings, price, food attributes, ratings, and reviews while demonstrating practical relational database design and SQL skills.
 
-## 2. Objectives
-- Complete the approved database design.
-- Implement core vendor, category, dish, user, and review relationships.
-- Demonstrate foreign keys, JOIN, GROUP BY, and aggregate SQL queries.
-- Build a usable web interface connected to the backend.
-- Complete testing and documentation before final submission.
+To develop a production-ready, full-stack food discovery platform that enables users to locate nearby restaurants and specific dishes based on natural cravings, distance, and dietary criteria, while demonstrating rigorous 3NF relational database design, query optimization, and cybersecurity standards.
 
-## 3. Deliverables
-- Project Brief
-- BRD
-- TRD
-- Project Charter and RACI
-- PRD
-- Architecture
-- Rules
-- Phases
-- Design
-- Memory
-- ER Diagram
-- Database schema and seed data
-- SQL query collection
-- Backend API
-- Frontend
-- Testing evidence
-- Final README and presentation material
+---
 
-## 4. Governance
-- BRD approval is required before TRD work is finalized.
-- TRD approval is required before implementation begins.
-- Scope changes must be documented.
-- Team members must work through GitHub issues/projects.
-- Significant technical decisions must be recorded in Memory.md.
+## 2. Project Team Roster
 
-## 5. Communication
-| Activity | Frequency | Output |
+| Member | Project Role | Academic Department |
 |---|---|---|
-| Team Standup | Daily/working days | Memory.md update |
-| Sprint Planning | Weekly or bi-weekly | GitHub Project backlog |
-| Code Review | Every PR | Review comments/approval |
-| Database Review | At schema milestones | ER/schema verification |
-| Faculty Review | As scheduled | Approval/feedback |
-| Retrospective | End of sprint | Action items |
+| **Harsh Garg** | Team Leader & System Architect | B.Tech CSE (3rd Year) |
+| **Simran** | Frontend Engineer | B.Tech CSE (3rd Year) |
+| **Taranpreet** | Frontend Engineer | B.Tech CSE (3rd Year) |
+| **Anshita** | Backend Developer | B.Tech CSE (3rd Year) |
+| **Divya** | Backend Developer | B.Tech CSE (3rd Year) |
+| **Babishya** | Database Engineer | B.Tech CSE (3rd Year) |
+| **Anshuman** | Database Engineer | B.Tech CSE (3rd Year) |
+| **Majid** | QA & Test Automation | B.Tech CSE (3rd Year) |
 
-## 6. Approval
-Project Leader: ____________________  
-Database Lead: ____________________  
-Faculty/Trainer: ____________________  
-Date: ____________________
+---
+
+## 3. Milestones & Gates
+
+1. **Gate 1 — Requirements & Normalization:** Relational schema designed in 3NF with ER diagrams and business requirements approved.
+2. **Gate 2 — Database Implementation:** MySQL schema created with constraints, composite keys, indexes, and comprehensive Indian culinary seed data.
+3. **Gate 3 — REST API Development:** Flask endpoints implemented for discovery, craving recommendation scoring, geocoding, and user sessions.
+4. **Gate 4 — Frontend UI Integration:** Responsive web interface completed with Leaflet map, dish filtering, and authentic cuisine photography.
+5. **Gate 5 — Testing & Cloud Deployment:** Automated regression test suite (262 assertions) passing at 100%; cloud deployment manifests validated for Render, Vercel, and TiDB.

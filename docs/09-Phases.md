@@ -1,118 +1,54 @@
-# Phase Roadmap
-**Project:** The Ultimate Cheat-Meal & Street Food Finder  
-**Version:** 1.0  
-**Date:** 2026-09-24
+# Project Phases & Lifecycle Roadmap
 
-> Phases define milestones and acceptance gates. Individual sprint tasks belong in GitHub Projects, not in this file.
+**Project:** CraveSpot — Hyper-Local Restaurant Discovery & Intelligent Craving Recommendation Engine  
+**Version:** 2.0  
+**Status:** COMPLETED & VERIFIED  
+**Academic Year:** 2026  
+**Team:** The Confluence  
 
-## Phase 1 — Requirements & Approval (Week 1)
-### Goal
-Finalize project definition and business requirements.
+---
 
-### Deliverables
-- Project Brief
-- BRD
-- Initial ER concept
-- Stakeholder review
+## Phase 1 — Problem Definition & Requirements (Weeks 1 - 2)
+### Status: Completed
+- Drafted and approved Project Brief, Charter, and Business Requirements (BRD v1.0).
+- Identified user personas: Hungry Students, Indecisive Diners, Dietary-Conscious Individuals.
+- Defined system scope, functional boundaries, and architectural guidelines.
 
-### Acceptance
-Project Brief and BRD reviewed/approved.
+---
 
-## Phase 2 — Technical & Product Design (Week 2)
-### Goal
-Translate approved business requirements into technical/product specifications.
+## Phase 2 — Relational Database Modeling & Normalization (Weeks 3 - 4)
+### Status: Completed
+- Constructed Entity-Relationship (ER) model with 15 relational entities.
+- Applied Boyce-Codd and Third Normal Form (3NF) normalization to eliminate data redundancy.
+- Created MySQL DDL schema (`database/schema.sql`) with B-tree composite indexes, cascade constraints, and views.
+- Curated authentic seed dataset covering Tricity food hubs, signature street foods, and multi-cuisine restaurants.
 
-### Deliverables
-- TRD
-- PRD
-- Architecture
-- Design
-- Rules
-- Project Charter/RACI
+---
 
-### Acceptance
-TRD traceability reviewed and architecture matches BRD.
+## Phase 3 — Backend API Architecture & Algorithm Design (Weeks 5 - 6)
+### Status: Completed
+- Implemented Python Flask WSGI application with modular service architecture.
+- Engineered NLP craving recommendation engine with multi-factor scoring (taste, texture, mood, price, rating).
+- Integrated in-database spherical Haversine formula for fast distance calculations.
+- Integrated OpenStreetMap Overpass API and Nominatim geocoder with local database fallback.
+- Implemented secure token-based user sessions, password hashing, and HTTP security headers.
 
-## Phase 3 — Database Foundation (Week 3)
-### Goal
-Implement the relational database.
+---
 
-### Deliverables
-- Final ER diagram
-- Schema
-- Primary/foreign keys
-- Constraints
-- Seed data
+## Phase 4 — Frontend UI/UX & Interactive Map Development (Weeks 7 - 8)
+### Status: Completed
+- Built responsive mobile-first frontend with HTML5 and CSS3 custom properties.
+- Integrated Leaflet.js interactive discovery map with pin clustering and custom restaurant popups.
+- Designed dynamic dish catalog with price sliders, spice meters, and vegetarian indicators.
+- Embedded authentic food photography matching real dishes across all categories.
+- Built user profile dashboard with spice tolerance preferences and dual-tab wishlist bookmarks.
 
-### Acceptance
-Database relationships and constraints pass validation.
+---
 
-## Phase 4 — SQL & Data Operations (Week 4)
-### Goal
-Demonstrate core DBMS functionality.
-
-### Deliverables
-- CRUD queries
-- JOIN queries
-- GROUP BY queries
-- Aggregate functions
-- Search/filter queries
-
-### Acceptance
-Required SQL demonstrations execute successfully.
-
-## Phase 5 — Backend API (Week 5)
-### Goal
-Expose database functionality through REST APIs.
-
-### Deliverables
-- Vendor endpoints
-- Category endpoints
-- Dish endpoints
-- Review endpoints
-- Search/filter endpoints
-
-### Acceptance
-API operations work against the database with validation.
-
-## Phase 6 — Frontend (Week 6)
-### Goal
-Build the user-facing discovery experience.
-
-### Deliverables
-- Home/search
-- Categories
-- Vendor details
-- Dish details
-- Review interface
-
-### Acceptance
-Core screens are responsive and usable.
-
-## Phase 7 — Integration (Week 7)
-### Goal
-Connect frontend, API, and database.
-
-### Deliverables
-- Search integration
-- Vendor/dish integration
-- Review integration
-- Rating display
-
-### Acceptance
-Complete user flow works end-to-end.
-
-## Phase 8 — Testing, Documentation & Demo (Week 8)
-### Goal
-Prepare the final project.
-
-### Deliverables
-- Functional testing
-- Database testing
-- Bug fixing
-- Documentation synchronization
-- Final README
-- Demo/presentation preparation
-
-### Acceptance
-Full MVP demonstration passes and required documentation is complete.
+## Phase 5 — Quality Assurance, Testing & Cloud Deployment (Weeks 9 - 10)
+### Status: Completed
+- Developed comprehensive automated test suite with 262 passing assertions (100% pass rate).
+- Validated SQL injection immunity, CSRF/XSS protection, and rate limiting.
+- Configured cloud deployment manifests (`Procfile`, `runtime.txt`, `vercel.json`, `netlify.toml`).
+- Created step-by-step free deployment documentation (`FREE_DEPLOYMENT_GUIDE.md`) for Render, Vercel, and TiDB Cloud.
+- Generated final academic presentation with real project screenshots for defense.
